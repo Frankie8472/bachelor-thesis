@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'bachelor-thesis';
+  title = 'HashVenture';
+
 }
