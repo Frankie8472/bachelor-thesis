@@ -7,6 +7,6 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'HashVenture';
+  title = 'HashVenture2';
 
 }
