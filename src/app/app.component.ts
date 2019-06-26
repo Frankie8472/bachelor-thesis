@@ -10,11 +10,12 @@ export class AppComponent {
   preImg = '/assets/hash.png';
   img = '/assets/hash.png';
   imgs = ['/assets/212.png', '/assets/211.png', '/assets/221.png', '/assets/212.png', '/assets/111.png'];
-  clicked = 0;
+  maxClicks = 100;
+  clicked = this.maxClicks;
 
   showImg() {
     this.img = '/assets/211.png';
-    this.clicked = this.clicked + 1;
+    this.clicked = this.clicked - 1;
   }
 
   turnBackImg() {

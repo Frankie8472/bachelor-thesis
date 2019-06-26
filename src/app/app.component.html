@@ -4,7 +4,7 @@
   <img width="300" alt="Angular Logo" src="{{ preImg }}">
 </div>
 
-<progress id="clicks" value="{{ clicked }}" max="100" ></progress>
+<progress id="clicks" value="{{ clicked }}" max="{{ maxClicks }}" ></progress>
 
 <button class="example-box" (cdkDragStarted)="showImg()" (cdkDragReleased)="turnBackImg()"  cdkDrag>
   <img src="{{ img }}"/>
