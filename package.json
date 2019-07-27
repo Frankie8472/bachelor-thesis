@@ -4,7 +4,9 @@
   "description": "Interactive learning about categorization and object comparision for children (kindergarden until 2nd grade) (Phaser 3 + TypeScript)",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "start": "webpack --watch & live-server --port=8085"
   },
   "repository": {
     "type": "git",
