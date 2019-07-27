@@ -1,0 +1,23 @@
+{
+  "name": "bachelor-thesis",
+  "version": "1.0.0",
+  "description": "Interactive learning about categorization and object comparision for children (kindergarden until 2nd grade) (Phaser 3 + TypeScript)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@gitlab.ethz.ch:ethz-projects/bachelor-thesis.git"
+  },
+  "author": "Franz Knobel",
+  "license": "ISC",
+  "devDependencies": {
+    "live-server": "^1.2.1",
+    "phaser": "^3.18.1",
+    "ts-loader": "^6.0.4",
+    "typescript": "^3.5.3",
+    "webpack": "^4.38.0",
+    "webpack-cli": "^3.3.6"
+  }
+}
