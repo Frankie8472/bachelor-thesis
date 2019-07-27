@@ -3,13 +3,13 @@
     "target": "es5"
   },
   "include": [
-    "src/*",
-    "node_modules/phaser/types/phaser.d.ts"
+    "src/*"]
+    /*"node_modules/phaser/types/phaser.d.ts"
   ],
   "exclude": [
     "node_modules",
     "bower_components",
     "jspm_packages",
     "<outDir>"
-  ]
+  ]*/
 }
