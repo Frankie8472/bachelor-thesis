@@ -1,0 +1,14 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./out-tsc/app",
+    "types": []
+  },
+  "include": [
+    "old_versions/angular1/src/**/*.ts"
+  ],
+  "exclude": [
+    "old_versions/angular1/src/test.ts",
+    "old_versions/angular1/src/**/*.spec.ts"
+  ]
+}

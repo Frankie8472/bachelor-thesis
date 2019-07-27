@@ -1,0 +1,27 @@
+{
+  "name": "phaser_test",
+  "version": "1.0.0",
+  "description": "How to manage different sponsor APIs in easy way - examples",
+  "main": "index.html",
+  "directories": {
+    "lib": "lib"
+  },
+  "dependencies": {
+    "ts-node-dev": "^1.0.0-pre.40"
+  },
+  "devDependencies": {
+    "live-server": "^1.2.1",
+    "phaser": "^3.18.1",
+    "ts-loader": "^6.0.4",
+    "typescript": "^3.5.3",
+    "webpack": "^4.37.0",
+    "webpack-cli": "^3.3.6"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "start": "webpack --watch & live-server --port=8085"
+  },
+  "author": "",
+  "license": "ISC"
+}
