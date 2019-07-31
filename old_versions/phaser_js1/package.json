@@ -2,7 +2,7 @@
   "name": "phaser_test",
   "version": "1.0.0",
   "description": "How to manage different sponsor APIs in easy way - examples",
-  "main": "index.html",
+  "main": "index_backup2.html",
   "directories": {
     "lib": "lib"
   },
