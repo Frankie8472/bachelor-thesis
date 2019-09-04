@@ -3,7 +3,7 @@ import { GameScene } from "./gameScene";
 import GameConfig = Phaser.Types.Core.GameConfig;
 
 const config: GameConfig = {
-    title: "BatArang",
+    title: "Gotscha!",
     width: 800,
     height: 600,
     parent: "game",

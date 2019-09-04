@@ -15,6 +15,7 @@
   "author": "Franz Knobel",
   "license": "ISC",
   "devDependencies": {
+    "js-yaml": "^3.13.1",
     "live-server": "^1.2.1",
     "phaser": "^3.18.1",
     "ts-loader": "^6.0.4",
