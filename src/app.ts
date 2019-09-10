@@ -1,22 +1,21 @@
 import "phaser";
-import { WelcomeScene } from "./welcomeScene";
-import { GameScene } from "./gameScene";
-import { ScoreScene } from "./scoreScene";
 import GameConfig = Phaser.Types.Core.GameConfig;
+import { WelcomeScene } from "./welcomeScene";
+import {GameScene} from './gameScene';
+import {DropDownMenu} from './dropDownMenu';
+import {ScoreScene} from './scoreScene';
 
 const config: GameConfig = {
     title: "Gotscha!",
-    width: 800,
-    height: 600,
     parent: "game",
-    scene: [WelcomeScene, GameScene, ScoreScene],
+    scene: [DropDownMenu, WelcomeScene, GameScene, ScoreScene],
     physics: {
         default: "arcade",
         arcade: {
             debug: false
         }
     },
-    backgroundColor: "#18216D",
+    backgroundColor: "#000000",
 
     scale: {
         parent:'phaser-example',
@@ -35,5 +34,5 @@ export class Gotscha extends Phaser.Game {
 };
 
 window.onload = () => {
-    var game = new Gotscha(config);
+    let game = new Gotscha(config);
 };

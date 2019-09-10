@@ -17,10 +17,10 @@
   "devDependencies": {
     "js-yaml": "^3.13.1",
     "live-server": "^1.2.1",
-    "phaser": "^3.18.1",
+    "phaser": "^3.19.0",
     "ts-loader": "^6.0.4",
-    "typescript": "^3.5.3",
-    "webpack": "^4.38.0",
-    "webpack-cli": "^3.3.6"
+    "typescript": "^3.6.2",
+    "webpack": "^4.39.3",
+    "webpack-cli": "^3.3.7"
   }
 }

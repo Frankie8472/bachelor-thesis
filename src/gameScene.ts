@@ -1,6 +1,8 @@
 import "phaser";
 
 export class GameScene extends Phaser.Scene {
+    key: string = "GameScene";
+
     delta: number;
     lastStarTime: number;
     starsCaught: number;
@@ -22,38 +24,43 @@ export class GameScene extends Phaser.Scene {
     }
 
     preload(): void {
-        this.load.json("assets/geometrical_objects/gemoetrical_objects.json")
-        this.load.setBaseURL("https://raw.githubusercontent.com/mariyadavydova/" +
-            "starfall-phaser3-typescript/master/");
-        this.load.image("star", "assets/star.png");
-        this.load.image("sand", "assets/sand.jpg");
+
+        //this.load.json("assets/geometrical_objects/gemoetrical_objects.json")
+
+        // this.load.setBaseURL("https://raw.githubusercontent.com/mariyadavydova/" +
+        //     "starfall-phaser3-typescript/master/");
+        // this.load.image("star", "assets/star.png");
+        // this.load.image("sand", "assets/sand.jpg");
     }
 
     create(): void {
-        this.sand = this.physics.add.staticGroup({
-            key: 'sand',
-            frameQuantity: 20
-        });
-        Phaser.Actions.PlaceOnLine(this.sand.getChildren(),
-            new Phaser.Geom.Line(20, 580, 820, 580));
-        this.sand.refresh();
+        // MenuUI must be in the front
+        this.game.scene.moveDown(this.key);
 
-        this.info = this.add.text(10, 10, '',
-            { font: '24px Arial Bold', fill: '#FBFBAC' });
+        // this.sand = this.physics.add.staticGroup({
+        //     key: 'sand',
+        //     frameQuantity: 20
+        // });
+        // Phaser.Actions.PlaceOnLine(this.sand.getChildren(),
+        //     new Phaser.Geom.Line(20, 580, 820, 580));
+        // this.sand.refresh();
+        //
+        // this.info = this.add.text(10, 10, '',
+        //     { font: '24px Arial Bold', fill: '#FBFBAC' });
     }
 
     update(time: number): void {
-        var diff: number = time - this.lastStarTime;
-        if (diff > this.delta) {
-            this.lastStarTime = time;
-            if (this.delta > 500) {
-                this.delta -= 20;
-            }
-            this.emitStar();
-        }
-        this.info.text =
-            this.starsCaught + " caught - " +
-            this.starsFallen + " fallen (max 3)";
+        // var diff: number = time - this.lastStarTime;
+        // if (diff > this.delta) {
+        //     this.lastStarTime = time;
+        //     if (this.delta > 500) {
+        //         this.delta -= 20;
+        //     }
+        //     this.emitStar();
+        // }
+        // this.info.text =
+        //     this.starsCaught + " caught - " +
+        //     this.starsFallen + " fallen (max 3)";
     }
 
     private onClick(star: Phaser.Physics.Arcade.Image): () => void {
@@ -93,4 +100,4 @@ export class GameScene extends Phaser.Scene {
         star.on('pointerdown', this.onClick(star), this);
         this.physics.add.collider(star, this.sand, this.onFall(star), null, this);
     }
-};
+}
