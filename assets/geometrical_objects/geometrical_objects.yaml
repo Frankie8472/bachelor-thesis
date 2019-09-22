@@ -1,262 +1,347 @@
-- categories:
-    - cat1: color.png
-    - cat2: shape.png
-    - cat3: nummeration.png
-- images:
+categories:
+    - name: cat1
+      url: color.png
+      valid:
+        - red
+        - blue
+        - yellow
+        - green
+    - name: cat2
+      url: shape.png
+      valid:
+        - circle
+        - square
+        - triangle
+        - ellipse
+    - name: cat3
+      url: nummeration.png
+      valid:
+        - one
+        - two
+        - three
+        - four
+    - name: cat4
+      url:
+      valid: []
+images:
     - name: bluecirclefour.svg
       cat1: blue
       cat2: circle
       cat3: four
+      cat4: 
     - name: bluecircleone.svg
       cat1: blue
       cat2: circle
       cat3: one
+      cat4: 
     - name: bluecirclethree.svg
       cat1: blue
       cat2: circle
       cat3: three
+      cat4: 
     - name: bluecircletwo.svg
       cat1: blue
       cat2: circle
       cat3: two
+      cat4: 
     - name: blueellipsefour.svg
       cat1: blue
       cat2: ellipse
       cat3: four
+      cat4: 
     - name: blueellipseone.svg
       cat1: blue
       cat2: ellipse
       cat3: one
+      cat4: 
     - name: blueellipsethree.svg
       cat1: blue
       cat2: ellipse
       cat3: three
+      cat4: 
     - name: blueellipsetwo.svg
       cat1: blue
       cat2: ellipse
       cat3: two
+      cat4: 
     - name: bluesquarefour.svg
       cat1: blue
       cat2: square
       cat3: four
+      cat4: 
     - name: bluesquareone.svg
       cat1: blue
       cat2: square
       cat3: one
+      cat4: 
     - name: bluesquarethree.svg
       cat1: blue
       cat2: square
       cat3: three
+      cat4: 
     - name: bluesquaretwo.svg
       cat1: blue
       cat2: square
       cat3: two
+      cat4: 
     - name: bluetrianglefour.svg
       cat1: blue
       cat2: triangle
       cat3: four
+      cat4: 
     - name: bluetriangleone.svg
       cat1: blue
       cat2: triangle
       cat3: one
+      cat4: 
     - name: bluetrianglethree.svg
       cat1: blue
       cat2: triangle
       cat3: three
+      cat4: 
     - name: bluetriangletwo.svg
       cat1: blue
       cat2: triangle
       cat3: two
+      cat4: 
     - name: greencirclefour.svg
       cat1: green
       cat2: circle
       cat3: four
+      cat4: 
     - name: greencircleone.svg
       cat1: green
       cat2: circle
       cat3: one
+      cat4: 
     - name: greencirclethree.svg
       cat1: green
       cat2: circle
       cat3: three
+      cat4: 
     - name: greencircletwo.svg
       cat1: green
       cat2: circle
       cat3: two
+      cat4: 
     - name: greenellipsefour.svg
       cat1: green
       cat2: ellipse
       cat3: four
+      cat4: 
     - name: greenellipseone.svg
       cat1: green
       cat2: ellipse
       cat3: one
+      cat4: 
     - name: greenellipsethree.svg
       cat1: green
       cat2: ellipse
       cat3: three
+      cat4: 
     - name: greenellipsetwo.svg
       cat1: green
       cat2: ellipse
       cat3: two
+      cat4: 
     - name: greensquarefour.svg
       cat1: green
       cat2: square
       cat3: four
+      cat4: 
     - name: greensquareone.svg
       cat1: green
       cat2: square
       cat3: one
+      cat4: 
     - name: greensquarethree.svg
       cat1: green
       cat2: square
       cat3: three
+      cat4: 
     - name: greensquaretwo.svg
       cat1: green
       cat2: square
       cat3: two
+      cat4: 
     - name: greentrianglefour.svg
       cat1: green
       cat2: triangle
       cat3: four
+      cat4: 
     - name: greentriangleone.svg
       cat1: green
       cat2: triangle
       cat3: one
+      cat4: 
     - name: greentrianglethree.svg
       cat1: green
       cat2: triangle
       cat3: three
+      cat4: 
     - name: greentriangletwo.svg
       cat1: green
       cat2: triangle
       cat3: two
+      cat4: 
     - name: redcirclefour.svg
       cat1: red
       cat2: circle
       cat3: four
+      cat4: 
     - name: redcircleone.svg
       cat1: red
       cat2: circle
       cat3: one
+      cat4: 
     - name: redcirclethree.svg
       cat1: red
       cat2: circle
       cat3: three
+      cat4: 
     - name: redcircletwo.svg
       cat1: red
       cat2: circle
       cat3: two
+      cat4: 
     - name: redellipsefour.svg
       cat1: red
       cat2: ellipse
       cat3: four
+      cat4: 
     - name: redellipseone.svg
       cat1: red
       cat2: ellipse
       cat3: one
+      cat4: 
     - name: redellipsethree.svg
       cat1: red
       cat2: ellipse
       cat3: three
+      cat4: 
     - name: redellipsetwo.svg
       cat1: red
       cat2: ellipse
       cat3: two
+      cat4: 
     - name: redsquarefour.svg
       cat1: red
       cat2: square
       cat3: four
+      cat4: 
     - name: redsquareone.svg
       cat1: red
       cat2: square
       cat3: one
+      cat4: 
     - name: redsquarethree.svg
       cat1: red
       cat2: square
       cat3: three
+      cat4: 
     - name: redsquaretwo.svg
       cat1: red
       cat2: square
       cat3: two
+      cat4: 
     - name: redtrianglefour.svg
       cat1: red
       cat2: triangle
       cat3: four
+      cat4: 
     - name: redtriangleone.svg
       cat1: red
       cat2: triangle
       cat3: one
+      cat4: 
     - name: redtrianglethree.svg
       cat1: red
       cat2: triangle
       cat3: three
+      cat4: 
     - name: redtriangletwo.svg
       cat1: red
       cat2: triangle
       cat3: two
+      cat4: 
     - name: yellowcirclefour.svg
       cat1: yellow
       cat2: circle
       cat3: four
+      cat4: 
     - name: yellowcircleone.svg
       cat1: yellow
       cat2: circle
       cat3: one
+      cat4: 
     - name: yellowcirclethree.svg
       cat1: yellow
       cat2: circle
       cat3: three
+      cat4: 
     - name: yellowcircletwo.svg
       cat1: yellow
       cat2: circle
       cat3: two
+      cat4: 
     - name: yellowellipsefour.svg
       cat1: yellow
       cat2: ellipse
       cat3: four
+      cat4: 
     - name: yellowellipseone.svg
       cat1: yellow
       cat2: ellipse
       cat3: one
+      cat4: 
     - name: yellowellipsethree.svg
       cat1: yellow
       cat2: ellipse
       cat3: three
+      cat4: 
     - name: yellowellipsetwo.svg
       cat1: yellow
       cat2: ellipse
       cat3: two
+      cat4: 
     - name: yellowsquarefour.svg
       cat1: yellow
       cat2: square
       cat3: four
+      cat4: 
     - name: yellowsquareone.svg
       cat1: yellow
       cat2: square
       cat3: one
+      cat4: 
     - name: yellowsquarethree.svg
       cat1: yellow
       cat2: square
       cat3: three
+      cat4: 
     - name: yellowsquaretwo.svg
       cat1: yellow
       cat2: square
       cat3: two
+      cat4: 
     - name: yellowtrianglefour.svg
       cat1: yellow
       cat2: triangle
       cat3: four
+      cat4: 
     - name: yellowtriangleone.svg
       cat1: yellow
       cat2: triangle
       cat3: one
+      cat4: 
     - name: yellowtrianglethree.svg
       cat1: yellow
       cat2: triangle
       cat3: three
+      cat4: 
     - name: yellowtriangletwo.svg
       cat1: yellow
       cat2: triangle
       cat3: two
+      cat4:
 

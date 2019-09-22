@@ -22,5 +22,9 @@
     "typescript": "^3.6.2",
     "webpack": "^4.39.3",
     "webpack-cli": "^3.3.7"
+  },
+  "dependencies": {
+    "read-yaml": "^1.1.0",
+    "yaml": "^1.6.0"
   }
 }
