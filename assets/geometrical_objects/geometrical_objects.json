@@ -38,448 +38,448 @@
   ],
   "images": [
     {
-      "name": "bluecirclefour.svg",
+      "name": "bluecirclefour.png",
       "cat1": "blue",
       "cat2": "circle",
       "cat3": "four",
       "cat4": null
     },
     {
-      "name": "bluecircleone.svg",
+      "name": "bluecircleone.png",
       "cat1": "blue",
       "cat2": "circle",
       "cat3": "one",
       "cat4": null
     },
     {
-      "name": "bluecirclethree.svg",
+      "name": "bluecirclethree.png",
       "cat1": "blue",
       "cat2": "circle",
       "cat3": "three",
       "cat4": null
     },
     {
-      "name": "bluecircletwo.svg",
+      "name": "bluecircletwo.png",
       "cat1": "blue",
       "cat2": "circle",
       "cat3": "two",
       "cat4": null
     },
     {
-      "name": "blueellipsefour.svg",
+      "name": "blueellipsefour.png",
       "cat1": "blue",
       "cat2": "ellipse",
       "cat3": "four",
       "cat4": null
     },
     {
-      "name": "blueellipseone.svg",
+      "name": "blueellipseone.png",
       "cat1": "blue",
       "cat2": "ellipse",
       "cat3": "one",
       "cat4": null
     },
     {
-      "name": "blueellipsethree.svg",
+      "name": "blueellipsethree.png",
       "cat1": "blue",
       "cat2": "ellipse",
       "cat3": "three",
       "cat4": null
     },
     {
-      "name": "blueellipsetwo.svg",
+      "name": "blueellipsetwo.png",
       "cat1": "blue",
       "cat2": "ellipse",
       "cat3": "two",
       "cat4": null
     },
     {
-      "name": "bluesquarefour.svg",
+      "name": "bluesquarefour.png",
       "cat1": "blue",
       "cat2": "square",
       "cat3": "four",
       "cat4": null
     },
     {
-      "name": "bluesquareone.svg",
+      "name": "bluesquareone.png",
       "cat1": "blue",
       "cat2": "square",
       "cat3": "one",
       "cat4": null
     },
     {
-      "name": "bluesquarethree.svg",
+      "name": "bluesquarethree.png",
       "cat1": "blue",
       "cat2": "square",
       "cat3": "three",
       "cat4": null
     },
     {
-      "name": "bluesquaretwo.svg",
+      "name": "bluesquaretwo.png",
       "cat1": "blue",
       "cat2": "square",
       "cat3": "two",
       "cat4": null
     },
     {
-      "name": "bluetrianglefour.svg",
+      "name": "bluetrianglefour.png",
       "cat1": "blue",
       "cat2": "triangle",
       "cat3": "four",
       "cat4": null
     },
     {
-      "name": "bluetriangleone.svg",
+      "name": "bluetriangleone.png",
       "cat1": "blue",
       "cat2": "triangle",
       "cat3": "one",
       "cat4": null
     },
     {
-      "name": "bluetrianglethree.svg",
+      "name": "bluetrianglethree.png",
       "cat1": "blue",
       "cat2": "triangle",
       "cat3": "three",
       "cat4": null
     },
     {
-      "name": "bluetriangletwo.svg",
+      "name": "bluetriangletwo.png",
       "cat1": "blue",
       "cat2": "triangle",
       "cat3": "two",
       "cat4": null
     },
     {
-      "name": "greencirclefour.svg",
+      "name": "greencirclefour.png",
       "cat1": "green",
       "cat2": "circle",
       "cat3": "four",
       "cat4": null
     },
     {
-      "name": "greencircleone.svg",
+      "name": "greencircleone.png",
       "cat1": "green",
       "cat2": "circle",
       "cat3": "one",
       "cat4": null
     },
     {
-      "name": "greencirclethree.svg",
+      "name": "greencirclethree.png",
       "cat1": "green",
       "cat2": "circle",
       "cat3": "three",
       "cat4": null
     },
     {
-      "name": "greencircletwo.svg",
+      "name": "greencircletwo.png",
       "cat1": "green",
       "cat2": "circle",
       "cat3": "two",
       "cat4": null
     },
     {
-      "name": "greenellipsefour.svg",
+      "name": "greenellipsefour.png",
       "cat1": "green",
       "cat2": "ellipse",
       "cat3": "four",
       "cat4": null
     },
     {
-      "name": "greenellipseone.svg",
+      "name": "greenellipseone.png",
       "cat1": "green",
       "cat2": "ellipse",
       "cat3": "one",
       "cat4": null
     },
     {
-      "name": "greenellipsethree.svg",
+      "name": "greenellipsethree.png",
       "cat1": "green",
       "cat2": "ellipse",
       "cat3": "three",
       "cat4": null
     },
     {
-      "name": "greenellipsetwo.svg",
+      "name": "greenellipsetwo.png",
       "cat1": "green",
       "cat2": "ellipse",
       "cat3": "two",
       "cat4": null
     },
     {
-      "name": "greensquarefour.svg",
+      "name": "greensquarefour.png",
       "cat1": "green",
       "cat2": "square",
       "cat3": "four",
       "cat4": null
     },
     {
-      "name": "greensquareone.svg",
+      "name": "greensquareone.png",
       "cat1": "green",
       "cat2": "square",
       "cat3": "one",
       "cat4": null
     },
     {
-      "name": "greensquarethree.svg",
+      "name": "greensquarethree.png",
       "cat1": "green",
       "cat2": "square",
       "cat3": "three",
       "cat4": null
     },
     {
-      "name": "greensquaretwo.svg",
+      "name": "greensquaretwo.png",
       "cat1": "green",
       "cat2": "square",
       "cat3": "two",
       "cat4": null
     },
     {
-      "name": "greentrianglefour.svg",
+      "name": "greentrianglefour.png",
       "cat1": "green",
       "cat2": "triangle",
       "cat3": "four",
       "cat4": null
     },
     {
-      "name": "greentriangleone.svg",
+      "name": "greentriangleone.png",
       "cat1": "green",
       "cat2": "triangle",
       "cat3": "one",
       "cat4": null
     },
     {
-      "name": "greentrianglethree.svg",
+      "name": "greentrianglethree.png",
       "cat1": "green",
       "cat2": "triangle",
       "cat3": "three",
       "cat4": null
     },
     {
-      "name": "greentriangletwo.svg",
+      "name": "greentriangletwo.png",
       "cat1": "green",
       "cat2": "triangle",
       "cat3": "two",
       "cat4": null
     },
     {
-      "name": "redcirclefour.svg",
+      "name": "redcirclefour.png",
       "cat1": "red",
       "cat2": "circle",
       "cat3": "four",
       "cat4": null
     },
     {
-      "name": "redcircleone.svg",
+      "name": "redcircleone.png",
       "cat1": "red",
       "cat2": "circle",
       "cat3": "one",
       "cat4": null
     },
     {
-      "name": "redcirclethree.svg",
+      "name": "redcirclethree.png",
       "cat1": "red",
       "cat2": "circle",
       "cat3": "three",
       "cat4": null
     },
     {
-      "name": "redcircletwo.svg",
+      "name": "redcircletwo.png",
       "cat1": "red",
       "cat2": "circle",
       "cat3": "two",
       "cat4": null
     },
     {
-      "name": "redellipsefour.svg",
+      "name": "redellipsefour.png",
       "cat1": "red",
       "cat2": "ellipse",
       "cat3": "four",
       "cat4": null
     },
     {
-      "name": "redellipseone.svg",
+      "name": "redellipseone.png",
       "cat1": "red",
       "cat2": "ellipse",
       "cat3": "one",
       "cat4": null
     },
     {
-      "name": "redellipsethree.svg",
+      "name": "redellipsethree.png",
       "cat1": "red",
       "cat2": "ellipse",
       "cat3": "three",
       "cat4": null
     },
     {
-      "name": "redellipsetwo.svg",
+      "name": "redellipsetwo.png",
       "cat1": "red",
       "cat2": "ellipse",
       "cat3": "two",
       "cat4": null
     },
     {
-      "name": "redsquarefour.svg",
+      "name": "redsquarefour.png",
       "cat1": "red",
       "cat2": "square",
       "cat3": "four",
       "cat4": null
     },
     {
-      "name": "redsquareone.svg",
+      "name": "redsquareone.png",
       "cat1": "red",
       "cat2": "square",
       "cat3": "one",
       "cat4": null
     },
     {
-      "name": "redsquarethree.svg",
+      "name": "redsquarethree.png",
       "cat1": "red",
       "cat2": "square",
       "cat3": "three",
       "cat4": null
     },
     {
-      "name": "redsquaretwo.svg",
+      "name": "redsquaretwo.png",
       "cat1": "red",
       "cat2": "square",
       "cat3": "two",
       "cat4": null
     },
     {
-      "name": "redtrianglefour.svg",
+      "name": "redtrianglefour.png",
       "cat1": "red",
       "cat2": "triangle",
       "cat3": "four",
       "cat4": null
     },
     {
-      "name": "redtriangleone.svg",
+      "name": "redtriangleone.png",
       "cat1": "red",
       "cat2": "triangle",
       "cat3": "one",
       "cat4": null
     },
     {
-      "name": "redtrianglethree.svg",
+      "name": "redtrianglethree.png",
       "cat1": "red",
       "cat2": "triangle",
       "cat3": "three",
       "cat4": null
     },
     {
-      "name": "redtriangletwo.svg",
+      "name": "redtriangletwo.png",
       "cat1": "red",
       "cat2": "triangle",
       "cat3": "two",
       "cat4": null
     },
     {
-      "name": "yellowcirclefour.svg",
+      "name": "yellowcirclefour.png",
       "cat1": "yellow",
       "cat2": "circle",
       "cat3": "four",
       "cat4": null
     },
     {
-      "name": "yellowcircleone.svg",
+      "name": "yellowcircleone.png",
       "cat1": "yellow",
       "cat2": "circle",
       "cat3": "one",
       "cat4": null
     },
     {
-      "name": "yellowcirclethree.svg",
+      "name": "yellowcirclethree.png",
       "cat1": "yellow",
       "cat2": "circle",
       "cat3": "three",
       "cat4": null
     },
     {
-      "name": "yellowcircletwo.svg",
+      "name": "yellowcircletwo.png",
       "cat1": "yellow",
       "cat2": "circle",
       "cat3": "two",
       "cat4": null
     },
     {
-      "name": "yellowellipsefour.svg",
+      "name": "yellowellipsefour.png",
       "cat1": "yellow",
       "cat2": "ellipse",
       "cat3": "four",
       "cat4": null
     },
     {
-      "name": "yellowellipseone.svg",
+      "name": "yellowellipseone.png",
       "cat1": "yellow",
       "cat2": "ellipse",
       "cat3": "one",
       "cat4": null
     },
     {
-      "name": "yellowellipsethree.svg",
+      "name": "yellowellipsethree.png",
       "cat1": "yellow",
       "cat2": "ellipse",
       "cat3": "three",
       "cat4": null
     },
     {
-      "name": "yellowellipsetwo.svg",
+      "name": "yellowellipsetwo.png",
       "cat1": "yellow",
       "cat2": "ellipse",
       "cat3": "two",
       "cat4": null
     },
     {
-      "name": "yellowsquarefour.svg",
+      "name": "yellowsquarefour.png",
       "cat1": "yellow",
       "cat2": "square",
       "cat3": "four",
       "cat4": null
     },
     {
-      "name": "yellowsquareone.svg",
+      "name": "yellowsquareone.png",
       "cat1": "yellow",
       "cat2": "square",
       "cat3": "one",
       "cat4": null
     },
     {
-      "name": "yellowsquarethree.svg",
+      "name": "yellowsquarethree.png",
       "cat1": "yellow",
       "cat2": "square",
       "cat3": "three",
       "cat4": null
     },
     {
-      "name": "yellowsquaretwo.svg",
+      "name": "yellowsquaretwo.png",
       "cat1": "yellow",
       "cat2": "square",
       "cat3": "two",
       "cat4": null
     },
     {
-      "name": "yellowtrianglefour.svg",
+      "name": "yellowtrianglefour.png",
       "cat1": "yellow",
       "cat2": "triangle",
       "cat3": "four",
       "cat4": null
     },
     {
-      "name": "yellowtriangleone.svg",
+      "name": "yellowtriangleone.png",
       "cat1": "yellow",
       "cat2": "triangle",
       "cat3": "one",
       "cat4": null
     },
     {
-      "name": "yellowtrianglethree.svg",
+      "name": "yellowtrianglethree.png",
       "cat1": "yellow",
       "cat2": "triangle",
       "cat3": "three",
       "cat4": null
     },
     {
-      "name": "yellowtriangletwo.svg",
+      "name": "yellowtriangletwo.png",
       "cat1": "yellow",
       "cat2": "triangle",
       "cat3": "two",
