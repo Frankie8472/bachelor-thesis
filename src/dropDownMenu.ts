@@ -30,6 +30,7 @@ export class DropDownMenu extends Phaser.Scene {
         menuBackground.setAngle(-90);
         menuBackground.setOrigin(0, 0);
         menuBackground.setScale(0.15, 0.15);
+        menuBackground.setTint(0xeeeeee);
 
         // ExitButton
         let exitButton = this.add.image(-64, 16+2*(16+64), 'exitbutton');

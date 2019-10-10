@@ -35,6 +35,15 @@ export class WelcomeScene extends Phaser.Scene {
         title.setScale(0.7, 0.7);
         title.setInteractive();
 
+        let titleTween = this.tweens.add({
+                targets: title,
+                alpha: 0.7,
+                ease: 'Linear',
+                repeat: 1000,
+                yoyo: true,
+                duration: 1000
+        });
+
         // Scene transition
         title.on("pointerup", function() {
             this.scene.start("GameSceneLoader");
