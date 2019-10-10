@@ -17,23 +17,20 @@ export class GameScene extends Phaser.Scene {
     cellWidth: number;
     cellHeight: number;
 
-    // Displayed images
-    arrayDisplayed: string[];
+    // Remaining stack  of images
+    arrayStack: Phaser.GameObjects.Group;
 
-    // Already displayed images
-    arrayDropped: string[];
+    // Displayed images
+    arrayDisplayed: Phaser.GameObjects.Group;
 
     // Marked images
-    arrayMarked: string[];
+    arrayMarked: Phaser.GameObjects.Group;
 
-    // Remaining stack  of images
-    arrayStack: string[];
+    // Already displayed images
+    arrayDropped: Phaser.GameObjects.Group;
 
     // Coordinates of each grid cell center
     arrayCoordinates: number[][];
-
-    // GameObjects
-    gameObjects: Phaser.GameObjects.Group;
 
 
     constructor() {
@@ -45,11 +42,10 @@ export class GameScene extends Phaser.Scene {
     init(data): void {
         this.helpDown = false;
         this.jsonObject = data.jsonObject;
-        this.arrayStack = [];
-        this.arrayDisplayed = [];
-        this.arrayDropped = [];
-        this.arrayMarked = [];
-        this.gameObjects = this.add.group();
+        this.arrayStack = this.add.group();
+        this.arrayDisplayed = this.add.group();
+        this.arrayDropped = this.add.group();
+        this.arrayMarked = this.add.group();
 
         // TODO: Cell input must come from userinput
         this.cellsX = 5;
@@ -76,7 +72,6 @@ export class GameScene extends Phaser.Scene {
         for (let image of this.jsonObject["images"]) {
             let name = image.name;
             let path = "assets/geometrical_objects/images/"+name;
-            this.arrayStack.push(name);
             this.load.image(name, path);
         }
     }
@@ -107,7 +102,9 @@ export class GameScene extends Phaser.Scene {
         // ================================================================================================
         // Initialize cards
         // ================================================================================================
+
         this.loadCards();
+        this.hideGroups();
         this.initiateCards();
 
 
@@ -123,6 +120,12 @@ export class GameScene extends Phaser.Scene {
 
     // ================================================================================================
     // Card action
+    hideGroups(): void {
+        this.arrayStack.toggleVisible();
+        //this.arrayDisplayed.toggleVisible();
+        this.arrayDropped.toggleVisible();
+        this.arrayMarked.toggleVisible();
+    }
 
     loadCards(): void {
         for (let image of this.jsonObject["images"]) {
@@ -138,35 +141,6 @@ export class GameScene extends Phaser.Scene {
             sprite.setData('cat4', cat4);
 
             //sprite.visible = false;
-            this.gameObjects.add(sprite);
-        }
-    }
-
-    initiateCards(): void {
-        while (this.arrayDisplayed.length < this.cellsY*this.cellsX) {
-            Phaser.Math.RND.shuffle(this.arrayStack);
-            this.arrayDisplayed.push(this.arrayStack.pop());
-        }
-
-        for (let image of this.arrayDisplayed) {
-            let x = this.arrayCoordinates[this.arrayDisplayed.indexOf(image)][0];
-            let y = this.arrayCoordinates[this.arrayDisplayed.indexOf(image)][1];
-            let sprite = this.add.sprite(x, y, image);
-            sprite.setName(image);
-            for (let image of this.jsonObject["images"]) {
-                let name = image.name;
-                if (name === sprite.name) {
-                    let cat1 = image.cat1;
-                    let cat2 = image.cat2;
-                    let cat3 = image.cat3;
-                    let cat4 = image.cat4;
-
-                    sprite.setData('cat1', cat1);
-                    sprite.setData('cat2', cat2);
-                    sprite.setData('cat3', cat3);
-                    sprite.setData('cat4', cat4);
-                }
-            }
 
             sprite.setOrigin(0.5, 0.5);
             sprite.setAngle(Phaser.Math.RND.angle());
@@ -196,13 +170,25 @@ export class GameScene extends Phaser.Scene {
                 }
 
             }, this);
+
+            this.arrayStack.add(sprite);
+        }
+    }
+
+    initiateCards(): void {
+        for (let coords of this.arrayCoordinates) {
+            let sprite = Phaser.Utils.Array.GetRandom(this.arrayStack.getChildren());
+            sprite.setX(coords[0]);
+            sprite.setY(coords[1]);
+            this.arrayStack.remove(sprite);
+            this.arrayDisplayed.add(sprite);
         }
     }
 
     replaceCards(): void {
 
     }
-
+    /**
     replace(sprite: Phaser.GameObjects.Sprite): void {
         let x = sprite.x;
         let y = sprite.y;
@@ -219,7 +205,7 @@ export class GameScene extends Phaser.Scene {
         let scale = this.min(this.cellHeight/sprite.height, this.cellWidth/sprite.width);
         sprite.setScale(scale, scale);
         sprite.setInteractive();
-    }
+    }**/
 
     // ================================================================================================
     // Menu action
