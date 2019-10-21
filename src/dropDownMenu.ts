@@ -26,16 +26,15 @@ export class DropDownMenu extends Phaser.Scene {
 
     create(): void {
         // Menubackground
-        let menuBackground = this.add.image(-115, 110, "menubackground");
-        menuBackground.setAngle(-90);
-        menuBackground.setOrigin(0, 0);
-        menuBackground.setScale(0.15, 0.15);
+        let menuBackground = this.add.image(10+64+25, 100, "menubackground");
+        menuBackground.setOrigin(1, 1);
+        menuBackground.setDisplaySize(200, 80*5);
         menuBackground.setTint(0xeeeeee);
 
         // ExitButton
-        let exitButton = this.add.image(-64, 16+2*(16+64), 'exitbutton');
-        exitButton.setOrigin(0, 0);
-        exitButton.setScale(0.125, 0.125);
+        let exitButton = this.add.image(-64, 10+32+2*(10+64), 'exitbutton');
+        exitButton.setOrigin(0.5, 0.5);
+        exitButton.setDisplaySize(64, 64);
         exitButton.setInteractive();
 
         exitButton.on('pointerup', function () {
@@ -47,8 +46,9 @@ export class DropDownMenu extends Phaser.Scene {
         }, this);
 
         // Fullscreen Button
-        let fullscreenButton = this.add.image(-64, 16+(16+64), 'fullscreenbuttonblack', 0);
-        fullscreenButton.setOrigin(0, 0);
+        let fullscreenButton = this.add.image(-64, 10+32+1*(10+64), 'fullscreenbuttonblack', 0);
+        fullscreenButton.setOrigin(0.5, 0.5);
+        fullscreenButton.setDisplaySize(64, 64);
         fullscreenButton.setInteractive();
 
         fullscreenButton.on('pointerup', function () {
@@ -82,11 +82,14 @@ export class DropDownMenu extends Phaser.Scene {
         }, this);
 
         // MenuButton
-        let menuButton = this.add.image(16+32, 16+32, 'menubutton');
-        menuButton.setScale(0.125, 0.125);
+        let menuButton = this.add.image(32+10, 10+32, 'menubutton');
+        menuButton.setOrigin(0.5, 0.5);
+        menuButton.setDisplaySize(64, 64);
         menuButton.setInteractive();
 
         menuButton.on('pointerup', () => this.menuAction(menuButton, fullscreenButton, exitButton, menuBackground));
+
+
 
         // StartGame
         this.game.scene.start("WelcomeScene");
@@ -107,7 +110,7 @@ export class DropDownMenu extends Phaser.Scene {
 
             let menuBackgroundTween = this.tweens.add({
                 targets: menuBackground,
-                y: 110,
+                y: 100,
                 ease: "Cubic",
                 duration: 500,
                 delay: 100
@@ -147,14 +150,14 @@ export class DropDownMenu extends Phaser.Scene {
 
             let menuBackgroundTween = this.tweens.add({
                 targets: menuBackground,
-                y: 270,
+                y: 3*(64+10)+30,
                 ease: "Cubic",
                 duration: 500
             });
 
             let fullscreenButtonTween = this.tweens.add({
                 targets: fullscreenButton,
-                x: 16,
+                x: 10+32,
                 ease: "Cubic",
                 duration: 500,
                 delay: 50,
@@ -162,7 +165,7 @@ export class DropDownMenu extends Phaser.Scene {
 
             let exitButtonTween = this.tweens.add({
                 targets: exitButton,
-                x: 16,
+                x: 10+32,
                 ease: "Cubic",
                 duration: 500,
                 delay: 100
