@@ -19,7 +19,6 @@ export class DropDownMenu extends Phaser.Scene {
     preload(): void {
         this.load.image("menubutton", "assets/ui/menu_button.png"/*{ frameWidth: 512, frameHeight: 512 }*/);
         this.load.spritesheet('fullscreenbuttonblack', 'assets/ui/fullscreen_button_black.png', { frameWidth: 64, frameHeight: 64 });
-        this.load.spritesheet('fullscreenbuttonwhite', 'assets/ui/fullscreen_button_white.png', { frameWidth: 64, frameHeight: 64 });
         this.load.image("exitbutton", "assets/ui/exit_button.png" /*{ frameWidth: 512, frameHeight: 512 }*/);
         this.load.image("menubackground", "assets/ui/menu_background.png" /*{ frameWidth: 352, frameHeight: 728 }*/);
     }

@@ -41,6 +41,11 @@ export class GameScene extends Phaser.Scene {
     // How many matching cards have you found?
     private points: number;
 
+    // Timeprogressbar
+    private timefluid: Phaser.GameObjects.Sprite;
+
+    // Gameprogressbar
+    private gamefluid: Phaser.GameObjects.Sprite;
 
     constructor() {
         super({
@@ -57,10 +62,11 @@ export class GameScene extends Phaser.Scene {
         this.arrayDropped = this.add.group();
         this.arrayMarked = this.add.group();
         this.checked = false;
+        this.points = 0;
 
         // TODO: Cell input must come from userinput
-        this.cellsX = 5;
-        this.cellsY = 4;
+        this.cellsX = 3;
+        this.cellsY = 3;
 
         this.arrayCoordinates = [];
         let offsetX = 100;
@@ -77,7 +83,8 @@ export class GameScene extends Phaser.Scene {
     preload(): void {
         // Helper menu graphics
         this.load.image('help', 'assets/ui/help.png'/*{ frameWidth: 512, frameHeight: 512 }*/);
-        this.load.image('menubackground', 'assets/ui/menu_background.png' /*{ frameWidth: 352, frameHeight: 728 }*/);
+        this.load.image('menubackground', 'assets/ui/menu_background.png');
+        this.load.image('gamebackground', 'assets/ui/game_background.png');
 
         // Get Image names from json and save them in array
         for (let image of this.jsonObject['images']) {
@@ -97,6 +104,13 @@ export class GameScene extends Phaser.Scene {
             this.load.image(name, path);
 
         }
+
+        // Get progressbar images
+        this.load.image('timefluid', 'assets/ui/timefluid.png');
+        this.load.image('gamefluid', 'assets/ui/gamefluid.png');
+        this.load.image('progressbar', 'assets/ui/progressbar.png');
+        this.load.image('progressstar', 'assets/ui/star.png');
+        this.load.image('sandclock', 'assets/ui/sandclock.png');
     }
 
     create(): void {
@@ -106,7 +120,11 @@ export class GameScene extends Phaser.Scene {
 
         this.game.scene.moveDown(this.key);
 
-        this.cameras.main.setBackgroundColor(0xb9b9b9);
+        let background = this.add.sprite(0, 0, "gamebackground");
+        background.setOrigin(0, 0);
+        background.setDisplaySize(this.cameras.main.width, this.cameras.main.height);
+        background.setTint(0xffccaa);
+        background.setAlpha(0.9);
 
         // ================================================================================================
         // Add helper menu
@@ -122,6 +140,13 @@ export class GameScene extends Phaser.Scene {
         this.initiateCards();
 
         // ================================================================================================
+        // Initialize cards
+        // ================================================================================================
+
+        this.createTimeProgressbar();
+        this.createGameProgressbar();
+
+        // ================================================================================================
         // Bring MenuUI to the front
         // ================================================================================================
 
@@ -129,9 +154,23 @@ export class GameScene extends Phaser.Scene {
     }
 
     update(time: number): void {
-        if (this.arrayMarked.getLength() >= 1 && !this.checked) {
+        // Check for correctness of selected cards
+        if (this.arrayMarked.getLength() >= 3 && !this.checked) {
             this.checked = true;
-            this.checkEquality();
+            this.replaceCards(this.checkEquality(this.arrayMarked.getChildren()));
+
+        }
+
+        // Update timebar
+        let timedata = this.timefluid.getData('timeY');
+        if (timedata <= 0) {
+            // Endgame
+            this.game.scene.stop(this.key);
+            this.game.scene.start("WelcomeScene");
+        } else {
+            timedata -= 0.0001;
+            this.timefluid.setData('timeY', timedata);
+            this.timefluid.setScale(this.timefluid.getData('timeX'), timedata);
         }
     }
 
@@ -143,8 +182,8 @@ export class GameScene extends Phaser.Scene {
         let menuBackground = this.add.image(this.cameras.main.width - 64-10-30, 64+10+40, 'menubackground');
         menuBackground.setAngle(180);
         menuBackground.setOrigin(1, 0);
-        menuBackground.setDisplaySize(500, this.cameras.main.height+100);
-        menuBackground.setTint(0xeeeeee);
+        menuBackground.setDisplaySize(500, this.cameras.main.height+120);
+        menuBackground.setTint(0xdddddd);
 
         // Category indicator
         let y = 16 + 32;
@@ -227,6 +266,13 @@ export class GameScene extends Phaser.Scene {
                     // Remove from marked array
                     this.arrayMarked.remove(sprite);
 
+                    // Remove helper/hint category tint
+                    for (let cat of this.arrayCategory.getChildren()) {
+                        if (cat instanceof Phaser.GameObjects.Sprite){
+                            cat.clearTint();
+                        }
+                    }
+
                     // Set checked to false
                     this.checked = false;
                 }
@@ -259,10 +305,10 @@ export class GameScene extends Phaser.Scene {
     // ================================================================================================
     // Equality check on a full stack
     // ================================================================================================
-    private checkEquality(): void {
+    private checkEquality(threeCards): boolean {
         let replaceCards = true;
 
-        if (this.arrayMarked.getLength() >= 3) {
+        if (this.arrayMarked.getLength() < 3) {
             replaceCards = false;
         }
 
@@ -276,8 +322,8 @@ export class GameScene extends Phaser.Scene {
                 // Clear tint
                 cat.clearTint();
 
-                for (let spriteFirst of this.arrayMarked.getChildren()) {
-                    for (let spriteSecond of this.arrayMarked.getChildren()) {
+                for (let spriteFirst of threeCards) {
+                    for (let spriteSecond of threeCards) {
 
                         // Check if not the same sprite
                         if (!(spriteFirst === spriteSecond)) {
@@ -338,9 +384,7 @@ export class GameScene extends Phaser.Scene {
             unEqCheck = false;
         }
 
-        this.replaceCards(replaceCards);
-
-
+        return replaceCards;
     }
 
     // ================================================================================================
@@ -371,9 +415,46 @@ export class GameScene extends Phaser.Scene {
             }
             this.arrayMarked.clear(true, false);
 
+            // Update progressbar
+            let timesUntilWin = 3;
+            this.points += this.gamefluid.getData('gameMax')/timesUntilWin;
+
+            if (this.points >= this.gamefluid.getData('gameMax')) {
+                this.gamefluid.setScale(this.gamefluid.getData('gameX'), this.points);
+
+                // Endgame
+                this.game.scene.stop(this.key);
+                this.game.scene.start("WelcomeScene");
+            }
+
+            this.gamefluid.setScale(this.gamefluid.getData('gameX'), this.points);
+
+            // Remove helper/hint category tint
+            for (let cat of this.arrayCategory.getChildren()) {
+                if (cat instanceof Phaser.GameObjects.Sprite){
+                    cat.clearTint();
+                }
+            }
+
             // Set checked to false
             this.checked = false;
         }
+    }
+
+    // ================================================================================================
+    // If you think there are no more pairs, refresh cards
+    // ================================================================================================
+    private refreshCards(): void {
+        // Replace all cards
+        for (let card of this.arrayDisplayed.getChildren()) {
+            if (card instanceof Phaser.GameObjects.Sprite) {
+                card.setVisible(false);
+                this.arrayStack.add(card);
+            }
+        }
+        this.arrayDisplayed.clear(true, false);
+        this.initiateCards();
+
     }
 
     // ================================================================================================
@@ -418,7 +499,7 @@ export class GameScene extends Phaser.Scene {
             // Animation
             let menuBackgroundTween = this.tweens.add({
                 targets: menuBackground,
-                y: this.cameras.main.height + 50,
+                y: this.cameras.main.height + 90,
                 x: this.cameras.main.width - 64-10-50,
                 ease: 'Cubic',
                 duration: 500
@@ -442,6 +523,31 @@ export class GameScene extends Phaser.Scene {
     // Gameprogressbar
     // ================================================================================================
     private createGameProgressbar(): void {
+        let multiplierX = 0.4;
+        let multiplierY = 0.3;
+        let progressbarY = this.cameras.main.height-10;
+        let progressbar = this.add.sprite(0, progressbarY, 'progressbar');
+        progressbar.setOrigin(0, 1);
+        progressbar.setScale(multiplierX, multiplierY);
+
+        let progressbarX = 10*2+progressbar.width*multiplierX;
+        progressbar.setX(progressbarX);
+
+        let progressstar = this.add.sprite(progressbarX,progressbarY-progressbar.height*multiplierY-10,'progressstar');
+        let starmultiplier = progressbar.width*multiplierX / progressstar.width;
+        progressstar.setOrigin(0, 1);
+        progressstar.setScale(starmultiplier, starmultiplier);
+
+        this.gamefluid = this.add.sprite(progressbarX+progressbar.width*multiplierX/2+2, progressbarY-6, 'gamefluid');
+        this.gamefluid.setOrigin(0.5, 1);
+        this.gamefluid.setData('gameX', multiplierX);
+        this.gamefluid.setData('gameY', 0.01);
+        this.gamefluid.setData('gameMax', (progressbar.height*multiplierY-6)/this.gamefluid.height);
+        this.gamefluid.setScale(multiplierX, 0.01);
+        this.gamefluid.setAlpha(0.7);
+
+
+        /**
         // size & position
         let width = 400;
         let height = 20;
@@ -467,11 +573,7 @@ export class GameScene extends Phaser.Scene {
 
         let progressbar = this.add.graphics();
 
-        /**
-         * Updates the progress bar.
-         *
-         * @param {number} percentage
-         */
+
         let updateProgressbar = function(percentage) {
             progressbar.clear();
             progressbar.fillStyle(0xffffff, 1);
@@ -485,13 +587,32 @@ export class GameScene extends Phaser.Scene {
             this.load.off('progress', updateProgressbar);
             this.scene.start('title');
 
-        }, this);
+        }, this);**/
+
     }
 
     // ================================================================================================
     // Timeprogressbar
     // ================================================================================================
     private createTimeProgressbar (): void {
+        let multiplierX = 0.4;
+        let multiplierY = 0.3;
+        let progressbarY = this.cameras.main.height-10;
+        let progressbar = this.add.sprite(10, progressbarY, 'progressbar');
+        progressbar.setOrigin(0, 1);
+        progressbar.setScale(multiplierX, multiplierY);
+
+        let sandclock = this.add.sprite(10,progressbarY-progressbar.height*multiplierY-10,'sandclock');
+        let starmultiplier = progressbar.width*multiplierX / sandclock.width;
+        sandclock.setOrigin(0, 1);
+        sandclock.setScale(starmultiplier, starmultiplier);
+
+        this.timefluid = this.add.sprite(10+progressbar.width*multiplierX/2+2, progressbarY-6, 'timefluid');
+        this.timefluid.setOrigin(0.5, 1);
+        this.timefluid.setData('timeX', multiplierX);
+        this.timefluid.setData('timeY', (progressbar.height*multiplierY-6)/this.timefluid.height);
+        this.timefluid.setScale(this.timefluid.getData('timeX'), this.timefluid.getData('timeY'));
+        this.timefluid.setAlpha(0.7);
 
     }
 
@@ -511,5 +632,4 @@ export class GameScene extends Phaser.Scene {
         }
         return val2;
     }
-
 }
