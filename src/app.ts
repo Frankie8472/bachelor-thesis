@@ -1,15 +1,15 @@
 import "phaser";
 import GameConfig = Phaser.Types.Core.GameConfig;
+import { DropDownMenu } from './dropDownMenu';
 import { WelcomeScene } from "./welcomeScene";
-import {GameScene} from './gameScene';
-import {GameSceneLoader} from './gameSceneLoader';
-import {DropDownMenu} from './dropDownMenu';
-import {ScoreScene} from './scoreScene';
+import { LevelMenuScene } from './levelMenuScene';
+import { GameScene } from './gameScene';
+import { ScoreScene } from './scoreScene';
 
 const config: GameConfig = {
     title: "Gotscha!",
     parent: "game",
-    scene: [DropDownMenu, WelcomeScene, GameSceneLoader, GameScene, ScoreScene],
+    scene: [DropDownMenu, WelcomeScene, LevelMenuScene, GameScene, ScoreScene],
     physics: {
         default: "arcade",
         arcade: {

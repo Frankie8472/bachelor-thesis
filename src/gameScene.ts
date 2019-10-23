@@ -1,6 +1,4 @@
 import 'phaser';
-import * as yaml from 'js-yaml';
-import Map = Phaser.Structs.Map;
 
 export class GameScene extends Phaser.Scene {
     key: string = 'GameScene';
@@ -64,9 +62,8 @@ export class GameScene extends Phaser.Scene {
         this.checked = false;
         this.points = 0;
 
-        // TODO: Cell input must come from userinput
         this.cellsX = 3;
-        this.cellsY = 3;
+        this.cellsY = 4;
 
         this.arrayCoordinates = [];
         let offsetX = 100;
@@ -129,6 +126,7 @@ export class GameScene extends Phaser.Scene {
         // ================================================================================================
         // Add helper menu
         // ================================================================================================
+        // TODO: lock for not triggering animation while animation runs
 
         this.helperMenu();
 
@@ -243,7 +241,7 @@ export class GameScene extends Phaser.Scene {
 
             sprite.setVisible(false);
 
-            let scale = this.max(this.cellHeight / sprite.height, this.cellWidth / sprite.width);
+            let scale = this.min(this.cellWidth / sprite.height, this.cellHeight / sprite.width);
             sprite.setScale(scale, scale);
             sprite.setInteractive();
 

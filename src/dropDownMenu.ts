@@ -24,6 +24,8 @@ export class DropDownMenu extends Phaser.Scene {
     }
 
     create(): void {
+        // TODO: lock for not triggering animation while animation runs
+
         // Menubackground
         let menuBackground = this.add.image(10+64+25, 100, "menubackground");
         menuBackground.setOrigin(1, 1);

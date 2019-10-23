@@ -1,5 +1,4 @@
 import "phaser";
-import {DropDownMenu} from './dropDownMenu';
 
 export class WelcomeScene extends Phaser.Scene {
     key: string = "WelcomeScene";
@@ -46,7 +45,7 @@ export class WelcomeScene extends Phaser.Scene {
 
         // Scene transition
         title.on("pointerup", function() {
-            this.scene.start("GameSceneLoader");
+            this.scene.start("GameScene");
         }, this);
     }
 }
