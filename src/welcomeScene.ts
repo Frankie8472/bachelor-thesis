@@ -45,7 +45,9 @@ export class WelcomeScene extends Phaser.Scene {
 
         // Scene transition
         title.on("pointerup", function() {
-            this.scene.start("GameScene");
+            this.game.scene.start("LevelMenuScene");
+            this.game.scene.stop(this.key);
+            return;
         }, this);
     }
 }

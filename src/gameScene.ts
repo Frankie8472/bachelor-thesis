@@ -3,6 +3,9 @@ import 'phaser';
 export class GameScene extends Phaser.Scene {
     key: string = 'GameScene';
 
+    // Lock for not messing up animations by clicking repeatedly without waiting for the animation to finish
+    private lock: boolean;
+
     // HelpersMenu down?
     private helpDown: boolean;
 
@@ -38,6 +41,7 @@ export class GameScene extends Phaser.Scene {
 
     // How many matching cards have you found?
     private points: number;
+    private maxPoints: number;
 
     // Timeprogressbar
     private timefluid: Phaser.GameObjects.Sprite;
@@ -61,6 +65,7 @@ export class GameScene extends Phaser.Scene {
         this.arrayMarked = this.add.group();
         this.checked = false;
         this.points = 0;
+        this.maxPoints = 1;
 
         this.cellsX = 3;
         this.cellsY = 4;
@@ -78,10 +83,12 @@ export class GameScene extends Phaser.Scene {
     }
 
     preload(): void {
+
+        this.load.image('gamebackground', 'assets/ui/game_background.png');
+
         // Helper menu graphics
         this.load.image('help', 'assets/ui/help.png'/*{ frameWidth: 512, frameHeight: 512 }*/);
         this.load.image('menubackground', 'assets/ui/menu_background.png');
-        this.load.image('gamebackground', 'assets/ui/game_background.png');
 
         // Get Image names from json and save them in array
         for (let image of this.jsonObject['images']) {
@@ -126,7 +133,6 @@ export class GameScene extends Phaser.Scene {
         // ================================================================================================
         // Add helper menu
         // ================================================================================================
-        // TODO: lock for not triggering animation while animation runs
 
         this.helperMenu();
 
@@ -163,8 +169,9 @@ export class GameScene extends Phaser.Scene {
         let timedata = this.timefluid.getData('timeY');
         if (timedata <= 0) {
             // Endgame
+            this.game.scene.start("ScoreScene", {'score': this.points/this.maxPoints});
             this.game.scene.stop(this.key);
-            this.game.scene.start("WelcomeScene");
+            return;
         } else {
             timedata -= 0.0001;
             this.timefluid.setData('timeY', timedata);
@@ -177,7 +184,7 @@ export class GameScene extends Phaser.Scene {
     // ================================================================================================
     private helperMenu(): void {
         // Menu background
-        let menuBackground = this.add.image(this.cameras.main.width - 64-10-30, 64+10+40, 'menubackground');
+        let menuBackground = this.add.sprite(this.cameras.main.width - 64-10-30, 64+10+40, 'menubackground');
         menuBackground.setAngle(180);
         menuBackground.setOrigin(1, 0);
         menuBackground.setDisplaySize(500, this.cameras.main.height+120);
@@ -210,7 +217,7 @@ export class GameScene extends Phaser.Scene {
         }
 
         // MenuButton
-        let menuButton = this.add.image(this.cameras.main.width - (10 + 32), 10 + 32, 'help');
+        let menuButton = this.add.sprite(this.cameras.main.width - (10 + 32), 10 + 32, 'help');
         menuButton.setDisplaySize(64, 64);
         menuButton.setInteractive();
 
@@ -413,16 +420,17 @@ export class GameScene extends Phaser.Scene {
             }
             this.arrayMarked.clear(true, false);
 
+            // ======================================================================
             // Update progressbar
-            let timesUntilWin = 3;
-            this.points += this.gamefluid.getData('gameMax')/timesUntilWin;
+            // ======================================================================
+            this.points += this.gamefluid.getData('gameMax')/this.maxPoints;
 
             if (this.points >= this.gamefluid.getData('gameMax')) {
                 this.gamefluid.setScale(this.gamefluid.getData('gameX'), this.points);
-
-                // Endgame
+                // End game
+                this.game.scene.start("ScoreScene");
                 this.game.scene.stop(this.key);
-                this.game.scene.start("WelcomeScene");
+                return;
             }
 
             this.gamefluid.setScale(this.gamefluid.getData('gameX'), this.points);
@@ -518,7 +526,7 @@ export class GameScene extends Phaser.Scene {
     }
 
     // ================================================================================================
-    // Gameprogressbar
+    // Game progressbar
     // ================================================================================================
     private createGameProgressbar(): void {
         let multiplierX = 0.4;
@@ -543,50 +551,6 @@ export class GameScene extends Phaser.Scene {
         this.gamefluid.setData('gameMax', (progressbar.height*multiplierY-6)/this.gamefluid.height);
         this.gamefluid.setScale(multiplierX, 0.01);
         this.gamefluid.setAlpha(0.7);
-
-
-        /**
-        // size & position
-        let width = 400;
-        let height = 20;
-        let xStart =  - width / 2;
-        let yStart =  - height / 2;
-
-        // border size
-        let borderOffset = 2;
-
-        let borderRect = new Phaser.Geom.Rectangle(
-            xStart - borderOffset,
-            yStart - borderOffset,
-            width + borderOffset * 2,
-            height + borderOffset * 2);
-
-        let border = this.add.graphics({
-            lineStyle: {
-                width: 5,
-                color: 0xaaaaaa
-            }
-        });
-        border.strokeRectShape(borderRect);
-
-        let progressbar = this.add.graphics();
-
-
-        let updateProgressbar = function(percentage) {
-            progressbar.clear();
-            progressbar.fillStyle(0xffffff, 1);
-            progressbar.fillRect(xStart, yStart, percentage * width, height);
-        };
-
-        this.load.on('progress', updateProgressbar);
-
-        this.load.once('complete', function() {
-
-            this.load.off('progress', updateProgressbar);
-            this.scene.start('title');
-
-        }, this);**/
-
     }
 
     // ================================================================================================

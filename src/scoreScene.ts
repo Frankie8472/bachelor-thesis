@@ -2,9 +2,9 @@ import "phaser";
 
 export class ScoreScene extends Phaser.Scene {
     key: string = "ScoreScene";
-    score: number;
-    result: Phaser.GameObjects.Text;
-    hint: Phaser.GameObjects.Text;
+    private score: number;
+    private result: Phaser.GameObjects.Text;
+    private hint: Phaser.GameObjects.Text;
 
     constructor() {
         super({
@@ -12,13 +12,23 @@ export class ScoreScene extends Phaser.Scene {
         });
     }
 
-    init(params: any): void {
-        this.score = params.starsCaught;
+    init(data): void {
+        this.score = data.score;
+    }
+
+    preload(): void {
+        this.load.image('gamebackground', 'assets/ui/game_background.png');
     }
 
     create(): void {
         // MenuUI must be in the front
         this.game.scene.moveDown(this.key);
+
+        let background = this.add.sprite(0, 0, "gamebackground");
+        background.setOrigin(0, 0);
+        background.setDisplaySize(this.cameras.main.width, this.cameras.main.height);
+        //background.setTint(0xffccaa);
+        //background.setAlpha(0.9);
 
         let resultText: string = 'Your score is ' + this.score + '!';
         this.result = this.add.text(200, 250, resultText,
@@ -33,4 +43,4 @@ export class ScoreScene extends Phaser.Scene {
         }, this);
     }
 
-};
+}

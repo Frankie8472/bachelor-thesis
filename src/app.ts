@@ -1,15 +1,22 @@
 import "phaser";
 import GameConfig = Phaser.Types.Core.GameConfig;
+import RenderConfig = Phaser.Types.Core.RenderConfig;
 import { DropDownMenu } from './dropDownMenu';
-import { WelcomeScene } from "./welcomeScene";
+import { WelcomeScene } from './welcomeScene';
 import { LevelMenuScene } from './levelMenuScene';
+import { GameSceneLoader } from './gameSceneLoader';
 import { GameScene } from './gameScene';
 import { ScoreScene } from './scoreScene';
+
+const renderConfig: RenderConfig = {
+    antialias: true,
+    pixelArt: false
+};
 
 const config: GameConfig = {
     title: "Gotscha!",
     parent: "game",
-    scene: [DropDownMenu, WelcomeScene, LevelMenuScene, GameScene, ScoreScene],
+    scene: [DropDownMenu, WelcomeScene, LevelMenuScene, GameSceneLoader, GameScene, ScoreScene],
     physics: {
         default: "arcade",
         arcade: {
@@ -17,6 +24,8 @@ const config: GameConfig = {
         }
     },
     backgroundColor: "#000000",
+
+    render: renderConfig,
 
     scale: {
         parent:'phaser-example',
