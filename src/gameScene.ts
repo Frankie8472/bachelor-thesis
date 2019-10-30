@@ -234,7 +234,8 @@ export class GameScene extends Phaser.Scene {
             let cat2 = image.cat2;
             let cat3 = image.cat3;
             let cat4 = image.cat4;
-            let sprite = this.add.sprite(200, 200, name);
+            // TODO: check if still instance of sprite. If not, all other code will fail!
+            let sprite = this.arrayStack.create(200, 200, name);
 
             sprite.setName(name);
 
@@ -284,7 +285,7 @@ export class GameScene extends Phaser.Scene {
 
             }, this);
 
-            this.arrayStack.add(sprite);
+            // should be redundant because of group.create()... this.arrayStack.add(sprite);
         }
     }
 
