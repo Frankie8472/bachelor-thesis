@@ -161,6 +161,7 @@ export class GameScene extends Phaser.Scene {
         // Check for correctness of selected cards
         if (this.arrayMarked.getLength() >= 3 && !this.checked) {
             this.checked = true;
+            console.log("isSet: " + this.isSet(this.arrayMarked.getChildren()));
             this.replaceCards(this.checkEquality(this.arrayMarked.getChildren()));
 
         }
@@ -293,6 +294,7 @@ export class GameScene extends Phaser.Scene {
     // Initialize cards
     // ================================================================================================
     private initiateCards(): void {
+
         for (let coords of this.arrayCoordinates) {
             let sprite = Phaser.Utils.Array.GetRandom(this.arrayStack.getChildren());
             if (sprite instanceof Phaser.GameObjects.Sprite) {
@@ -394,12 +396,69 @@ export class GameScene extends Phaser.Scene {
     }
 
     // ================================================================================================
+    // Equality check on three cards
+    // ================================================================================================
+    private isSet(threeCards): boolean {
+        // Boolean: Equal until now?
+        let eqCheck = false;
+        // Boolean Different until now?
+        let unEqCheck = false;
+        for (let cat of this.arrayCategory.getChildren()) {
+            // Make sure your objects are sprites
+            if (cat instanceof Phaser.GameObjects.Sprite) {
+
+                // Iterate through all cards. Check in sets of two for equality or inequality and remember this.
+                // Check all 3 pair matchings.
+                for (let spriteFirst of threeCards) {
+                    for (let spriteSecond of threeCards) {
+
+                        // Check if not the same sprite
+                        if (!(spriteFirst === spriteSecond)) {
+
+                            // Check if category the same or not
+                            if (spriteFirst.getData(cat.name) === spriteSecond.getData(cat.name)) {
+
+                                // Check if all categories are the same until now
+                                if (unEqCheck) {
+                                    return false;
+                                }
+
+                                if (!eqCheck) {
+                                    eqCheck = true;
+                                }
+
+                            } else {
+                                // Check if all categories are different until now
+                                if (eqCheck) {
+
+                                    return false;
+
+                                }
+
+                                if (!unEqCheck) {
+                                    unEqCheck = true;
+                                }
+                            }
+                            // Cat of all cards are the same or different until now => OK
+                        }
+                    }
+                }
+            }
+
+            // Reset for every category
+            eqCheck = false;
+            unEqCheck = false;
+        }
+
+        return true;
+    }
+
+    // ================================================================================================
     // Replace marked cards
     // ================================================================================================
     private replaceCards(replaceCards: boolean): void {
         if (replaceCards) {
             for (let discardedCard of this.arrayMarked.getChildren()) {
-                console.log(discardedCard.name);
                 let newSprite = Phaser.Utils.Array.GetRandom(this.arrayStack.getChildren());
                 if (newSprite instanceof Phaser.GameObjects.Sprite && discardedCard instanceof Phaser.GameObjects.Sprite) {
                     newSprite.setX(discardedCard.x);
@@ -451,6 +510,23 @@ export class GameScene extends Phaser.Scene {
     // ================================================================================================
     // If you think there are no more pairs, refresh cards
     // ================================================================================================
+    private checkForPossibleSet(): void {
+        let cardSet = this.arrayDisplayed.getChildren();
+        let cardSetLength = cardSet.length;
+        for (let x = 0; x <= cardSetLength; x++) {
+            for (let y = x + 1; y <= cardSetLength-(x+1); y++) {
+                for (let z = y + 1; z <= cardSetLength-(y+1); z++) {
+                    if (this.isSet([cardSet[x], cardSet[y], cardSet[z]])) {
+                        // Do not replace/add cards
+                        return;
+                    }
+                }
+            }
+        }
+        // Replace/add cards
+
+    }
+
     private refreshCards(): void {
         // Replace all cards
         for (let card of this.arrayDisplayed.getChildren()) {
