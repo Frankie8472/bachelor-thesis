@@ -1,28 +1,28 @@
 categories:
     - name: cat1
       url: color.png
-      valid:
+      validElements:
         - red
         - blue
         - yellow
         - green
     - name: cat2
       url: shape.png
-      valid:
+      validElements:
         - circle
         - square
         - triangle
         - ellipse
     - name: cat3
       url: nummeration.png
-      valid:
+      validElements:
         - one
         - two
         - three
         - four
     - name: cat4
-      url:
-      valid: []
+      url: 
+      validElements: []
 images:
     - name: bluecirclefour.png
       cat1: blue

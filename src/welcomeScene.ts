@@ -22,7 +22,10 @@ export class WelcomeScene extends Phaser.Scene {
 
     create(): void {
         // MenuUI must be in the front
-        this.game.scene.moveDown(this.key);
+        this.game.scene.sendToBack(this.key);
+
+        let transition = this.transitionInit();
+        this.transitionIn(transition);
 
         // Add background
         let background = this.add.sprite(0, 0, "background");
@@ -44,10 +47,52 @@ export class WelcomeScene extends Phaser.Scene {
         });
 
         // Scene transition
-        title.on("pointerup", function() {
-            this.game.scene.start("LevelMenuScene");
-            this.game.scene.stop(this.key);
-            return;
-        }, this);
+        title.on("pointerup", () => this.transitionOut(transition, "LevelMenuScene"));
+        return;
+    }
+
+    private transitionInit(): Phaser.GameObjects.Graphics {
+        let circle = this.add.graphics();
+        let mask = circle.createGeometryMask();
+        let rectangle = this.add.rectangle(0, 0, this.cameras.main.width, this.cameras.main.height, 0x000000);
+
+        circle.setPosition(this.cameras.main.width/2, this.cameras.main.height/2);
+        circle.fillCircle(0, 0, 0.1);
+
+        mask.setInvertAlpha(true);
+
+        rectangle.setDepth(2);
+        rectangle.setOrigin(0, 0);
+        rectangle.setMask(mask);
+
+        circle.fillCircle(0, 0, 0.1);
+
+        return circle;
+    }
+
+    private transitionIn(circle: Phaser.GameObjects.Graphics): void {
+        let tween = this.add.tween({
+            targets: circle,
+            scale: 10*0.5*Math.sqrt(Math.pow(this.cameras.main.width, 2) + Math.pow(this.cameras.main.height, 2)),
+            ease: 'linear',
+            duration: 700,
+        });
+    }
+
+    private transitionOut(circle: Phaser.GameObjects.Graphics, scene: string): void {
+        let tween = this.add.tween({
+            targets: circle,
+            scale: 0,
+            ease: 'linear',
+            duration: 700,
+            onComplete: () => this.sceneChange(scene)
+        });
+        return;
+    }
+
+    private sceneChange(scene: string):void {
+        this.game.scene.start(scene);
+        this.game.scene.stop(this.key);
+        return;
     }
 }

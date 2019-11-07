@@ -1,18 +1,18 @@
 import "phaser";
 
-export class GameSceneLoader extends Phaser.Scene {
-    key: string = "GameSceneLoader";
+export class SortingSceneLoader extends Phaser.Scene {
+    key: string = "SortingSceneLoader";
 
     setLevel: number;
 
     constructor() {
         super({
-            key: "GameSceneLoader"
+            key: "SortingSceneLoader"
         });
     }
 
     init(data): void {
-        this.setLevel = data.setLevel;
+
     }
 
     preload(): void {
@@ -21,7 +21,7 @@ export class GameSceneLoader extends Phaser.Scene {
     }
 
     create(): void {
-        this.game.scene.start("GameScene", { 'jsonObject': this.cache.json.get("objects"), 'setLevel': this.setLevel});
+        this.game.scene.start("SortingScene", { 'jsonObject': this.cache.json.get("objects")});
         this.game.scene.stop(this.key);
         return;
     }

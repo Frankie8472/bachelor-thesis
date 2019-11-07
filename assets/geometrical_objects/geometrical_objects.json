@@ -3,7 +3,7 @@
     {
       "name": "cat1",
       "url": "color.png",
-      "valid": [
+      "validElements": [
         "red",
         "blue",
         "yellow",
@@ -13,7 +13,7 @@
     {
       "name": "cat2",
       "url": "shape.png",
-      "valid": [
+      "validElements": [
         "circle",
         "square",
         "triangle",
@@ -23,7 +23,7 @@
     {
       "name": "cat3",
       "url": "nummeration.png",
-      "valid": [
+      "validElements": [
         "one",
         "two",
         "three",
@@ -33,7 +33,7 @@
     {
       "name": "cat4",
       "url": null,
-      "valid": []
+      "validElements": []
     }
   ],
   "images": [

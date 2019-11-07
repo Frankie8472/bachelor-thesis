@@ -1,5 +1,6 @@
 import "phaser";
 import {WelcomeScene} from './welcomeScene';
+import TRANSITION_OUT = Phaser.Scenes.Events.TRANSITION_OUT;
 
 export class DropDownMenu extends Phaser.Scene {
     key: string = "DropDownMenu";
@@ -11,13 +12,14 @@ export class DropDownMenu extends Phaser.Scene {
 
     constructor(){
         super({
-            key: "dropDownMenu"
+            key: "DropDownMenu"
         });
     }
 
     init(/*params: any*/): void {
         this.menuDown = false;
         this.lock = false;
+        return;
     }
 
     preload(): void {
@@ -25,11 +27,10 @@ export class DropDownMenu extends Phaser.Scene {
         this.load.spritesheet('fullscreenbuttonblack', 'assets/ui/fullscreen_button_black.png', { frameWidth: 64, frameHeight: 64 });
         this.load.image("exitbutton", "assets/ui/exit_button.png" /*{ frameWidth: 512, frameHeight: 512 }*/);
         this.load.image("menubackground", "assets/ui/menu_background.png" /*{ frameWidth: 352, frameHeight: 728 }*/);
+        return;
     }
 
     create(): void {
-        // TODO: lock for not triggering animation while animation runs
-
         // Menubackground
         let menuBackground = this.add.sprite(10+64+25, 100, "menubackground");
         menuBackground.setOrigin(1, 1);
@@ -103,6 +104,11 @@ export class DropDownMenu extends Phaser.Scene {
 
         // StartGame
         this.game.scene.start("WelcomeScene");
+        return;
+    }
+
+    update(time: number, delta: number): void {
+        return;
     }
 
     private menuAction(menuButton, fullscreenButton, exitButton, menuBackground): void {

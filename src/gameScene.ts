@@ -48,6 +48,7 @@ export class GameScene extends Phaser.Scene {
 
     // Gameprogressbar
     private gamefluid: Phaser.GameObjects.Sprite;
+    private timedataStepsize: number;
 
     constructor() {
         super({
@@ -56,6 +57,7 @@ export class GameScene extends Phaser.Scene {
     }
 
     init(data): void {
+        this.lock = false;
         this.helpDown = false;
         this.jsonObject = data.jsonObject;
         this.arrayCategory = this.add.group();
@@ -65,7 +67,36 @@ export class GameScene extends Phaser.Scene {
         this.arrayMarked = this.add.group();
         this.checked = false;
         this.points = 0;
-        this.maxPoints = 1;
+
+        // Level settings
+        switch(data.setLevel) {
+            case 1: {
+                this.maxPoints = 10;
+                this.timedataStepsize = 0.00001;
+
+                break;
+            }
+
+            case 2: {
+                this.maxPoints = 10;
+                this.timedataStepsize = 0.0005;
+                break;
+            }
+
+            case 3: {
+                this.maxPoints = 10;
+                this.timedataStepsize = 0.0001;
+                break;
+            }
+
+            default: {
+                console.log("Initialisation Error: setLevel is not 1, 2 or 3!");
+                this.maxPoints = 0;
+
+                break;
+            }
+        }
+
 
         this.cellsX = 3;
         this.cellsY = 4;
@@ -106,7 +137,6 @@ export class GameScene extends Phaser.Scene {
             let name = cat.name;
             let path = 'assets/geometrical_objects/categories/' + cat.url;
             this.load.image(name, path);
-
         }
 
         // Get progressbar images
@@ -122,7 +152,7 @@ export class GameScene extends Phaser.Scene {
         // Bring MenuUI to the front and set background
         // ================================================================================================
 
-        this.game.scene.moveDown(this.key);
+        this.game.scene.sendToBack(this.key);
 
         let background = this.add.sprite(0, 0, "gamebackground");
         background.setOrigin(0, 0);
@@ -142,6 +172,7 @@ export class GameScene extends Phaser.Scene {
 
         this.loadCards();
         this.initiateCards();
+        this.checkForPossibleSet();
 
         // ================================================================================================
         // Initialize cards
@@ -153,8 +184,6 @@ export class GameScene extends Phaser.Scene {
         // ================================================================================================
         // Bring MenuUI to the front
         // ================================================================================================
-
-        this.game.scene.moveDown(this.key);
     }
 
     update(time: number): void {
@@ -163,7 +192,6 @@ export class GameScene extends Phaser.Scene {
             this.checked = true;
             console.log("isSet: " + this.isSet(this.arrayMarked.getChildren()));
             this.replaceCards(this.checkEquality(this.arrayMarked.getChildren()));
-
         }
 
         // Update timebar
@@ -174,7 +202,7 @@ export class GameScene extends Phaser.Scene {
             this.game.scene.stop(this.key);
             return;
         } else {
-            timedata -= 0.0001;
+            timedata -= this.timedataStepsize;
             this.timefluid.setData('timeY', timedata);
             this.timefluid.setScale(this.timefluid.getData('timeX'), timedata);
         }
@@ -502,6 +530,8 @@ export class GameScene extends Phaser.Scene {
                 }
             }
 
+            this.checkForPossibleSet();
+
             // Set checked to false
             this.checked = false;
         }
@@ -511,20 +541,27 @@ export class GameScene extends Phaser.Scene {
     // If you think there are no more pairs, refresh cards
     // ================================================================================================
     private checkForPossibleSet(): void {
+        console.log("problem?");
+
         let cardSet = this.arrayDisplayed.getChildren();
+        console.log("no");
+
         let cardSetLength = cardSet.length;
+        console.log("start");
         for (let x = 0; x <= cardSetLength; x++) {
             for (let y = x + 1; y <= cardSetLength-(x+1); y++) {
                 for (let z = y + 1; z <= cardSetLength-(y+1); z++) {
                     if (this.isSet([cardSet[x], cardSet[y], cardSet[z]])) {
-                        // Do not replace/add cards
+                        console.log("end");
                         return;
                     }
                 }
             }
         }
         // Replace/add cards
-
+        this.refreshCards();
+        // Do not replace/add cards
+        console.log("end");
     }
 
     private refreshCards(): void {

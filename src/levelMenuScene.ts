@@ -16,6 +16,7 @@ export class LevelMenuScene extends Phaser.Scene {
 
     preload(): void {
         this.load.image("background", "assets/ui/background1.png");
+        this.load.image("catButton", 'assets/ui/cat_button.png');
         this.load.image("levelOneButton", "assets/ui/level1_button.png");
         this.load.image("levelTwoButton", "assets/ui/level2_button.png");
         this.load.image("levelThreeButton", "assets/ui/level3_button.png");
@@ -27,34 +28,48 @@ export class LevelMenuScene extends Phaser.Scene {
         // Bring MenuUI to the front and set background
         // ================================================================================================
 
-        this.game.scene.moveDown(this.key);
+        this.game.scene.sendToBack(this.key);
 
         let background = this.add.sprite(0, 0, "background");
         background.setOrigin(0, 0);
         background.setDisplaySize(this.cameras.main.width, this.cameras.main.height);
 
-        let levelOneButton = this.add.sprite(this.cameras.main.width/10*2, this.cameras.main.height/2, "levelOneButton");
-        let levelTwoButton = this.add.sprite(this.cameras.main.width/10*5, this.cameras.main.height/2, "levelTwoButton");
-        let levelThreeButton = this.add.sprite(this.cameras.main.width/10*8, this.cameras.main.height/2, "levelThreeButton");
+        let catButton = this.add.sprite(this.cameras.main.width/10*5, this.cameras.main.height/10*3, "catButton");
+        let levelOneButton = this.add.sprite(this.cameras.main.width/10*2, this.cameras.main.height/10*7, "levelOneButton");
+        let levelTwoButton = this.add.sprite(this.cameras.main.width/10*5, this.cameras.main.height/10*7, "levelTwoButton");
+        let levelThreeButton = this.add.sprite(this.cameras.main.width/10*8, this.cameras.main.height/10*7, "levelThreeButton");
 
+        catButton.setOrigin(0.5, 0.5);
         levelOneButton.setOrigin(0.5, 0.5);
         levelTwoButton.setOrigin(0.5, 0.5);
         levelThreeButton.setOrigin(0.5, 0.5);
 
+        catButton.setDisplaySize(this.cameras.main.height/3, this.cameras.main.height/3);
         levelOneButton.setDisplaySize(this.cameras.main.height/3, this.cameras.main.height/3);
         levelTwoButton.setDisplaySize(this.cameras.main.height/3, this.cameras.main.height/3);
         levelThreeButton.setDisplaySize(this.cameras.main.height/3, this.cameras.main.height/3);
 
+        catButton.setInteractive();
         levelOneButton.setInteractive();
         levelTwoButton.setInteractive();
         levelThreeButton.setInteractive();
+
+        catButton.on('pointerdown', function(event) {
+            catButton.setTint(0xcccccc);
+        }, this);
+        catButton.on('pointerup', function(event) {
+            catButton.clearTint();
+            this.game.scene.start("SortingSceneLoader");
+            this.game.scene.stop(this.key);
+            return;
+        }, this);
 
         levelOneButton.on('pointerdown', function(event) {
             levelOneButton.setTint(0xcccccc);
         }, this);
         levelOneButton.on('pointerup', function(event) {
             levelOneButton.clearTint();
-            this.game.scene.start("GameSceneLoader");
+            this.game.scene.start("GameSceneLoader", {'setLevel': 1 });
             this.game.scene.stop(this.key);
             return;
         }, this);
@@ -64,7 +79,7 @@ export class LevelMenuScene extends Phaser.Scene {
         }, this);
         levelTwoButton.on('pointerup', function(event) {
             levelTwoButton.clearTint();
-            this.game.scene.start("GameSceneLoader");
+            this.game.scene.start("GameSceneLoader", {'setLevel': 2 });
             this.game.scene.stop(this.key);
             return;
         }, this);
@@ -74,7 +89,7 @@ export class LevelMenuScene extends Phaser.Scene {
         }, this);
         levelThreeButton.on('pointerup', function(event) {
             levelThreeButton.clearTint();
-            this.game.scene.start("GameSceneLoader");
+            this.game.scene.start("GameSceneLoader", {'setLevel': 3 });
             this.game.scene.stop(this.key);
             return;
         }, this);

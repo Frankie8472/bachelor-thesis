@@ -18,11 +18,15 @@ export class ScoreScene extends Phaser.Scene {
 
     preload(): void {
         this.load.image('gamebackground', 'assets/ui/game_background.png');
+        this.load.image('star_0', 'assets/ui/star_0.png');
+        this.load.image('star_1', 'assets/ui/star_1.png');
+        this.load.image('star_2', 'assets/ui/star_2.png');
+        this.load.image('star_3', 'assets/ui/star_3.png');
     }
 
     create(): void {
         // MenuUI must be in the front
-        this.game.scene.moveDown(this.key);
+        this.game.scene.sendToBack(this.key);
 
         let background = this.add.sprite(0, 0, "gamebackground");
         background.setOrigin(0, 0);
@@ -30,17 +34,24 @@ export class ScoreScene extends Phaser.Scene {
         //background.setTint(0xffccaa);
         //background.setAlpha(0.9);
 
-        let resultText: string = 'Your score is ' + this.score + '!';
-        this.result = this.add.text(200, 250, resultText,
-            { font: '48px Arial Bold', fill: '#FBFBAC' });
+        let sprite: Phaser.GameObjects.Sprite;
 
-        let hintText: string = "Click to restart";
-        this.hint = this.add.text(300, 350, hintText,
-            { font: '24px Arial Bold', fill: '#FBFBAC' });
+        if (this.score < 0.3) {
+            sprite = this.add.sprite(this.cameras.main.width/2, this.cameras.main.height/2, "star_0");
+        } else if (this.score < 0.6) {
+            sprite = this.add.sprite(this.cameras.main.width/2, this.cameras.main.height/2, "star_1");
+        } else if (this.score < 1) {
+            sprite = this.add.sprite(this.cameras.main.width/2, this.cameras.main.height/2, "star_2");
+        } else {
+            sprite = this.add.sprite(this.cameras.main.width/2, this.cameras.main.height/2, "star_3");
+        }
 
-        this.input.on('pointerdown', function (/*pointer*/) {
+        sprite.setOrigin(0.5, 0.5);
+
+        this.input.on('pointerup', function (/*pointer*/) {
             this.scene.start("WelcomeScene");
         }, this);
+
     }
 
 }

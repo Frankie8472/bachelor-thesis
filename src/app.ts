@@ -7,6 +7,9 @@ import { LevelMenuScene } from './levelMenuScene';
 import { GameSceneLoader } from './gameSceneLoader';
 import { GameScene } from './gameScene';
 import { ScoreScene } from './scoreScene';
+import { SortingScene } from './sortingScene';
+import { SortingSceneLoader } from './sortingSceneLoader';
+import { TransitionScene } from './transitionScene';
 
 const renderConfig: RenderConfig = {
     antialias: true,
@@ -16,7 +19,8 @@ const renderConfig: RenderConfig = {
 const config: GameConfig = {
     title: "Gotscha!",
     parent: "game",
-    scene: [DropDownMenu, WelcomeScene, LevelMenuScene, GameSceneLoader, GameScene, ScoreScene],
+    type: Phaser.AUTO,
+    scene: [DropDownMenu, TransitionScene, WelcomeScene, LevelMenuScene, GameSceneLoader, GameScene, ScoreScene, SortingSceneLoader, SortingScene],
     physics: {
         default: "arcade",
         arcade: {
@@ -31,8 +35,8 @@ const config: GameConfig = {
         parent:'phaser-example',
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
-        width: 800,
-        height: 600
+        width: window.screen.width,
+        height: window.screen.height
 
     }
 };
