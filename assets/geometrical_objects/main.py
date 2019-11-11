@@ -1,6 +1,8 @@
 # 1. All single properties
 # 2. 3 categories with 3 properties each
 # 3. 4 categories with 3 properties each
+# gimp batch processing
+# mogrify -trim +repage *
 
 
 def main():
@@ -21,7 +23,7 @@ def main():
                 three = "none"
                 four = "none"
 
-                filling = "none"
+                filling = "url(#stripe)"  # "none"
                 [colordefault, colordark] = colors[0]
 
                 if shape == "square":
@@ -31,11 +33,17 @@ def main():
                 else:
                     triangle = "inherit"
 
-                file = open("images/svg/"+shape+".svg", "w+")
-                imageString = imgStr(colordefault, colordark, square, circle, triangle, ellipse, filling, one,
-                                     two, three, four)
-                file.write(imageString)
+                imageString = imgStr(colordefault, colordark, square, circle, triangle, ellipse, filling, one, two, three, four)
+
+                with open("images/svg/"+shape+".svg", "w+") as file:
+                    file.write(imageString)
+
             continue
+
+        with open("temp.txt", "w") as file:
+            file.write("")
+            file.close()
+
         for colordefault, colordark in colors:
             for shape in shapes:
                 for filling in fillings:
@@ -65,10 +73,25 @@ def main():
                         fillingname = "none"
                         if filling != "none":
                             fillingname = filling[5:len(filling)-1]
-                        file = open("images/svg/" + colordefault + shape + fillingname + number + ".svg", "w+")
-                        imageString = imgStr(colordefault, colordark, square, circle, triangle, ellipse, filling, one,
-                                             two, three, four)
-                        file.write(imageString)
+                        filename = colordefault + shape + number + fillingname
+                        imageString = imgStr(colordefault, colordark, square, circle, triangle, ellipse, filling, one, two, three, four)
+
+                        with open("images/svg/" + filename + ".svg", "w+") as file:
+                            file.write(imageString)
+                            file.close()
+
+                        with open("temp.txt", "a") as file:
+                            if fillingname == "none":
+                                fillingname = "full"
+                            file.seek(0, 2)
+                            file.writelines([
+                                "- name: " + colordefault + shape + number + fillingname + ".png\n",
+                                "  cat1: " + colordefault+"\n",
+                                "  cat2: " + shape+"\n",
+                                "  cat3: " + number+"\n",
+                                "  cat4: " + fillingname+"\n"
+                            ])
+                            file.close()
 
 
 def imgStr(colordefault, colordark, square, circle, triangle, ellipse, filling, one, two, three, four):

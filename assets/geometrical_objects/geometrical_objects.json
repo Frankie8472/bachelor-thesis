@@ -4,486 +4,642 @@
       "name": "cat1",
       "url": "color.png",
       "validElements": [
-        "red",
-        "blue",
-        "yellow",
-        "green"
+        {
+          "name": "darkturquoise",
+          "url": "darkturquoise.png"
+        },
+        {
+          "name": "darkorange",
+          "url": "darkorange.png"
+        },
+        {
+          "name": "purple",
+          "url": "purple.png"
+        }
       ]
     },
     {
       "name": "cat2",
       "url": "shape.png",
       "validElements": [
-        "circle",
-        "square",
-        "triangle",
-        "ellipse"
+        {
+          "name": "circle",
+          "url": "circle.png"
+        },
+        {
+          "name": "square",
+          "url": "square.png"
+        },
+        {
+          "name": "triangle",
+          "url": "triangle.png"
+        }
       ]
     },
     {
       "name": "cat3",
       "url": "nummeration.png",
       "validElements": [
-        "one",
-        "two",
-        "three",
-        "four"
+        {
+          "name": "one",
+          "url": "one.png"
+        },
+        {
+          "name": "two",
+          "url": "two.png"
+        },
+        {
+          "name": "three",
+          "url": "three.png"
+        }
       ]
     },
     {
       "name": "cat4",
-      "url": null,
-      "validElements": []
+      "url": "filling.png",
+      "validElements": [
+        {
+          "name": "full",
+          "url": "full.png"
+        },
+        {
+          "name": "dotted",
+          "url": "dotted.png"
+        },
+        {
+          "name": "stripe",
+          "url": "stripe.png"
+        }
+      ]
     }
   ],
   "images": [
     {
-      "name": "bluecirclefour.png",
-      "cat1": "blue",
-      "cat2": "circle",
-      "cat3": "four",
-      "cat4": null
-    },
-    {
-      "name": "bluecircleone.png",
-      "cat1": "blue",
-      "cat2": "circle",
-      "cat3": "one",
-      "cat4": null
-    },
-    {
-      "name": "bluecirclethree.png",
-      "cat1": "blue",
-      "cat2": "circle",
-      "cat3": "three",
-      "cat4": null
-    },
-    {
-      "name": "bluecircletwo.png",
-      "cat1": "blue",
-      "cat2": "circle",
-      "cat3": "two",
-      "cat4": null
-    },
-    {
-      "name": "blueellipsefour.png",
-      "cat1": "blue",
-      "cat2": "ellipse",
-      "cat3": "four",
-      "cat4": null
-    },
-    {
-      "name": "blueellipseone.png",
-      "cat1": "blue",
-      "cat2": "ellipse",
-      "cat3": "one",
-      "cat4": null
-    },
-    {
-      "name": "blueellipsethree.png",
-      "cat1": "blue",
-      "cat2": "ellipse",
-      "cat3": "three",
-      "cat4": null
-    },
-    {
-      "name": "blueellipsetwo.png",
-      "cat1": "blue",
-      "cat2": "ellipse",
-      "cat3": "two",
-      "cat4": null
-    },
-    {
-      "name": "bluesquarefour.png",
-      "cat1": "blue",
-      "cat2": "square",
-      "cat3": "four",
-      "cat4": null
-    },
-    {
-      "name": "bluesquareone.png",
-      "cat1": "blue",
+      "name": "purplesquareonefull.png",
+      "cat1": "purple",
       "cat2": "square",
       "cat3": "one",
-      "cat4": null
+      "cat4": "full"
     },
     {
-      "name": "bluesquarethree.png",
-      "cat1": "blue",
-      "cat2": "square",
-      "cat3": "three",
-      "cat4": null
-    },
-    {
-      "name": "bluesquaretwo.png",
-      "cat1": "blue",
+      "name": "purplesquaretwofull.png",
+      "cat1": "purple",
       "cat2": "square",
       "cat3": "two",
-      "cat4": null
+      "cat4": "full"
     },
     {
-      "name": "bluetrianglefour.png",
-      "cat1": "blue",
-      "cat2": "triangle",
-      "cat3": "four",
-      "cat4": null
-    },
-    {
-      "name": "bluetriangleone.png",
-      "cat1": "blue",
-      "cat2": "triangle",
-      "cat3": "one",
-      "cat4": null
-    },
-    {
-      "name": "bluetrianglethree.png",
-      "cat1": "blue",
-      "cat2": "triangle",
-      "cat3": "three",
-      "cat4": null
-    },
-    {
-      "name": "bluetriangletwo.png",
-      "cat1": "blue",
-      "cat2": "triangle",
-      "cat3": "two",
-      "cat4": null
-    },
-    {
-      "name": "greencirclefour.png",
-      "cat1": "green",
-      "cat2": "circle",
-      "cat3": "four",
-      "cat4": null
-    },
-    {
-      "name": "greencircleone.png",
-      "cat1": "green",
-      "cat2": "circle",
-      "cat3": "one",
-      "cat4": null
-    },
-    {
-      "name": "greencirclethree.png",
-      "cat1": "green",
-      "cat2": "circle",
-      "cat3": "three",
-      "cat4": null
-    },
-    {
-      "name": "greencircletwo.png",
-      "cat1": "green",
-      "cat2": "circle",
-      "cat3": "two",
-      "cat4": null
-    },
-    {
-      "name": "greenellipsefour.png",
-      "cat1": "green",
-      "cat2": "ellipse",
-      "cat3": "four",
-      "cat4": null
-    },
-    {
-      "name": "greenellipseone.png",
-      "cat1": "green",
-      "cat2": "ellipse",
-      "cat3": "one",
-      "cat4": null
-    },
-    {
-      "name": "greenellipsethree.png",
-      "cat1": "green",
-      "cat2": "ellipse",
-      "cat3": "three",
-      "cat4": null
-    },
-    {
-      "name": "greenellipsetwo.png",
-      "cat1": "green",
-      "cat2": "ellipse",
-      "cat3": "two",
-      "cat4": null
-    },
-    {
-      "name": "greensquarefour.png",
-      "cat1": "green",
+      "name": "purplesquarethreefull.png",
+      "cat1": "purple",
       "cat2": "square",
-      "cat3": "four",
-      "cat4": null
+      "cat3": "three",
+      "cat4": "full"
     },
     {
-      "name": "greensquareone.png",
-      "cat1": "green",
+      "name": "purplesquareonestripe.png",
+      "cat1": "purple",
       "cat2": "square",
       "cat3": "one",
-      "cat4": null
+      "cat4": "stripe"
     },
     {
-      "name": "greensquarethree.png",
-      "cat1": "green",
-      "cat2": "square",
-      "cat3": "three",
-      "cat4": null
-    },
-    {
-      "name": "greensquaretwo.png",
-      "cat1": "green",
+      "name": "purplesquaretwostripe.png",
+      "cat1": "purple",
       "cat2": "square",
       "cat3": "two",
-      "cat4": null
+      "cat4": "stripe"
     },
     {
-      "name": "greentrianglefour.png",
-      "cat1": "green",
-      "cat2": "triangle",
-      "cat3": "four",
-      "cat4": null
+      "name": "purplesquarethreestripe.png",
+      "cat1": "purple",
+      "cat2": "square",
+      "cat3": "three",
+      "cat4": "stripe"
     },
     {
-      "name": "greentriangleone.png",
-      "cat1": "green",
-      "cat2": "triangle",
+      "name": "purplesquareonedotted.png",
+      "cat1": "purple",
+      "cat2": "square",
       "cat3": "one",
-      "cat4": null
+      "cat4": "dotted"
     },
     {
-      "name": "greentrianglethree.png",
-      "cat1": "green",
-      "cat2": "triangle",
-      "cat3": "three",
-      "cat4": null
-    },
-    {
-      "name": "greentriangletwo.png",
-      "cat1": "green",
-      "cat2": "triangle",
+      "name": "purplesquaretwodotted.png",
+      "cat1": "purple",
+      "cat2": "square",
       "cat3": "two",
-      "cat4": null
+      "cat4": "dotted"
     },
     {
-      "name": "redcirclefour.png",
-      "cat1": "red",
-      "cat2": "circle",
-      "cat3": "four",
-      "cat4": null
+      "name": "purplesquarethreedotted.png",
+      "cat1": "purple",
+      "cat2": "square",
+      "cat3": "three",
+      "cat4": "dotted"
     },
     {
-      "name": "redcircleone.png",
-      "cat1": "red",
+      "name": "purplecircleonefull.png",
+      "cat1": "purple",
       "cat2": "circle",
       "cat3": "one",
-      "cat4": null
+      "cat4": "full"
     },
     {
-      "name": "redcirclethree.png",
-      "cat1": "red",
-      "cat2": "circle",
-      "cat3": "three",
-      "cat4": null
-    },
-    {
-      "name": "redcircletwo.png",
-      "cat1": "red",
+      "name": "purplecircletwofull.png",
+      "cat1": "purple",
       "cat2": "circle",
       "cat3": "two",
-      "cat4": null
+      "cat4": "full"
     },
     {
-      "name": "redellipsefour.png",
-      "cat1": "red",
-      "cat2": "ellipse",
-      "cat3": "four",
-      "cat4": null
-    },
-    {
-      "name": "redellipseone.png",
-      "cat1": "red",
-      "cat2": "ellipse",
-      "cat3": "one",
-      "cat4": null
-    },
-    {
-      "name": "redellipsethree.png",
-      "cat1": "red",
-      "cat2": "ellipse",
-      "cat3": "three",
-      "cat4": null
-    },
-    {
-      "name": "redellipsetwo.png",
-      "cat1": "red",
-      "cat2": "ellipse",
-      "cat3": "two",
-      "cat4": null
-    },
-    {
-      "name": "redsquarefour.png",
-      "cat1": "red",
-      "cat2": "square",
-      "cat3": "four",
-      "cat4": null
-    },
-    {
-      "name": "redsquareone.png",
-      "cat1": "red",
-      "cat2": "square",
-      "cat3": "one",
-      "cat4": null
-    },
-    {
-      "name": "redsquarethree.png",
-      "cat1": "red",
-      "cat2": "square",
-      "cat3": "three",
-      "cat4": null
-    },
-    {
-      "name": "redsquaretwo.png",
-      "cat1": "red",
-      "cat2": "square",
-      "cat3": "two",
-      "cat4": null
-    },
-    {
-      "name": "redtrianglefour.png",
-      "cat1": "red",
-      "cat2": "triangle",
-      "cat3": "four",
-      "cat4": null
-    },
-    {
-      "name": "redtriangleone.png",
-      "cat1": "red",
-      "cat2": "triangle",
-      "cat3": "one",
-      "cat4": null
-    },
-    {
-      "name": "redtrianglethree.png",
-      "cat1": "red",
-      "cat2": "triangle",
-      "cat3": "three",
-      "cat4": null
-    },
-    {
-      "name": "redtriangletwo.png",
-      "cat1": "red",
-      "cat2": "triangle",
-      "cat3": "two",
-      "cat4": null
-    },
-    {
-      "name": "yellowcirclefour.png",
-      "cat1": "yellow",
-      "cat2": "circle",
-      "cat3": "four",
-      "cat4": null
-    },
-    {
-      "name": "yellowcircleone.png",
-      "cat1": "yellow",
-      "cat2": "circle",
-      "cat3": "one",
-      "cat4": null
-    },
-    {
-      "name": "yellowcirclethree.png",
-      "cat1": "yellow",
+      "name": "purplecirclethreefull.png",
+      "cat1": "purple",
       "cat2": "circle",
       "cat3": "three",
-      "cat4": null
+      "cat4": "full"
     },
     {
-      "name": "yellowcircletwo.png",
-      "cat1": "yellow",
+      "name": "purplecircleonestripe.png",
+      "cat1": "purple",
+      "cat2": "circle",
+      "cat3": "one",
+      "cat4": "stripe"
+    },
+    {
+      "name": "purplecircletwostripe.png",
+      "cat1": "purple",
       "cat2": "circle",
       "cat3": "two",
-      "cat4": null
+      "cat4": "stripe"
     },
     {
-      "name": "yellowellipsefour.png",
-      "cat1": "yellow",
-      "cat2": "ellipse",
-      "cat3": "four",
-      "cat4": null
-    },
-    {
-      "name": "yellowellipseone.png",
-      "cat1": "yellow",
-      "cat2": "ellipse",
-      "cat3": "one",
-      "cat4": null
-    },
-    {
-      "name": "yellowellipsethree.png",
-      "cat1": "yellow",
-      "cat2": "ellipse",
+      "name": "purplecirclethreestripe.png",
+      "cat1": "purple",
+      "cat2": "circle",
       "cat3": "three",
-      "cat4": null
+      "cat4": "stripe"
     },
     {
-      "name": "yellowellipsetwo.png",
-      "cat1": "yellow",
-      "cat2": "ellipse",
-      "cat3": "two",
-      "cat4": null
-    },
-    {
-      "name": "yellowsquarefour.png",
-      "cat1": "yellow",
-      "cat2": "square",
-      "cat3": "four",
-      "cat4": null
-    },
-    {
-      "name": "yellowsquareone.png",
-      "cat1": "yellow",
-      "cat2": "square",
+      "name": "purplecircleonedotted.png",
+      "cat1": "purple",
+      "cat2": "circle",
       "cat3": "one",
-      "cat4": null
+      "cat4": "dotted"
     },
     {
-      "name": "yellowsquarethree.png",
-      "cat1": "yellow",
-      "cat2": "square",
-      "cat3": "three",
-      "cat4": null
-    },
-    {
-      "name": "yellowsquaretwo.png",
-      "cat1": "yellow",
-      "cat2": "square",
+      "name": "purplecircletwodotted.png",
+      "cat1": "purple",
+      "cat2": "circle",
       "cat3": "two",
-      "cat4": null
+      "cat4": "dotted"
     },
     {
-      "name": "yellowtrianglefour.png",
-      "cat1": "yellow",
-      "cat2": "triangle",
-      "cat3": "four",
-      "cat4": null
+      "name": "purplecirclethreedotted.png",
+      "cat1": "purple",
+      "cat2": "circle",
+      "cat3": "three",
+      "cat4": "dotted"
     },
     {
-      "name": "yellowtriangleone.png",
-      "cat1": "yellow",
+      "name": "purpletriangleonefull.png",
+      "cat1": "purple",
       "cat2": "triangle",
       "cat3": "one",
-      "cat4": null
+      "cat4": "full"
     },
     {
-      "name": "yellowtrianglethree.png",
-      "cat1": "yellow",
-      "cat2": "triangle",
-      "cat3": "three",
-      "cat4": null
-    },
-    {
-      "name": "yellowtriangletwo.png",
-      "cat1": "yellow",
+      "name": "purpletriangletwofull.png",
+      "cat1": "purple",
       "cat2": "triangle",
       "cat3": "two",
-      "cat4": null
+      "cat4": "full"
+    },
+    {
+      "name": "purpletrianglethreefull.png",
+      "cat1": "purple",
+      "cat2": "triangle",
+      "cat3": "three",
+      "cat4": "full"
+    },
+    {
+      "name": "purpletriangleonestripe.png",
+      "cat1": "purple",
+      "cat2": "triangle",
+      "cat3": "one",
+      "cat4": "stripe"
+    },
+    {
+      "name": "purpletriangletwostripe.png",
+      "cat1": "purple",
+      "cat2": "triangle",
+      "cat3": "two",
+      "cat4": "stripe"
+    },
+    {
+      "name": "purpletrianglethreestripe.png",
+      "cat1": "purple",
+      "cat2": "triangle",
+      "cat3": "three",
+      "cat4": "stripe"
+    },
+    {
+      "name": "purpletriangleonedotted.png",
+      "cat1": "purple",
+      "cat2": "triangle",
+      "cat3": "one",
+      "cat4": "dotted"
+    },
+    {
+      "name": "purpletriangletwodotted.png",
+      "cat1": "purple",
+      "cat2": "triangle",
+      "cat3": "two",
+      "cat4": "dotted"
+    },
+    {
+      "name": "purpletrianglethreedotted.png",
+      "cat1": "purple",
+      "cat2": "triangle",
+      "cat3": "three",
+      "cat4": "dotted"
+    },
+    {
+      "name": "darkorangesquareonefull.png",
+      "cat1": "darkorange",
+      "cat2": "square",
+      "cat3": "one",
+      "cat4": "full"
+    },
+    {
+      "name": "darkorangesquaretwofull.png",
+      "cat1": "darkorange",
+      "cat2": "square",
+      "cat3": "two",
+      "cat4": "full"
+    },
+    {
+      "name": "darkorangesquarethreefull.png",
+      "cat1": "darkorange",
+      "cat2": "square",
+      "cat3": "three",
+      "cat4": "full"
+    },
+    {
+      "name": "darkorangesquareonestripe.png",
+      "cat1": "darkorange",
+      "cat2": "square",
+      "cat3": "one",
+      "cat4": "stripe"
+    },
+    {
+      "name": "darkorangesquaretwostripe.png",
+      "cat1": "darkorange",
+      "cat2": "square",
+      "cat3": "two",
+      "cat4": "stripe"
+    },
+    {
+      "name": "darkorangesquarethreestripe.png",
+      "cat1": "darkorange",
+      "cat2": "square",
+      "cat3": "three",
+      "cat4": "stripe"
+    },
+    {
+      "name": "darkorangesquareonedotted.png",
+      "cat1": "darkorange",
+      "cat2": "square",
+      "cat3": "one",
+      "cat4": "dotted"
+    },
+    {
+      "name": "darkorangesquaretwodotted.png",
+      "cat1": "darkorange",
+      "cat2": "square",
+      "cat3": "two",
+      "cat4": "dotted"
+    },
+    {
+      "name": "darkorangesquarethreedotted.png",
+      "cat1": "darkorange",
+      "cat2": "square",
+      "cat3": "three",
+      "cat4": "dotted"
+    },
+    {
+      "name": "darkorangecircleonefull.png",
+      "cat1": "darkorange",
+      "cat2": "circle",
+      "cat3": "one",
+      "cat4": "full"
+    },
+    {
+      "name": "darkorangecircletwofull.png",
+      "cat1": "darkorange",
+      "cat2": "circle",
+      "cat3": "two",
+      "cat4": "full"
+    },
+    {
+      "name": "darkorangecirclethreefull.png",
+      "cat1": "darkorange",
+      "cat2": "circle",
+      "cat3": "three",
+      "cat4": "full"
+    },
+    {
+      "name": "darkorangecircleonestripe.png",
+      "cat1": "darkorange",
+      "cat2": "circle",
+      "cat3": "one",
+      "cat4": "stripe"
+    },
+    {
+      "name": "darkorangecircletwostripe.png",
+      "cat1": "darkorange",
+      "cat2": "circle",
+      "cat3": "two",
+      "cat4": "stripe"
+    },
+    {
+      "name": "darkorangecirclethreestripe.png",
+      "cat1": "darkorange",
+      "cat2": "circle",
+      "cat3": "three",
+      "cat4": "stripe"
+    },
+    {
+      "name": "darkorangecircleonedotted.png",
+      "cat1": "darkorange",
+      "cat2": "circle",
+      "cat3": "one",
+      "cat4": "dotted"
+    },
+    {
+      "name": "darkorangecircletwodotted.png",
+      "cat1": "darkorange",
+      "cat2": "circle",
+      "cat3": "two",
+      "cat4": "dotted"
+    },
+    {
+      "name": "darkorangecirclethreedotted.png",
+      "cat1": "darkorange",
+      "cat2": "circle",
+      "cat3": "three",
+      "cat4": "dotted"
+    },
+    {
+      "name": "darkorangetriangleonefull.png",
+      "cat1": "darkorange",
+      "cat2": "triangle",
+      "cat3": "one",
+      "cat4": "full"
+    },
+    {
+      "name": "darkorangetriangletwofull.png",
+      "cat1": "darkorange",
+      "cat2": "triangle",
+      "cat3": "two",
+      "cat4": "full"
+    },
+    {
+      "name": "darkorangetrianglethreefull.png",
+      "cat1": "darkorange",
+      "cat2": "triangle",
+      "cat3": "three",
+      "cat4": "full"
+    },
+    {
+      "name": "darkorangetriangleonestripe.png",
+      "cat1": "darkorange",
+      "cat2": "triangle",
+      "cat3": "one",
+      "cat4": "stripe"
+    },
+    {
+      "name": "darkorangetriangletwostripe.png",
+      "cat1": "darkorange",
+      "cat2": "triangle",
+      "cat3": "two",
+      "cat4": "stripe"
+    },
+    {
+      "name": "darkorangetrianglethreestripe.png",
+      "cat1": "darkorange",
+      "cat2": "triangle",
+      "cat3": "three",
+      "cat4": "stripe"
+    },
+    {
+      "name": "darkorangetriangleonedotted.png",
+      "cat1": "darkorange",
+      "cat2": "triangle",
+      "cat3": "one",
+      "cat4": "dotted"
+    },
+    {
+      "name": "darkorangetriangletwodotted.png",
+      "cat1": "darkorange",
+      "cat2": "triangle",
+      "cat3": "two",
+      "cat4": "dotted"
+    },
+    {
+      "name": "darkorangetrianglethreedotted.png",
+      "cat1": "darkorange",
+      "cat2": "triangle",
+      "cat3": "three",
+      "cat4": "dotted"
+    },
+    {
+      "name": "darkturquoisesquareonefull.png",
+      "cat1": "darkturquoise",
+      "cat2": "square",
+      "cat3": "one",
+      "cat4": "full"
+    },
+    {
+      "name": "darkturquoisesquaretwofull.png",
+      "cat1": "darkturquoise",
+      "cat2": "square",
+      "cat3": "two",
+      "cat4": "full"
+    },
+    {
+      "name": "darkturquoisesquarethreefull.png",
+      "cat1": "darkturquoise",
+      "cat2": "square",
+      "cat3": "three",
+      "cat4": "full"
+    },
+    {
+      "name": "darkturquoisesquareonestripe.png",
+      "cat1": "darkturquoise",
+      "cat2": "square",
+      "cat3": "one",
+      "cat4": "stripe"
+    },
+    {
+      "name": "darkturquoisesquaretwostripe.png",
+      "cat1": "darkturquoise",
+      "cat2": "square",
+      "cat3": "two",
+      "cat4": "stripe"
+    },
+    {
+      "name": "darkturquoisesquarethreestripe.png",
+      "cat1": "darkturquoise",
+      "cat2": "square",
+      "cat3": "three",
+      "cat4": "stripe"
+    },
+    {
+      "name": "darkturquoisesquareonedotted.png",
+      "cat1": "darkturquoise",
+      "cat2": "square",
+      "cat3": "one",
+      "cat4": "dotted"
+    },
+    {
+      "name": "darkturquoisesquaretwodotted.png",
+      "cat1": "darkturquoise",
+      "cat2": "square",
+      "cat3": "two",
+      "cat4": "dotted"
+    },
+    {
+      "name": "darkturquoisesquarethreedotted.png",
+      "cat1": "darkturquoise",
+      "cat2": "square",
+      "cat3": "three",
+      "cat4": "dotted"
+    },
+    {
+      "name": "darkturquoisecircleonefull.png",
+      "cat1": "darkturquoise",
+      "cat2": "circle",
+      "cat3": "one",
+      "cat4": "full"
+    },
+    {
+      "name": "darkturquoisecircletwofull.png",
+      "cat1": "darkturquoise",
+      "cat2": "circle",
+      "cat3": "two",
+      "cat4": "full"
+    },
+    {
+      "name": "darkturquoisecirclethreefull.png",
+      "cat1": "darkturquoise",
+      "cat2": "circle",
+      "cat3": "three",
+      "cat4": "full"
+    },
+    {
+      "name": "darkturquoisecircleonestripe.png",
+      "cat1": "darkturquoise",
+      "cat2": "circle",
+      "cat3": "one",
+      "cat4": "stripe"
+    },
+    {
+      "name": "darkturquoisecircletwostripe.png",
+      "cat1": "darkturquoise",
+      "cat2": "circle",
+      "cat3": "two",
+      "cat4": "stripe"
+    },
+    {
+      "name": "darkturquoisecirclethreestripe.png",
+      "cat1": "darkturquoise",
+      "cat2": "circle",
+      "cat3": "three",
+      "cat4": "stripe"
+    },
+    {
+      "name": "darkturquoisecircleonedotted.png",
+      "cat1": "darkturquoise",
+      "cat2": "circle",
+      "cat3": "one",
+      "cat4": "dotted"
+    },
+    {
+      "name": "darkturquoisecircletwodotted.png",
+      "cat1": "darkturquoise",
+      "cat2": "circle",
+      "cat3": "two",
+      "cat4": "dotted"
+    },
+    {
+      "name": "darkturquoisecirclethreedotted.png",
+      "cat1": "darkturquoise",
+      "cat2": "circle",
+      "cat3": "three",
+      "cat4": "dotted"
+    },
+    {
+      "name": "darkturquoisetriangleonefull.png",
+      "cat1": "darkturquoise",
+      "cat2": "triangle",
+      "cat3": "one",
+      "cat4": "full"
+    },
+    {
+      "name": "darkturquoisetriangletwofull.png",
+      "cat1": "darkturquoise",
+      "cat2": "triangle",
+      "cat3": "two",
+      "cat4": "full"
+    },
+    {
+      "name": "darkturquoisetrianglethreefull.png",
+      "cat1": "darkturquoise",
+      "cat2": "triangle",
+      "cat3": "three",
+      "cat4": "full"
+    },
+    {
+      "name": "darkturquoisetriangleonestripe.png",
+      "cat1": "darkturquoise",
+      "cat2": "triangle",
+      "cat3": "one",
+      "cat4": "stripe"
+    },
+    {
+      "name": "darkturquoisetriangletwostripe.png",
+      "cat1": "darkturquoise",
+      "cat2": "triangle",
+      "cat3": "two",
+      "cat4": "stripe"
+    },
+    {
+      "name": "darkturquoisetrianglethreestripe.png",
+      "cat1": "darkturquoise",
+      "cat2": "triangle",
+      "cat3": "three",
+      "cat4": "stripe"
+    },
+    {
+      "name": "darkturquoisetriangleonedotted.png",
+      "cat1": "darkturquoise",
+      "cat2": "triangle",
+      "cat3": "one",
+      "cat4": "dotted"
+    },
+    {
+      "name": "darkturquoisetriangletwodotted.png",
+      "cat1": "darkturquoise",
+      "cat2": "triangle",
+      "cat3": "two",
+      "cat4": "dotted"
+    },
+    {
+      "name": "darkturquoisetrianglethreedotted.png",
+      "cat1": "darkturquoise",
+      "cat2": "triangle",
+      "cat3": "three",
+      "cat4": "dotted"
     }
   ]
 }
