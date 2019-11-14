@@ -30,6 +30,9 @@ export class LevelMenuScene extends Phaser.Scene {
 
         this.game.scene.sendToBack(this.key);
 
+        let transition = this.transitionInit();
+        this.transitionIn(transition);
+
         let background = this.add.sprite(0, 0, "background");
         background.setOrigin(0, 0);
         background.setDisplaySize(this.cameras.main.width, this.cameras.main.height);
@@ -69,8 +72,7 @@ export class LevelMenuScene extends Phaser.Scene {
         }, this);
         levelOneButton.on('pointerup', function(event) {
             levelOneButton.clearTint();
-            this.game.scene.start("GameSceneLoader", {'setLevel': 1 });
-            this.game.scene.stop(this.key);
+            this.transitionOut(transition, "PropertySortingSceneLoader", {'setCat': 2 });
             return;
         }, this);
 
@@ -79,8 +81,7 @@ export class LevelMenuScene extends Phaser.Scene {
         }, this);
         levelTwoButton.on('pointerup', function(event) {
             levelTwoButton.clearTint();
-            this.game.scene.start("GameSceneLoader", {'setLevel': 2 });
-            this.game.scene.stop(this.key);
+            this.transitionOut(transition, "GameSceneLoader", {'setLevel': 2 });
             return;
         }, this);
 
@@ -89,13 +90,57 @@ export class LevelMenuScene extends Phaser.Scene {
         }, this);
         levelThreeButton.on('pointerup', function(event) {
             levelThreeButton.clearTint();
-            this.game.scene.start("GameSceneLoader", {'setLevel': 3 });
-            this.game.scene.stop(this.key);
+            this.transitionOut(transition, "GameSceneLoader", {'setLevel': 3 });
             return;
         }, this);
     }
 
     update(time: number): void {
 
+    }
+
+    private transitionInit(): Phaser.GameObjects.Graphics {
+        let circle = this.add.graphics();
+        let mask = circle.createGeometryMask();
+        let rectangle = this.add.rectangle(0, 0, this.cameras.main.width, this.cameras.main.height, 0x000000);
+
+        circle.setPosition(this.cameras.main.width/2, this.cameras.main.height/2);
+        circle.fillCircle(0, 0, 0.1);
+
+        mask.setInvertAlpha(true);
+
+        rectangle.setDepth(2);
+        rectangle.setOrigin(0, 0);
+        rectangle.setMask(mask);
+
+        circle.fillCircle(0, 0, 0.1);
+
+        return circle;
+    }
+
+    private transitionIn(circle: Phaser.GameObjects.Graphics): void {
+        let tween = this.add.tween({
+            targets: circle,
+            scale: 10*0.5*Math.sqrt(Math.pow(this.cameras.main.width, 2) + Math.pow(this.cameras.main.height, 2)),
+            ease: 'linear',
+            duration: 700,
+        });
+    }
+
+    private transitionOut(circle: Phaser.GameObjects.Graphics, scene: string, data?: any): void {
+        let tween = this.add.tween({
+            targets: circle,
+            scale: 0,
+            ease: 'linear',
+            duration: 700,
+            onComplete: () => this.sceneChange(scene, data)
+        });
+        return;
+    }
+
+    private sceneChange(scene: string, data?: any):void {
+        this.game.scene.start(scene, data);
+        this.game.scene.stop(this.key);
+        return;
     }
 }

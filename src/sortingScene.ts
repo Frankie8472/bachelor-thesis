@@ -63,6 +63,9 @@ export class SortingScene extends Phaser.Scene {
 
         this.game.scene.sendToBack(this.key);
 
+        let transition = this.transitionInit();
+        this.transitionIn(transition);
+
         let background = this.add.sprite(0, 0, 'gamebackground');
         background.setOrigin(0, 0);
         background.setDisplaySize(this.cameras.main.width, this.cameras.main.height);
@@ -210,6 +213,54 @@ export class SortingScene extends Phaser.Scene {
                 element.setY(coords[1]);
             }
         }, this)
+    }
+
+    // ================================================================================================
+    // Transition functions
+    // ================================================================================================
+    private transitionInit(): Phaser.GameObjects.Graphics {
+        let circle = this.add.graphics();
+        let mask = circle.createGeometryMask();
+        let rectangle = this.add.rectangle(0, 0, this.cameras.main.width, this.cameras.main.height, 0x000000);
+
+        circle.setPosition(this.cameras.main.width/2, this.cameras.main.height/2);
+        circle.fillCircle(0, 0, 0.1);
+
+        mask.setInvertAlpha(true);
+
+        rectangle.setDepth(2);
+        rectangle.setOrigin(0, 0);
+        rectangle.setMask(mask);
+
+        circle.fillCircle(0, 0, 0.1);
+
+        return circle;
+    }
+
+    private transitionIn(circle: Phaser.GameObjects.Graphics): void {
+        let tween = this.add.tween({
+            targets: circle,
+            scale: 10*0.5*Math.sqrt(Math.pow(this.cameras.main.width, 2) + Math.pow(this.cameras.main.height, 2)),
+            ease: 'linear',
+            duration: 700,
+        });
+    }
+
+    private transitionOut(circle: Phaser.GameObjects.Graphics, scene: string, data?: any): void {
+        let tween = this.add.tween({
+            targets: circle,
+            scale: 0,
+            ease: 'linear',
+            duration: 700,
+            onComplete: () => this.sceneChange(scene, data)
+        });
+        return;
+    }
+
+    private sceneChange(scene: string, data?: any):void {
+        this.game.scene.start(scene, data);
+        this.game.scene.stop(this.key);
+        return;
     }
 
     // ================================================================================================

@@ -79,19 +79,19 @@ export class WelcomeScene extends Phaser.Scene {
         });
     }
 
-    private transitionOut(circle: Phaser.GameObjects.Graphics, scene: string): void {
+    private transitionOut(circle: Phaser.GameObjects.Graphics, scene: string, data?: any): void {
         let tween = this.add.tween({
             targets: circle,
             scale: 0,
             ease: 'linear',
             duration: 700,
-            onComplete: () => this.sceneChange(scene)
+            onComplete: () => this.sceneChange(scene, data)
         });
         return;
     }
 
-    private sceneChange(scene: string):void {
-        this.game.scene.start(scene);
+    private sceneChange(scene: string, data?: any):void {
+        this.game.scene.start(scene, data);
         this.game.scene.stop(this.key);
         return;
     }
