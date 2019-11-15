@@ -198,7 +198,7 @@ export class GameScene extends Phaser.Scene {
         let timedata = this.timefluid.getData('timeY');
         if (timedata <= 0) {
             // Endgame
-            this.game.scene.start("ScoreScene", {'score': this.points/this.maxPoints});
+            this.game.scene.start("ScoreScene", {'score': this.points/this.maxPoints, 'previousScene': this.key});
             this.game.scene.stop(this.key);
             return;
         } else {
