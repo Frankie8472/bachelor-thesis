@@ -50,7 +50,7 @@ export class ScoreScene extends Phaser.Scene {
             sprite = this.add.sprite(this.cameras.main.width/2, this.cameras.main.height/2, "star_0");
         } else if (this.score < 0.6) {
             sprite = this.add.sprite(this.cameras.main.width/2, this.cameras.main.height/2, "star_1");
-        } else if (this.score < 1) {
+        } else if (this.score < 1 - Phaser.Math.EPSILON) {
             sprite = this.add.sprite(this.cameras.main.width/2, this.cameras.main.height/2, "star_2");
         } else {
             sprite = this.add.sprite(this.cameras.main.width/2, this.cameras.main.height/2, "star_3");

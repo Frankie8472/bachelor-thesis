@@ -72,7 +72,7 @@ export class LevelMenuScene extends Phaser.Scene {
         }, this);
         levelOneButton.on('pointerup', function(event) {
             levelOneButton.clearTint();
-            this.transitionOut(transition, "PropertySortingSceneLoader", {'setCat': 2 });
+            this.transitionOut(transition, "PropertySortingSceneLoader", { 'setCat': 2, 'infinite': false });
             return;
         }, this);
 
@@ -81,7 +81,7 @@ export class LevelMenuScene extends Phaser.Scene {
         }, this);
         levelTwoButton.on('pointerup', function(event) {
             levelTwoButton.clearTint();
-            this.transitionOut(transition, "GameSceneLoader", {'setLevel': 2 });
+            this.transitionOut(transition, "PropertySortingSceneLoader", { 'setCat': 2, 'infinite': true });
             return;
         }, this);
 

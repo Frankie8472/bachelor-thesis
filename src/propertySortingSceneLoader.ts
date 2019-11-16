@@ -2,7 +2,8 @@ import "phaser";
 
 export class PropertySortingSceneLoader extends Phaser.Scene {
     key: string = "PropertySortingSceneLoader";
-    setCat: number
+    setCat: number;
+    infinite: boolean;
 
     constructor() {
         super({
@@ -12,6 +13,7 @@ export class PropertySortingSceneLoader extends Phaser.Scene {
 
     init(data): void {
         this.setCat = data.setCat;
+        this.infinite = data.infinite;
     }
 
     preload(): void {
@@ -20,7 +22,7 @@ export class PropertySortingSceneLoader extends Phaser.Scene {
     }
 
     create(): void {
-        this.game.scene.start("PropertySortingScene", { 'jsonObject': this.cache.json.get("objects"), 'setCat': this.setCat});
+        this.game.scene.start("PropertySortingScene", { 'jsonObject': this.cache.json.get("objects"), 'setCat': this.setCat, 'infinite': this.infinite});
         this.game.scene.stop(this.key);
         return;
     }

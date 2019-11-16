@@ -11,6 +11,10 @@ export class PropertySortingScene extends Phaser.Scene {
     // Remaining stack  of images
     private arrayStack: Phaser.GameObjects.Container;
 
+    private arrayStatic: Phaser.GameObjects.Group;
+
+    private arrayFalling: Phaser.GameObjects.Group;
+
     private arrayDropped: Phaser.GameObjects.Group;
 
     private arrayCategory: Phaser.GameObjects.Group;
@@ -21,6 +25,8 @@ export class PropertySortingScene extends Phaser.Scene {
 
     private setCat: number;
 
+    private infinite: boolean;
+
     private correctBar: Phaser.GameObjects.Sprite;
     private wrongBar: Phaser.GameObjects.Sprite;
 
@@ -28,6 +34,12 @@ export class PropertySortingScene extends Phaser.Scene {
     private wrongCount: number;
 
     private propertyCount: number;
+
+    private maxPoints: number;
+
+    private velocity: number;
+    private lastEmitTime: number;
+    private delay: number;
 
     constructor() {
         super({
@@ -41,6 +53,8 @@ export class PropertySortingScene extends Phaser.Scene {
         this.setCat = data.setCat;
         this.arrayStack = this.add.container(0, 0);
         this.arrayCategory = this.add.group();
+        this.arrayStatic = this.add.group();
+        this.arrayFalling = this.add.group();
         this.arrayDropped = this.add.group();
         this.arrayDropZone = this.add.group();
         this.cardDisplaySize = 100;
@@ -53,6 +67,15 @@ export class PropertySortingScene extends Phaser.Scene {
         this.propertyCount = numberOfProperties;
         this.correctCount = 0;
         this.wrongCount = 0;
+
+        // the same level category but another boolean if infinite or not
+        this.infinite = data.infinite;
+
+        this.velocity = 100;
+
+        this.lastEmitTime = 0;
+        this.delay = 1000;
+
     }
 
     preload(): void {
@@ -121,11 +144,24 @@ export class PropertySortingScene extends Phaser.Scene {
         // ================================================================================================
 
         this.addProgressbar();
-
     }
 
     update(time: number): void {
+        if (this.infinite){
+            let diff: number = time - this.lastEmitTime;
+            if (diff > this.delay) {
+                this.lastEmitTime = time;
+                if (this.delay > 500) {
+                    this.delay -= 20;
+                }
+                if (this.arrayStatic.getLength() != 0) {
+                    let sprite = Phaser.Math.RND.pick(this.arrayStatic.getChildren());
+                    this.arrayStatic.remove(sprite);
+                    sprite.setVelocityY(this.velocity);
 
+                }
+            }
+        }
     }
 
     // ================================================================================================
@@ -172,7 +208,7 @@ export class PropertySortingScene extends Phaser.Scene {
             gameObject.setPosition(dragX, dragY);
         });
         this.input.on('drop', function(pointer, gameObject, dropZone) {
-            if (gameObject instanceof Phaser.GameObjects.Sprite) {
+            if (gameObject instanceof Phaser.Physics.Arcade.Sprite) {
                 if (gameObject.name === dropZone.name) {
                     gameObject.clearTint();
                     gameObject.x = dropZone.x + dropZone.width * 0.15;
@@ -181,12 +217,14 @@ export class PropertySortingScene extends Phaser.Scene {
                     gameObject.setScale(imageScale, imageScale);
                     this.arrayDropped.add(gameObject);
                     gameObject.removeInteractive();
+                    gameObject.setVelocityY(0);
                     this.updateProgressbar(+1);
                 } else {
                     gameObject.x = gameObject.getData('x');
                     gameObject.y = gameObject.getData('y');
                     gameObject.setScale(gameObject.getData('originScale'), gameObject.getData('originScale'));
                     gameObject.clearTint();
+                    gameObject.setVelocityY(this.velocity);
                     this.updateProgressbar(-1);
                 }
             }
@@ -204,14 +242,21 @@ export class PropertySortingScene extends Phaser.Scene {
             let propImageName = propImage.name;
 
             // Create 10 of each property
-            for (let i = 0; i < 3; i++) {
+            for (let i = 0; i < 5; i++) {
                 // RND size
                 let size = Phaser.Math.RND.between(this.cardDisplaySize * 0.8, this.cardDisplaySize * 1.3);
 
-                let sprite = this.add.sprite(Phaser.Math.RND.between(100 + this.cardDisplaySize / 2, this.cameras.main.width - this.cardDisplaySize / 2), Phaser.Math.RND.between(this.cardDisplaySize / 2, this.cameras.main.height - this.cardDisplaySize * 2 - this.cardDisplaySize / 2), propImageName);
+                let sprite = this.physics.add.sprite(Phaser.Math.RND.between(100 + this.cardDisplaySize / 2, this.cameras.main.width - this.cardDisplaySize / 2), Phaser.Math.RND.between(this.cardDisplaySize / 2, this.cameras.main.height - this.cardDisplaySize * 2 - this.cardDisplaySize / 2), propImageName);
                 this.arrayStack.add(sprite);
+                this.arrayStatic.add(sprite);
                 sprite.setName(propImageName);
 
+                let velocityY = 0;
+                if (this.infinite) {
+                    sprite.setY(0);
+                }
+
+                sprite.setVelocity(0, velocityY);
                 sprite.setOrigin(0.5, 0.5);
 
                 // RND spin
@@ -230,8 +275,9 @@ export class PropertySortingScene extends Phaser.Scene {
                 this.input.enableDebug(sprite);
 
                 sprite.on('pointerdown', function(pointer, localX, localY, event) {
-                    if (sprite instanceof Phaser.GameObjects.Sprite) {
+                    if (sprite instanceof Phaser.Physics.Arcade.Sprite) {
                         sprite.setTint(0x999999);
+                        sprite.setVelocityY(0);
                         let zoomSpriteScale = this.imageScalingFactor(size * 1.5, sprite.width, sprite.height);
                         sprite.setScale(zoomSpriteScale, zoomSpriteScale);
                         this.arrayStack.bringToTop(sprite);
@@ -241,8 +287,11 @@ export class PropertySortingScene extends Phaser.Scene {
                 sprite.on('pointerup', function(pointer, localX, localY, event) {
                     sprite.setScale(sprite.getData('originScale'), sprite.getData('originScale'));
                     sprite.clearTint();
+                    sprite.setVelocityY(this.velocity);
                 }, this);
             }
+
+            this.maxPoints = this.arrayStack.length - this.propertyCount;
         }
     }
 
@@ -250,7 +299,7 @@ export class PropertySortingScene extends Phaser.Scene {
         let counterSet: string[] = [];
 
         for (let sprite of this.arrayStack.getAll()) {
-            if (sprite instanceof Phaser.GameObjects.Sprite) {
+            if (sprite instanceof Phaser.Physics.Arcade.Sprite) {
                 let spriteName = sprite.name;
                 if (!(counterSet.indexOf(spriteName) > -1)) {
                     for (let dropZone of this.arrayDropZone.getChildren()) {
@@ -263,6 +312,7 @@ export class PropertySortingScene extends Phaser.Scene {
                                 sprite.setScale(imageScale, imageScale);
                                 this.arrayDropped.add(sprite);
                                 sprite.removeInteractive();
+                                this.arrayStatic.remove(sprite);
                             }
                         }
                     }
@@ -337,7 +387,7 @@ export class PropertySortingScene extends Phaser.Scene {
         progressbarCorrect.setOrigin(0, 1);
         progressbarCorrect.setScale(multiplierX, multiplierY);
 
-        let progressbarCorrectX = 10*2+progressbarCorrect.width*multiplierX;;
+        let progressbarCorrectX = 10*2+progressbarCorrect.width*multiplierX;
         progressbarCorrect.setX(progressbarCorrectX);
 
         let progressbarWrong = this.add.sprite(10, progressbarY, 'progressbar');
@@ -378,22 +428,21 @@ export class PropertySortingScene extends Phaser.Scene {
     // Update progressbar
     // ======================================================================
     private updateProgressbar(point: integer): void {
-        let maxPoints = this.arrayStack.length - this.propertyCount;
 
-        if (point > 0){
+        if (point > 0) {
             // Add to plus: max number of cards minus three
-            this.correctCount += this.correctBar.getData('gameMax')/maxPoints;
+            this.correctCount += this.correctBar.getData('gameMax')/this.maxPoints;
             this.correctBar.setScale(this.correctBar.getData('gameX'), this.correctCount);
 
 
         } else {
             // Add to minus: max not defined (lets say number of cards minus three also...)
-            this.wrongCount += this.wrongBar.getData('gameMax')/maxPoints;
+            this.wrongCount += this.wrongBar.getData('gameMax')/this.maxPoints;
             this.wrongBar.setScale(this.wrongBar.getData('gameX'), this.wrongCount);
 
         }
 
-        if ((this.wrongCount >= this.wrongBar.getData('gameMax')) || (this.correctCount >= this.correctBar.getData('gameMax'))) {
+        if ((this.wrongCount >= this.wrongBar.getData('gameMax')  - Phaser.Math.EPSILON) || (this.correctCount >= this.correctBar.getData('gameMax') - Phaser.Math.EPSILON)) {
             this.transitionOut(this.transition, "ScoreScene", {'score': this.correctCount/this.correctBar.getData('gameMax') - this.wrongCount/this.wrongBar.getData('gameMax'), 'previousScene': this.key})
         }
     }
@@ -421,4 +470,4 @@ export class PropertySortingScene extends Phaser.Scene {
         return this.min(wantedImageSize / realImageSizeWidth, wantedImageSize / realImageSizeHeight);
     }
 }
-9
+
