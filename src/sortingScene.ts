@@ -1,8 +1,7 @@
 import 'phaser';
+import {BaseScene} from './BaseScene';
 
-export class SortingScene extends Phaser.Scene {
-    key: string = 'SortingScene';
-
+export class SortingScene extends BaseScene {
     // Our Object with name, imagepath and properties
     private jsonObject: any;
 
@@ -14,15 +13,13 @@ export class SortingScene extends Phaser.Scene {
     private cardDisplaySize: number;
 
     constructor() {
-        super({
-            key: 'SortingScene'
-        });
+        super('SortingScene');
     }
 
     init(data): void {
 
         this.jsonObject = data.jsonObject;
-        this.arrayStack = this.add.container(0,0);
+        this.arrayStack = this.add.container(0, 0);
         this.arrayCategory = this.add.group();
         this.cardDisplaySize = 100;
     }
@@ -54,6 +51,7 @@ export class SortingScene extends Phaser.Scene {
 
         }
 
+
     }
 
     create(): void {
@@ -63,8 +61,7 @@ export class SortingScene extends Phaser.Scene {
 
         this.game.scene.sendToBack(this.key);
 
-        let transition = this.transitionInit();
-        this.transitionIn(transition);
+        this.transitionIn();
 
         let background = this.add.sprite(0, 0, 'gamebackground');
         background.setOrigin(0, 0);
@@ -94,13 +91,13 @@ export class SortingScene extends Phaser.Scene {
     // Control Bar
     // ================================================================================================
     private controlBar(): void {
-        let controlbar = this.add.sprite(this.cameras.main.width/2, this.cameras.main.height, "menubackground");
+        let controlbar = this.add.sprite(this.cameras.main.width / 2, this.cameras.main.height, 'menubackground');
         controlbar.setOrigin(0.5, 0.5);
         controlbar.setAngle(-90);
-        controlbar.setScale(0.13,0.24);
+        controlbar.setScale(0.13, 0.24);
 
         // Category indicator
-        let x = this.cameras.main.width/2 - (controlbar.height*0.24)/2;
+        let x = this.cameras.main.width / 2 - (controlbar.height * 0.24) / 2;
         let countCategories = 0;
 
         for (let cat of this.jsonObject['categories']) {
@@ -115,34 +112,38 @@ export class SortingScene extends Phaser.Scene {
                 continue;
             }
 
-            x += (controlbar.height*0.24) / (countCategories + 1);
+            let validElements = [];
+            for (let elem of cat.validElements) {
+                validElements.push(elem.name);
+            }
+
+            x += (controlbar.height * 0.24) / (countCategories + 1);
             let name = cat.name;
-            let sprite = this.add.sprite(x, this.cameras.main.height - controlbar.width*0.13/5, name);
+            let sprite = this.add.sprite(x, this.cameras.main.height - controlbar.width * 0.13 / 5, name);
             sprite.setName(name);
 
-            // TODO: needed?
-            sprite.setData("pushed", false);
-            sprite.setData("validElements", cat.validElements);
+            // TODO: listcompreension
+            sprite.setData('pushed', false);
+            sprite.setData('validElements', validElements);
 
             sprite.setOrigin(0.5, 0.5);
             sprite.setDisplaySize(64, 64);
             sprite.setVisible(true);
 
-            // TODO: überflüssig?
             this.arrayCategory.add(sprite);
 
             sprite.setInteractive();
 
             sprite.on('pointerdown', function(event) {
-                for (let item of this.arrayCategory.getChildren()){
-                    if (item instanceof Phaser.GameObjects.Sprite){
+                for (let item of this.arrayCategory.getChildren()) {
+                    if (item instanceof Phaser.GameObjects.Sprite) {
                         item.clearTint();
                     }
                 }
 
                 if (sprite instanceof Phaser.GameObjects.Sprite) {
                     sprite.setTintFill(0x8dfd59);
-                    this.orderCards(sprite.name, sprite.getData("validElements"));
+                    this.orderCards(sprite.name, sprite.getData('validElements'));
                 }
             }, this);
         }
@@ -179,7 +180,7 @@ export class SortingScene extends Phaser.Scene {
 
             sprite.setVisible(true);
 
-            let scale = this.min(size / sprite.height, size / sprite.width);
+            let scale = Math.min(size / sprite.height, size / sprite.width);
             sprite.setScale(scale, scale);
             sprite.setInteractive();
 
@@ -205,126 +206,13 @@ export class SortingScene extends Phaser.Scene {
         }
     }
 
-    private orderCards(catname: string, validElements: string[]):void {
-        this.arrayStack.each(function(element){
-            if (element instanceof Phaser.GameObjects.Sprite){
+    private orderCards(catname: string, validElements: string[]): void {
+        this.arrayStack.each(function(element) {
+            if (element instanceof Phaser.GameObjects.Sprite) {
                 let coords = this.returnQuad(validElements.indexOf(element.getData(catname)));
                 element.setX(coords[0]);
                 element.setY(coords[1]);
             }
-        }, this)
-    }
-
-    // ================================================================================================
-    // Transition functions
-    // ================================================================================================
-    private transitionInit(): Phaser.GameObjects.Graphics {
-        let circle = this.add.graphics();
-        let mask = circle.createGeometryMask();
-        let rectangle = this.add.rectangle(0, 0, this.cameras.main.width, this.cameras.main.height, 0x000000);
-
-        circle.setPosition(this.cameras.main.width/2, this.cameras.main.height/2);
-        circle.fillCircle(0, 0, 0.1);
-
-        mask.setInvertAlpha(true);
-
-        rectangle.setDepth(2);
-        rectangle.setOrigin(0, 0);
-        rectangle.setMask(mask);
-
-        circle.fillCircle(0, 0, 0.1);
-
-        return circle;
-    }
-
-    private transitionIn(circle: Phaser.GameObjects.Graphics): void {
-        let tween = this.add.tween({
-            targets: circle,
-            scale: 10*0.5*Math.sqrt(Math.pow(this.cameras.main.width, 2) + Math.pow(this.cameras.main.height, 2)),
-            ease: 'linear',
-            duration: 700,
-        });
-    }
-
-    private transitionOut(circle: Phaser.GameObjects.Graphics, scene: string, data?: any): void {
-        let tween = this.add.tween({
-            targets: circle,
-            scale: 0,
-            ease: 'linear',
-            duration: 700,
-            onComplete: () => this.sceneChange(scene, data)
-        });
-        return;
-    }
-
-    private sceneChange(scene: string, data?: any):void {
-        this.game.scene.start(scene, data);
-        this.game.scene.stop(this.key);
-        return;
-    }
-
-    // ================================================================================================
-    // Helper functions
-    // ================================================================================================
-    private returnQuad(quad: number): number[] {
-        let spritesize = this.cardDisplaySize;
-        let ret = null;
-        let leftBound = 100 + spritesize/2;
-        let rightBound = this.cameras.main.width - spritesize/2;
-        let topBound = spritesize/2;
-        let botBound = this.cameras.main.height - 100 - spritesize/2;
-        let horizontalMid = topBound + (botBound - topBound)/2;
-        let verticalMid = leftBound + (rightBound - leftBound)/2;
-
-        /**
-         * #########
-         * # 0 # 1 #
-         * #########
-         * # 2 # 3 #
-         * #########
-         */
-
-        switch(quad) {
-            case 0: {
-                ret = [Phaser.Math.RND.between(leftBound, verticalMid - spritesize/2), Phaser.Math.RND.between(topBound, horizontalMid-spritesize/2)];
-                break;
-            }
-
-            case 1: {
-                ret = [Phaser.Math.RND.between(verticalMid + spritesize/2, rightBound), Phaser.Math.RND.between(topBound, horizontalMid-spritesize/2)];
-
-                break;
-            }
-
-            case 2: {
-                ret = [Phaser.Math.RND.between(leftBound, verticalMid - spritesize/2), Phaser.Math.RND.between(horizontalMid+spritesize/2, botBound)];
-
-                break;
-            }
-
-            case 3: {
-                ret = [Phaser.Math.RND.between(verticalMid + spritesize/2, rightBound), Phaser.Math.RND.between(horizontalMid+spritesize/2, botBound)];
-                break;
-            }
-
-            default: {
-                break;
-            }
-        }
-        return ret;
-    }
-
-    private min(val1: number, val2: number): number{
-        if (val1 < val2) {
-            return val1;
-        }
-        return val2;
-    }
-
-    private max(val1: number, val2: number): number {
-        if (val1 > val2) {
-            return val1;
-        }
-        return val2;
+        }, this);
     }
 }

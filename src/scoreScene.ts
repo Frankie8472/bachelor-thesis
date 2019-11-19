@@ -1,14 +1,12 @@
-import "phaser";
+import 'phaser';
+import {BaseScene} from './BaseScene';
 
-export class ScoreScene extends Phaser.Scene {
-    key: string = "ScoreScene";
+export class ScoreScene extends BaseScene {
     private score: number;
     private previousScene: string;
 
     constructor() {
-        super({
-            key: "ScoreScene"
-        });
+        super('ScoreScene');
     }
 
     init(data): void {
@@ -29,17 +27,17 @@ export class ScoreScene extends Phaser.Scene {
         // MenuUI must be in the front
         this.game.scene.sendToBack(this.key);
 
-        let background = this.add.sprite(0, 0, "gamebackground");
+        let background = this.add.sprite(0, 0, 'gamebackground');
         background.setOrigin(0, 0);
         background.setDisplaySize(this.cameras.main.width, this.cameras.main.height);
         //background.setTint(0xffccaa);
         //background.setAlpha(0.9);
 
         // Add replay button
-        let replayButton = this.add.sprite(this.cameras.main.width -100, this.cameras.main.height-100, 'replay');
+        let replayButton = this.add.sprite(this.cameras.main.width - 100, this.cameras.main.height - 100, 'replay');
         replayButton.setOrigin(0.5, 0.5);
         replayButton.setInteractive();
-        replayButton.on('pointerdown', function(){
+        replayButton.on('pointerdown', function() {
             this.scene.start(this.previousScene);
             this.scene.stop(this.key);
         }, this);
@@ -47,19 +45,19 @@ export class ScoreScene extends Phaser.Scene {
         let sprite: Phaser.GameObjects.Sprite;
 
         if (this.score < 0.3) {
-            sprite = this.add.sprite(this.cameras.main.width/2, this.cameras.main.height/2, "star_0");
+            sprite = this.add.sprite(this.cameras.main.width / 2, this.cameras.main.height / 2, 'star_0');
         } else if (this.score < 0.6) {
-            sprite = this.add.sprite(this.cameras.main.width/2, this.cameras.main.height/2, "star_1");
+            sprite = this.add.sprite(this.cameras.main.width / 2, this.cameras.main.height / 2, 'star_1');
         } else if (this.score < 1 - Phaser.Math.EPSILON) {
-            sprite = this.add.sprite(this.cameras.main.width/2, this.cameras.main.height/2, "star_2");
+            sprite = this.add.sprite(this.cameras.main.width / 2, this.cameras.main.height / 2, 'star_2');
         } else {
-            sprite = this.add.sprite(this.cameras.main.width/2, this.cameras.main.height/2, "star_3");
+            sprite = this.add.sprite(this.cameras.main.width / 2, this.cameras.main.height / 2, 'star_3');
         }
 
         sprite.setOrigin(0.5, 0.5);
 
-        this.input.on('pointerup', function (/*pointer*/) {
-            this.scene.start("WelcomeScene");
+        this.input.on('pointerup', function(/*pointer*/) {
+            this.scene.start('LevelMenuScene');
             this.scene.stop(this.key);
         }, this);
 

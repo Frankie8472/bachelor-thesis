@@ -1,7 +1,7 @@
 import 'phaser';
+import {BaseScene} from './BaseScene';
 
-export class GameScene extends Phaser.Scene {
-    key: string = 'GameScene';
+export class GameScene extends BaseScene {
 
     // Lock for not messing up animations by clicking repeatedly without waiting for the animation to finish
     private lock: boolean;
@@ -51,10 +51,9 @@ export class GameScene extends Phaser.Scene {
     private timedataStepsize: number;
 
     constructor() {
-        super({
-            key: 'GameScene'
-        });
+        super('GameScene');
     }
+
 
     init(data): void {
         this.lock = false;
@@ -69,7 +68,7 @@ export class GameScene extends Phaser.Scene {
         this.points = 0;
 
         // Level settings
-        switch(data.setLevel) {
+        switch (data.setLevel) {
             case 1: {
                 this.maxPoints = 10;
                 this.timedataStepsize = 0.00001;
@@ -90,7 +89,7 @@ export class GameScene extends Phaser.Scene {
             }
 
             default: {
-                console.log("Initialisation Error: setLevel is not 1, 2 or 3!");
+                console.log('Initialisation Error: setLevel is not 1, 2 or 3!');
                 this.maxPoints = 0;
 
                 break;
@@ -154,7 +153,7 @@ export class GameScene extends Phaser.Scene {
 
         this.game.scene.sendToBack(this.key);
 
-        let background = this.add.sprite(0, 0, "gamebackground");
+        let background = this.add.sprite(0, 0, 'gamebackground');
         background.setOrigin(0, 0);
         background.setDisplaySize(this.cameras.main.width, this.cameras.main.height);
         background.setTint(0xffccaa);
@@ -190,7 +189,7 @@ export class GameScene extends Phaser.Scene {
         // Check for correctness of selected cards
         if (this.arrayMarked.getLength() >= 3 && !this.checked) {
             this.checked = true;
-            console.log("isSet: " + this.isSet(this.arrayMarked.getChildren()));
+            console.log('isSet: ' + this.isSet(this.arrayMarked.getChildren()));
             this.replaceCards(this.checkEquality(this.arrayMarked.getChildren()));
         }
 
@@ -198,7 +197,7 @@ export class GameScene extends Phaser.Scene {
         let timedata = this.timefluid.getData('timeY');
         if (timedata <= 0) {
             // Endgame
-            this.game.scene.start("ScoreScene", {'score': this.points/this.maxPoints, 'previousScene': this.key});
+            this.game.scene.start('ScoreScene', {'score': this.points / this.maxPoints, 'previousScene': this.key});
             this.game.scene.stop(this.key);
             return;
         } else {
@@ -213,10 +212,10 @@ export class GameScene extends Phaser.Scene {
     // ================================================================================================
     private helperMenu(): void {
         // Menu background
-        let menuBackground = this.add.sprite(this.cameras.main.width - 64-10-30, 64+10+40, 'menubackground');
+        let menuBackground = this.add.sprite(this.cameras.main.width - 64 - 10 - 30, 64 + 10 + 40, 'menubackground');
         menuBackground.setAngle(180);
         menuBackground.setOrigin(1, 0);
-        menuBackground.setDisplaySize(500, this.cameras.main.height+120);
+        menuBackground.setDisplaySize(500, this.cameras.main.height + 120);
         menuBackground.setTint(0xdddddd);
 
         // Category indicator
@@ -278,7 +277,7 @@ export class GameScene extends Phaser.Scene {
 
             sprite.setVisible(false);
 
-            let scale = this.min(this.cellWidth / sprite.height, this.cellHeight / sprite.width);
+            let scale = Math.min(this.cellWidth / sprite.height, this.cellHeight / sprite.width);
             sprite.setScale(scale, scale);
             sprite.setInteractive();
 
@@ -303,7 +302,7 @@ export class GameScene extends Phaser.Scene {
 
                     // Remove helper/hint category tint
                     for (let cat of this.arrayCategory.getChildren()) {
-                        if (cat instanceof Phaser.GameObjects.Sprite){
+                        if (cat instanceof Phaser.GameObjects.Sprite) {
                             cat.clearTint();
                         }
                     }
@@ -511,12 +510,12 @@ export class GameScene extends Phaser.Scene {
             // ======================================================================
             // Update progressbar
             // ======================================================================
-            this.points += this.gamefluid.getData('gameMax')/this.maxPoints;
+            this.points += this.gamefluid.getData('gameMax') / this.maxPoints;
 
             if (this.points >= this.gamefluid.getData('gameMax')) {
                 this.gamefluid.setScale(this.gamefluid.getData('gameX'), this.points);
                 // End game
-                this.game.scene.start("ScoreScene");
+                this.game.scene.start('ScoreScene');
                 this.game.scene.stop(this.key);
                 return;
             }
@@ -525,7 +524,7 @@ export class GameScene extends Phaser.Scene {
 
             // Remove helper/hint category tint
             for (let cat of this.arrayCategory.getChildren()) {
-                if (cat instanceof Phaser.GameObjects.Sprite){
+                if (cat instanceof Phaser.GameObjects.Sprite) {
                     cat.clearTint();
                 }
             }
@@ -541,18 +540,18 @@ export class GameScene extends Phaser.Scene {
     // If you think there are no more pairs, refresh cards
     // ================================================================================================
     private checkForPossibleSet(): void {
-        console.log("problem?");
+        console.log('problem?');
 
         let cardSet = this.arrayDisplayed.getChildren();
-        console.log("no");
+        console.log('no');
 
         let cardSetLength = cardSet.length;
-        console.log("start");
+        console.log('start');
         for (let x = 0; x <= cardSetLength; x++) {
-            for (let y = x + 1; y <= cardSetLength-(x+1); y++) {
-                for (let z = y + 1; z <= cardSetLength-(y+1); z++) {
+            for (let y = x + 1; y <= cardSetLength - (x + 1); y++) {
+                for (let z = y + 1; z <= cardSetLength - (y + 1); z++) {
                     if (this.isSet([cardSet[x], cardSet[y], cardSet[z]])) {
-                        console.log("end");
+                        console.log('end');
                         return;
                     }
                 }
@@ -561,7 +560,7 @@ export class GameScene extends Phaser.Scene {
         // Replace/add cards
         this.refreshCards();
         // Do not replace/add cards
-        console.log("end");
+        console.log('end');
     }
 
     private refreshCards(): void {
@@ -595,8 +594,8 @@ export class GameScene extends Phaser.Scene {
             // Animation
             let menuBackgroundTween = this.tweens.add({
                 targets: menuBackground,
-                y: 64+10+40,
-                x: this.cameras.main.width - 64-10-30,
+                y: 64 + 10 + 40,
+                x: this.cameras.main.width - 64 - 10 - 30,
                 ease: 'Cubic',
                 duration: 500,
                 delay: 100
@@ -614,13 +613,13 @@ export class GameScene extends Phaser.Scene {
 
             this.helpDown = false;
 
-        // Extend
+            // Extend
         } else {
             // Animation
             let menuBackgroundTween = this.tweens.add({
                 targets: menuBackground,
                 y: this.cameras.main.height + 90,
-                x: this.cameras.main.width - 64-10-50,
+                x: this.cameras.main.width - 64 - 10 - 50,
                 ease: 'Cubic',
                 duration: 500
             });
@@ -645,24 +644,24 @@ export class GameScene extends Phaser.Scene {
     private createGameProgressbar(): void {
         let multiplierX = 0.4;
         let multiplierY = 0.3;
-        let progressbarY = this.cameras.main.height-10;
+        let progressbarY = this.cameras.main.height - 10;
         let progressbar = this.add.sprite(0, progressbarY, 'progressbar');
         progressbar.setOrigin(0, 1);
         progressbar.setScale(multiplierX, multiplierY);
 
-        let progressbarX = 10*2+progressbar.width*multiplierX;
+        let progressbarX = 10 * 2 + progressbar.width * multiplierX;
         progressbar.setX(progressbarX);
 
-        let progressstar = this.add.sprite(progressbarX,progressbarY-progressbar.height*multiplierY-10,'progressstar');
-        let starmultiplier = progressbar.width*multiplierX / progressstar.width;
+        let progressstar = this.add.sprite(progressbarX, progressbarY - progressbar.height * multiplierY - 10, 'progressstar');
+        let starmultiplier = progressbar.width * multiplierX / progressstar.width;
         progressstar.setOrigin(0, 1);
         progressstar.setScale(starmultiplier, starmultiplier);
 
-        this.gamefluid = this.add.sprite(progressbarX+progressbar.width*multiplierX/2+2, progressbarY-6, 'gamefluid');
+        this.gamefluid = this.add.sprite(progressbarX + progressbar.width * multiplierX / 2 + 2, progressbarY - 6, 'gamefluid');
         this.gamefluid.setOrigin(0.5, 1);
         this.gamefluid.setData('gameX', multiplierX);
         this.gamefluid.setData('gameY', 0.01);
-        this.gamefluid.setData('gameMax', (progressbar.height*multiplierY-6)/this.gamefluid.height);
+        this.gamefluid.setData('gameMax', (progressbar.height * multiplierY - 6) / this.gamefluid.height);
         this.gamefluid.setScale(multiplierX, 0.01);
         this.gamefluid.setAlpha(0.7);
     }
@@ -670,42 +669,25 @@ export class GameScene extends Phaser.Scene {
     // ================================================================================================
     // Timeprogressbar
     // ================================================================================================
-    private createTimeProgressbar (): void {
+    private createTimeProgressbar(): void {
         let multiplierX = 0.4;
         let multiplierY = 0.3;
-        let progressbarY = this.cameras.main.height-10;
+        let progressbarY = this.cameras.main.height - 10;
         let progressbar = this.add.sprite(10, progressbarY, 'progressbar');
         progressbar.setOrigin(0, 1);
         progressbar.setScale(multiplierX, multiplierY);
 
-        let sandclock = this.add.sprite(10,progressbarY-progressbar.height*multiplierY-10,'sandclock');
-        let starmultiplier = progressbar.width*multiplierX / sandclock.width;
+        let sandclock = this.add.sprite(10, progressbarY - progressbar.height * multiplierY - 10, 'sandclock');
+        let starmultiplier = progressbar.width * multiplierX / sandclock.width;
         sandclock.setOrigin(0, 1);
         sandclock.setScale(starmultiplier, starmultiplier);
 
-        this.timefluid = this.add.sprite(10+progressbar.width*multiplierX/2+2, progressbarY-6, 'timefluid');
+        this.timefluid = this.add.sprite(10 + progressbar.width * multiplierX / 2 + 2, progressbarY - 6, 'timefluid');
         this.timefluid.setOrigin(0.5, 1);
         this.timefluid.setData('timeX', multiplierX);
-        this.timefluid.setData('timeY', (progressbar.height*multiplierY-6)/this.timefluid.height);
+        this.timefluid.setData('timeY', (progressbar.height * multiplierY - 6) / this.timefluid.height);
         this.timefluid.setScale(this.timefluid.getData('timeX'), this.timefluid.getData('timeY'));
         this.timefluid.setAlpha(0.7);
 
-    }
-
-    // ================================================================================================
-    // Helper functions
-    // ================================================================================================
-    private min(val1, val2) {
-        if (val1 < val2) {
-            return val1;
-        }
-        return val2;
-    }
-
-    private max(val1, val2) {
-        if (val1 > val2) {
-            return val1;
-        }
-        return val2;
     }
 }
