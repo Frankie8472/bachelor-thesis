@@ -3,44 +3,73 @@ import {BaseScene} from './BaseScene';
 
 export class PropertySortingScene extends BaseScene {
 
-    // Our Object with name, imagepath and properties
+    /**
+     * Object database with all image names, image paths and image properties
+     */
     private jsonObject: any;
 
-    // Remaining stack  of images
+    /**
+     * Image groups and containers
+     */
+    // Container of all displayed interactive objects
     private arrayStack: Phaser.GameObjects.Container;
 
+    // All displayed interactive objects with NO velocity
     private arrayStatic: Phaser.GameObjects.Group;
 
+    // All displayed interactive objects WITH velocity
     private arrayFalling: Phaser.GameObjects.Group;
 
+    // All DROPPED displayed interactive objects
     private arrayDropped: Phaser.GameObjects.Group;
 
+    // All category objects (images)
     private arrayCategory: Phaser.GameObjects.Group;
 
+    // All drop zones
     private arrayDropZone: Phaser.GameObjects.Group;
 
+    // Display size of displayed interactive objects
     private cardDisplaySize: number;
 
-    private setCat: number;
-
+    // Should the object fall (true) or be static (false)
     private infinite: boolean;
 
+    // Image of the number of correct categorized objects
     private correctBar: Phaser.GameObjects.Sprite;
+
+    // Image of the number of incorrect categorized objects
     private wrongBar: Phaser.GameObjects.Sprite;
 
+    // Number of correct categorized objects
     private correctCount: number;
+
+    // Number of incorrect categorized objects
     private wrongCount: number;
 
+    // Array index Number +1 of category to sort
+    private setCat: number;
+
+    // Amount of properties in the respective category
     private propertyCount: number;
 
+    // Maximum points to reach
     private maxPoints: number;
 
+    // Object falling speed
     private velocity: number;
+
+    // Last time an object was emitted to fall
     private lastEmitTime: number;
+
+    // Time until the next object starts to fall
     private delay: number;
 
-    // 'pointerup' and 'drop' will be both triggered on drop so get lock.
+    // Lock for 'pointerup' and 'drop' so not both will get triggered. First 'drop' triggers, then 'pointerup' on 'drop'.
     private dropped: boolean;
+
+    // How many objects of each category - category count
+    private numberOfObjects: number;
 
     constructor() {
         super('PropertySortingScene');
@@ -48,47 +77,45 @@ export class PropertySortingScene extends BaseScene {
 
     init(data): void {
 
+        // Data from scene before
         this.jsonObject = data.jsonObject;
+        this.infinite = data.infinite;
         this.setCat = data.setCat;
+
+        // Normal initializations
         this.arrayStack = this.add.container(0, 0);
         this.arrayCategory = this.add.group();
         this.arrayStatic = this.add.group();
         this.arrayFalling = this.add.group();
         this.arrayDropped = this.add.group();
         this.arrayDropZone = this.add.group();
-        this.cardDisplaySize = 100;
 
         let numberOfProperties = 0;
         for (let property of this.jsonObject['categories'][this.setCat - 1].validElements) {
             numberOfProperties++;
         }
-
         this.propertyCount = numberOfProperties;
+
         this.correctCount = 0;
         this.wrongCount = 0;
 
-        // the same level category but another boolean if infinite or not
-        this.infinite = data.infinite;
-
-        this.velocity = 100;
-
-        this.lastEmitTime = 0;
-        this.delay = 3000;
-
         this.dropped = false;
 
+        // Debatable initializations
+        this.cardDisplaySize = 100;
+        this.velocity = 100;
+        this.lastEmitTime = 0;
+        this.delay = 3000;
+        this.numberOfObjects = 2;
     }
 
     preload(): void {
 
+        // Background
         this.load.image('gamebackground', 'assets/ui/sorting_background.png');
 
-        // Helper menu graphics
-        this.load.image('help', 'assets/ui/help.png'/*{ frameWidth: 512, frameHeight: 512 }*/);
-        this.load.image('menubackground', 'assets/ui/menu_background.png');
-
-        // Wooden basket
-        this.load.image('basket', 'assets/ui/wooden_crate.png');
+        // Wooden crate
+        this.load.image('crate', 'assets/ui/wooden_crate.png');
 
         // Get propertie images
         for (let prop of this.jsonObject['categories'][this.setCat - 1].validElements) {
@@ -138,10 +165,10 @@ export class PropertySortingScene extends BaseScene {
         this.loadCards();
 
         // ================================================================================================
-        // Add baskets
+        // Add crates
         // ================================================================================================
 
-        this.initBaskets();
+        this.initCrates();
 
         this.addCardToCrates();
 
@@ -167,31 +194,31 @@ export class PropertySortingScene extends BaseScene {
     }
 
     // ================================================================================================
-    // Add Baskets
+    // Add Crates
     // ================================================================================================
 
-    private initBaskets(): void {
-        // For each property add a basket
+    private initCrates(): void {
+        // For each property add a crate
         // evenly distributed
-        // make snap to grid over basket
+        // make snap to grid over crate
         // add one element of each prop
 
         let stepSize = this.cameras.main.width / (this.propertyCount + 1);
-        let basketSize = this.cardDisplaySize * 2;
+        let crateSize = this.cardDisplaySize * 2;
         let iteration = 1;
 
         for (let property of this.jsonObject['categories'][this.setCat - 1].validElements) {
-            // Add basket
-            let basket = this.add.sprite(stepSize * iteration, this.cameras.main.height - basketSize / 2, 'basket');
-            basket.setOrigin(0.5, 0.5);
+            // Add crate
+            let crate = this.add.sprite(stepSize * iteration, this.cameras.main.height - crateSize / 2, 'crate');
+            crate.setOrigin(0.5, 0.5);
 
-            let imageScalingFactor = this.imageScalingFactor(basketSize, basket.width, basket.height);
-            basket.setScale(imageScalingFactor, imageScalingFactor);
+            let imageScalingFactor = this.imageScalingFactor(crateSize, crate.width, crate.height);
+            crate.setScale(imageScalingFactor, imageScalingFactor);
 
-            // Add zone around basket
-            let zone = this.add.zone(basket.x, basket.y, basket.width * imageScalingFactor, basket.height * imageScalingFactor);
+            // Add zone around crate
+            let zone = this.add.zone(crate.x, crate.y, crate.width * imageScalingFactor, crate.height * imageScalingFactor);
             zone.setOrigin(0.5, 0.5);
-            zone.setRectangleDropZone(basket.width * imageScalingFactor, basket.height * imageScalingFactor);
+            zone.setRectangleDropZone(crate.width * imageScalingFactor, crate.height * imageScalingFactor);
             zone.setName(property.name);
 
             this.arrayDropZone.add(zone);
@@ -209,6 +236,7 @@ export class PropertySortingScene extends BaseScene {
         this.input.on('drag', function(pointer, gameObject, dragX, dragY) {
             gameObject.setPosition(dragX, dragY);
         });
+
         this.input.on('drop', function(pointer, gameObject, dropZone) {
             this.dropped = true;
             if (gameObject instanceof Phaser.Physics.Arcade.Sprite) {
@@ -216,7 +244,7 @@ export class PropertySortingScene extends BaseScene {
                     gameObject.clearTint();
                     gameObject.x = dropZone.x + dropZone.width * 0.15;
                     gameObject.y = dropZone.y - dropZone.height * 0.2;
-                    let imageScale = this.imageScalingFactor(this.min(dropZone.width, dropZone.height) * 0.4, gameObject.width, gameObject.height);
+                    let imageScale = this.imageScalingFactor(Math.min(dropZone.width, dropZone.height) * 0.4, gameObject.width, gameObject.height);
                     gameObject.setScale(imageScale, imageScale);
                     this.arrayDropped.add(gameObject);
                     gameObject.disableInteractive();
@@ -247,7 +275,7 @@ export class PropertySortingScene extends BaseScene {
             let propImageName = propImage.name;
 
             // Create 10 of each property
-            for (let i = 0; i < 5; i++) {
+            for (let i = 0; i < this.numberOfObjects; i++) {
                 // RND size
                 let size = Phaser.Math.RND.between(this.cardDisplaySize * 0.8, this.cardDisplaySize * 1.3);
 

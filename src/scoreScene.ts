@@ -36,6 +36,7 @@ export class ScoreScene extends BaseScene {
         // Add replay button
         let replayButton = this.add.sprite(this.cameras.main.width - 100, this.cameras.main.height - 100, 'replay');
         replayButton.setOrigin(0.5, 0.5);
+        replayButton.setScale(0.5, 0.5);
         replayButton.setInteractive();
         replayButton.on('pointerdown', function() {
             this.scene.start(this.previousScene);

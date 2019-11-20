@@ -127,7 +127,8 @@ export class SortingScene extends BaseScene {
             sprite.setData('validElements', validElements);
 
             sprite.setOrigin(0.5, 0.5);
-            sprite.setDisplaySize(64, 64);
+            let scale = this.imageScalingFactor(64, sprite.width, sprite.height);
+            sprite.setScale(scale, scale);
             sprite.setVisible(true);
 
             this.arrayCategory.add(sprite);
@@ -209,7 +210,7 @@ export class SortingScene extends BaseScene {
     private orderCards(catname: string, validElements: string[]): void {
         this.arrayStack.each(function(element) {
             if (element instanceof Phaser.GameObjects.Sprite) {
-                let coords = this.returnQuad(validElements.indexOf(element.getData(catname)));
+                let coords = this.returnQuad(validElements.indexOf(element.getData(catname)), this.cardDisplaySize);
                 element.setX(coords[0]);
                 element.setY(coords[1]);
             }

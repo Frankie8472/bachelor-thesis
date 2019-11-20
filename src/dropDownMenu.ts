@@ -44,9 +44,8 @@ export class DropDownMenu extends BaseScene {
         exitButton.on('pointerup', function() {
             // Close menu
             this.menuAction(menuButton, fullscreenButton, exitButton, menuBackground);
-
-            this.game.scene.start('WelcomeScene');
             this.game.scene.stop(this.key_paused_scene);
+            this.game.scene.start('WelcomeScene');
         }, this);
 
         // Fullscreen Button

@@ -1,19 +1,18 @@
 export class BaseScene extends Phaser.Scene {
     protected key: string;
-    protected transition: Phaser.GameObjects.Graphics;
+    private transition: Phaser.GameObjects.Graphics;
 
     constructor(key: string) {
         super({
             key: key
         });
         this.key = key;
-        this.transitionInit();
     }
 
     /**
      * Function for initializing the shape, position and properties of the graphical scene transition
      */
-    protected transitionInit(): void {
+    private transitionInit(): void {
         let circle = this.add.graphics();
         let mask = circle.createGeometryMask();
         let rectangle = this.add.rectangle(0, 0, this.cameras.main.width, this.cameras.main.height, 0x000000);
@@ -38,6 +37,8 @@ export class BaseScene extends Phaser.Scene {
      * Opening transition. Normally used to visually introduce a new scene
      */
     protected transitionIn(): void {
+        this.transitionInit();
+
         let tween = this.add.tween({
             targets: this.transition,
             scale: 10 * 0.5 * Math.sqrt(Math.pow(this.cameras.main.width, 2) + Math.pow(this.cameras.main.height, 2)),
@@ -52,6 +53,7 @@ export class BaseScene extends Phaser.Scene {
      * @param data Additional data you want to give to the next scene.
      */
     protected transitionOut(scene: string, data?: any): void {
+
         let tween = this.add.tween({
             targets: this.transition,
             scale: 0,
