@@ -68,7 +68,7 @@ export class LevelMenuScene extends BaseScene {
         }, this);
         levelOneButton.on('pointerup', function(event) {
             levelOneButton.clearTint();
-            this.transitionOut('PropertySortingSceneLoader', {'setCat': 2, 'infinite': false});
+            this.transitionOut('PropertySortingSceneLoader', {'setCat': 3, 'infinite': false});
             return;
         }, this);
 

@@ -239,7 +239,8 @@ export class GameScene extends BaseScene {
             let sprite = this.add.sprite(this.cameras.main.width + 64, y, name);
             sprite.setName(name);
             sprite.setOrigin(0.5, 0.5);
-            sprite.setDisplaySize(64, 64);
+            let scale = this.imageScalingFactor(64, sprite.width, sprite.height);
+            sprite.setScale(scale, scale);
             sprite.setVisible(true);
             this.arrayCategory.add(sprite);
         }
@@ -277,7 +278,8 @@ export class GameScene extends BaseScene {
 
             sprite.setVisible(false);
 
-            let scale = Math.min(this.cellWidth / sprite.height, this.cellHeight / sprite.width);
+            let diag = Math.sqrt(Math.pow(sprite.height, 2) + Math.pow(sprite.width, 2));
+            let scale = this.imageScalingFactor(Math.min(this.cellWidth, this.cellHeight), diag, diag);
             sprite.setScale(scale, scale);
             sprite.setInteractive();
 
@@ -540,38 +542,37 @@ export class GameScene extends BaseScene {
     // If you think there are no more pairs, refresh cards
     // ================================================================================================
     private checkForPossibleSet(): void {
-        console.log('problem?');
-
         let cardSet = this.arrayDisplayed.getChildren();
-        console.log('no');
-
         let cardSetLength = cardSet.length;
-        console.log('start');
+
         for (let x = 0; x <= cardSetLength; x++) {
             for (let y = x + 1; y <= cardSetLength - (x + 1); y++) {
                 for (let z = y + 1; z <= cardSetLength - (y + 1); z++) {
                     if (this.isSet([cardSet[x], cardSet[y], cardSet[z]])) {
-                        console.log('end');
+                        console.log("Set available");
                         return;
                     }
                 }
             }
         }
+        console.log("no set available");
         // Replace/add cards
         this.refreshCards();
         // Do not replace/add cards
-        console.log('end');
     }
 
     private refreshCards(): void {
+        // TODO: what if card size is 20 and there is no more set, how to check?
         // Replace all cards
+        console.log(this.arrayStack.getLength());
         for (let card of this.arrayDisplayed.getChildren()) {
             if (card instanceof Phaser.GameObjects.Sprite) {
                 card.setVisible(false);
                 this.arrayStack.add(card);
             }
         }
-        this.arrayDisplayed.clear(true, false);
+        this.arrayDisplayed.clear(false, false);
+        console.log(this.arrayStack.getLength());
         this.initiateCards();
 
     }
