@@ -2,12 +2,18 @@ categories:
     - name: cat1
       url: color.png
       validElements:
-        - name: darkturquoise
-          url: darkturquoise.png
-        - name: darkorange
-          url: darkorange.png
         - name: purple
           url: purple.png
+        - name: darkorange
+          url: darkorange.png
+        - name: red
+          url: red.png
+        - name: yellow
+          url: yellow.png
+        - name: blue
+          url: blue.png
+        - name: lime
+          url: lime.png
     - name: cat2
       url: shape.png
       validElements:
@@ -17,6 +23,12 @@ categories:
           url: square.png
         - name: triangle
           url: triangle.png
+        - name: ellipse
+          url: ellipse.png
+        - name: octagon
+          url: octagon.png
+        - name: rhombus
+          url: rhombus.png
     - name: cat3
       url: nummeration.png
       validElements:
@@ -26,6 +38,12 @@ categories:
           url: two.png
         - name: three
           url: three.png
+        - name: four
+          url: four.png
+        - name: five
+          url: five.png
+        - name: six
+          url: six.png
     - name: cat4
       url: filling.png
       validElements:
@@ -51,6 +69,21 @@ images:
       cat2: square
       cat3: three
       cat4: full
+    - name: purplesquarefourfull.png
+      cat1: purple
+      cat2: square
+      cat3: four
+      cat4: full
+    - name: purplesquarefivefull.png
+      cat1: purple
+      cat2: square
+      cat3: five
+      cat4: full
+    - name: purplesquaresixfull.png
+      cat1: purple
+      cat2: square
+      cat3: six
+      cat4: full
     - name: purplesquareonestripe.png
       cat1: purple
       cat2: square
@@ -65,6 +98,21 @@ images:
       cat1: purple
       cat2: square
       cat3: three
+      cat4: stripe
+    - name: purplesquarefourstripe.png
+      cat1: purple
+      cat2: square
+      cat3: four
+      cat4: stripe
+    - name: purplesquarefivestripe.png
+      cat1: purple
+      cat2: square
+      cat3: five
+      cat4: stripe
+    - name: purplesquaresixstripe.png
+      cat1: purple
+      cat2: square
+      cat3: six
       cat4: stripe
     - name: purplesquareonedotted.png
       cat1: purple
@@ -81,6 +129,21 @@ images:
       cat2: square
       cat3: three
       cat4: dotted
+    - name: purplesquarefourdotted.png
+      cat1: purple
+      cat2: square
+      cat3: four
+      cat4: dotted
+    - name: purplesquarefivedotted.png
+      cat1: purple
+      cat2: square
+      cat3: five
+      cat4: dotted
+    - name: purplesquaresixdotted.png
+      cat1: purple
+      cat2: square
+      cat3: six
+      cat4: dotted
     - name: purplecircleonefull.png
       cat1: purple
       cat2: circle
@@ -95,6 +158,21 @@ images:
       cat1: purple
       cat2: circle
       cat3: three
+      cat4: full
+    - name: purplecirclefourfull.png
+      cat1: purple
+      cat2: circle
+      cat3: four
+      cat4: full
+    - name: purplecirclefivefull.png
+      cat1: purple
+      cat2: circle
+      cat3: five
+      cat4: full
+    - name: purplecirclesixfull.png
+      cat1: purple
+      cat2: circle
+      cat3: six
       cat4: full
     - name: purplecircleonestripe.png
       cat1: purple
@@ -111,6 +189,21 @@ images:
       cat2: circle
       cat3: three
       cat4: stripe
+    - name: purplecirclefourstripe.png
+      cat1: purple
+      cat2: circle
+      cat3: four
+      cat4: stripe
+    - name: purplecirclefivestripe.png
+      cat1: purple
+      cat2: circle
+      cat3: five
+      cat4: stripe
+    - name: purplecirclesixstripe.png
+      cat1: purple
+      cat2: circle
+      cat3: six
+      cat4: stripe
     - name: purplecircleonedotted.png
       cat1: purple
       cat2: circle
@@ -125,6 +218,21 @@ images:
       cat1: purple
       cat2: circle
       cat3: three
+      cat4: dotted
+    - name: purplecirclefourdotted.png
+      cat1: purple
+      cat2: circle
+      cat3: four
+      cat4: dotted
+    - name: purplecirclefivedotted.png
+      cat1: purple
+      cat2: circle
+      cat3: five
+      cat4: dotted
+    - name: purplecirclesixdotted.png
+      cat1: purple
+      cat2: circle
+      cat3: six
       cat4: dotted
     - name: purpletriangleonefull.png
       cat1: purple
@@ -141,6 +249,21 @@ images:
       cat2: triangle
       cat3: three
       cat4: full
+    - name: purpletrianglefourfull.png
+      cat1: purple
+      cat2: triangle
+      cat3: four
+      cat4: full
+    - name: purpletrianglefivefull.png
+      cat1: purple
+      cat2: triangle
+      cat3: five
+      cat4: full
+    - name: purpletrianglesixfull.png
+      cat1: purple
+      cat2: triangle
+      cat3: six
+      cat4: full
     - name: purpletriangleonestripe.png
       cat1: purple
       cat2: triangle
@@ -155,6 +278,21 @@ images:
       cat1: purple
       cat2: triangle
       cat3: three
+      cat4: stripe
+    - name: purpletrianglefourstripe.png
+      cat1: purple
+      cat2: triangle
+      cat3: four
+      cat4: stripe
+    - name: purpletrianglefivestripe.png
+      cat1: purple
+      cat2: triangle
+      cat3: five
+      cat4: stripe
+    - name: purpletrianglesixstripe.png
+      cat1: purple
+      cat2: triangle
+      cat3: six
       cat4: stripe
     - name: purpletriangleonedotted.png
       cat1: purple
@@ -171,6 +309,831 @@ images:
       cat2: triangle
       cat3: three
       cat4: dotted
+    - name: purpletrianglefourdotted.png
+      cat1: purple
+      cat2: triangle
+      cat3: four
+      cat4: dotted
+    - name: purpletrianglefivedotted.png
+      cat1: purple
+      cat2: triangle
+      cat3: five
+      cat4: dotted
+    - name: purpletrianglesixdotted.png
+      cat1: purple
+      cat2: triangle
+      cat3: six
+      cat4: dotted
+    - name: purpleellipseonefull.png
+      cat1: purple
+      cat2: ellipse
+      cat3: one
+      cat4: full
+    - name: purpleellipsetwofull.png
+      cat1: purple
+      cat2: ellipse
+      cat3: two
+      cat4: full
+    - name: purpleellipsethreefull.png
+      cat1: purple
+      cat2: ellipse
+      cat3: three
+      cat4: full
+    - name: purpleellipsefourfull.png
+      cat1: purple
+      cat2: ellipse
+      cat3: four
+      cat4: full
+    - name: purpleellipsefivefull.png
+      cat1: purple
+      cat2: ellipse
+      cat3: five
+      cat4: full
+    - name: purpleellipsesixfull.png
+      cat1: purple
+      cat2: ellipse
+      cat3: six
+      cat4: full
+    - name: purpleellipseonestripe.png
+      cat1: purple
+      cat2: ellipse
+      cat3: one
+      cat4: stripe
+    - name: purpleellipsetwostripe.png
+      cat1: purple
+      cat2: ellipse
+      cat3: two
+      cat4: stripe
+    - name: purpleellipsethreestripe.png
+      cat1: purple
+      cat2: ellipse
+      cat3: three
+      cat4: stripe
+    - name: purpleellipsefourstripe.png
+      cat1: purple
+      cat2: ellipse
+      cat3: four
+      cat4: stripe
+    - name: purpleellipsefivestripe.png
+      cat1: purple
+      cat2: ellipse
+      cat3: five
+      cat4: stripe
+    - name: purpleellipsesixstripe.png
+      cat1: purple
+      cat2: ellipse
+      cat3: six
+      cat4: stripe
+    - name: purpleellipseonedotted.png
+      cat1: purple
+      cat2: ellipse
+      cat3: one
+      cat4: dotted
+    - name: purpleellipsetwodotted.png
+      cat1: purple
+      cat2: ellipse
+      cat3: two
+      cat4: dotted
+    - name: purpleellipsethreedotted.png
+      cat1: purple
+      cat2: ellipse
+      cat3: three
+      cat4: dotted
+    - name: purpleellipsefourdotted.png
+      cat1: purple
+      cat2: ellipse
+      cat3: four
+      cat4: dotted
+    - name: purpleellipsefivedotted.png
+      cat1: purple
+      cat2: ellipse
+      cat3: five
+      cat4: dotted
+    - name: purpleellipsesixdotted.png
+      cat1: purple
+      cat2: ellipse
+      cat3: six
+      cat4: dotted
+    - name: purpleoctagononefull.png
+      cat1: purple
+      cat2: octagon
+      cat3: one
+      cat4: full
+    - name: purpleoctagontwofull.png
+      cat1: purple
+      cat2: octagon
+      cat3: two
+      cat4: full
+    - name: purpleoctagonthreefull.png
+      cat1: purple
+      cat2: octagon
+      cat3: three
+      cat4: full
+    - name: purpleoctagonfourfull.png
+      cat1: purple
+      cat2: octagon
+      cat3: four
+      cat4: full
+    - name: purpleoctagonfivefull.png
+      cat1: purple
+      cat2: octagon
+      cat3: five
+      cat4: full
+    - name: purpleoctagonsixfull.png
+      cat1: purple
+      cat2: octagon
+      cat3: six
+      cat4: full
+    - name: purpleoctagononestripe.png
+      cat1: purple
+      cat2: octagon
+      cat3: one
+      cat4: stripe
+    - name: purpleoctagontwostripe.png
+      cat1: purple
+      cat2: octagon
+      cat3: two
+      cat4: stripe
+    - name: purpleoctagonthreestripe.png
+      cat1: purple
+      cat2: octagon
+      cat3: three
+      cat4: stripe
+    - name: purpleoctagonfourstripe.png
+      cat1: purple
+      cat2: octagon
+      cat3: four
+      cat4: stripe
+    - name: purpleoctagonfivestripe.png
+      cat1: purple
+      cat2: octagon
+      cat3: five
+      cat4: stripe
+    - name: purpleoctagonsixstripe.png
+      cat1: purple
+      cat2: octagon
+      cat3: six
+      cat4: stripe
+    - name: purpleoctagononedotted.png
+      cat1: purple
+      cat2: octagon
+      cat3: one
+      cat4: dotted
+    - name: purpleoctagontwodotted.png
+      cat1: purple
+      cat2: octagon
+      cat3: two
+      cat4: dotted
+    - name: purpleoctagonthreedotted.png
+      cat1: purple
+      cat2: octagon
+      cat3: three
+      cat4: dotted
+    - name: purpleoctagonfourdotted.png
+      cat1: purple
+      cat2: octagon
+      cat3: four
+      cat4: dotted
+    - name: purpleoctagonfivedotted.png
+      cat1: purple
+      cat2: octagon
+      cat3: five
+      cat4: dotted
+    - name: purpleoctagonsixdotted.png
+      cat1: purple
+      cat2: octagon
+      cat3: six
+      cat4: dotted
+    - name: purplerhombusonefull.png
+      cat1: purple
+      cat2: rhombus
+      cat3: one
+      cat4: full
+    - name: purplerhombustwofull.png
+      cat1: purple
+      cat2: rhombus
+      cat3: two
+      cat4: full
+    - name: purplerhombusthreefull.png
+      cat1: purple
+      cat2: rhombus
+      cat3: three
+      cat4: full
+    - name: purplerhombusfourfull.png
+      cat1: purple
+      cat2: rhombus
+      cat3: four
+      cat4: full
+    - name: purplerhombusfivefull.png
+      cat1: purple
+      cat2: rhombus
+      cat3: five
+      cat4: full
+    - name: purplerhombussixfull.png
+      cat1: purple
+      cat2: rhombus
+      cat3: six
+      cat4: full
+    - name: purplerhombusonestripe.png
+      cat1: purple
+      cat2: rhombus
+      cat3: one
+      cat4: stripe
+    - name: purplerhombustwostripe.png
+      cat1: purple
+      cat2: rhombus
+      cat3: two
+      cat4: stripe
+    - name: purplerhombusthreestripe.png
+      cat1: purple
+      cat2: rhombus
+      cat3: three
+      cat4: stripe
+    - name: purplerhombusfourstripe.png
+      cat1: purple
+      cat2: rhombus
+      cat3: four
+      cat4: stripe
+    - name: purplerhombusfivestripe.png
+      cat1: purple
+      cat2: rhombus
+      cat3: five
+      cat4: stripe
+    - name: purplerhombussixstripe.png
+      cat1: purple
+      cat2: rhombus
+      cat3: six
+      cat4: stripe
+    - name: purplerhombusonedotted.png
+      cat1: purple
+      cat2: rhombus
+      cat3: one
+      cat4: dotted
+    - name: purplerhombustwodotted.png
+      cat1: purple
+      cat2: rhombus
+      cat3: two
+      cat4: dotted
+    - name: purplerhombusthreedotted.png
+      cat1: purple
+      cat2: rhombus
+      cat3: three
+      cat4: dotted
+    - name: purplerhombusfourdotted.png
+      cat1: purple
+      cat2: rhombus
+      cat3: four
+      cat4: dotted
+    - name: purplerhombusfivedotted.png
+      cat1: purple
+      cat2: rhombus
+      cat3: five
+      cat4: dotted
+    - name: purplerhombussixdotted.png
+      cat1: purple
+      cat2: rhombus
+      cat3: six
+      cat4: dotted
+    - name: yellowsquareonefull.png
+      cat1: yellow
+      cat2: square
+      cat3: one
+      cat4: full
+    - name: yellowsquaretwofull.png
+      cat1: yellow
+      cat2: square
+      cat3: two
+      cat4: full
+    - name: yellowsquarethreefull.png
+      cat1: yellow
+      cat2: square
+      cat3: three
+      cat4: full
+    - name: yellowsquarefourfull.png
+      cat1: yellow
+      cat2: square
+      cat3: four
+      cat4: full
+    - name: yellowsquarefivefull.png
+      cat1: yellow
+      cat2: square
+      cat3: five
+      cat4: full
+    - name: yellowsquaresixfull.png
+      cat1: yellow
+      cat2: square
+      cat3: six
+      cat4: full
+    - name: yellowsquareonestripe.png
+      cat1: yellow
+      cat2: square
+      cat3: one
+      cat4: stripe
+    - name: yellowsquaretwostripe.png
+      cat1: yellow
+      cat2: square
+      cat3: two
+      cat4: stripe
+    - name: yellowsquarethreestripe.png
+      cat1: yellow
+      cat2: square
+      cat3: three
+      cat4: stripe
+    - name: yellowsquarefourstripe.png
+      cat1: yellow
+      cat2: square
+      cat3: four
+      cat4: stripe
+    - name: yellowsquarefivestripe.png
+      cat1: yellow
+      cat2: square
+      cat3: five
+      cat4: stripe
+    - name: yellowsquaresixstripe.png
+      cat1: yellow
+      cat2: square
+      cat3: six
+      cat4: stripe
+    - name: yellowsquareonedotted.png
+      cat1: yellow
+      cat2: square
+      cat3: one
+      cat4: dotted
+    - name: yellowsquaretwodotted.png
+      cat1: yellow
+      cat2: square
+      cat3: two
+      cat4: dotted
+    - name: yellowsquarethreedotted.png
+      cat1: yellow
+      cat2: square
+      cat3: three
+      cat4: dotted
+    - name: yellowsquarefourdotted.png
+      cat1: yellow
+      cat2: square
+      cat3: four
+      cat4: dotted
+    - name: yellowsquarefivedotted.png
+      cat1: yellow
+      cat2: square
+      cat3: five
+      cat4: dotted
+    - name: yellowsquaresixdotted.png
+      cat1: yellow
+      cat2: square
+      cat3: six
+      cat4: dotted
+    - name: yellowcircleonefull.png
+      cat1: yellow
+      cat2: circle
+      cat3: one
+      cat4: full
+    - name: yellowcircletwofull.png
+      cat1: yellow
+      cat2: circle
+      cat3: two
+      cat4: full
+    - name: yellowcirclethreefull.png
+      cat1: yellow
+      cat2: circle
+      cat3: three
+      cat4: full
+    - name: yellowcirclefourfull.png
+      cat1: yellow
+      cat2: circle
+      cat3: four
+      cat4: full
+    - name: yellowcirclefivefull.png
+      cat1: yellow
+      cat2: circle
+      cat3: five
+      cat4: full
+    - name: yellowcirclesixfull.png
+      cat1: yellow
+      cat2: circle
+      cat3: six
+      cat4: full
+    - name: yellowcircleonestripe.png
+      cat1: yellow
+      cat2: circle
+      cat3: one
+      cat4: stripe
+    - name: yellowcircletwostripe.png
+      cat1: yellow
+      cat2: circle
+      cat3: two
+      cat4: stripe
+    - name: yellowcirclethreestripe.png
+      cat1: yellow
+      cat2: circle
+      cat3: three
+      cat4: stripe
+    - name: yellowcirclefourstripe.png
+      cat1: yellow
+      cat2: circle
+      cat3: four
+      cat4: stripe
+    - name: yellowcirclefivestripe.png
+      cat1: yellow
+      cat2: circle
+      cat3: five
+      cat4: stripe
+    - name: yellowcirclesixstripe.png
+      cat1: yellow
+      cat2: circle
+      cat3: six
+      cat4: stripe
+    - name: yellowcircleonedotted.png
+      cat1: yellow
+      cat2: circle
+      cat3: one
+      cat4: dotted
+    - name: yellowcircletwodotted.png
+      cat1: yellow
+      cat2: circle
+      cat3: two
+      cat4: dotted
+    - name: yellowcirclethreedotted.png
+      cat1: yellow
+      cat2: circle
+      cat3: three
+      cat4: dotted
+    - name: yellowcirclefourdotted.png
+      cat1: yellow
+      cat2: circle
+      cat3: four
+      cat4: dotted
+    - name: yellowcirclefivedotted.png
+      cat1: yellow
+      cat2: circle
+      cat3: five
+      cat4: dotted
+    - name: yellowcirclesixdotted.png
+      cat1: yellow
+      cat2: circle
+      cat3: six
+      cat4: dotted
+    - name: yellowtriangleonefull.png
+      cat1: yellow
+      cat2: triangle
+      cat3: one
+      cat4: full
+    - name: yellowtriangletwofull.png
+      cat1: yellow
+      cat2: triangle
+      cat3: two
+      cat4: full
+    - name: yellowtrianglethreefull.png
+      cat1: yellow
+      cat2: triangle
+      cat3: three
+      cat4: full
+    - name: yellowtrianglefourfull.png
+      cat1: yellow
+      cat2: triangle
+      cat3: four
+      cat4: full
+    - name: yellowtrianglefivefull.png
+      cat1: yellow
+      cat2: triangle
+      cat3: five
+      cat4: full
+    - name: yellowtrianglesixfull.png
+      cat1: yellow
+      cat2: triangle
+      cat3: six
+      cat4: full
+    - name: yellowtriangleonestripe.png
+      cat1: yellow
+      cat2: triangle
+      cat3: one
+      cat4: stripe
+    - name: yellowtriangletwostripe.png
+      cat1: yellow
+      cat2: triangle
+      cat3: two
+      cat4: stripe
+    - name: yellowtrianglethreestripe.png
+      cat1: yellow
+      cat2: triangle
+      cat3: three
+      cat4: stripe
+    - name: yellowtrianglefourstripe.png
+      cat1: yellow
+      cat2: triangle
+      cat3: four
+      cat4: stripe
+    - name: yellowtrianglefivestripe.png
+      cat1: yellow
+      cat2: triangle
+      cat3: five
+      cat4: stripe
+    - name: yellowtrianglesixstripe.png
+      cat1: yellow
+      cat2: triangle
+      cat3: six
+      cat4: stripe
+    - name: yellowtriangleonedotted.png
+      cat1: yellow
+      cat2: triangle
+      cat3: one
+      cat4: dotted
+    - name: yellowtriangletwodotted.png
+      cat1: yellow
+      cat2: triangle
+      cat3: two
+      cat4: dotted
+    - name: yellowtrianglethreedotted.png
+      cat1: yellow
+      cat2: triangle
+      cat3: three
+      cat4: dotted
+    - name: yellowtrianglefourdotted.png
+      cat1: yellow
+      cat2: triangle
+      cat3: four
+      cat4: dotted
+    - name: yellowtrianglefivedotted.png
+      cat1: yellow
+      cat2: triangle
+      cat3: five
+      cat4: dotted
+    - name: yellowtrianglesixdotted.png
+      cat1: yellow
+      cat2: triangle
+      cat3: six
+      cat4: dotted
+    - name: yellowellipseonefull.png
+      cat1: yellow
+      cat2: ellipse
+      cat3: one
+      cat4: full
+    - name: yellowellipsetwofull.png
+      cat1: yellow
+      cat2: ellipse
+      cat3: two
+      cat4: full
+    - name: yellowellipsethreefull.png
+      cat1: yellow
+      cat2: ellipse
+      cat3: three
+      cat4: full
+    - name: yellowellipsefourfull.png
+      cat1: yellow
+      cat2: ellipse
+      cat3: four
+      cat4: full
+    - name: yellowellipsefivefull.png
+      cat1: yellow
+      cat2: ellipse
+      cat3: five
+      cat4: full
+    - name: yellowellipsesixfull.png
+      cat1: yellow
+      cat2: ellipse
+      cat3: six
+      cat4: full
+    - name: yellowellipseonestripe.png
+      cat1: yellow
+      cat2: ellipse
+      cat3: one
+      cat4: stripe
+    - name: yellowellipsetwostripe.png
+      cat1: yellow
+      cat2: ellipse
+      cat3: two
+      cat4: stripe
+    - name: yellowellipsethreestripe.png
+      cat1: yellow
+      cat2: ellipse
+      cat3: three
+      cat4: stripe
+    - name: yellowellipsefourstripe.png
+      cat1: yellow
+      cat2: ellipse
+      cat3: four
+      cat4: stripe
+    - name: yellowellipsefivestripe.png
+      cat1: yellow
+      cat2: ellipse
+      cat3: five
+      cat4: stripe
+    - name: yellowellipsesixstripe.png
+      cat1: yellow
+      cat2: ellipse
+      cat3: six
+      cat4: stripe
+    - name: yellowellipseonedotted.png
+      cat1: yellow
+      cat2: ellipse
+      cat3: one
+      cat4: dotted
+    - name: yellowellipsetwodotted.png
+      cat1: yellow
+      cat2: ellipse
+      cat3: two
+      cat4: dotted
+    - name: yellowellipsethreedotted.png
+      cat1: yellow
+      cat2: ellipse
+      cat3: three
+      cat4: dotted
+    - name: yellowellipsefourdotted.png
+      cat1: yellow
+      cat2: ellipse
+      cat3: four
+      cat4: dotted
+    - name: yellowellipsefivedotted.png
+      cat1: yellow
+      cat2: ellipse
+      cat3: five
+      cat4: dotted
+    - name: yellowellipsesixdotted.png
+      cat1: yellow
+      cat2: ellipse
+      cat3: six
+      cat4: dotted
+    - name: yellowoctagononefull.png
+      cat1: yellow
+      cat2: octagon
+      cat3: one
+      cat4: full
+    - name: yellowoctagontwofull.png
+      cat1: yellow
+      cat2: octagon
+      cat3: two
+      cat4: full
+    - name: yellowoctagonthreefull.png
+      cat1: yellow
+      cat2: octagon
+      cat3: three
+      cat4: full
+    - name: yellowoctagonfourfull.png
+      cat1: yellow
+      cat2: octagon
+      cat3: four
+      cat4: full
+    - name: yellowoctagonfivefull.png
+      cat1: yellow
+      cat2: octagon
+      cat3: five
+      cat4: full
+    - name: yellowoctagonsixfull.png
+      cat1: yellow
+      cat2: octagon
+      cat3: six
+      cat4: full
+    - name: yellowoctagononestripe.png
+      cat1: yellow
+      cat2: octagon
+      cat3: one
+      cat4: stripe
+    - name: yellowoctagontwostripe.png
+      cat1: yellow
+      cat2: octagon
+      cat3: two
+      cat4: stripe
+    - name: yellowoctagonthreestripe.png
+      cat1: yellow
+      cat2: octagon
+      cat3: three
+      cat4: stripe
+    - name: yellowoctagonfourstripe.png
+      cat1: yellow
+      cat2: octagon
+      cat3: four
+      cat4: stripe
+    - name: yellowoctagonfivestripe.png
+      cat1: yellow
+      cat2: octagon
+      cat3: five
+      cat4: stripe
+    - name: yellowoctagonsixstripe.png
+      cat1: yellow
+      cat2: octagon
+      cat3: six
+      cat4: stripe
+    - name: yellowoctagononedotted.png
+      cat1: yellow
+      cat2: octagon
+      cat3: one
+      cat4: dotted
+    - name: yellowoctagontwodotted.png
+      cat1: yellow
+      cat2: octagon
+      cat3: two
+      cat4: dotted
+    - name: yellowoctagonthreedotted.png
+      cat1: yellow
+      cat2: octagon
+      cat3: three
+      cat4: dotted
+    - name: yellowoctagonfourdotted.png
+      cat1: yellow
+      cat2: octagon
+      cat3: four
+      cat4: dotted
+    - name: yellowoctagonfivedotted.png
+      cat1: yellow
+      cat2: octagon
+      cat3: five
+      cat4: dotted
+    - name: yellowoctagonsixdotted.png
+      cat1: yellow
+      cat2: octagon
+      cat3: six
+      cat4: dotted
+    - name: yellowrhombusonefull.png
+      cat1: yellow
+      cat2: rhombus
+      cat3: one
+      cat4: full
+    - name: yellowrhombustwofull.png
+      cat1: yellow
+      cat2: rhombus
+      cat3: two
+      cat4: full
+    - name: yellowrhombusthreefull.png
+      cat1: yellow
+      cat2: rhombus
+      cat3: three
+      cat4: full
+    - name: yellowrhombusfourfull.png
+      cat1: yellow
+      cat2: rhombus
+      cat3: four
+      cat4: full
+    - name: yellowrhombusfivefull.png
+      cat1: yellow
+      cat2: rhombus
+      cat3: five
+      cat4: full
+    - name: yellowrhombussixfull.png
+      cat1: yellow
+      cat2: rhombus
+      cat3: six
+      cat4: full
+    - name: yellowrhombusonestripe.png
+      cat1: yellow
+      cat2: rhombus
+      cat3: one
+      cat4: stripe
+    - name: yellowrhombustwostripe.png
+      cat1: yellow
+      cat2: rhombus
+      cat3: two
+      cat4: stripe
+    - name: yellowrhombusthreestripe.png
+      cat1: yellow
+      cat2: rhombus
+      cat3: three
+      cat4: stripe
+    - name: yellowrhombusfourstripe.png
+      cat1: yellow
+      cat2: rhombus
+      cat3: four
+      cat4: stripe
+    - name: yellowrhombusfivestripe.png
+      cat1: yellow
+      cat2: rhombus
+      cat3: five
+      cat4: stripe
+    - name: yellowrhombussixstripe.png
+      cat1: yellow
+      cat2: rhombus
+      cat3: six
+      cat4: stripe
+    - name: yellowrhombusonedotted.png
+      cat1: yellow
+      cat2: rhombus
+      cat3: one
+      cat4: dotted
+    - name: yellowrhombustwodotted.png
+      cat1: yellow
+      cat2: rhombus
+      cat3: two
+      cat4: dotted
+    - name: yellowrhombusthreedotted.png
+      cat1: yellow
+      cat2: rhombus
+      cat3: three
+      cat4: dotted
+    - name: yellowrhombusfourdotted.png
+      cat1: yellow
+      cat2: rhombus
+      cat3: four
+      cat4: dotted
+    - name: yellowrhombusfivedotted.png
+      cat1: yellow
+      cat2: rhombus
+      cat3: five
+      cat4: dotted
+    - name: yellowrhombussixdotted.png
+      cat1: yellow
+      cat2: rhombus
+      cat3: six
+      cat4: dotted
     - name: darkorangesquareonefull.png
       cat1: darkorange
       cat2: square
@@ -185,6 +1148,21 @@ images:
       cat1: darkorange
       cat2: square
       cat3: three
+      cat4: full
+    - name: darkorangesquarefourfull.png
+      cat1: darkorange
+      cat2: square
+      cat3: four
+      cat4: full
+    - name: darkorangesquarefivefull.png
+      cat1: darkorange
+      cat2: square
+      cat3: five
+      cat4: full
+    - name: darkorangesquaresixfull.png
+      cat1: darkorange
+      cat2: square
+      cat3: six
       cat4: full
     - name: darkorangesquareonestripe.png
       cat1: darkorange
@@ -201,6 +1179,21 @@ images:
       cat2: square
       cat3: three
       cat4: stripe
+    - name: darkorangesquarefourstripe.png
+      cat1: darkorange
+      cat2: square
+      cat3: four
+      cat4: stripe
+    - name: darkorangesquarefivestripe.png
+      cat1: darkorange
+      cat2: square
+      cat3: five
+      cat4: stripe
+    - name: darkorangesquaresixstripe.png
+      cat1: darkorange
+      cat2: square
+      cat3: six
+      cat4: stripe
     - name: darkorangesquareonedotted.png
       cat1: darkorange
       cat2: square
@@ -215,6 +1208,21 @@ images:
       cat1: darkorange
       cat2: square
       cat3: three
+      cat4: dotted
+    - name: darkorangesquarefourdotted.png
+      cat1: darkorange
+      cat2: square
+      cat3: four
+      cat4: dotted
+    - name: darkorangesquarefivedotted.png
+      cat1: darkorange
+      cat2: square
+      cat3: five
+      cat4: dotted
+    - name: darkorangesquaresixdotted.png
+      cat1: darkorange
+      cat2: square
+      cat3: six
       cat4: dotted
     - name: darkorangecircleonefull.png
       cat1: darkorange
@@ -231,6 +1239,21 @@ images:
       cat2: circle
       cat3: three
       cat4: full
+    - name: darkorangecirclefourfull.png
+      cat1: darkorange
+      cat2: circle
+      cat3: four
+      cat4: full
+    - name: darkorangecirclefivefull.png
+      cat1: darkorange
+      cat2: circle
+      cat3: five
+      cat4: full
+    - name: darkorangecirclesixfull.png
+      cat1: darkorange
+      cat2: circle
+      cat3: six
+      cat4: full
     - name: darkorangecircleonestripe.png
       cat1: darkorange
       cat2: circle
@@ -245,6 +1268,21 @@ images:
       cat1: darkorange
       cat2: circle
       cat3: three
+      cat4: stripe
+    - name: darkorangecirclefourstripe.png
+      cat1: darkorange
+      cat2: circle
+      cat3: four
+      cat4: stripe
+    - name: darkorangecirclefivestripe.png
+      cat1: darkorange
+      cat2: circle
+      cat3: five
+      cat4: stripe
+    - name: darkorangecirclesixstripe.png
+      cat1: darkorange
+      cat2: circle
+      cat3: six
       cat4: stripe
     - name: darkorangecircleonedotted.png
       cat1: darkorange
@@ -261,6 +1299,21 @@ images:
       cat2: circle
       cat3: three
       cat4: dotted
+    - name: darkorangecirclefourdotted.png
+      cat1: darkorange
+      cat2: circle
+      cat3: four
+      cat4: dotted
+    - name: darkorangecirclefivedotted.png
+      cat1: darkorange
+      cat2: circle
+      cat3: five
+      cat4: dotted
+    - name: darkorangecirclesixdotted.png
+      cat1: darkorange
+      cat2: circle
+      cat3: six
+      cat4: dotted
     - name: darkorangetriangleonefull.png
       cat1: darkorange
       cat2: triangle
@@ -275,6 +1328,21 @@ images:
       cat1: darkorange
       cat2: triangle
       cat3: three
+      cat4: full
+    - name: darkorangetrianglefourfull.png
+      cat1: darkorange
+      cat2: triangle
+      cat3: four
+      cat4: full
+    - name: darkorangetrianglefivefull.png
+      cat1: darkorange
+      cat2: triangle
+      cat3: five
+      cat4: full
+    - name: darkorangetrianglesixfull.png
+      cat1: darkorange
+      cat2: triangle
+      cat3: six
       cat4: full
     - name: darkorangetriangleonestripe.png
       cat1: darkorange
@@ -291,6 +1359,21 @@ images:
       cat2: triangle
       cat3: three
       cat4: stripe
+    - name: darkorangetrianglefourstripe.png
+      cat1: darkorange
+      cat2: triangle
+      cat3: four
+      cat4: stripe
+    - name: darkorangetrianglefivestripe.png
+      cat1: darkorange
+      cat2: triangle
+      cat3: five
+      cat4: stripe
+    - name: darkorangetrianglesixstripe.png
+      cat1: darkorange
+      cat2: triangle
+      cat3: six
+      cat4: stripe
     - name: darkorangetriangleonedotted.png
       cat1: darkorange
       cat2: triangle
@@ -306,140 +1389,1908 @@ images:
       cat2: triangle
       cat3: three
       cat4: dotted
-    - name: darkturquoisesquareonefull.png
-      cat1: darkturquoise
+    - name: darkorangetrianglefourdotted.png
+      cat1: darkorange
+      cat2: triangle
+      cat3: four
+      cat4: dotted
+    - name: darkorangetrianglefivedotted.png
+      cat1: darkorange
+      cat2: triangle
+      cat3: five
+      cat4: dotted
+    - name: darkorangetrianglesixdotted.png
+      cat1: darkorange
+      cat2: triangle
+      cat3: six
+      cat4: dotted
+    - name: darkorangeellipseonefull.png
+      cat1: darkorange
+      cat2: ellipse
+      cat3: one
+      cat4: full
+    - name: darkorangeellipsetwofull.png
+      cat1: darkorange
+      cat2: ellipse
+      cat3: two
+      cat4: full
+    - name: darkorangeellipsethreefull.png
+      cat1: darkorange
+      cat2: ellipse
+      cat3: three
+      cat4: full
+    - name: darkorangeellipsefourfull.png
+      cat1: darkorange
+      cat2: ellipse
+      cat3: four
+      cat4: full
+    - name: darkorangeellipsefivefull.png
+      cat1: darkorange
+      cat2: ellipse
+      cat3: five
+      cat4: full
+    - name: darkorangeellipsesixfull.png
+      cat1: darkorange
+      cat2: ellipse
+      cat3: six
+      cat4: full
+    - name: darkorangeellipseonestripe.png
+      cat1: darkorange
+      cat2: ellipse
+      cat3: one
+      cat4: stripe
+    - name: darkorangeellipsetwostripe.png
+      cat1: darkorange
+      cat2: ellipse
+      cat3: two
+      cat4: stripe
+    - name: darkorangeellipsethreestripe.png
+      cat1: darkorange
+      cat2: ellipse
+      cat3: three
+      cat4: stripe
+    - name: darkorangeellipsefourstripe.png
+      cat1: darkorange
+      cat2: ellipse
+      cat3: four
+      cat4: stripe
+    - name: darkorangeellipsefivestripe.png
+      cat1: darkorange
+      cat2: ellipse
+      cat3: five
+      cat4: stripe
+    - name: darkorangeellipsesixstripe.png
+      cat1: darkorange
+      cat2: ellipse
+      cat3: six
+      cat4: stripe
+    - name: darkorangeellipseonedotted.png
+      cat1: darkorange
+      cat2: ellipse
+      cat3: one
+      cat4: dotted
+    - name: darkorangeellipsetwodotted.png
+      cat1: darkorange
+      cat2: ellipse
+      cat3: two
+      cat4: dotted
+    - name: darkorangeellipsethreedotted.png
+      cat1: darkorange
+      cat2: ellipse
+      cat3: three
+      cat4: dotted
+    - name: darkorangeellipsefourdotted.png
+      cat1: darkorange
+      cat2: ellipse
+      cat3: four
+      cat4: dotted
+    - name: darkorangeellipsefivedotted.png
+      cat1: darkorange
+      cat2: ellipse
+      cat3: five
+      cat4: dotted
+    - name: darkorangeellipsesixdotted.png
+      cat1: darkorange
+      cat2: ellipse
+      cat3: six
+      cat4: dotted
+    - name: darkorangeoctagononefull.png
+      cat1: darkorange
+      cat2: octagon
+      cat3: one
+      cat4: full
+    - name: darkorangeoctagontwofull.png
+      cat1: darkorange
+      cat2: octagon
+      cat3: two
+      cat4: full
+    - name: darkorangeoctagonthreefull.png
+      cat1: darkorange
+      cat2: octagon
+      cat3: three
+      cat4: full
+    - name: darkorangeoctagonfourfull.png
+      cat1: darkorange
+      cat2: octagon
+      cat3: four
+      cat4: full
+    - name: darkorangeoctagonfivefull.png
+      cat1: darkorange
+      cat2: octagon
+      cat3: five
+      cat4: full
+    - name: darkorangeoctagonsixfull.png
+      cat1: darkorange
+      cat2: octagon
+      cat3: six
+      cat4: full
+    - name: darkorangeoctagononestripe.png
+      cat1: darkorange
+      cat2: octagon
+      cat3: one
+      cat4: stripe
+    - name: darkorangeoctagontwostripe.png
+      cat1: darkorange
+      cat2: octagon
+      cat3: two
+      cat4: stripe
+    - name: darkorangeoctagonthreestripe.png
+      cat1: darkorange
+      cat2: octagon
+      cat3: three
+      cat4: stripe
+    - name: darkorangeoctagonfourstripe.png
+      cat1: darkorange
+      cat2: octagon
+      cat3: four
+      cat4: stripe
+    - name: darkorangeoctagonfivestripe.png
+      cat1: darkorange
+      cat2: octagon
+      cat3: five
+      cat4: stripe
+    - name: darkorangeoctagonsixstripe.png
+      cat1: darkorange
+      cat2: octagon
+      cat3: six
+      cat4: stripe
+    - name: darkorangeoctagononedotted.png
+      cat1: darkorange
+      cat2: octagon
+      cat3: one
+      cat4: dotted
+    - name: darkorangeoctagontwodotted.png
+      cat1: darkorange
+      cat2: octagon
+      cat3: two
+      cat4: dotted
+    - name: darkorangeoctagonthreedotted.png
+      cat1: darkorange
+      cat2: octagon
+      cat3: three
+      cat4: dotted
+    - name: darkorangeoctagonfourdotted.png
+      cat1: darkorange
+      cat2: octagon
+      cat3: four
+      cat4: dotted
+    - name: darkorangeoctagonfivedotted.png
+      cat1: darkorange
+      cat2: octagon
+      cat3: five
+      cat4: dotted
+    - name: darkorangeoctagonsixdotted.png
+      cat1: darkorange
+      cat2: octagon
+      cat3: six
+      cat4: dotted
+    - name: darkorangerhombusonefull.png
+      cat1: darkorange
+      cat2: rhombus
+      cat3: one
+      cat4: full
+    - name: darkorangerhombustwofull.png
+      cat1: darkorange
+      cat2: rhombus
+      cat3: two
+      cat4: full
+    - name: darkorangerhombusthreefull.png
+      cat1: darkorange
+      cat2: rhombus
+      cat3: three
+      cat4: full
+    - name: darkorangerhombusfourfull.png
+      cat1: darkorange
+      cat2: rhombus
+      cat3: four
+      cat4: full
+    - name: darkorangerhombusfivefull.png
+      cat1: darkorange
+      cat2: rhombus
+      cat3: five
+      cat4: full
+    - name: darkorangerhombussixfull.png
+      cat1: darkorange
+      cat2: rhombus
+      cat3: six
+      cat4: full
+    - name: darkorangerhombusonestripe.png
+      cat1: darkorange
+      cat2: rhombus
+      cat3: one
+      cat4: stripe
+    - name: darkorangerhombustwostripe.png
+      cat1: darkorange
+      cat2: rhombus
+      cat3: two
+      cat4: stripe
+    - name: darkorangerhombusthreestripe.png
+      cat1: darkorange
+      cat2: rhombus
+      cat3: three
+      cat4: stripe
+    - name: darkorangerhombusfourstripe.png
+      cat1: darkorange
+      cat2: rhombus
+      cat3: four
+      cat4: stripe
+    - name: darkorangerhombusfivestripe.png
+      cat1: darkorange
+      cat2: rhombus
+      cat3: five
+      cat4: stripe
+    - name: darkorangerhombussixstripe.png
+      cat1: darkorange
+      cat2: rhombus
+      cat3: six
+      cat4: stripe
+    - name: darkorangerhombusonedotted.png
+      cat1: darkorange
+      cat2: rhombus
+      cat3: one
+      cat4: dotted
+    - name: darkorangerhombustwodotted.png
+      cat1: darkorange
+      cat2: rhombus
+      cat3: two
+      cat4: dotted
+    - name: darkorangerhombusthreedotted.png
+      cat1: darkorange
+      cat2: rhombus
+      cat3: three
+      cat4: dotted
+    - name: darkorangerhombusfourdotted.png
+      cat1: darkorange
+      cat2: rhombus
+      cat3: four
+      cat4: dotted
+    - name: darkorangerhombusfivedotted.png
+      cat1: darkorange
+      cat2: rhombus
+      cat3: five
+      cat4: dotted
+    - name: darkorangerhombussixdotted.png
+      cat1: darkorange
+      cat2: rhombus
+      cat3: six
+      cat4: dotted
+    - name: redsquareonefull.png
+      cat1: red
       cat2: square
       cat3: one
       cat4: full
-    - name: darkturquoisesquaretwofull.png
-      cat1: darkturquoise
+    - name: redsquaretwofull.png
+      cat1: red
       cat2: square
       cat3: two
       cat4: full
-    - name: darkturquoisesquarethreefull.png
-      cat1: darkturquoise
+    - name: redsquarethreefull.png
+      cat1: red
       cat2: square
       cat3: three
       cat4: full
-    - name: darkturquoisesquareonestripe.png
-      cat1: darkturquoise
+    - name: redsquarefourfull.png
+      cat1: red
+      cat2: square
+      cat3: four
+      cat4: full
+    - name: redsquarefivefull.png
+      cat1: red
+      cat2: square
+      cat3: five
+      cat4: full
+    - name: redsquaresixfull.png
+      cat1: red
+      cat2: square
+      cat3: six
+      cat4: full
+    - name: redsquareonestripe.png
+      cat1: red
       cat2: square
       cat3: one
       cat4: stripe
-    - name: darkturquoisesquaretwostripe.png
-      cat1: darkturquoise
+    - name: redsquaretwostripe.png
+      cat1: red
       cat2: square
       cat3: two
       cat4: stripe
-    - name: darkturquoisesquarethreestripe.png
-      cat1: darkturquoise
+    - name: redsquarethreestripe.png
+      cat1: red
       cat2: square
       cat3: three
       cat4: stripe
-    - name: darkturquoisesquareonedotted.png
-      cat1: darkturquoise
+    - name: redsquarefourstripe.png
+      cat1: red
+      cat2: square
+      cat3: four
+      cat4: stripe
+    - name: redsquarefivestripe.png
+      cat1: red
+      cat2: square
+      cat3: five
+      cat4: stripe
+    - name: redsquaresixstripe.png
+      cat1: red
+      cat2: square
+      cat3: six
+      cat4: stripe
+    - name: redsquareonedotted.png
+      cat1: red
       cat2: square
       cat3: one
       cat4: dotted
-    - name: darkturquoisesquaretwodotted.png
-      cat1: darkturquoise
+    - name: redsquaretwodotted.png
+      cat1: red
       cat2: square
       cat3: two
       cat4: dotted
-    - name: darkturquoisesquarethreedotted.png
-      cat1: darkturquoise
+    - name: redsquarethreedotted.png
+      cat1: red
       cat2: square
       cat3: three
       cat4: dotted
-    - name: darkturquoisecircleonefull.png
-      cat1: darkturquoise
+    - name: redsquarefourdotted.png
+      cat1: red
+      cat2: square
+      cat3: four
+      cat4: dotted
+    - name: redsquarefivedotted.png
+      cat1: red
+      cat2: square
+      cat3: five
+      cat4: dotted
+    - name: redsquaresixdotted.png
+      cat1: red
+      cat2: square
+      cat3: six
+      cat4: dotted
+    - name: redcircleonefull.png
+      cat1: red
       cat2: circle
       cat3: one
       cat4: full
-    - name: darkturquoisecircletwofull.png
-      cat1: darkturquoise
+    - name: redcircletwofull.png
+      cat1: red
       cat2: circle
       cat3: two
       cat4: full
-    - name: darkturquoisecirclethreefull.png
-      cat1: darkturquoise
+    - name: redcirclethreefull.png
+      cat1: red
       cat2: circle
       cat3: three
       cat4: full
-    - name: darkturquoisecircleonestripe.png
-      cat1: darkturquoise
+    - name: redcirclefourfull.png
+      cat1: red
+      cat2: circle
+      cat3: four
+      cat4: full
+    - name: redcirclefivefull.png
+      cat1: red
+      cat2: circle
+      cat3: five
+      cat4: full
+    - name: redcirclesixfull.png
+      cat1: red
+      cat2: circle
+      cat3: six
+      cat4: full
+    - name: redcircleonestripe.png
+      cat1: red
       cat2: circle
       cat3: one
       cat4: stripe
-    - name: darkturquoisecircletwostripe.png
-      cat1: darkturquoise
+    - name: redcircletwostripe.png
+      cat1: red
       cat2: circle
       cat3: two
       cat4: stripe
-    - name: darkturquoisecirclethreestripe.png
-      cat1: darkturquoise
+    - name: redcirclethreestripe.png
+      cat1: red
       cat2: circle
       cat3: three
       cat4: stripe
-    - name: darkturquoisecircleonedotted.png
-      cat1: darkturquoise
+    - name: redcirclefourstripe.png
+      cat1: red
+      cat2: circle
+      cat3: four
+      cat4: stripe
+    - name: redcirclefivestripe.png
+      cat1: red
+      cat2: circle
+      cat3: five
+      cat4: stripe
+    - name: redcirclesixstripe.png
+      cat1: red
+      cat2: circle
+      cat3: six
+      cat4: stripe
+    - name: redcircleonedotted.png
+      cat1: red
       cat2: circle
       cat3: one
       cat4: dotted
-    - name: darkturquoisecircletwodotted.png
-      cat1: darkturquoise
+    - name: redcircletwodotted.png
+      cat1: red
       cat2: circle
       cat3: two
       cat4: dotted
-    - name: darkturquoisecirclethreedotted.png
-      cat1: darkturquoise
+    - name: redcirclethreedotted.png
+      cat1: red
       cat2: circle
       cat3: three
       cat4: dotted
-    - name: darkturquoisetriangleonefull.png
-      cat1: darkturquoise
+    - name: redcirclefourdotted.png
+      cat1: red
+      cat2: circle
+      cat3: four
+      cat4: dotted
+    - name: redcirclefivedotted.png
+      cat1: red
+      cat2: circle
+      cat3: five
+      cat4: dotted
+    - name: redcirclesixdotted.png
+      cat1: red
+      cat2: circle
+      cat3: six
+      cat4: dotted
+    - name: redtriangleonefull.png
+      cat1: red
       cat2: triangle
       cat3: one
       cat4: full
-    - name: darkturquoisetriangletwofull.png
-      cat1: darkturquoise
+    - name: redtriangletwofull.png
+      cat1: red
       cat2: triangle
       cat3: two
       cat4: full
-    - name: darkturquoisetrianglethreefull.png
-      cat1: darkturquoise
+    - name: redtrianglethreefull.png
+      cat1: red
       cat2: triangle
       cat3: three
       cat4: full
-    - name: darkturquoisetriangleonestripe.png
-      cat1: darkturquoise
+    - name: redtrianglefourfull.png
+      cat1: red
+      cat2: triangle
+      cat3: four
+      cat4: full
+    - name: redtrianglefivefull.png
+      cat1: red
+      cat2: triangle
+      cat3: five
+      cat4: full
+    - name: redtrianglesixfull.png
+      cat1: red
+      cat2: triangle
+      cat3: six
+      cat4: full
+    - name: redtriangleonestripe.png
+      cat1: red
       cat2: triangle
       cat3: one
       cat4: stripe
-    - name: darkturquoisetriangletwostripe.png
-      cat1: darkturquoise
+    - name: redtriangletwostripe.png
+      cat1: red
       cat2: triangle
       cat3: two
       cat4: stripe
-    - name: darkturquoisetrianglethreestripe.png
-      cat1: darkturquoise
+    - name: redtrianglethreestripe.png
+      cat1: red
       cat2: triangle
       cat3: three
       cat4: stripe
-    - name: darkturquoisetriangleonedotted.png
-      cat1: darkturquoise
+    - name: redtrianglefourstripe.png
+      cat1: red
+      cat2: triangle
+      cat3: four
+      cat4: stripe
+    - name: redtrianglefivestripe.png
+      cat1: red
+      cat2: triangle
+      cat3: five
+      cat4: stripe
+    - name: redtrianglesixstripe.png
+      cat1: red
+      cat2: triangle
+      cat3: six
+      cat4: stripe
+    - name: redtriangleonedotted.png
+      cat1: red
       cat2: triangle
       cat3: one
       cat4: dotted
-    - name: darkturquoisetriangletwodotted.png
-      cat1: darkturquoise
+    - name: redtriangletwodotted.png
+      cat1: red
       cat2: triangle
       cat3: two
       cat4: dotted
-    - name: darkturquoisetrianglethreedotted.png
-      cat1: darkturquoise
+    - name: redtrianglethreedotted.png
+      cat1: red
       cat2: triangle
       cat3: three
       cat4: dotted
-
-
+    - name: redtrianglefourdotted.png
+      cat1: red
+      cat2: triangle
+      cat3: four
+      cat4: dotted
+    - name: redtrianglefivedotted.png
+      cat1: red
+      cat2: triangle
+      cat3: five
+      cat4: dotted
+    - name: redtrianglesixdotted.png
+      cat1: red
+      cat2: triangle
+      cat3: six
+      cat4: dotted
+    - name: redellipseonefull.png
+      cat1: red
+      cat2: ellipse
+      cat3: one
+      cat4: full
+    - name: redellipsetwofull.png
+      cat1: red
+      cat2: ellipse
+      cat3: two
+      cat4: full
+    - name: redellipsethreefull.png
+      cat1: red
+      cat2: ellipse
+      cat3: three
+      cat4: full
+    - name: redellipsefourfull.png
+      cat1: red
+      cat2: ellipse
+      cat3: four
+      cat4: full
+    - name: redellipsefivefull.png
+      cat1: red
+      cat2: ellipse
+      cat3: five
+      cat4: full
+    - name: redellipsesixfull.png
+      cat1: red
+      cat2: ellipse
+      cat3: six
+      cat4: full
+    - name: redellipseonestripe.png
+      cat1: red
+      cat2: ellipse
+      cat3: one
+      cat4: stripe
+    - name: redellipsetwostripe.png
+      cat1: red
+      cat2: ellipse
+      cat3: two
+      cat4: stripe
+    - name: redellipsethreestripe.png
+      cat1: red
+      cat2: ellipse
+      cat3: three
+      cat4: stripe
+    - name: redellipsefourstripe.png
+      cat1: red
+      cat2: ellipse
+      cat3: four
+      cat4: stripe
+    - name: redellipsefivestripe.png
+      cat1: red
+      cat2: ellipse
+      cat3: five
+      cat4: stripe
+    - name: redellipsesixstripe.png
+      cat1: red
+      cat2: ellipse
+      cat3: six
+      cat4: stripe
+    - name: redellipseonedotted.png
+      cat1: red
+      cat2: ellipse
+      cat3: one
+      cat4: dotted
+    - name: redellipsetwodotted.png
+      cat1: red
+      cat2: ellipse
+      cat3: two
+      cat4: dotted
+    - name: redellipsethreedotted.png
+      cat1: red
+      cat2: ellipse
+      cat3: three
+      cat4: dotted
+    - name: redellipsefourdotted.png
+      cat1: red
+      cat2: ellipse
+      cat3: four
+      cat4: dotted
+    - name: redellipsefivedotted.png
+      cat1: red
+      cat2: ellipse
+      cat3: five
+      cat4: dotted
+    - name: redellipsesixdotted.png
+      cat1: red
+      cat2: ellipse
+      cat3: six
+      cat4: dotted
+    - name: redoctagononefull.png
+      cat1: red
+      cat2: octagon
+      cat3: one
+      cat4: full
+    - name: redoctagontwofull.png
+      cat1: red
+      cat2: octagon
+      cat3: two
+      cat4: full
+    - name: redoctagonthreefull.png
+      cat1: red
+      cat2: octagon
+      cat3: three
+      cat4: full
+    - name: redoctagonfourfull.png
+      cat1: red
+      cat2: octagon
+      cat3: four
+      cat4: full
+    - name: redoctagonfivefull.png
+      cat1: red
+      cat2: octagon
+      cat3: five
+      cat4: full
+    - name: redoctagonsixfull.png
+      cat1: red
+      cat2: octagon
+      cat3: six
+      cat4: full
+    - name: redoctagononestripe.png
+      cat1: red
+      cat2: octagon
+      cat3: one
+      cat4: stripe
+    - name: redoctagontwostripe.png
+      cat1: red
+      cat2: octagon
+      cat3: two
+      cat4: stripe
+    - name: redoctagonthreestripe.png
+      cat1: red
+      cat2: octagon
+      cat3: three
+      cat4: stripe
+    - name: redoctagonfourstripe.png
+      cat1: red
+      cat2: octagon
+      cat3: four
+      cat4: stripe
+    - name: redoctagonfivestripe.png
+      cat1: red
+      cat2: octagon
+      cat3: five
+      cat4: stripe
+    - name: redoctagonsixstripe.png
+      cat1: red
+      cat2: octagon
+      cat3: six
+      cat4: stripe
+    - name: redoctagononedotted.png
+      cat1: red
+      cat2: octagon
+      cat3: one
+      cat4: dotted
+    - name: redoctagontwodotted.png
+      cat1: red
+      cat2: octagon
+      cat3: two
+      cat4: dotted
+    - name: redoctagonthreedotted.png
+      cat1: red
+      cat2: octagon
+      cat3: three
+      cat4: dotted
+    - name: redoctagonfourdotted.png
+      cat1: red
+      cat2: octagon
+      cat3: four
+      cat4: dotted
+    - name: redoctagonfivedotted.png
+      cat1: red
+      cat2: octagon
+      cat3: five
+      cat4: dotted
+    - name: redoctagonsixdotted.png
+      cat1: red
+      cat2: octagon
+      cat3: six
+      cat4: dotted
+    - name: redrhombusonefull.png
+      cat1: red
+      cat2: rhombus
+      cat3: one
+      cat4: full
+    - name: redrhombustwofull.png
+      cat1: red
+      cat2: rhombus
+      cat3: two
+      cat4: full
+    - name: redrhombusthreefull.png
+      cat1: red
+      cat2: rhombus
+      cat3: three
+      cat4: full
+    - name: redrhombusfourfull.png
+      cat1: red
+      cat2: rhombus
+      cat3: four
+      cat4: full
+    - name: redrhombusfivefull.png
+      cat1: red
+      cat2: rhombus
+      cat3: five
+      cat4: full
+    - name: redrhombussixfull.png
+      cat1: red
+      cat2: rhombus
+      cat3: six
+      cat4: full
+    - name: redrhombusonestripe.png
+      cat1: red
+      cat2: rhombus
+      cat3: one
+      cat4: stripe
+    - name: redrhombustwostripe.png
+      cat1: red
+      cat2: rhombus
+      cat3: two
+      cat4: stripe
+    - name: redrhombusthreestripe.png
+      cat1: red
+      cat2: rhombus
+      cat3: three
+      cat4: stripe
+    - name: redrhombusfourstripe.png
+      cat1: red
+      cat2: rhombus
+      cat3: four
+      cat4: stripe
+    - name: redrhombusfivestripe.png
+      cat1: red
+      cat2: rhombus
+      cat3: five
+      cat4: stripe
+    - name: redrhombussixstripe.png
+      cat1: red
+      cat2: rhombus
+      cat3: six
+      cat4: stripe
+    - name: redrhombusonedotted.png
+      cat1: red
+      cat2: rhombus
+      cat3: one
+      cat4: dotted
+    - name: redrhombustwodotted.png
+      cat1: red
+      cat2: rhombus
+      cat3: two
+      cat4: dotted
+    - name: redrhombusthreedotted.png
+      cat1: red
+      cat2: rhombus
+      cat3: three
+      cat4: dotted
+    - name: redrhombusfourdotted.png
+      cat1: red
+      cat2: rhombus
+      cat3: four
+      cat4: dotted
+    - name: redrhombusfivedotted.png
+      cat1: red
+      cat2: rhombus
+      cat3: five
+      cat4: dotted
+    - name: redrhombussixdotted.png
+      cat1: red
+      cat2: rhombus
+      cat3: six
+      cat4: dotted
+    - name: bluesquareonefull.png
+      cat1: blue
+      cat2: square
+      cat3: one
+      cat4: full
+    - name: bluesquaretwofull.png
+      cat1: blue
+      cat2: square
+      cat3: two
+      cat4: full
+    - name: bluesquarethreefull.png
+      cat1: blue
+      cat2: square
+      cat3: three
+      cat4: full
+    - name: bluesquarefourfull.png
+      cat1: blue
+      cat2: square
+      cat3: four
+      cat4: full
+    - name: bluesquarefivefull.png
+      cat1: blue
+      cat2: square
+      cat3: five
+      cat4: full
+    - name: bluesquaresixfull.png
+      cat1: blue
+      cat2: square
+      cat3: six
+      cat4: full
+    - name: bluesquareonestripe.png
+      cat1: blue
+      cat2: square
+      cat3: one
+      cat4: stripe
+    - name: bluesquaretwostripe.png
+      cat1: blue
+      cat2: square
+      cat3: two
+      cat4: stripe
+    - name: bluesquarethreestripe.png
+      cat1: blue
+      cat2: square
+      cat3: three
+      cat4: stripe
+    - name: bluesquarefourstripe.png
+      cat1: blue
+      cat2: square
+      cat3: four
+      cat4: stripe
+    - name: bluesquarefivestripe.png
+      cat1: blue
+      cat2: square
+      cat3: five
+      cat4: stripe
+    - name: bluesquaresixstripe.png
+      cat1: blue
+      cat2: square
+      cat3: six
+      cat4: stripe
+    - name: bluesquareonedotted.png
+      cat1: blue
+      cat2: square
+      cat3: one
+      cat4: dotted
+    - name: bluesquaretwodotted.png
+      cat1: blue
+      cat2: square
+      cat3: two
+      cat4: dotted
+    - name: bluesquarethreedotted.png
+      cat1: blue
+      cat2: square
+      cat3: three
+      cat4: dotted
+    - name: bluesquarefourdotted.png
+      cat1: blue
+      cat2: square
+      cat3: four
+      cat4: dotted
+    - name: bluesquarefivedotted.png
+      cat1: blue
+      cat2: square
+      cat3: five
+      cat4: dotted
+    - name: bluesquaresixdotted.png
+      cat1: blue
+      cat2: square
+      cat3: six
+      cat4: dotted
+    - name: bluecircleonefull.png
+      cat1: blue
+      cat2: circle
+      cat3: one
+      cat4: full
+    - name: bluecircletwofull.png
+      cat1: blue
+      cat2: circle
+      cat3: two
+      cat4: full
+    - name: bluecirclethreefull.png
+      cat1: blue
+      cat2: circle
+      cat3: three
+      cat4: full
+    - name: bluecirclefourfull.png
+      cat1: blue
+      cat2: circle
+      cat3: four
+      cat4: full
+    - name: bluecirclefivefull.png
+      cat1: blue
+      cat2: circle
+      cat3: five
+      cat4: full
+    - name: bluecirclesixfull.png
+      cat1: blue
+      cat2: circle
+      cat3: six
+      cat4: full
+    - name: bluecircleonestripe.png
+      cat1: blue
+      cat2: circle
+      cat3: one
+      cat4: stripe
+    - name: bluecircletwostripe.png
+      cat1: blue
+      cat2: circle
+      cat3: two
+      cat4: stripe
+    - name: bluecirclethreestripe.png
+      cat1: blue
+      cat2: circle
+      cat3: three
+      cat4: stripe
+    - name: bluecirclefourstripe.png
+      cat1: blue
+      cat2: circle
+      cat3: four
+      cat4: stripe
+    - name: bluecirclefivestripe.png
+      cat1: blue
+      cat2: circle
+      cat3: five
+      cat4: stripe
+    - name: bluecirclesixstripe.png
+      cat1: blue
+      cat2: circle
+      cat3: six
+      cat4: stripe
+    - name: bluecircleonedotted.png
+      cat1: blue
+      cat2: circle
+      cat3: one
+      cat4: dotted
+    - name: bluecircletwodotted.png
+      cat1: blue
+      cat2: circle
+      cat3: two
+      cat4: dotted
+    - name: bluecirclethreedotted.png
+      cat1: blue
+      cat2: circle
+      cat3: three
+      cat4: dotted
+    - name: bluecirclefourdotted.png
+      cat1: blue
+      cat2: circle
+      cat3: four
+      cat4: dotted
+    - name: bluecirclefivedotted.png
+      cat1: blue
+      cat2: circle
+      cat3: five
+      cat4: dotted
+    - name: bluecirclesixdotted.png
+      cat1: blue
+      cat2: circle
+      cat3: six
+      cat4: dotted
+    - name: bluetriangleonefull.png
+      cat1: blue
+      cat2: triangle
+      cat3: one
+      cat4: full
+    - name: bluetriangletwofull.png
+      cat1: blue
+      cat2: triangle
+      cat3: two
+      cat4: full
+    - name: bluetrianglethreefull.png
+      cat1: blue
+      cat2: triangle
+      cat3: three
+      cat4: full
+    - name: bluetrianglefourfull.png
+      cat1: blue
+      cat2: triangle
+      cat3: four
+      cat4: full
+    - name: bluetrianglefivefull.png
+      cat1: blue
+      cat2: triangle
+      cat3: five
+      cat4: full
+    - name: bluetrianglesixfull.png
+      cat1: blue
+      cat2: triangle
+      cat3: six
+      cat4: full
+    - name: bluetriangleonestripe.png
+      cat1: blue
+      cat2: triangle
+      cat3: one
+      cat4: stripe
+    - name: bluetriangletwostripe.png
+      cat1: blue
+      cat2: triangle
+      cat3: two
+      cat4: stripe
+    - name: bluetrianglethreestripe.png
+      cat1: blue
+      cat2: triangle
+      cat3: three
+      cat4: stripe
+    - name: bluetrianglefourstripe.png
+      cat1: blue
+      cat2: triangle
+      cat3: four
+      cat4: stripe
+    - name: bluetrianglefivestripe.png
+      cat1: blue
+      cat2: triangle
+      cat3: five
+      cat4: stripe
+    - name: bluetrianglesixstripe.png
+      cat1: blue
+      cat2: triangle
+      cat3: six
+      cat4: stripe
+    - name: bluetriangleonedotted.png
+      cat1: blue
+      cat2: triangle
+      cat3: one
+      cat4: dotted
+    - name: bluetriangletwodotted.png
+      cat1: blue
+      cat2: triangle
+      cat3: two
+      cat4: dotted
+    - name: bluetrianglethreedotted.png
+      cat1: blue
+      cat2: triangle
+      cat3: three
+      cat4: dotted
+    - name: bluetrianglefourdotted.png
+      cat1: blue
+      cat2: triangle
+      cat3: four
+      cat4: dotted
+    - name: bluetrianglefivedotted.png
+      cat1: blue
+      cat2: triangle
+      cat3: five
+      cat4: dotted
+    - name: bluetrianglesixdotted.png
+      cat1: blue
+      cat2: triangle
+      cat3: six
+      cat4: dotted
+    - name: blueellipseonefull.png
+      cat1: blue
+      cat2: ellipse
+      cat3: one
+      cat4: full
+    - name: blueellipsetwofull.png
+      cat1: blue
+      cat2: ellipse
+      cat3: two
+      cat4: full
+    - name: blueellipsethreefull.png
+      cat1: blue
+      cat2: ellipse
+      cat3: three
+      cat4: full
+    - name: blueellipsefourfull.png
+      cat1: blue
+      cat2: ellipse
+      cat3: four
+      cat4: full
+    - name: blueellipsefivefull.png
+      cat1: blue
+      cat2: ellipse
+      cat3: five
+      cat4: full
+    - name: blueellipsesixfull.png
+      cat1: blue
+      cat2: ellipse
+      cat3: six
+      cat4: full
+    - name: blueellipseonestripe.png
+      cat1: blue
+      cat2: ellipse
+      cat3: one
+      cat4: stripe
+    - name: blueellipsetwostripe.png
+      cat1: blue
+      cat2: ellipse
+      cat3: two
+      cat4: stripe
+    - name: blueellipsethreestripe.png
+      cat1: blue
+      cat2: ellipse
+      cat3: three
+      cat4: stripe
+    - name: blueellipsefourstripe.png
+      cat1: blue
+      cat2: ellipse
+      cat3: four
+      cat4: stripe
+    - name: blueellipsefivestripe.png
+      cat1: blue
+      cat2: ellipse
+      cat3: five
+      cat4: stripe
+    - name: blueellipsesixstripe.png
+      cat1: blue
+      cat2: ellipse
+      cat3: six
+      cat4: stripe
+    - name: blueellipseonedotted.png
+      cat1: blue
+      cat2: ellipse
+      cat3: one
+      cat4: dotted
+    - name: blueellipsetwodotted.png
+      cat1: blue
+      cat2: ellipse
+      cat3: two
+      cat4: dotted
+    - name: blueellipsethreedotted.png
+      cat1: blue
+      cat2: ellipse
+      cat3: three
+      cat4: dotted
+    - name: blueellipsefourdotted.png
+      cat1: blue
+      cat2: ellipse
+      cat3: four
+      cat4: dotted
+    - name: blueellipsefivedotted.png
+      cat1: blue
+      cat2: ellipse
+      cat3: five
+      cat4: dotted
+    - name: blueellipsesixdotted.png
+      cat1: blue
+      cat2: ellipse
+      cat3: six
+      cat4: dotted
+    - name: blueoctagononefull.png
+      cat1: blue
+      cat2: octagon
+      cat3: one
+      cat4: full
+    - name: blueoctagontwofull.png
+      cat1: blue
+      cat2: octagon
+      cat3: two
+      cat4: full
+    - name: blueoctagonthreefull.png
+      cat1: blue
+      cat2: octagon
+      cat3: three
+      cat4: full
+    - name: blueoctagonfourfull.png
+      cat1: blue
+      cat2: octagon
+      cat3: four
+      cat4: full
+    - name: blueoctagonfivefull.png
+      cat1: blue
+      cat2: octagon
+      cat3: five
+      cat4: full
+    - name: blueoctagonsixfull.png
+      cat1: blue
+      cat2: octagon
+      cat3: six
+      cat4: full
+    - name: blueoctagononestripe.png
+      cat1: blue
+      cat2: octagon
+      cat3: one
+      cat4: stripe
+    - name: blueoctagontwostripe.png
+      cat1: blue
+      cat2: octagon
+      cat3: two
+      cat4: stripe
+    - name: blueoctagonthreestripe.png
+      cat1: blue
+      cat2: octagon
+      cat3: three
+      cat4: stripe
+    - name: blueoctagonfourstripe.png
+      cat1: blue
+      cat2: octagon
+      cat3: four
+      cat4: stripe
+    - name: blueoctagonfivestripe.png
+      cat1: blue
+      cat2: octagon
+      cat3: five
+      cat4: stripe
+    - name: blueoctagonsixstripe.png
+      cat1: blue
+      cat2: octagon
+      cat3: six
+      cat4: stripe
+    - name: blueoctagononedotted.png
+      cat1: blue
+      cat2: octagon
+      cat3: one
+      cat4: dotted
+    - name: blueoctagontwodotted.png
+      cat1: blue
+      cat2: octagon
+      cat3: two
+      cat4: dotted
+    - name: blueoctagonthreedotted.png
+      cat1: blue
+      cat2: octagon
+      cat3: three
+      cat4: dotted
+    - name: blueoctagonfourdotted.png
+      cat1: blue
+      cat2: octagon
+      cat3: four
+      cat4: dotted
+    - name: blueoctagonfivedotted.png
+      cat1: blue
+      cat2: octagon
+      cat3: five
+      cat4: dotted
+    - name: blueoctagonsixdotted.png
+      cat1: blue
+      cat2: octagon
+      cat3: six
+      cat4: dotted
+    - name: bluerhombusonefull.png
+      cat1: blue
+      cat2: rhombus
+      cat3: one
+      cat4: full
+    - name: bluerhombustwofull.png
+      cat1: blue
+      cat2: rhombus
+      cat3: two
+      cat4: full
+    - name: bluerhombusthreefull.png
+      cat1: blue
+      cat2: rhombus
+      cat3: three
+      cat4: full
+    - name: bluerhombusfourfull.png
+      cat1: blue
+      cat2: rhombus
+      cat3: four
+      cat4: full
+    - name: bluerhombusfivefull.png
+      cat1: blue
+      cat2: rhombus
+      cat3: five
+      cat4: full
+    - name: bluerhombussixfull.png
+      cat1: blue
+      cat2: rhombus
+      cat3: six
+      cat4: full
+    - name: bluerhombusonestripe.png
+      cat1: blue
+      cat2: rhombus
+      cat3: one
+      cat4: stripe
+    - name: bluerhombustwostripe.png
+      cat1: blue
+      cat2: rhombus
+      cat3: two
+      cat4: stripe
+    - name: bluerhombusthreestripe.png
+      cat1: blue
+      cat2: rhombus
+      cat3: three
+      cat4: stripe
+    - name: bluerhombusfourstripe.png
+      cat1: blue
+      cat2: rhombus
+      cat3: four
+      cat4: stripe
+    - name: bluerhombusfivestripe.png
+      cat1: blue
+      cat2: rhombus
+      cat3: five
+      cat4: stripe
+    - name: bluerhombussixstripe.png
+      cat1: blue
+      cat2: rhombus
+      cat3: six
+      cat4: stripe
+    - name: bluerhombusonedotted.png
+      cat1: blue
+      cat2: rhombus
+      cat3: one
+      cat4: dotted
+    - name: bluerhombustwodotted.png
+      cat1: blue
+      cat2: rhombus
+      cat3: two
+      cat4: dotted
+    - name: bluerhombusthreedotted.png
+      cat1: blue
+      cat2: rhombus
+      cat3: three
+      cat4: dotted
+    - name: bluerhombusfourdotted.png
+      cat1: blue
+      cat2: rhombus
+      cat3: four
+      cat4: dotted
+    - name: bluerhombusfivedotted.png
+      cat1: blue
+      cat2: rhombus
+      cat3: five
+      cat4: dotted
+    - name: bluerhombussixdotted.png
+      cat1: blue
+      cat2: rhombus
+      cat3: six
+      cat4: dotted
+    - name: limesquareonefull.png
+      cat1: lime
+      cat2: square
+      cat3: one
+      cat4: full
+    - name: limesquaretwofull.png
+      cat1: lime
+      cat2: square
+      cat3: two
+      cat4: full
+    - name: limesquarethreefull.png
+      cat1: lime
+      cat2: square
+      cat3: three
+      cat4: full
+    - name: limesquarefourfull.png
+      cat1: lime
+      cat2: square
+      cat3: four
+      cat4: full
+    - name: limesquarefivefull.png
+      cat1: lime
+      cat2: square
+      cat3: five
+      cat4: full
+    - name: limesquaresixfull.png
+      cat1: lime
+      cat2: square
+      cat3: six
+      cat4: full
+    - name: limesquareonestripe.png
+      cat1: lime
+      cat2: square
+      cat3: one
+      cat4: stripe
+    - name: limesquaretwostripe.png
+      cat1: lime
+      cat2: square
+      cat3: two
+      cat4: stripe
+    - name: limesquarethreestripe.png
+      cat1: lime
+      cat2: square
+      cat3: three
+      cat4: stripe
+    - name: limesquarefourstripe.png
+      cat1: lime
+      cat2: square
+      cat3: four
+      cat4: stripe
+    - name: limesquarefivestripe.png
+      cat1: lime
+      cat2: square
+      cat3: five
+      cat4: stripe
+    - name: limesquaresixstripe.png
+      cat1: lime
+      cat2: square
+      cat3: six
+      cat4: stripe
+    - name: limesquareonedotted.png
+      cat1: lime
+      cat2: square
+      cat3: one
+      cat4: dotted
+    - name: limesquaretwodotted.png
+      cat1: lime
+      cat2: square
+      cat3: two
+      cat4: dotted
+    - name: limesquarethreedotted.png
+      cat1: lime
+      cat2: square
+      cat3: three
+      cat4: dotted
+    - name: limesquarefourdotted.png
+      cat1: lime
+      cat2: square
+      cat3: four
+      cat4: dotted
+    - name: limesquarefivedotted.png
+      cat1: lime
+      cat2: square
+      cat3: five
+      cat4: dotted
+    - name: limesquaresixdotted.png
+      cat1: lime
+      cat2: square
+      cat3: six
+      cat4: dotted
+    - name: limecircleonefull.png
+      cat1: lime
+      cat2: circle
+      cat3: one
+      cat4: full
+    - name: limecircletwofull.png
+      cat1: lime
+      cat2: circle
+      cat3: two
+      cat4: full
+    - name: limecirclethreefull.png
+      cat1: lime
+      cat2: circle
+      cat3: three
+      cat4: full
+    - name: limecirclefourfull.png
+      cat1: lime
+      cat2: circle
+      cat3: four
+      cat4: full
+    - name: limecirclefivefull.png
+      cat1: lime
+      cat2: circle
+      cat3: five
+      cat4: full
+    - name: limecirclesixfull.png
+      cat1: lime
+      cat2: circle
+      cat3: six
+      cat4: full
+    - name: limecircleonestripe.png
+      cat1: lime
+      cat2: circle
+      cat3: one
+      cat4: stripe
+    - name: limecircletwostripe.png
+      cat1: lime
+      cat2: circle
+      cat3: two
+      cat4: stripe
+    - name: limecirclethreestripe.png
+      cat1: lime
+      cat2: circle
+      cat3: three
+      cat4: stripe
+    - name: limecirclefourstripe.png
+      cat1: lime
+      cat2: circle
+      cat3: four
+      cat4: stripe
+    - name: limecirclefivestripe.png
+      cat1: lime
+      cat2: circle
+      cat3: five
+      cat4: stripe
+    - name: limecirclesixstripe.png
+      cat1: lime
+      cat2: circle
+      cat3: six
+      cat4: stripe
+    - name: limecircleonedotted.png
+      cat1: lime
+      cat2: circle
+      cat3: one
+      cat4: dotted
+    - name: limecircletwodotted.png
+      cat1: lime
+      cat2: circle
+      cat3: two
+      cat4: dotted
+    - name: limecirclethreedotted.png
+      cat1: lime
+      cat2: circle
+      cat3: three
+      cat4: dotted
+    - name: limecirclefourdotted.png
+      cat1: lime
+      cat2: circle
+      cat3: four
+      cat4: dotted
+    - name: limecirclefivedotted.png
+      cat1: lime
+      cat2: circle
+      cat3: five
+      cat4: dotted
+    - name: limecirclesixdotted.png
+      cat1: lime
+      cat2: circle
+      cat3: six
+      cat4: dotted
+    - name: limetriangleonefull.png
+      cat1: lime
+      cat2: triangle
+      cat3: one
+      cat4: full
+    - name: limetriangletwofull.png
+      cat1: lime
+      cat2: triangle
+      cat3: two
+      cat4: full
+    - name: limetrianglethreefull.png
+      cat1: lime
+      cat2: triangle
+      cat3: three
+      cat4: full
+    - name: limetrianglefourfull.png
+      cat1: lime
+      cat2: triangle
+      cat3: four
+      cat4: full
+    - name: limetrianglefivefull.png
+      cat1: lime
+      cat2: triangle
+      cat3: five
+      cat4: full
+    - name: limetrianglesixfull.png
+      cat1: lime
+      cat2: triangle
+      cat3: six
+      cat4: full
+    - name: limetriangleonestripe.png
+      cat1: lime
+      cat2: triangle
+      cat3: one
+      cat4: stripe
+    - name: limetriangletwostripe.png
+      cat1: lime
+      cat2: triangle
+      cat3: two
+      cat4: stripe
+    - name: limetrianglethreestripe.png
+      cat1: lime
+      cat2: triangle
+      cat3: three
+      cat4: stripe
+    - name: limetrianglefourstripe.png
+      cat1: lime
+      cat2: triangle
+      cat3: four
+      cat4: stripe
+    - name: limetrianglefivestripe.png
+      cat1: lime
+      cat2: triangle
+      cat3: five
+      cat4: stripe
+    - name: limetrianglesixstripe.png
+      cat1: lime
+      cat2: triangle
+      cat3: six
+      cat4: stripe
+    - name: limetriangleonedotted.png
+      cat1: lime
+      cat2: triangle
+      cat3: one
+      cat4: dotted
+    - name: limetriangletwodotted.png
+      cat1: lime
+      cat2: triangle
+      cat3: two
+      cat4: dotted
+    - name: limetrianglethreedotted.png
+      cat1: lime
+      cat2: triangle
+      cat3: three
+      cat4: dotted
+    - name: limetrianglefourdotted.png
+      cat1: lime
+      cat2: triangle
+      cat3: four
+      cat4: dotted
+    - name: limetrianglefivedotted.png
+      cat1: lime
+      cat2: triangle
+      cat3: five
+      cat4: dotted
+    - name: limetrianglesixdotted.png
+      cat1: lime
+      cat2: triangle
+      cat3: six
+      cat4: dotted
+    - name: limeellipseonefull.png
+      cat1: lime
+      cat2: ellipse
+      cat3: one
+      cat4: full
+    - name: limeellipsetwofull.png
+      cat1: lime
+      cat2: ellipse
+      cat3: two
+      cat4: full
+    - name: limeellipsethreefull.png
+      cat1: lime
+      cat2: ellipse
+      cat3: three
+      cat4: full
+    - name: limeellipsefourfull.png
+      cat1: lime
+      cat2: ellipse
+      cat3: four
+      cat4: full
+    - name: limeellipsefivefull.png
+      cat1: lime
+      cat2: ellipse
+      cat3: five
+      cat4: full
+    - name: limeellipsesixfull.png
+      cat1: lime
+      cat2: ellipse
+      cat3: six
+      cat4: full
+    - name: limeellipseonestripe.png
+      cat1: lime
+      cat2: ellipse
+      cat3: one
+      cat4: stripe
+    - name: limeellipsetwostripe.png
+      cat1: lime
+      cat2: ellipse
+      cat3: two
+      cat4: stripe
+    - name: limeellipsethreestripe.png
+      cat1: lime
+      cat2: ellipse
+      cat3: three
+      cat4: stripe
+    - name: limeellipsefourstripe.png
+      cat1: lime
+      cat2: ellipse
+      cat3: four
+      cat4: stripe
+    - name: limeellipsefivestripe.png
+      cat1: lime
+      cat2: ellipse
+      cat3: five
+      cat4: stripe
+    - name: limeellipsesixstripe.png
+      cat1: lime
+      cat2: ellipse
+      cat3: six
+      cat4: stripe
+    - name: limeellipseonedotted.png
+      cat1: lime
+      cat2: ellipse
+      cat3: one
+      cat4: dotted
+    - name: limeellipsetwodotted.png
+      cat1: lime
+      cat2: ellipse
+      cat3: two
+      cat4: dotted
+    - name: limeellipsethreedotted.png
+      cat1: lime
+      cat2: ellipse
+      cat3: three
+      cat4: dotted
+    - name: limeellipsefourdotted.png
+      cat1: lime
+      cat2: ellipse
+      cat3: four
+      cat4: dotted
+    - name: limeellipsefivedotted.png
+      cat1: lime
+      cat2: ellipse
+      cat3: five
+      cat4: dotted
+    - name: limeellipsesixdotted.png
+      cat1: lime
+      cat2: ellipse
+      cat3: six
+      cat4: dotted
+    - name: limeoctagononefull.png
+      cat1: lime
+      cat2: octagon
+      cat3: one
+      cat4: full
+    - name: limeoctagontwofull.png
+      cat1: lime
+      cat2: octagon
+      cat3: two
+      cat4: full
+    - name: limeoctagonthreefull.png
+      cat1: lime
+      cat2: octagon
+      cat3: three
+      cat4: full
+    - name: limeoctagonfourfull.png
+      cat1: lime
+      cat2: octagon
+      cat3: four
+      cat4: full
+    - name: limeoctagonfivefull.png
+      cat1: lime
+      cat2: octagon
+      cat3: five
+      cat4: full
+    - name: limeoctagonsixfull.png
+      cat1: lime
+      cat2: octagon
+      cat3: six
+      cat4: full
+    - name: limeoctagononestripe.png
+      cat1: lime
+      cat2: octagon
+      cat3: one
+      cat4: stripe
+    - name: limeoctagontwostripe.png
+      cat1: lime
+      cat2: octagon
+      cat3: two
+      cat4: stripe
+    - name: limeoctagonthreestripe.png
+      cat1: lime
+      cat2: octagon
+      cat3: three
+      cat4: stripe
+    - name: limeoctagonfourstripe.png
+      cat1: lime
+      cat2: octagon
+      cat3: four
+      cat4: stripe
+    - name: limeoctagonfivestripe.png
+      cat1: lime
+      cat2: octagon
+      cat3: five
+      cat4: stripe
+    - name: limeoctagonsixstripe.png
+      cat1: lime
+      cat2: octagon
+      cat3: six
+      cat4: stripe
+    - name: limeoctagononedotted.png
+      cat1: lime
+      cat2: octagon
+      cat3: one
+      cat4: dotted
+    - name: limeoctagontwodotted.png
+      cat1: lime
+      cat2: octagon
+      cat3: two
+      cat4: dotted
+    - name: limeoctagonthreedotted.png
+      cat1: lime
+      cat2: octagon
+      cat3: three
+      cat4: dotted
+    - name: limeoctagonfourdotted.png
+      cat1: lime
+      cat2: octagon
+      cat3: four
+      cat4: dotted
+    - name: limeoctagonfivedotted.png
+      cat1: lime
+      cat2: octagon
+      cat3: five
+      cat4: dotted
+    - name: limeoctagonsixdotted.png
+      cat1: lime
+      cat2: octagon
+      cat3: six
+      cat4: dotted
+    - name: limerhombusonefull.png
+      cat1: lime
+      cat2: rhombus
+      cat3: one
+      cat4: full
+    - name: limerhombustwofull.png
+      cat1: lime
+      cat2: rhombus
+      cat3: two
+      cat4: full
+    - name: limerhombusthreefull.png
+      cat1: lime
+      cat2: rhombus
+      cat3: three
+      cat4: full
+    - name: limerhombusfourfull.png
+      cat1: lime
+      cat2: rhombus
+      cat3: four
+      cat4: full
+    - name: limerhombusfivefull.png
+      cat1: lime
+      cat2: rhombus
+      cat3: five
+      cat4: full
+    - name: limerhombussixfull.png
+      cat1: lime
+      cat2: rhombus
+      cat3: six
+      cat4: full
+    - name: limerhombusonestripe.png
+      cat1: lime
+      cat2: rhombus
+      cat3: one
+      cat4: stripe
+    - name: limerhombustwostripe.png
+      cat1: lime
+      cat2: rhombus
+      cat3: two
+      cat4: stripe
+    - name: limerhombusthreestripe.png
+      cat1: lime
+      cat2: rhombus
+      cat3: three
+      cat4: stripe
+    - name: limerhombusfourstripe.png
+      cat1: lime
+      cat2: rhombus
+      cat3: four
+      cat4: stripe
+    - name: limerhombusfivestripe.png
+      cat1: lime
+      cat2: rhombus
+      cat3: five
+      cat4: stripe
+    - name: limerhombussixstripe.png
+      cat1: lime
+      cat2: rhombus
+      cat3: six
+      cat4: stripe
+    - name: limerhombusonedotted.png
+      cat1: lime
+      cat2: rhombus
+      cat3: one
+      cat4: dotted
+    - name: limerhombustwodotted.png
+      cat1: lime
+      cat2: rhombus
+      cat3: two
+      cat4: dotted
+    - name: limerhombusthreedotted.png
+      cat1: lime
+      cat2: rhombus
+      cat3: three
+      cat4: dotted
+    - name: limerhombusfourdotted.png
+      cat1: lime
+      cat2: rhombus
+      cat3: four
+      cat4: dotted
+    - name: limerhombusfivedotted.png
+      cat1: lime
+      cat2: rhombus
+      cat3: five
+      cat4: dotted
+    - name: limerhombussixdotted.png
+      cat1: lime
+      cat2: rhombus
+      cat3: six
+      cat4: dotted

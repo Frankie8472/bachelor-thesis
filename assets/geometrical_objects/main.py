@@ -8,10 +8,18 @@
 
 
 def main():
-    colors = [["purple", "mediumpurple"], ["darkorange", "peachpuff"], ["darkturquoise", "aquamarine"]]
-    shapes = ["square", "circle", "triangle"]
+    colors = [
+        #["darkturquoise", "aquamarine"],
+        ["purple", "mediumpurple"],
+        ["yellow", "darkkhaki"],
+        ["darkorange", "peachpuff"],
+        ["red", "lightsalmon"],
+        ["blue", "aqua"],
+        ["lime", "seagreen"]
+    ]
+    shapes = ["square", "circle", "triangle", "ellipse", "octagon", "rhombus"]
     fillings = ["none", "url(#stripe)", "url(#dotted)"]
-    numbers = ["one", "two", "three"]
+    numbers = ["one", "two", "three", "four", "five", "six"]
 
     for single in [True, False]:
         if single:
@@ -20,10 +28,14 @@ def main():
                 circle = "none"
                 triangle = "none"
                 ellipse = "none"
+                octagon = "none"
+                rhombus = "none"
                 one = "none"
                 two = "none"
                 three = "none"
                 four = "none"
+                five = "none"
+                six = "none"
 
                 filling = "none"
 
@@ -33,11 +45,17 @@ def main():
                     square = "inherit"
                 elif shape == "circle":
                     circle = "inherit"
-                else:
+                elif shape == "triangle":
                     triangle = "inherit"
+                elif shape == "ellipse":
+                    ellipse = "inherit"
+                elif shape == "octagon":
+                    octagon = "inherit"
+                else:
+                    rhombus = "inherit"
 
-                imageString = imgStr(colordefault, colordark, square, circle, triangle, ellipse, filling, one, two,
-                                     three, four)
+                imageString = imgStr(colordefault, colordark, square, circle, triangle, ellipse, octagon, rhombus, filling, one, two,
+                                     three, four, five, six)
 
                 with open("images/svg/" + shape + ".svg", "w+") as file:
                     file.write(imageString)
@@ -47,15 +65,19 @@ def main():
                 circle = "none"
                 triangle = "none"
                 ellipse = "none"
+                octagon = "none"
+                rhombus = "none"
                 one = "none"
                 two = "none"
                 three = "none"
                 four = "none"
+                five = "none"
+                six = "none"
 
                 filling = "none"
 
-                imageString = imgStr(colordefault, colordark, square, circle, triangle, ellipse, filling, one, two,
-                                     three, four)
+                imageString = imgStr(colordefault, colordark, square, circle, triangle, ellipse, octagon, rhombus, filling, one, two,
+                                     three, four, five, six)
 
                 with open("images/svg/" + colordefault + ".svg", "w+") as file:
                     file.write(imageString)
@@ -65,10 +87,14 @@ def main():
                 circle = "none"
                 triangle = "none"
                 ellipse = "none"
+                octagon = "none"
+                rhombus = "none"
                 one = "none"
                 two = "none"
                 three = "none"
                 four = "none"
+                five = "none"
+                six = "none"
 
                 [colordefault, colordark] = colors[0]
 
@@ -76,8 +102,8 @@ def main():
                 if filling != "none":
                     fillingname = filling[5:len(filling) - 1]
 
-                imageString = imgStr(colordefault, colordark, square, circle, triangle, ellipse, filling, one, two,
-                                     three, four)
+                imageString = imgStr(colordefault, colordark, square, circle, triangle, ellipse, octagon, rhombus, filling, one, two,
+                                     three, four, five, six)
 
                 with open("images/svg/" + fillingname + ".svg", "w+") as file:
                     file.write(imageString)
@@ -87,10 +113,14 @@ def main():
                 circle = "none"
                 triangle = "none"
                 ellipse = "none"
+                octagon = "none"
+                rhombus = "none"
                 one = "none"
                 two = "none"
                 three = "none"
                 four = "none"
+                five = "none"
+                six = "none"
 
                 filling = "none"
 
@@ -100,13 +130,17 @@ def main():
                     one = "inherit"
                 elif number == "two":
                     two = "inherit"
-                elif number == three:
+                elif number == "three":
                     three = "inherit"
-                else:
+                elif number == "four":
                     four = "inherit"
+                elif number == "five":
+                    five = "inherit"
+                else:
+                    six = "inherit"
 
-                imageString = imgStr(colordefault, colordark, square, circle, triangle, ellipse, filling, one, two,
-                                     three, four)
+                imageString = imgStr(colordefault, colordark, square, circle, triangle, ellipse, octagon, rhombus, filling, one, two,
+                                     three, four, five, six)
 
                 with open("images/svg/" + number + ".svg", "w+") as file:
                     file.write(imageString)
@@ -125,31 +159,48 @@ def main():
                         circle = "none"
                         triangle = "none"
                         ellipse = "none"
+                        octagon = "none"
+                        rhombus = "none"
                         one = "none"
                         two = "none"
                         three = "none"
                         four = "none"
+                        five = "none"
+                        six = "none"
 
                         if shape == "square":
                             square = "inherit"
                         elif shape == "circle":
                             circle = "inherit"
-                        else:
+                        elif shape == "triangle":
                             triangle = "inherit"
+                        elif shape == "ellipse":
+                            ellipse = "inherit"
+                        elif shape == "octagon":
+                            octagon = "inherit"
+                        else:
+                            rhombus = "inherit"
+
 
                         if number == "one":
                             one = "inherit"
                         elif number == "two":
                             two = "inherit"
-                        else:
+                        elif number == "three":
                             three = "inherit"
+                        elif number == "four":
+                            four = "inherit"
+                        elif number == "five":
+                            five = "inherit"
+                        else:
+                            six = "inherit"
 
                         fillingname = "full"
                         if filling != "none":
                             fillingname = filling[5:len(filling) - 1]
 
-                        imageString = imgStr(colordefault, colordark, square, circle, triangle, ellipse, filling, one,
-                                             two, three, four)
+                        imageString = imgStr(colordefault, colordark, square, circle, triangle, ellipse, octagon, rhombus, filling, one,
+                                             two, three, four, five, six)
 
                         filename = colordefault + shape + number + fillingname
 
@@ -169,7 +220,7 @@ def main():
                             file.close()
 
 
-def imgStr(colordefault, colordark, square, circle, triangle, ellipse, filling, one, two, three, four):
+def imgStr(colordefault, colordark, square, circle, triangle, ellipse, octagon, rhombus, filling, one, two, three, four, five, six):
     imageString = "<?xml version=\"1.0\" standalone=\"yes\"?>\n\
     \n\
     <svg height=\"1000\" width=\"1000\" viewbox=\"0 0 1000 1000\" xmlns=\"http://www.w3.org/2000/svg\">\n\
@@ -217,6 +268,17 @@ def imgStr(colordefault, colordark, square, circle, triangle, ellipse, filling, 
       <ellipse cx=\"500\" cy=\"500\" rx=\"400\" ry=\"250\" class=\"button\" fill=\"" + filling + "\" />\n\
       <ellipse cx=\"500\" cy=\"500\" rx=\"350\" ry=\"200\" class=\"button\" fill=\"none\" />\n\
      </g>\n\
+     <g id=\"octagon\" display=\"" + octagon + "\">\n\
+      <polygon points=\"400,250 600,250 750,400 750,600 600,750 400,750 250,600 250,400\" stroke-linejoin=\"round\" class=\"button\" fill=\"" + colordefault + "\" />\n\
+      <polygon points=\"400,250 600,250 750,400 750,600 600,750 400,750 250,600 250,400\" stroke-linejoin=\"round\" class=\"button\" fill=\"" + filling + "\" />\n\
+      <polygon points=\"400,300 600,300 700,400 700,600 600,700 400,700 300,600 300,400\" stroke-linejoin=\"round\" class=\"button\" fill=\"none\"/>\n\
+     </g>\n\
+     \n\
+     <g id=\"rhombus\" display=\"" + rhombus + "\">\n\
+      <polygon points=\"350,250 150,750 650,750 850,250\" stroke-linejoin=\"round\" class=\"button\" fill=\"" + colordefault + "\" />\n\
+      <polygon points=\"350,250 150,750 650,750 850,250\" stroke-linejoin=\"round\" class=\"button\" fill=\"" + filling + "\" />\n\
+      <polygon points=\"390,300 230,700 620,700 770,300\" stroke-linejoin=\"round\" class=\"button\" fill=\"none\"/>\n\
+     </g>\n\
     \n\
     \n\
      <g id=\"one\" display=\"" + one + "\"> \n\
@@ -240,8 +302,24 @@ def imgStr(colordefault, colordark, square, circle, triangle, ellipse, filling, 
       <circle cx=\"570\" cy=\"570\" r=\"40\" stroke=\"black\" fill=\"black\"/>\n\
       <circle cx=\"430\" cy=\"570\" r=\"40\" stroke=\"black\" fill=\"black\"/> \n\
     </g> \n\
+    <g id=\"five\" display=\"" + five + "\">\n\
+      <circle cx=\"570\" cy=\"430\" r=\"40\" stroke=\"black\" fill=\"black\"/>\n\
+      <circle cx=\"430\" cy=\"430\" r=\"40\" stroke=\"black\" fill=\"black\"/>\n\
+      <circle cx=\"570\" cy=\"570\" r=\"40\" stroke=\"black\" fill=\"black\"/>\n\
+      <circle cx=\"430\" cy=\"570\" r=\"40\" stroke=\"black\" fill=\"black\"/>\n\
+      <circle cx=\"500\" cy=\"500\" r=\"40\" stroke=\"black\" fill=\"black\"/>\n\
+    </g>\n\
     \n\
-    Sorry, your browser does not support inline SVG.  \n\
+    <g id=\"six\" display=\"" + six + "\">\n\
+      <circle cx=\"570\" cy=\"400\" r=\"40\" stroke=\"black\" fill=\"black\"/>\n\
+      <circle cx=\"430\" cy=\"400\" r=\"40\" stroke=\"black\" fill=\"black\"/>\n\
+      <circle cx=\"570\" cy=\"600\" r=\"40\" stroke=\"black\" fill=\"black\"/>\n\
+      <circle cx=\"430\" cy=\"600\" r=\"40\" stroke=\"black\" fill=\"black\"/>\n\
+      <circle cx=\"430\" cy=\"500\" r=\"40\" stroke=\"black\" fill=\"black\"/>\n\
+      <circle cx=\"570\" cy=\"500\" r=\"40\" stroke=\"black\" fill=\"black\"/>\n\
+    </g>\n\
+    \n\
+    Sorry, your browser does not support inline SVG.\n\
     </svg>\n\
     "
     return imageString
