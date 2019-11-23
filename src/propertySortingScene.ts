@@ -69,7 +69,9 @@ export class PropertySortingScene extends BaseScene {
     private dropped: boolean;
 
     // How many objects of each category - category count
-    private numberOfObjects: number;
+    private numberOfObjectsEach: number;
+
+    private selectedElements: string[];
 
     constructor() {
         super('PropertySortingScene');
@@ -94,19 +96,23 @@ export class PropertySortingScene extends BaseScene {
         for (let property of this.jsonObject['categories'][this.setCat - 1].validElements) {
             numberOfProperties++;
         }
-        this.propertyCount = numberOfProperties;
+        // Make it random
+        // this.propertyCount = numberOfProperties;
+        this.propertyCount = Phaser.Math.RND.between(3, numberOfProperties);
 
         this.correctCount = 0;
         this.wrongCount = 0;
 
         this.dropped = false;
 
+        this.selectedElements = [];
+
         // Debatable initializations
         this.cardDisplaySize = 100;
-        this.velocity = 100;
+        this.velocity = 150;
         this.lastEmitTime = 0;
-        this.delay = 3000;
-        this.numberOfObjects = 2;
+        this.delay = 2000;
+        this.numberOfObjectsEach = 3;
     }
 
     preload(): void {
@@ -117,9 +123,20 @@ export class PropertySortingScene extends BaseScene {
         // Wooden crate
         this.load.image('crate', 'assets/ui/wooden_crate.png');
 
-        // Get propertie images
+        // Select properties
+        for (let property of this.jsonObject['categories'][this.setCat - 1].validElements) {
+            this.selectedElements.push(property.name);
+        }
+
+        // Pick the elements
+        while (this.selectedElements.length > this.propertyCount) {
+            this.selectedElements = Phaser.Math.RND.shuffle(this.selectedElements);
+            this.selectedElements.pop();
+        }
+
+        // Get property images
         for (let prop of this.jsonObject['categories'][this.setCat - 1].validElements) {
-            if (prop.url === null) {
+            if (prop.url === null || !(this.selectedElements.indexOf(prop.name) > -1)) {
                 continue;
             }
 
@@ -135,6 +152,7 @@ export class PropertySortingScene extends BaseScene {
         this.load.image('progressbarRed', 'assets/ui/progressbar_red.png');
         this.load.image('plus', 'assets/ui/plus.png');
         this.load.image('minus', 'assets/ui/minus.png');
+
     }
 
     create(): void {
@@ -207,7 +225,7 @@ export class PropertySortingScene extends BaseScene {
         let crateSize = this.cardDisplaySize * 2;
         let iteration = 1;
 
-        for (let property of this.jsonObject['categories'][this.setCat - 1].validElements) {
+        for (let property of this.selectedElements) {
             // Add crate
             let crate = this.add.sprite(stepSize * iteration, this.cameras.main.height - crateSize / 2, 'crate');
             crate.setOrigin(0.5, 0.5);
@@ -219,7 +237,7 @@ export class PropertySortingScene extends BaseScene {
             let zone = this.add.zone(crate.x, crate.y, crate.width * imageScalingFactor, crate.height * imageScalingFactor);
             zone.setOrigin(0.5, 0.5);
             zone.setRectangleDropZone(crate.width * imageScalingFactor, crate.height * imageScalingFactor);
-            zone.setName(property.name);
+            zone.setName(property);
 
             this.arrayDropZone.add(zone);
 
@@ -271,11 +289,10 @@ export class PropertySortingScene extends BaseScene {
     private loadCards(): void {
         this.arrayStack.setDepth(1);
 
-        for (let propImage of this.jsonObject['categories'][this.setCat - 1].validElements) {
-            let propImageName = propImage.name;
+        for (let propImageName of this.selectedElements) {
 
             // Create 10 of each property
-            for (let i = 0; i < this.numberOfObjects; i++) {
+            for (let i = 0; i < this.numberOfObjectsEach; i++) {
                 // RND size
                 let size = Phaser.Math.RND.between(this.cardDisplaySize * 0.8, this.cardDisplaySize * 1.3);
 

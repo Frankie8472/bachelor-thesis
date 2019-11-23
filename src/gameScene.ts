@@ -562,7 +562,6 @@ export class GameScene extends BaseScene {
     }
 
     private refreshCards(): void {
-        // TODO: what if card size is 20 and there is no more set, how to check?
         // Replace all cards
         console.log(this.arrayStack.getLength());
         for (let card of this.arrayDisplayed.getChildren()) {
