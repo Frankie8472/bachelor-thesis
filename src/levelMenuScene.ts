@@ -45,7 +45,7 @@ export class LevelMenuScene extends BaseScene {
         background.setOrigin(0, 0);
         background.setDisplaySize(this.cameras.main.width, this.cameras.main.height);
 
-        let catButton = this.add.sprite(0, this.cameras.main.height, 'catButton');
+        let catButton = this.add.sprite(20, this.cameras.main.height - 20, 'catButton');
         let levelButton11 = this.add.sprite(this.cameras.main.width / 5 * 1, this.cameras.main.height / 4 * 1, 'levelButton11');
         let levelButton12 = this.add.sprite(this.cameras.main.width / 5 * 2, this.cameras.main.height / 4 * 1, 'levelButton12');
         let levelButton13 = this.add.sprite(this.cameras.main.width / 5 * 3, this.cameras.main.height / 4 * 1, 'levelButton13');
@@ -76,8 +76,9 @@ export class LevelMenuScene extends BaseScene {
             levelButton34
         ]);
 
-        catButton.setOrigin(0.5, 0.5);
-        let scaleCatButton = this.imageScalingFactor(this.imageSize/2, catButton.width, catButton.height);
+        catButton.setOrigin(0, 1);
+
+        let scaleCatButton = this.imageScalingFactor(this.imageSize/1.5, catButton.width, catButton.height);
         catButton.setScale(scaleCatButton, scaleCatButton);
         catButton.setInteractive();
         catButton.on('pointerdown', function(event) {
@@ -106,6 +107,7 @@ export class LevelMenuScene extends BaseScene {
                 }, this);
             }
         }
+
         levelButton11.on('pointerup', function(event) {
             if (levelButton11 instanceof Phaser.GameObjects.Sprite) {
                 levelButton11.clearTint();

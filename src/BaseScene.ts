@@ -87,54 +87,66 @@ export class BaseScene extends Phaser.Scene {
         return Math.min(wantedImageSize / realImageSizeWidth, wantedImageSize / realImageSizeHeight);
     }
 
+
     /**
-     * Returns random coordinates in the defined quadrant.
-     * #########
-     * # 0 # 1 #
-     * #########
-     * # 2 # 3 #
-     * #########
-     *
-     * @param quad Number of the quadrant.
+     * Returns random coordinates in the requested quadrant of total quadrants.
+     * Starting by 0, from left to right then from top to bottom.
+     * IMPORTANT: Sprite origin has to be (0.5, 0.5)!
+     * @param quadrant Number of the quadrant
+     * @param quadrantType Number of quadrants
      * @param cardDisplaySize Size of the displayed object for returning coordinates inside the visible object boundaries
      */
-    protected returnQuad(quad: number, cardDisplaySize: number): number[] {
-        let spritesize = cardDisplaySize;
+    protected returnQuad(quadrant: number, quadrantType: number, cardDisplaySize: number): number[] {
         let ret = null;
-        let leftBound = 100 + spritesize / 2;
-        let rightBound = this.cameras.main.width - spritesize / 2;
-        let topBound = spritesize / 2;
-        let botBound = this.cameras.main.height - 100 - spritesize / 2;
-        let horizontalMid = topBound + (botBound - topBound) / 2;
-        let verticalMid = leftBound + (rightBound - leftBound) / 2;
 
-        switch (quad) {
-            case 0: {
-                ret = [Phaser.Math.RND.between(leftBound, verticalMid - spritesize / 2), Phaser.Math.RND.between(topBound, horizontalMid - spritesize / 2)];
-                break;
-            }
+        if (quadrant >= quadrantType) {
+            console.log("ERROR: quadrant >= quadrantType");
+            return ret;
+        }
 
-            case 1: {
-                ret = [Phaser.Math.RND.between(verticalMid + spritesize / 2, rightBound), Phaser.Math.RND.between(topBound, horizontalMid - spritesize / 2)];
+        let spriteSizeHalf = cardDisplaySize / 2;
 
-                break;
-            }
+        let leftOffsite = 100;
+        let rightOffsite = 0;
+        let topOffsite = 0;
+        let bottomOffsite = 100;
 
-            case 2: {
-                ret = [Phaser.Math.RND.between(leftBound, verticalMid - spritesize / 2), Phaser.Math.RND.between(horizontalMid + spritesize / 2, botBound)];
+        // Has entries dependant of
+        let horizontal = [];
 
-                break;
-            }
+        // Has numberOfLines + 1 entries
+        let vertical = [];
 
+        horizontal.push(leftOffsite);
+
+        vertical.push(topOffsite);
+
+        switch (quadrantType) {
             case 3: {
-                ret = [Phaser.Math.RND.between(verticalMid + spritesize / 2, rightBound), Phaser.Math.RND.between(horizontalMid + spritesize / 2, botBound)];
+                horizontal.push(leftOffsite + (this.cameras.main.width - leftOffsite - rightOffsite)/3);
+                horizontal.push(leftOffsite + (this.cameras.main.width - leftOffsite - rightOffsite)*2/3);
                 break;
             }
-
+            case 4: {
+                horizontal.push(leftOffsite + (this.cameras.main.width - leftOffsite - rightOffsite)/2);
+                vertical.push(topOffsite + (this.cameras.main.height - topOffsite - bottomOffsite)/2);
+                break;
+            }
+            case 6: {
+                horizontal.push(leftOffsite + (this.cameras.main.width - leftOffsite - rightOffsite)/3);
+                horizontal.push(leftOffsite + (this.cameras.main.width - leftOffsite - rightOffsite)*2/3);
+                vertical.push(topOffsite + (this.cameras.main.height - topOffsite - bottomOffsite)/2);
+                break;
+            }
             default: {
                 break;
             }
         }
+
+        horizontal.push(this.cameras.main.width - rightOffsite);
+        vertical.push(this.cameras.main.height - bottomOffsite);
+
+        ret = [Phaser.Math.RND.between(horizontal[quadrant] + spriteSizeHalf, horizontal[quadrant + 1] - spriteSizeHalf), Phaser.Math.RND.between(vertical[quadrant] + spriteSizeHalf, vertical[quadrant + 1] - spriteSizeHalf)];
         return ret;
     }
 }

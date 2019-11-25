@@ -122,7 +122,6 @@ export class SortingScene extends BaseScene {
             let sprite = this.add.sprite(x, this.cameras.main.height - controlbar.width * 0.13 / 5, name);
             sprite.setName(name);
 
-            // TODO: listcompreension
             sprite.setData('pushed', false);
             sprite.setData('validElements', validElements);
 
@@ -156,6 +155,7 @@ export class SortingScene extends BaseScene {
     private loadCards(): void {
         this.arrayStack.setDepth(2);
 
+        // TODO: only load 4*6*4 images at max
         for (let image of this.jsonObject['images']) {
             let size = this.cardDisplaySize;
 
