@@ -104,7 +104,7 @@ export class BaseScene extends Phaser.Scene {
             return ret;
         }
 
-        let spriteSizeHalf = cardDisplaySize / 2;
+        let spriteSizeHalf = cardDisplaySize / 2 + 10;
 
         let leftOffsite = 100;
         let rightOffsite = 0;
@@ -146,7 +146,32 @@ export class BaseScene extends Phaser.Scene {
         horizontal.push(this.cameras.main.width - rightOffsite);
         vertical.push(this.cameras.main.height - bottomOffsite);
 
-        ret = [Phaser.Math.RND.between(horizontal[quadrant] + spriteSizeHalf, horizontal[quadrant + 1] - spriteSizeHalf), Phaser.Math.RND.between(vertical[quadrant] + spriteSizeHalf, vertical[quadrant + 1] - spriteSizeHalf)];
+        switch (quadrantType) {
+            case 3: {
+                ret = [Phaser.Math.RND.between(horizontal[quadrant] + spriteSizeHalf, horizontal[quadrant + 1] - spriteSizeHalf), Phaser.Math.RND.between(vertical[0] + spriteSizeHalf + this.cameras.main.height/8, vertical[1] - spriteSizeHalf - this.cameras.main.height/8)];
+                break;
+            }
+            case 4: {
+                if (quadrant < 2) {
+                    ret = [Phaser.Math.RND.between(horizontal[quadrant] + spriteSizeHalf, horizontal[quadrant + 1] - spriteSizeHalf), Phaser.Math.RND.between(vertical[0] + spriteSizeHalf, vertical[1] - spriteSizeHalf)];
+                } else {
+                    ret = [Phaser.Math.RND.between(horizontal[quadrant % 2] + spriteSizeHalf, horizontal[(quadrant % 2) + 1] - spriteSizeHalf), Phaser.Math.RND.between(vertical[1] + spriteSizeHalf, vertical[2] - spriteSizeHalf)];
+
+                }
+                break;
+            }
+            case 6: {
+                if (quadrant < 3) {
+                    ret = [Phaser.Math.RND.between(horizontal[quadrant] + spriteSizeHalf, horizontal[quadrant + 1] - spriteSizeHalf), Phaser.Math.RND.between(vertical[0] + spriteSizeHalf, vertical[1] - spriteSizeHalf)];
+                } else {
+                    ret = [Phaser.Math.RND.between(horizontal[quadrant % 3] + spriteSizeHalf, horizontal[(quadrant % 3) + 1] - spriteSizeHalf), Phaser.Math.RND.between(vertical[1] + spriteSizeHalf, vertical[2] - spriteSizeHalf)];
+                }
+                break;
+            }
+            default: {
+                break;
+            }
+        }
         return ret;
     }
 }
