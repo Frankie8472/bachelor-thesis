@@ -59,8 +59,6 @@ export class LevelMenuScene extends BaseScene {
         let levelButton33 = this.add.sprite(this.cameras.main.width / 5 * 3, this.cameras.main.height / 4 * 3, 'levelButton33');
         let levelButton34 = this.add.sprite(this.cameras.main.width / 5 * 4, this.cameras.main.height / 4 * 3, 'levelButton34');
 
-        console.log(levelButton34.texture.key);
-
         this.levelButtons.addMultiple([
             levelButton11,
             levelButton12,

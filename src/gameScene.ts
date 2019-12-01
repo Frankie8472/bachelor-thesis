@@ -6,6 +6,11 @@ export class GameScene extends BaseScene {
     // Lock for not messing up animations by clicking repeatedly without waiting for the animation to finish
     private lock: boolean;
 
+    private level: number;
+
+    private gameSet: any[];
+    private categorySet: any[];
+
     // HelpersMenu down?
     private helpDown: boolean;
 
@@ -58,6 +63,8 @@ export class GameScene extends BaseScene {
     init(data): void {
         this.lock = false;
         this.helpDown = false;
+        this.gameSet = [];
+        this.categorySet = [];
         this.jsonObject = data.jsonObject;
         this.arrayCategory = this.add.group();
         this.arrayStack = this.add.group();
@@ -66,36 +73,10 @@ export class GameScene extends BaseScene {
         this.arrayMarked = this.add.group();
         this.checked = false;
         this.points = 0;
+        this.level = data.setLevel;
 
-        // Level settings
-        switch (data.setLevel) {
-            case 1: {
-                this.maxPoints = 10;
-                this.timedataStepsize = 0.00001;
-
-                break;
-            }
-
-            case 2: {
-                this.maxPoints = 10;
-                this.timedataStepsize = 0.0005;
-                break;
-            }
-
-            case 3: {
-                this.maxPoints = 10;
-                this.timedataStepsize = 0.0001;
-                break;
-            }
-
-            default: {
-                console.log('Initialisation Error: setLevel is not 1, 2 or 3!');
-                this.maxPoints = 0;
-
-                break;
-            }
-        }
-
+        this.maxPoints = 10;
+        this.timedataStepsize = 0.00005;
 
         this.cellsX = 3;
         this.cellsY = 4;
@@ -110,6 +91,8 @@ export class GameScene extends BaseScene {
                 this.arrayCoordinates.push([offsetX + this.cellWidth * (0.5 + x), offsetY + this.cellHeight * (0.5 + y)]);
             }
         }
+
+
     }
 
     preload(): void {
@@ -120,19 +103,49 @@ export class GameScene extends BaseScene {
         this.load.image('help', 'assets/ui/help.png'/*{ frameWidth: 512, frameHeight: 512 }*/);
         this.load.image('menubackground', 'assets/ui/menu_background.png');
 
-        // Get Image names from json and save them in array
+        // Preselect objects
+        let selectedProperties: any[] = [];
+        for (let cat of this.jsonObject['categories']) {
+            let selectedProperty: any[] = Phaser.Math.RND.shuffle(cat['validElements']).slice(0,3);
+            selectedProperty.forEach((object, index, array) => array[index] = object.name);
+            selectedProperties.push(selectedProperty);
+        }
+
         for (let image of this.jsonObject['images']) {
+            if (
+                selectedProperties[0].indexOf(image.cat1) > -1 &&
+                selectedProperties[1].indexOf(image.cat2) > -1 &&
+                selectedProperties[2].indexOf(image.cat3) > -1
+            ) {
+                if (this.level === 1) {
+                    if (image.cat4 === "full"){
+                        this.gameSet.push(image);
+                    }
+                } else {
+                    this.gameSet.push(image);
+
+                }
+            }
+
+        }
+
+        for (let image of this.gameSet) {
             let name = image.name;
             let path = 'assets/geometrical_objects/images/' + name;
             this.load.image(name, path);
         }
 
         // Get categories
-        for (let cat of this.jsonObject['categories']) {
+        this.categorySet = [...this.jsonObject['categories']]; // Full copy the array instead of referencing
+
+        if (this.level === 1) {
+            this.categorySet.pop();
+        }
+
+        for (let cat of this.categorySet) {
             if (cat.url === null) {
                 continue;
             }
-
             let name = cat.name;
             let path = 'assets/geometrical_objects/categories/' + cat.url;
             this.load.image(name, path);
@@ -152,6 +165,8 @@ export class GameScene extends BaseScene {
         // ================================================================================================
 
         this.game.scene.sendToBack(this.key);
+
+        this.transitionIn();
 
         let background = this.add.sprite(0, 0, 'gamebackground');
         background.setOrigin(0, 0);
@@ -197,8 +212,7 @@ export class GameScene extends BaseScene {
         let timedata = this.timefluid.getData('timeY');
         if (timedata <= 0) {
             // Endgame
-            this.game.scene.start('ScoreScene', {'score': this.points / this.maxPoints, 'previousScene': this.key});
-            this.game.scene.stop(this.key);
+            this.transitionOut('ScoreScene', {'score': this.points / this.maxPoints, 'previousScene': this.key});
             return;
         } else {
             timedata -= this.timedataStepsize;
@@ -212,7 +226,7 @@ export class GameScene extends BaseScene {
     // ================================================================================================
     private helperMenu(): void {
         // Menu background
-        let menuBackground = this.add.sprite(this.cameras.main.width - 64 - 10 - 30, 64 + 10 + 40, 'menubackground');
+        let menuBackground = this.add.sprite(this.cameras.main.width - 64 - 10 - 30, 64 + 10 + 50, 'menubackground');
         menuBackground.setAngle(180);
         menuBackground.setOrigin(1, 0);
         menuBackground.setDisplaySize(500, this.cameras.main.height + 120);
@@ -222,14 +236,14 @@ export class GameScene extends BaseScene {
         let y = 16 + 32;
         let countCategories = 0;
 
-        for (let cat of this.jsonObject['categories']) {
+        for (let cat of this.categorySet) {
             if (cat.url === null) {
                 continue;
             }
             countCategories++;
         }
 
-        for (let cat of this.jsonObject['categories']) {
+        for (let cat of this.categorySet) {
             if (cat.url === null) {
                 continue;
             }
@@ -257,13 +271,12 @@ export class GameScene extends BaseScene {
     // Card action
     // ================================================================================================
     private loadCards(): void {
-        for (let image of this.jsonObject['images']) {
+        for (let image of this.gameSet) {
             let name = image.name;
             let cat1 = image.cat1;
             let cat2 = image.cat2;
             let cat3 = image.cat3;
             let cat4 = image.cat4;
-            // TODO: check if still instance of sprite. If not, all other code will fail!
             let sprite = this.arrayStack.create(200, 200, name);
 
             sprite.setName(name);
@@ -517,8 +530,7 @@ export class GameScene extends BaseScene {
             if (this.points >= this.gamefluid.getData('gameMax')) {
                 this.gamefluid.setScale(this.gamefluid.getData('gameX'), this.points);
                 // End game
-                this.game.scene.start('ScoreScene');
-                this.game.scene.stop(this.key);
+                this.transitionOut('ScoreScene', {'score': this.points / this.maxPoints, 'previousScene': this.key});
                 return;
             }
 
@@ -594,7 +606,7 @@ export class GameScene extends BaseScene {
             // Animation
             let menuBackgroundTween = this.tweens.add({
                 targets: menuBackground,
-                y: 64 + 10 + 40,
+                y: 64 + 10 + 50,
                 x: this.cameras.main.width - 64 - 10 - 30,
                 ease: 'Cubic',
                 duration: 500,
