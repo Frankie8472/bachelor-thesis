@@ -174,7 +174,7 @@ export class LevelMenuScene extends BaseScene {
             if (levelButton31 instanceof Phaser.GameObjects.Sprite) {
                 levelButton31.clearTint();
             }
-            console.log("TODO: implement");
+            this.transitionOut('RestrictedSortingSceneLoader', {'setLevel': 1});
             return;
         }, this);
 
@@ -182,7 +182,7 @@ export class LevelMenuScene extends BaseScene {
             if (levelButton32 instanceof Phaser.GameObjects.Sprite) {
                 levelButton32.clearTint();
             }
-            console.log("TODO: implement");
+            this.transitionOut('RestrictedSortingSceneLoader', {'setLevel': 2});
             return;
         }, this);
 

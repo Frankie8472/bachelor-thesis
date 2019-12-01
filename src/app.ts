@@ -11,6 +11,8 @@ import {SortingScene} from './sortingScene';
 import {SortingSceneLoader} from './sortingSceneLoader';
 import {PropertySortingSceneLoader} from './propertySortingSceneLoader';
 import {PropertySortingScene} from './propertySortingScene';
+import {RestrictedSortingScene} from './restrictedSortingScene';
+import {RestrictedSortingSceneLoader} from './restrictedSortingSceneLoader';
 
 const renderConfig: RenderConfig = {
     antialias: true,
@@ -26,6 +28,7 @@ const config: GameConfig = {
         GameSceneLoader, GameScene,
         SortingSceneLoader, SortingScene,
         PropertySortingSceneLoader, PropertySortingScene,
+        RestrictedSortingSceneLoader, RestrictedSortingScene,
         ScoreScene
     ],
     physics: {
