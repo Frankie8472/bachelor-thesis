@@ -42,13 +42,17 @@ export class RestrictedSortingScene extends BaseScene {
         this.load.image('crate', 'assets/ui/crate_topview.png');
 
         // TODO: Preselect objects
+        let categories: any[] = [...this.jsonObject['categories']];
+        let rndCat = Phaser.Math.RND.shuffle(categories)[0];
+        for (let cat of this.jsonObject['categories']) {
+
+        }
+
         for (let image of this.jsonObject['images']) {
 
         }
 
-        for (let cat of this.jsonObject['categories']) {
 
-        }
         // TODO: Load objects
         // TODO: Load containers/dropzones
         // TODO: Load Progressbar?
