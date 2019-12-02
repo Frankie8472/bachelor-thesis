@@ -2,16 +2,14 @@ import 'phaser';
 import {BaseScene} from './BaseScene';
 
 export class RestrictedSortingSceneLoader extends BaseScene {
-    setCat: number;
-    infinite: boolean;
+    setLevel: number;
 
     constructor() {
         super('RestrictedSortingSceneLoader');
     }
 
     init(data): void {
-        this.setCat = data.setCat;
-        this.infinite = data.infinite;
+        this.setLevel = data.setLevel;
     }
 
     preload(): void {
@@ -20,11 +18,7 @@ export class RestrictedSortingSceneLoader extends BaseScene {
     }
 
     create(): void {
-        this.game.scene.start('PropertySortingScene', {
-            'jsonObject': this.cache.json.get('objects'),
-            'setCat': this.setCat,
-            'infinite': this.infinite
-        });
+        this.game.scene.start('RestrictedSortingScene', {'jsonObject': this.cache.json.get('objects'), 'setLevel': this.setLevel});
         this.game.scene.stop(this.key);
         return;
     }
