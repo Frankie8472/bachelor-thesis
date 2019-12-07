@@ -22,7 +22,13 @@ export class RestrictedSortingScene extends BaseScene {
     private dropZone2: Phaser.GameObjects.Group;
     private dropZone3: Phaser.GameObjects.Group;
 
-    private displayedObjects: any[];
+    private dropZone1Array: string[];
+    private dropZone2Array: string[];
+    private dropZone3Array: string[];
+
+
+    private preselectedObjects: any[];
+    private displayedObjects: Phaser.GameObjects.Group;
 
     constructor() {
         super('RestrictedSortingScene');
@@ -37,53 +43,53 @@ export class RestrictedSortingScene extends BaseScene {
         this.objZoneMap = [];
         this.zoneObjMap = [];
 
-        this.displayedObjects = [];
+        this.preselectedObjects = [];
 
         this.dropZone1 = this.add.group();
         this.dropZone2 = this.add.group();
         this.dropZone3 = this.add.group();
+        this.displayedObjects = this.add.group();
 
         this.objectSize = 100;
     }
 
     preload(): void {
-        // TODO: Load UI
         this.load.image('gamebackground', 'assets/ui/game_background.png');
         this.load.image('crate', 'assets/ui/crate_topview.png');
 
-        // TODO: Preselect objects
         if (this.level === 1) {
             // ???
         } else {
             const categories: any[] = [...this.jsonObject['categories']];
             const rndCat = Phaser.Math.RND.shuffle(categories)[0];
+            let images: any[] = [...Phaser.Math.RND.shuffle(this.jsonObject['images'])];
             for (let property of Phaser.Math.RND.shuffle(rndCat['validElements']).slice(0, 3)) {
 
                 let maxSize: number = 2;
-                if (this.objectSize === 2) {
+                if (this.preselectedObjects.length === 2) {
                     maxSize = 6;
-                } else if (this.objectSize === 6) {
+                } else if (this.preselectedObjects.length === 6) {
                     maxSize = 12;
                 }
 
-                for (let image of Phaser.Math.RND.shuffle(this.jsonObject['images'])) {
-                    if (this.displayedObjects.length >= maxSize) {
+                for (let image of images) {
+                    if (this.preselectedObjects.length >= maxSize) {
                         break;
                     }
-                    console.log(image[rndCat.name]);
-                    console.log(property.name);
+
                     if (image[rndCat.name] === property.name) {
-                        this.load.image(image.name, 'assets/images/' + image.name);
-                        this.displayedObjects.push(image);
+                        this.load.image(image.name, 'assets/geometrical_objects/images/' + image.name);
+                        this.preselectedObjects.push(image);
                     }
                 }
+
+                this.preselectedObjects.forEach(function (element) {
+                    if (images.indexOf(element, 0) > -1) {
+                        images.splice(images.indexOf(element, 0), 1);
+                    }
+                }, this);
             }
         }
-
-
-
-        // TODO: Load objects
-        // TODO: Load containers/dropzones
         // TODO: Load Progressbar?
 
     }
@@ -103,9 +109,6 @@ export class RestrictedSortingScene extends BaseScene {
 
         this.setObjects();
 
-        // TODO: Display objects
-        // TODO: Action on objects, drag and drop
-        // TODO: Display dropzones
         // TODO: Action on dropzones, placement free + scaling accordingly, check if all objects are placed or simultaniously? how to display failure? rot markieren mit reset button und check button?
         // TODO: level 1 choose one category, level two categories can be mixed
         // TODO: placement in containers 6 4 2? absrpache mit elizabeta
@@ -200,18 +203,29 @@ export class RestrictedSortingScene extends BaseScene {
             let index = this.objZoneMap.indexOf(gameObject);
             if (index > -1) {
                 delete this.objZoneMap[index];
+                let index1 = this.dropZone1Array.indexOf(gameObject.name);
+                if (index1 > -1) {
+                    this.zoneObjMap.splice(index1, 1);
+                }
+                let index2 = this.dropZone1Array.indexOf(gameObject.name);
+                if (index2 > -1) {
+                    this.zoneObjMap.splice(index2, 1);
+                }
+                let index3 = this.dropZone1Array.indexOf(gameObject.name);
+                if (index3 > -1) {
+                    this.zoneObjMap.splice(index3, 1);
+                }
             }
 
             if (gameObject instanceof Phaser.GameObjects.Sprite) {
                 gameObject.clearTint();
-                gameObject.setTintFill(0xf0000f);
+                gameObject.setTint(0x999999);
             }
         }, this);
 
         this.input.on('dragend', function (pointer, gameObject, dropped) {
             if (!dropped && gameObject instanceof Phaser.GameObjects.Sprite) {
                 gameObject.clearTint();
-                gameObject.setTintFill(0xf00f0f);
             }
         }, this);
 
@@ -225,9 +239,8 @@ export class RestrictedSortingScene extends BaseScene {
             if (gameObject instanceof Phaser.GameObjects.Sprite && dropZone instanceof Phaser.GameObjects.Zone) {
                 let index = this.zoneObjMap.indexOf(dropZone);
 
-                if (typeof this.objZoneMap[index] == 'undefined'){
+                if (typeof this.objZoneMap[index] == 'undefined' && this.equalityCheck(gameObject, dropZone)){
                     gameObject.clearTint();
-                    gameObject.setTintFill(0x0000ff);
                     let imageScale = this.imageScalingFactor(Math.min(dropZone.width, dropZone.height)*0.9, gameObject.width, gameObject.height);
                     gameObject.setScale(imageScale, imageScale);
                     gameObject.setPosition(dropZone.getCenter().x, dropZone.getCenter().y);
@@ -235,7 +248,6 @@ export class RestrictedSortingScene extends BaseScene {
                     this.objZoneMap[index] = gameObject;
                 } else {
                     gameObject.clearTint();
-                    gameObject.setTintFill(0xffffff);
                     gameObject.setPosition(gameObject.input.dragStartX, gameObject.input.dragStartY);
                 }
 
@@ -245,32 +257,95 @@ export class RestrictedSortingScene extends BaseScene {
     }
 
     private setObjects() {
-        for (let image of this.displayedObjects) {
+        for (let image of this.preselectedObjects) {
             const x = Phaser.Math.RND.between(100 + this.objectSize / 2, this.cameras.main.width - this.objectSize / 2);
             const y = Phaser.Math.RND.between(this.objectSize / 2, this.cameras.main.height / 2 - this.objectSize / 2);
             let sprite = this.add.sprite(x, y, image.name);
             const scale = this.imageScalingFactor(this.objectSize, sprite.width, sprite.height);
             sprite.setScale(scale, scale);
             sprite.setOrigin(0.5, 0.5);
+            sprite.setVisible(true);
+
+            const name = image.name;
+            const cat1 = image.cat1;
+            const cat2 = image.cat2;
+            const cat3 = image.cat3;
+            const cat4 = image.cat4;
+
+            sprite.setName(name);
+            sprite.setData('cat1', cat1);
+            sprite.setData('cat2', cat2);
+            sprite.setData('cat3', cat3);
+            sprite.setData('cat4', cat4);
+            sprite.setData('properties', [cat1, cat2, cat3, cat4]);
+
             sprite.setInteractive();
             this.input.setDraggable(sprite);
             this.displayedObjects.add(sprite);
         }
+    }
 
-        let test = this.add.sprite(100, 100, 'crate');
-        test.setOrigin(0.5,0.5);
-        let scalet = this.imageScalingFactor(200, test.width, test.height);
-        test.setScale(scalet, scalet);
-        test.setInteractive();
-        test.setTintFill(0x00ff00);
-        this.input.setDraggable(test);
+    private equalityCheck(gameObject: Phaser.GameObjects.Sprite, dropZone: Phaser.GameObjects.Zone): boolean {
+        let ret = true;
+        let mergeArray: string[] = [];
 
-        let test2 = this.add.sprite(100, 100, 'crate');
-        test2.setOrigin(0.5,0.5);
-        test2.setScale(scalet, scalet);
-        test2.setInteractive();
-        test2.setTintFill(0xff0000);
-        this.input.setDraggable(test2);
+        switch(dropZone.name) {
+            case "dropZone1": {
+                // TODO: Wrong iterate through all objects in dropzone
+                this.objZoneMap.filter((element, index, array) => this.zoneObjMap[index].name === "dropZone1").forEach(function(element){
+                    // TODO: dumm! mergearray kann 0 sein bei erneutem durchgehen der objekte.... idiot!!!! ändere!!!!
+                    // de franz hets nöd so gmeint, du bisc okay. Kopf hoch! \(^o^)/
+
+                    if (mergeArray.length <= 0){
+                        mergeArray = element.getData('properties');
+                    } else {
+                        mergeArray = mergeArray.filter(x => element.getData('properties').includes(x));
+                    }
+                });
+                if (mergeArray.length <= 0) {
+                    ret = false;
+                } else {
+                    this.dropZone1Array.push(gameObject.name);
+                }
+                break;
+            }
+            case "dropZone2": {
+                this.objZoneMap.filter((element, index, array) => this.zoneObjMap[index].name === "dropZone2").forEach(function(element){
+                    if (mergeArray.length <= 0){
+                        mergeArray = element.getData('properties');
+                    } else {
+                        mergeArray = mergeArray.filter(x => element.getData('properties').includes(x));
+                    }
+                });
+                if (mergeArray.length <= 0) {
+                    ret = false;
+                } else {
+                    this.dropZone2Array.push(gameObject.name);
+                }
+                break;
+            }
+            case "dropZone3": {
+                this.objZoneMap.filter((element, index, array) => this.zoneObjMap[index].name === "dropZone3").forEach(function(element){
+                    if (mergeArray.length <= 0){
+                        mergeArray = element.getData('properties');
+                    } else {
+                        mergeArray = mergeArray.filter(x => element.getData('properties').includes(x));
+                    }
+                });
+                if (mergeArray.length <= 0) {
+                    ret = false;
+                } else {
+                    this.dropZone3Array.push(gameObject.name);
+                }
+                break;
+            }
+            default: {
+                break;
+            }
+
+        }
+
+        return ret;
     }
 }
 
