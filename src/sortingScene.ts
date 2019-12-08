@@ -103,19 +103,18 @@ export class SortingScene extends BaseScene {
      */
     private imagePreSelection(): void {
         // Select an manageable amount of images to be displayed
-        let selectiveArray: any[] = [];
-        let originArray: any[] = this.jsonObject['images'];
+        const selectiveArray: any[] = [];
+        const originArray: any[] = [...this.jsonObject['images']];
+
         // Select category to add
         for (let category of this.jsonObject['categories']) {
-            let temporaryArray: any[] = [];
+            const temporaryArray: any[] = [];
 
             // Select property to add
             for (let property of category['validElements']) {
-                originArray = Phaser.Math.RND.shuffle(originArray);
-
+                Phaser.Math.RND.shuffle(originArray);
                 // Check how many are needed in already selected elements
                 let missing: number = this.objectsPerProperty;
-
                 for (let selectedImage of selectiveArray) {
                     if (missing <= 0) {
                         break;
@@ -148,6 +147,7 @@ export class SortingScene extends BaseScene {
             // Da concat auf leeren listen nicht zu funktionieren schein, machen wir ein bischen lambda magic
             temporaryArray.forEach((x) => selectiveArray.push(x));
         }
+
         this.selectedObjects = selectiveArray;
     }
 
@@ -155,7 +155,7 @@ export class SortingScene extends BaseScene {
      * Function for initializing the background
      */
     private setBackground() {
-        let background: Phaser.GameObjects.Sprite = this.add.sprite(0, 0, 'gamebackground');
+        const background: Phaser.GameObjects.Sprite = this.add.sprite(0, 0, 'gamebackground');
         background.setOrigin(0, 0);
         background.setDisplaySize(this.cameras.main.width, this.cameras.main.height);
         background.setTint(0xffccaa);
@@ -188,7 +188,7 @@ export class SortingScene extends BaseScene {
                 continue;
             }
 
-            let validElements: any[] = cat['validElements'];
+            const validElements: any[] = [...cat['validElements']];
             validElements.forEach((object, index, array) => array[index] = object.name);
 
             x += (controlbar.height * 0.24) / (countCategories + 1);
@@ -227,9 +227,8 @@ export class SortingScene extends BaseScene {
      * Function for loading all game objects
      */
     private loadGameObjects(): void {
-        this.arrayStack.setDepth(2);
-
         for (let image of this.selectedObjects) {
+
             let size = this.objectDisplaySize;
 
             const name = image.name;
@@ -257,7 +256,10 @@ export class SortingScene extends BaseScene {
             sprite.setInteractive();
 
             this.arrayStack.add(sprite);
+            this.arrayStack.bringToTop(sprite);
+
         }
+        this.children.bringToTop(this.arrayStack);
     }
 
     /**
