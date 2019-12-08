@@ -51,6 +51,8 @@ export class BaseScene extends Phaser.Scene {
     protected transitionIn(): void {
         this.transitionInit();
 
+        this.children.bringToTop(this.transition[1]);
+
         const tween: Phaser.Tweens.Tween = this.add.tween({
             targets: this.transition[0],
             scale: 10 * 0.5 * Math.sqrt(Math.pow(this.cameras.main.width, 2) + Math.pow(this.cameras.main.height, 2)),
