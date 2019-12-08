@@ -152,7 +152,7 @@ export class PropertySortingScene extends BaseScene {
 
         // Preload UI
         this.load.image('gamebackground', 'assets/ui/sorting_background.png');
-        this.load.image('crate', 'assets/ui/wooden_crate.png');
+        this.load.image('wooden_crate', 'assets/ui/wooden_crate.png');
 
         // Preselect properties
         for (let property of this.jsonObject['categories'][this.setCat - 1].validElements) {
@@ -237,7 +237,7 @@ export class PropertySortingScene extends BaseScene {
 
         for (let property of this.selectedElements) {
             // Add crate
-            const crate: Phaser.GameObjects.Sprite = this.add.sprite(stepSize * iteration, this.cameras.main.height - crateSize / 2, 'crate');
+            const crate: Phaser.GameObjects.Sprite = this.add.sprite(stepSize * iteration, this.cameras.main.height - crateSize / 2, 'wooden_crate');
             crate.setOrigin(0.5, 0.5);
 
             const imageScalingFactor: number = this.imageScalingFactor(crateSize, crate.width, crate.height);
