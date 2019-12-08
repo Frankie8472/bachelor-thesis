@@ -55,7 +55,7 @@ export class DropDownMenu extends BaseScene {
      * Function for initializing the menu buttons, background and action
      */
     private setMenu() {
-        let scale: number = null;
+        let scale: number;
 
         // Menubackground
         const menuBackground: Phaser.GameObjects.Sprite = this.add.sprite(10 + 64 + 25, 100, 'menubackground');
@@ -76,7 +76,11 @@ export class DropDownMenu extends BaseScene {
             // Close menu
             this.menuAction(menuButton, fullscreenButton, exitButton, menuBackground);
             this.game.scene.stop(this.key_paused_scene);
-            this.game.scene.start('LevelScene');
+            if (this.key_paused_scene === "LevelMenuScene" || this.key_paused_scene === "WelcomeScene") {
+                this.game.scene.start('WelcomeScene');
+            } else {
+                this.game.scene.start('LevelMenuScene');
+            }
         }, this);
 
         // Fullscreen Button
@@ -84,7 +88,7 @@ export class DropDownMenu extends BaseScene {
         fullscreenButton.setOrigin(0.5, 0.5);
 
         scale = this.imageScalingFactor(this.buttonSize, fullscreenButton.width, fullscreenButton.height);
-        fullscreenButton.setDisplaySize(scale, scale);
+        fullscreenButton.setScale(scale, scale);
 
         fullscreenButton.setInteractive();
 
@@ -120,7 +124,7 @@ export class DropDownMenu extends BaseScene {
         menuButton.setOrigin(0.5, 0.5);
 
         scale = this.imageScalingFactor(this.buttonSize, menuButton.width, menuButton.height);
-        menuButton.setDisplaySize(scale, scale);
+        menuButton.setScale(scale, scale);
 
         menuButton.setInteractive();
 

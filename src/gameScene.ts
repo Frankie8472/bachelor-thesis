@@ -165,7 +165,7 @@ export class GameScene extends BaseScene {
             ) {
                 // If level one, fix the last category
                 if (this.level === 1) {
-                    if (image.cat4 === this.jsonObject['categories'][0].name) {
+                    if (image.cat4 === "full") {
                         this.gameSet.push(image);
                     }
                 } else {

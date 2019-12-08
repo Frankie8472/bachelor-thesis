@@ -7,7 +7,7 @@ export class BaseScene extends Phaser.Scene {
     /**
      * Transition graphic
      */
-    private transition: Phaser.GameObjects.Graphics;
+    private transition: Phaser.GameObjects.GameObject[];
 
     constructor(key: string) {
         super({
@@ -32,16 +32,17 @@ export class BaseScene extends Phaser.Scene {
 
         circle.setPosition(this.cameras.main.width / 2, this.cameras.main.height / 2);
         circle.fillCircle(0, 0, 0.1);
+        circle.setDepth(0);
 
         mask.setInvertAlpha(true);
 
-        rectangle.setDepth(2);
+        rectangle.setDepth(1);
         rectangle.setOrigin(0, 0);
         rectangle.setMask(mask);
 
         circle.fillCircle(0, 0, 0.1);
 
-        this.transition = circle;
+        this.transition = [circle, rectangle];
     }
 
     /**
@@ -51,7 +52,7 @@ export class BaseScene extends Phaser.Scene {
         this.transitionInit();
 
         const tween: Phaser.Tweens.Tween = this.add.tween({
-            targets: this.transition,
+            targets: this.transition[0],
             scale: 10 * 0.5 * Math.sqrt(Math.pow(this.cameras.main.width, 2) + Math.pow(this.cameras.main.height, 2)),
             ease: 'linear',
             duration: 700,
@@ -64,9 +65,10 @@ export class BaseScene extends Phaser.Scene {
      * @param data Additional data you want to give to the next scene.
      */
     protected transitionOut(scene: string, data?: any): void {
+        this.children.bringToTop(this.transition[1]);
 
         const tween: Phaser.Tweens.Tween = this.add.tween({
-            targets: this.transition,
+            targets: this.transition[0],
             scale: 0,
             ease: 'linear',
             duration: 700,

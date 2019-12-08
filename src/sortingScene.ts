@@ -265,12 +265,12 @@ export class SortingScene extends BaseScene {
      */
     private initInput(): void {
         // On start dragging
-        this.input.setDraggable(this.arrayStack);
+        this.input.setDraggable(this.arrayStack.getAll());
 
         this.input.on('dragstart', function(pointer, gameObject) {
             if (gameObject instanceof Phaser.GameObjects.Sprite) {
                 // Bring gameObject to top
-                this.children.bringToTop(gameObject);
+                this.arrayStack.bringToTop(gameObject);
 
                 // Set visual effects
                 gameObject.clearTint();

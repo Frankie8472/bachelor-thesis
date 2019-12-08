@@ -295,7 +295,7 @@ export class RestrictedSortingScene extends BaseScene {
 
             let sprite = this.add.sprite(x, y, image.name);
 
-            const variance = 0.2;
+            const variance = 0.01;
             const scale = this.imageScalingFactor(this.objectSize, sprite.width, sprite.height) + Phaser.Math.RND.realInRange(-variance, variance);
 
             sprite.setScale(scale, scale);
