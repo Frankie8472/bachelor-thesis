@@ -1,57 +1,91 @@
 import 'phaser';
-import {WelcomeScene} from './welcomeScene';
-import TRANSITION_OUT = Phaser.Scenes.Events.TRANSITION_OUT;
 import {BaseScene} from './BaseScene';
 
 export class DropDownMenu extends BaseScene {
+    /**
+     * Name of the paused scene
+     */
     private key_paused_scene: string;
 
-    // Lock for not messing up animations by clicking repeatedly without waiting for the animation to finish
+    /**
+     * Lock for not messing up animations by clicking repeatedly without waiting for the animation to finish
+     */
     private lock: boolean;
+
+    /**
+     * State of the drop down menu
+     */
     private menuDown: boolean;
+
+    /**
+     * Size of the menu buttons
+     */
+    private buttonSize: number;
 
     constructor() {
         super('DropDownMenu');
     }
 
-    init(/*params: any*/): void {
-        this.menuDown = false;
+    init(): void {
+        // Initialize fields
+        this.key_paused_scene = null;
         this.lock = false;
-        return;
+        this.menuDown = false;
+        this.buttonSize = 64;
     }
 
     preload(): void {
+        // Load UI
         this.load.image('menubutton', 'assets/ui/menu_button.png'/*{ frameWidth: 512, frameHeight: 512 }*/);
         this.load.spritesheet('fullscreenbuttonblack', 'assets/ui/fullscreen_button_black.png', {frameWidth: 64, frameHeight: 64});
         this.load.image('exitbutton', 'assets/ui/exit_button.png' /*{ frameWidth: 512, frameHeight: 512 }*/);
         this.load.image('menubackground', 'assets/ui/menu_background.png' /*{ frameWidth: 352, frameHeight: 728 }*/);
-        return;
     }
 
     create(): void {
+        // TODO: find a way to generalize the drop down menu and the tweendata
+        this.setMenu();
+    }
+
+    update(time: number, delta: number): void {
+
+    }
+
+    /**
+     * Function for initializing the menu buttons, background and action
+     */
+    private setMenu() {
+        let scale: number = null;
+
         // Menubackground
-        let menuBackground = this.add.sprite(10 + 64 + 25, 100, 'menubackground');
+        const menuBackground: Phaser.GameObjects.Sprite = this.add.sprite(10 + 64 + 25, 100, 'menubackground');
         menuBackground.setOrigin(1, 1);
         menuBackground.setDisplaySize(200, 80 * 5);
         menuBackground.setTint(0xeeeeee);
 
         // ExitButton
-        let exitButton = this.add.sprite(-64, 10 + 32 + 2 * (10 + 64), 'exitbutton');
+        const exitButton: Phaser.GameObjects.Sprite = this.add.sprite(-64, 10 + 32 + 2 * (10 + 64), 'exitbutton');
         exitButton.setOrigin(0.5, 0.5);
-        exitButton.setDisplaySize(64, 64);
+
+        scale = this.imageScalingFactor(this.buttonSize, exitButton.width, exitButton.height);
+        exitButton.setScale(scale, scale);
+
         exitButton.setInteractive();
 
         exitButton.on('pointerup', function() {
             // Close menu
             this.menuAction(menuButton, fullscreenButton, exitButton, menuBackground);
             this.game.scene.stop(this.key_paused_scene);
-            this.game.scene.start('WelcomeScene');
+            this.game.scene.start('LevelScene');
         }, this);
 
         // Fullscreen Button
-        let fullscreenButton = this.add.sprite(-64, 10 + 32 + 1 * (10 + 64), 'fullscreenbuttonblack', 0);
+        const fullscreenButton: Phaser.GameObjects.Sprite = this.add.sprite(-64, 10 + 32 + (10 + 64), 'fullscreenbuttonblack', 0);
         fullscreenButton.setOrigin(0.5, 0.5);
-        fullscreenButton.setDisplaySize(64, 64);
+
+        scale = this.imageScalingFactor(this.buttonSize, fullscreenButton.width, fullscreenButton.height);
+        fullscreenButton.setDisplaySize(scale, scale);
+
         fullscreenButton.setInteractive();
 
         fullscreenButton.on('pointerup', function() {
@@ -67,7 +101,7 @@ export class DropDownMenu extends BaseScene {
         }, this);
 
         // Enable key F for enabling/disabling fullscreen
-        var FKey = this.input.keyboard.addKey('F');
+        const FKey: Phaser.Input.Keyboard.Key = this.input.keyboard.addKey('F');
 
         FKey.on('down', function() {
 
@@ -82,9 +116,12 @@ export class DropDownMenu extends BaseScene {
         }, this);
 
         // MenuButton
-        let menuButton = this.add.sprite(32 + 10, 10 + 32, 'menubutton');
+        const menuButton: Phaser.GameObjects.Sprite = this.add.sprite(32 + 10, 10 + 32, 'menubutton');
         menuButton.setOrigin(0.5, 0.5);
-        menuButton.setDisplaySize(64, 64);
+
+        scale = this.imageScalingFactor(this.buttonSize, menuButton.width, menuButton.height);
+        menuButton.setDisplaySize(scale, scale);
+
         menuButton.setInteractive();
 
         menuButton.on('pointerup', function() {
@@ -98,20 +135,19 @@ export class DropDownMenu extends BaseScene {
 
         // StartGame
         this.game.scene.start('WelcomeScene');
-        return;
     }
 
-    update(time: number, delta: number): void {
-        return;
-    }
-
+    /**
+     * Function which defines the graphical behaviour of the drop down menu
+     * @param menuButton Button for displaying or hiding the menu
+     * @param fullscreenButton Button for entering or leaving fullscreen mode
+     * @param exitButton Button to return to the main menu
+     * @param menuBackground Graphical background of the menu
+     */
     private menuAction(menuButton, fullscreenButton, exitButton, menuBackground): void {
         if (this.menuDown) {
-            // Resume current scene
-            this.game.scene.resume(this.key_paused_scene);
-
             // Animation
-            let menuButtonTween = this.tweens.add({
+            const menuButtonTween: Phaser.Tweens.Tween = this.tweens.add({
                 targets: menuButton,
                 angle: 0,
                 ease: 'Cubic',
@@ -119,7 +155,7 @@ export class DropDownMenu extends BaseScene {
                 onComplete: () => this.lock = false,
             });
 
-            let menuBackgroundTween = this.tweens.add({
+            const menuBackgroundTween: Phaser.Tweens.Tween = this.tweens.add({
                 targets: menuBackground,
                 y: 100,
                 ease: 'Cubic',
@@ -127,7 +163,7 @@ export class DropDownMenu extends BaseScene {
                 delay: 200
             });
 
-            let fullscreenButtonTween = this.tweens.add({
+            const fullscreenButtonTween: Phaser.Tweens.Tween = this.tweens.add({
                 targets: fullscreenButton,
                 x: -64,
                 ease: 'Cubic',
@@ -135,7 +171,7 @@ export class DropDownMenu extends BaseScene {
                 delay: 100
             });
 
-            let exitButtonTween = this.tweens.add({
+            const exitButtonTween: Phaser.Tweens.Tween = this.tweens.add({
                 targets: exitButton,
                 x: -64,
                 ease: 'Cubic',
@@ -144,15 +180,18 @@ export class DropDownMenu extends BaseScene {
 
             this.menuDown = false;
 
+            // Resume current scene
+            this.game.scene.resume(this.key_paused_scene);
+
         } else {
             // Pause current scene
             // @ts-ignore
-            let key_paused_scene = this.game.scene.getScenes(true)[0].key;
+            const key_paused_scene: string = this.game.scene.getScenes(true)[0].key;
             this.game.scene.pause(key_paused_scene);
             this.key_paused_scene = key_paused_scene;
 
             // Animation
-            let menuButtonTween = this.tweens.add({
+            const menuButtonTween: Phaser.Tweens.Tween = this.tweens.add({
                 targets: menuButton,
                 angle: -90,
                 ease: 'Cubic',
@@ -160,14 +199,14 @@ export class DropDownMenu extends BaseScene {
                 onComplete: () => this.lock = false,
             });
 
-            let menuBackgroundTween = this.tweens.add({
+            const menuBackgroundTween: Phaser.Tweens.Tween = this.tweens.add({
                 targets: menuBackground,
                 y: 3 * (64 + 10) + 30,
                 ease: 'Cubic',
                 duration: 600
             });
 
-            let fullscreenButtonTween = this.tweens.add({
+            const fullscreenButtonTween: Phaser.Tweens.Tween = this.tweens.add({
                 targets: fullscreenButton,
                 x: 10 + 32,
                 ease: 'Cubic',
@@ -175,7 +214,7 @@ export class DropDownMenu extends BaseScene {
                 delay: 100,
             });
 
-            let exitButtonTween = this.tweens.add({
+            const exitButtonTween: Phaser.Tweens.Tween = this.tweens.add({
                 targets: exitButton,
                 x: 10 + 32,
                 ease: 'Cubic',

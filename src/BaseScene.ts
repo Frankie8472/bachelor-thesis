@@ -1,11 +1,19 @@
 export class BaseScene extends Phaser.Scene {
+    /**
+     * Name of the scene
+     */
     protected key: string;
+
+    /**
+     * Transition graphic
+     */
     private transition: Phaser.GameObjects.Graphics;
 
     constructor(key: string) {
         super({
             key: key
         });
+
         this.key = key;
     }
 
@@ -13,9 +21,14 @@ export class BaseScene extends Phaser.Scene {
      * Function for initializing the shape, position and properties of the graphical scene transition
      */
     private transitionInit(): void {
-        let circle = this.add.graphics();
-        let mask = circle.createGeometryMask();
-        let rectangle = this.add.rectangle(0, 0, this.cameras.main.width, this.cameras.main.height, 0x000000);
+        // Shape of the graphical transition
+        const circle: Phaser.GameObjects.Graphics = this.add.graphics();
+
+        // Shape of the screen
+        const rectangle: Phaser.GameObjects.Rectangle = this.add.rectangle(0, 0, this.cameras.main.width, this.cameras.main.height, 0x000000);
+
+        // Define circle as the mask
+        const mask: Phaser.Display.Masks.GeometryMask = circle.createGeometryMask();
 
         circle.setPosition(this.cameras.main.width / 2, this.cameras.main.height / 2);
         circle.fillCircle(0, 0, 0.1);
@@ -29,8 +42,6 @@ export class BaseScene extends Phaser.Scene {
         circle.fillCircle(0, 0, 0.1);
 
         this.transition = circle;
-
-        return;
     }
 
     /**
@@ -39,7 +50,7 @@ export class BaseScene extends Phaser.Scene {
     protected transitionIn(): void {
         this.transitionInit();
 
-        let tween = this.add.tween({
+        const tween: Phaser.Tweens.Tween = this.add.tween({
             targets: this.transition,
             scale: 10 * 0.5 * Math.sqrt(Math.pow(this.cameras.main.width, 2) + Math.pow(this.cameras.main.height, 2)),
             ease: 'linear',
@@ -54,14 +65,13 @@ export class BaseScene extends Phaser.Scene {
      */
     protected transitionOut(scene: string, data?: any): void {
 
-        let tween = this.add.tween({
+        const tween: Phaser.Tweens.Tween = this.add.tween({
             targets: this.transition,
             scale: 0,
             ease: 'linear',
             duration: 700,
             onComplete: () => this.sceneChange(scene, data)
         });
-        return;
     }
 
     /**
@@ -74,7 +84,6 @@ export class BaseScene extends Phaser.Scene {
     protected sceneChange(scene: string, data?: any): void {
         this.game.scene.start(scene, data);
         this.game.scene.stop(this.key);
-        return;
     }
 
     /**
@@ -97,25 +106,25 @@ export class BaseScene extends Phaser.Scene {
      * @param cardDisplaySize Size of the displayed object for returning coordinates inside the visible object boundaries
      */
     protected returnQuad(quadrant: number, quadrantType: number, cardDisplaySize: number): number[] {
-        let ret = null;
+        let ret: number[] = null;
 
         if (quadrant >= quadrantType) {
-            console.log("ERROR: quadrant >= quadrantType");
+            console.log('ERROR: quadrant >= quadrantType');
             return ret;
         }
 
-        let spriteSizeHalf = cardDisplaySize / 2 + 10;
+        const spriteSizeHalf: number = cardDisplaySize / 2 + 10;
 
-        let leftOffsite = 100;
-        let rightOffsite = 0;
-        let topOffsite = 0;
-        let bottomOffsite = 100;
+        const leftOffsite: number = 100;
+        const rightOffsite: number = 0;
+        const topOffsite: number = 0;
+        const bottomOffsite: number = 100;
 
         // Has entries dependant of
-        let horizontal = [];
+        const horizontal: number[] = [];
 
         // Has numberOfLines + 1 entries
-        let vertical = [];
+        const vertical: number[] = [];
 
         horizontal.push(leftOffsite);
 
@@ -123,19 +132,19 @@ export class BaseScene extends Phaser.Scene {
 
         switch (quadrantType) {
             case 3: {
-                horizontal.push(leftOffsite + (this.cameras.main.width - leftOffsite - rightOffsite)/3);
-                horizontal.push(leftOffsite + (this.cameras.main.width - leftOffsite - rightOffsite)*2/3);
+                horizontal.push(leftOffsite + (this.cameras.main.width - leftOffsite - rightOffsite) / 3);
+                horizontal.push(leftOffsite + (this.cameras.main.width - leftOffsite - rightOffsite) * 2 / 3);
                 break;
             }
             case 4: {
-                horizontal.push(leftOffsite + (this.cameras.main.width - leftOffsite - rightOffsite)/2);
-                vertical.push(topOffsite + (this.cameras.main.height - topOffsite - bottomOffsite)/2);
+                horizontal.push(leftOffsite + (this.cameras.main.width - leftOffsite - rightOffsite) / 2);
+                vertical.push(topOffsite + (this.cameras.main.height - topOffsite - bottomOffsite) / 2);
                 break;
             }
             case 6: {
-                horizontal.push(leftOffsite + (this.cameras.main.width - leftOffsite - rightOffsite)/3);
-                horizontal.push(leftOffsite + (this.cameras.main.width - leftOffsite - rightOffsite)*2/3);
-                vertical.push(topOffsite + (this.cameras.main.height - topOffsite - bottomOffsite)/2);
+                horizontal.push(leftOffsite + (this.cameras.main.width - leftOffsite - rightOffsite) / 3);
+                horizontal.push(leftOffsite + (this.cameras.main.width - leftOffsite - rightOffsite) * 2 / 3);
+                vertical.push(topOffsite + (this.cameras.main.height - topOffsite - bottomOffsite) / 2);
                 break;
             }
             default: {
@@ -148,7 +157,7 @@ export class BaseScene extends Phaser.Scene {
 
         switch (quadrantType) {
             case 3: {
-                ret = [Phaser.Math.RND.between(horizontal[quadrant] + spriteSizeHalf, horizontal[quadrant + 1] - spriteSizeHalf), Phaser.Math.RND.between(vertical[0] + spriteSizeHalf + this.cameras.main.height/8, vertical[1] - spriteSizeHalf - this.cameras.main.height/8)];
+                ret = [Phaser.Math.RND.between(horizontal[quadrant] + spriteSizeHalf, horizontal[quadrant + 1] - spriteSizeHalf), Phaser.Math.RND.between(vertical[0] + spriteSizeHalf + this.cameras.main.height / 8, vertical[1] - spriteSizeHalf - this.cameras.main.height / 8)];
                 break;
             }
             case 4: {

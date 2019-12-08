@@ -2,19 +2,30 @@ import 'phaser';
 import {BaseScene} from './BaseScene';
 
 export class LevelMenuScene extends BaseScene {
+    /**
+     * Group with all level buttons
+     */
     private levelButtons: Phaser.GameObjects.Group;
-    private imageSize: number;
+
+    /**
+     * Global size of all buttons
+     */
+    private buttonSize: number;
 
     constructor() {
         super('LevelMenuScene');
     }
 
-    init(data): void {
+    init(): void {
+        // Initialize fields
         this.levelButtons = this.add.group();
-        this.imageSize = Math.min(this.cameras.main.width/(4+2), this.cameras.main.height/(3+2));
+
+        // Define button size dependant on the screen dimensions and the number of buttons
+        this.buttonSize = Math.min(this.cameras.main.width / (4 + 2), this.cameras.main.height / (3 + 2));
     }
 
     preload(): void {
+        // Load UI
         this.load.image('background', 'assets/ui/background1.png');
         this.load.image('catButton', 'assets/ui/cat_button.png');
         this.load.image('levelButton11', 'assets/ui/level11_button.png');
@@ -33,31 +44,44 @@ export class LevelMenuScene extends BaseScene {
     }
 
     create(): void {
-        // ================================================================================================
-        // Bring MenuUI to the front and set background
-        // ================================================================================================
-
+        // Bring MenuUI to the front and initialize transition
         this.game.scene.sendToBack(this.key);
-
         this.transitionIn();
 
-        let background = this.add.sprite(0, 0, 'background');
+        this.setBackground();
+        this.setLevelButtons();
+    }
+
+    update(time: number): void {
+
+    }
+
+    /**
+     * Function for initializing background graphics
+     */
+    private setBackground() {
+        const background: Phaser.GameObjects.Sprite = this.add.sprite(0, 0, 'background');
         background.setOrigin(0, 0);
         background.setDisplaySize(this.cameras.main.width, this.cameras.main.height);
+    }
 
-        let catButton = this.add.sprite(20, this.cameras.main.height - 20, 'catButton');
-        let levelButton11 = this.add.sprite(this.cameras.main.width / 5 * 1, this.cameras.main.height / 4 * 1, 'levelButton11');
-        let levelButton12 = this.add.sprite(this.cameras.main.width / 5 * 2, this.cameras.main.height / 4 * 1, 'levelButton12');
-        let levelButton13 = this.add.sprite(this.cameras.main.width / 5 * 3, this.cameras.main.height / 4 * 1, 'levelButton13');
-        let levelButton14 = this.add.sprite(this.cameras.main.width / 5 * 4, this.cameras.main.height / 4 * 1, 'levelButton14');
-        let levelButton21 = this.add.sprite(this.cameras.main.width / 5 * 1, this.cameras.main.height / 4 * 2, 'levelButton21');
-        let levelButton22 = this.add.sprite(this.cameras.main.width / 5 * 2, this.cameras.main.height / 4 * 2, 'levelButton22');
-        let levelButton23 = this.add.sprite(this.cameras.main.width / 5 * 3, this.cameras.main.height / 4 * 2, 'levelButton23');
-        let levelButton24 = this.add.sprite(this.cameras.main.width / 5 * 4, this.cameras.main.height / 4 * 2, 'levelButton24');
-        let levelButton31 = this.add.sprite(this.cameras.main.width / 5 * 1, this.cameras.main.height / 4 * 3, 'levelButton31');
-        let levelButton32 = this.add.sprite(this.cameras.main.width / 5 * 2, this.cameras.main.height / 4 * 3, 'levelButton32');
-        let levelButton33 = this.add.sprite(this.cameras.main.width / 5 * 3, this.cameras.main.height / 4 * 3, 'levelButton33');
-        let levelButton34 = this.add.sprite(this.cameras.main.width / 5 * 4, this.cameras.main.height / 4 * 3, 'levelButton34');
+    /**
+     * Function for initializing the level buttons and their onclick action
+     */
+    private setLevelButtons() {
+        const catButton: Phaser.GameObjects.Sprite = this.add.sprite(20, this.cameras.main.height - 20, 'catButton');
+        const levelButton11: Phaser.GameObjects.Sprite = this.add.sprite(this.cameras.main.width / 5 * 1, this.cameras.main.height / 4 * 1, 'levelButton11');
+        const levelButton12: Phaser.GameObjects.Sprite = this.add.sprite(this.cameras.main.width / 5 * 2, this.cameras.main.height / 4 * 1, 'levelButton12');
+        const levelButton13: Phaser.GameObjects.Sprite = this.add.sprite(this.cameras.main.width / 5 * 3, this.cameras.main.height / 4 * 1, 'levelButton13');
+        const levelButton14: Phaser.GameObjects.Sprite = this.add.sprite(this.cameras.main.width / 5 * 4, this.cameras.main.height / 4 * 1, 'levelButton14');
+        const levelButton21: Phaser.GameObjects.Sprite = this.add.sprite(this.cameras.main.width / 5 * 1, this.cameras.main.height / 4 * 2, 'levelButton21');
+        const levelButton22: Phaser.GameObjects.Sprite = this.add.sprite(this.cameras.main.width / 5 * 2, this.cameras.main.height / 4 * 2, 'levelButton22');
+        const levelButton23: Phaser.GameObjects.Sprite = this.add.sprite(this.cameras.main.width / 5 * 3, this.cameras.main.height / 4 * 2, 'levelButton23');
+        const levelButton24: Phaser.GameObjects.Sprite = this.add.sprite(this.cameras.main.width / 5 * 4, this.cameras.main.height / 4 * 2, 'levelButton24');
+        const levelButton31: Phaser.GameObjects.Sprite = this.add.sprite(this.cameras.main.width / 5 * 1, this.cameras.main.height / 4 * 3, 'levelButton31');
+        const levelButton32: Phaser.GameObjects.Sprite = this.add.sprite(this.cameras.main.width / 5 * 2, this.cameras.main.height / 4 * 3, 'levelButton32');
+        const levelButton33: Phaser.GameObjects.Sprite = this.add.sprite(this.cameras.main.width / 5 * 3, this.cameras.main.height / 4 * 3, 'levelButton33');
+        const levelButton34: Phaser.GameObjects.Sprite = this.add.sprite(this.cameras.main.width / 5 * 4, this.cameras.main.height / 4 * 3, 'levelButton34');
 
         this.levelButtons.addMultiple([
             levelButton11,
@@ -76,134 +100,93 @@ export class LevelMenuScene extends BaseScene {
 
         catButton.setOrigin(0, 1);
 
-        let scaleCatButton = this.imageScalingFactor(this.imageSize/1.5, catButton.width, catButton.height);
+        const scaleCatButton: number = this.imageScalingFactor(this.buttonSize / 1.5, catButton.width, catButton.height);
         catButton.setScale(scaleCatButton, scaleCatButton);
         catButton.setInteractive();
-        catButton.on('pointerdown', function(event) {
+
+        catButton.on('pointerdown', function() {
             catButton.setTint(0xcccccc);
         }, this);
-        catButton.on('pointerup', function(event) {
+
+        catButton.on('pointerup', function() {
             catButton.clearTint();
-            this.game.scene.start('SortingSceneLoader');
-            this.game.scene.stop(this.key);
-            return;
+            this.transitionOut('SortingSceneLoader');
         }, this);
 
-        for (let sprite of this.levelButtons.getChildren()) {
-            if (sprite instanceof Phaser.GameObjects.Sprite) {
-                sprite.setName(sprite.texture.key);
-                sprite.setOrigin(0.5, 0.5);
+        this.levelButtons.getChildren().forEach(function(gameObject) {
+            if (gameObject instanceof Phaser.GameObjects.Sprite) {
+                gameObject.setName(gameObject.texture.key);
+                gameObject.setOrigin(0.5, 0.5);
 
-                let scale = this.imageScalingFactor(this.imageSize, sprite.width, sprite.height);
-                sprite.setScale(scale, scale);
+                const scale: number = this.imageScalingFactor(this.buttonSize, gameObject.width, gameObject.height);
+                gameObject.setScale(scale, scale);
 
-                sprite.setInteractive();
-                sprite.on('pointerdown', function(event) {
-                    if (sprite instanceof Phaser.GameObjects.Sprite) {
-                        sprite.setTint(0xcccccc);
-                    }
+                gameObject.setInteractive();
+                gameObject.on('pointerdown', function() {
+                    gameObject.setTint(0xcccccc);
                 }, this);
             }
-        }
-
-        levelButton11.on('pointerup', function(event) {
-            if (levelButton11 instanceof Phaser.GameObjects.Sprite) {
-                levelButton11.clearTint();
-            }
-            this.transitionOut('PropertySortingSceneLoader', {'setCat': 1, 'infinite': false});
-            return;
         }, this);
 
-        levelButton12.on('pointerup', function(event) {
-            if (levelButton12 instanceof Phaser.GameObjects.Sprite) {
-                levelButton12.clearTint();
-            }
+        levelButton11.on('pointerup', function() {
+            levelButton11.clearTint();
+            this.transitionOut('PropertySortingSceneLoader', {'setCat': 1, 'infinite': false});
+        }, this);
+
+        levelButton12.on('pointerup', function() {
+            levelButton12.clearTint();
             this.transitionOut('PropertySortingSceneLoader', {'setCat': 2, 'infinite': false});
             return;
         }, this);
 
-        levelButton13.on('pointerup', function(event) {
-            if (levelButton13 instanceof Phaser.GameObjects.Sprite) {
-                levelButton13.clearTint();
-            }
+        levelButton13.on('pointerup', function() {
+            levelButton13.clearTint();
             this.transitionOut('PropertySortingSceneLoader', {'setCat': 3, 'infinite': false});
-            return;
         }, this);
 
-        levelButton14.on('pointerup', function(event) {
-            if (levelButton14 instanceof Phaser.GameObjects.Sprite) {
-                levelButton14.clearTint();
-            }
+        levelButton14.on('pointerup', function() {
+            levelButton14.clearTint();
             this.transitionOut('PropertySortingSceneLoader', {'setCat': 4, 'infinite': false});
-            return;
         }, this);
 
-        levelButton21.on('pointerup', function(event) {
-            if (levelButton21 instanceof Phaser.GameObjects.Sprite) {
-                levelButton21.clearTint();
-            }
+        levelButton21.on('pointerup', function() {
+            levelButton21.clearTint();
             this.transitionOut('PropertySortingSceneLoader', {'setCat': 1, 'infinite': true});
-            return;
         }, this);
 
-        levelButton22.on('pointerup', function(event) {
-            if (levelButton22 instanceof Phaser.GameObjects.Sprite) {
-                levelButton22.clearTint();
-            }
+        levelButton22.on('pointerup', function() {
+            levelButton22.clearTint();
             this.transitionOut('PropertySortingSceneLoader', {'setCat': 2, 'infinite': true});
-            return;
         }, this);
 
-        levelButton23.on('pointerup', function(event) {
-            if (levelButton23 instanceof Phaser.GameObjects.Sprite) {
-                levelButton23.clearTint();
-            }
+        levelButton23.on('pointerup', function() {
+            levelButton23.clearTint();
             this.transitionOut('PropertySortingSceneLoader', {'setCat': 3, 'infinite': true});
-            return;
         }, this);
 
-        levelButton24.on('pointerup', function(event) {
-            if (levelButton24 instanceof Phaser.GameObjects.Sprite) {
-                levelButton24.clearTint();
-            }
+        levelButton24.on('pointerup', function() {
+            levelButton24.clearTint();
             this.transitionOut('PropertySortingSceneLoader', {'setCat': 4, 'infinite': true});
-            return;
         }, this);
 
-        levelButton31.on('pointerup', function(event) {
-            if (levelButton31 instanceof Phaser.GameObjects.Sprite) {
-                levelButton31.clearTint();
-            }
-            this.transitionOut('RestrictedSortingSceneLoader', {'setLevel': 1});
-            return;
+        levelButton31.on('pointerup', function() {
+            levelButton31.clearTint();
+            this.transitionOut('RestrictedSortingSceneLoader', {'level': 1});
         }, this);
 
-        levelButton32.on('pointerup', function(event) {
-            if (levelButton32 instanceof Phaser.GameObjects.Sprite) {
-                levelButton32.clearTint();
-            }
-            this.transitionOut('RestrictedSortingSceneLoader', {'setLevel': 2});
-            return;
+        levelButton32.on('pointerup', function() {
+            levelButton32.clearTint();
+            this.transitionOut('RestrictedSortingSceneLoader', {'level': 2});
         }, this);
 
-        levelButton33.on('pointerup', function(event) {
-            if (levelButton33 instanceof Phaser.GameObjects.Sprite) {
-                levelButton33.clearTint();
-            }
-            this.transitionOut('GameSceneLoader', {'setLevel': 1});
-            return;
+        levelButton33.on('pointerup', function() {
+            levelButton33.clearTint();
+            this.transitionOut('GameSceneLoader', {'level': 1});
         }, this);
 
-        levelButton34.on('pointerup', function(event) {
-            if (levelButton34 instanceof Phaser.GameObjects.Sprite) {
-                levelButton34.clearTint();
-            }
-            this.transitionOut('GameSceneLoader', {'setLevel': 2});
-            return;
+        levelButton34.on('pointerup', function() {
+            levelButton34.clearTint();
+            this.transitionOut('GameSceneLoader', {'level': 2});
         }, this);
-    }
-
-    update(time: number): void {
-
     }
 }

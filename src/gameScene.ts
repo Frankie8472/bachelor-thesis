@@ -3,55 +3,95 @@ import {BaseScene} from './BaseScene';
 
 export class GameScene extends BaseScene {
 
-    // Lock for not messing up animations by clicking repeatedly without waiting for the animation to finish
-    private lock: boolean;
-
-    private level: number;
-
-    private gameSet: any[];
-    private categorySet: any[];
-
-    // HelpersMenu down?
-    private helpDown: boolean;
-
-    // Our Object with name, imagepath and properties
+    /**
+     * Object data file
+     */
     private jsonObject: any;
 
-    // How many cells (forming a grid)
+    /**
+     * Game level
+     */
+    private level: number;
+
+    /**
+     * Lock for not messing up animations by clicking repeatedly without waiting for the animation to finish
+     */
+    private lock: boolean;
+
+    /**
+     * State of the helper menu and data
+     */
+    private helpDown: boolean;
+    private buttonSize: number;
+
+    /**
+     * Lock for checking the marked objects
+     */
+    private checked: boolean;
+
+    /**
+     * Array of objects in play
+     */
+    private gameSet: any[];
+
+    /**
+     * Copy of the categories
+     */
+    private categorySet: any[];
+
+
+    /**
+     * Grid properties
+     */
     private cellsX: number;
     private cellsY: number;
     private cellWidth: number;
     private cellHeight: number;
 
-    // Category sprites
-    private arrayCategory: Phaser.GameObjects.Group;
-
-    // Remaining stack  of images
-    private arrayStack: Phaser.GameObjects.Group;
-
-    // Displayed images
-    private arrayDisplayed: Phaser.GameObjects.Group;
-
-    // Marked images
-    private arrayMarked: Phaser.GameObjects.Group;
-
-    // Already displayed images
-    private arrayDropped: Phaser.GameObjects.Group;
-
-    // Coordinates of each grid cell center
+    /**
+     * Center coordinates of each grid cell
+     */
     private arrayCoordinates: number[][];
 
-    // Already checked the three marked objects?
-    private checked: boolean;
+    /**
+     * All category objects
+     */
+    private arrayCategory: Phaser.GameObjects.Group;
 
-    // How many matching cards have you found?
+    /**
+     * All remaining (not yet discarded) objects
+     */
+    private arrayStack: Phaser.GameObjects.Group;
+
+    /**
+     * All displayed objects
+     */
+    private arrayDisplayed: Phaser.GameObjects.Group;
+
+    /**
+     * All marked objects
+     */
+    private arrayMarked: Phaser.GameObjects.Group;
+
+    /**
+     * All correctly indentified object sets
+     */
+    private arrayDropped: Phaser.GameObjects.Group;
+
+    /**
+     * Stats of already found sets
+     */
     private points: number;
     private maxPoints: number;
 
-    // Timeprogressbar
+    /**
+     * Timeprogressbar
+     */
     private timefluid: Phaser.GameObjects.Sprite;
 
-    // Gameprogressbar
+    /**
+     * Gameprogressbar and data
+     */
     private gamefluid: Phaser.GameObjects.Sprite;
     private timedataStepsize: number;
 
@@ -59,13 +99,17 @@ export class GameScene extends BaseScene {
         super('GameScene');
     }
 
-
     init(data): void {
+
+        // Initialize data from previous scene
+        this.jsonObject = data.jsonObject;
+        this.level = data.level;
+
+        // Initialize fields
         this.lock = false;
         this.helpDown = false;
         this.gameSet = [];
         this.categorySet = [];
-        this.jsonObject = data.jsonObject;
         this.arrayCategory = this.add.group();
         this.arrayStack = this.add.group();
         this.arrayDisplayed = this.add.group();
@@ -73,7 +117,9 @@ export class GameScene extends BaseScene {
         this.arrayMarked = this.add.group();
         this.checked = false;
         this.points = 0;
-        this.level = data.setLevel;
+
+        // Initialize game parameters
+        this.buttonSize = 64;
 
         this.maxPoints = 10;
         this.timedataStepsize = 0.00005;
@@ -96,17 +142,17 @@ export class GameScene extends BaseScene {
     }
 
     preload(): void {
-
+        // Preload background graphic
         this.load.image('gamebackground', 'assets/ui/game_background.png');
 
-        // Helper menu graphics
+        // Preload helper menu graphics
         this.load.image('help', 'assets/ui/help.png'/*{ frameWidth: 512, frameHeight: 512 }*/);
         this.load.image('menubackground', 'assets/ui/menu_background.png');
 
-        // Preselect objects
-        let selectedProperties: any[] = [];
+        // Preselect objects and preload images
+        const selectedProperties: any[] = [];
         for (let cat of this.jsonObject['categories']) {
-            let selectedProperty: any[] = Phaser.Math.RND.shuffle(cat['validElements']).slice(0,3);
+            const selectedProperty: any[] = Phaser.Math.RND.shuffle(cat['validElements']).slice(0, 3);
             selectedProperty.forEach((object, index, array) => array[index] = object.name);
             selectedProperties.push(selectedProperty);
         }
@@ -117,41 +163,44 @@ export class GameScene extends BaseScene {
                 selectedProperties[1].indexOf(image.cat2) > -1 &&
                 selectedProperties[2].indexOf(image.cat3) > -1
             ) {
+                // If level one, fix the last category
                 if (this.level === 1) {
-                    if (image.cat4 === "full"){
+                    if (image.cat4 === this.jsonObject['categories'][0].name) {
                         this.gameSet.push(image);
                     }
                 } else {
                     this.gameSet.push(image);
-
                 }
             }
 
         }
 
         for (let image of this.gameSet) {
-            let name = image.name;
-            let path = 'assets/geometrical_objects/images/' + name;
+            let name: string = image.name;
+            let path: string = 'assets/geometrical_objects/images/' + name;
             this.load.image(name, path);
         }
 
-        // Get categories
+        // Preload category images
         this.categorySet = [...this.jsonObject['categories']]; // Full copy the array instead of referencing
 
+        // If level one, ignore the last category
         if (this.level === 1) {
             this.categorySet.pop();
         }
 
         for (let cat of this.categorySet) {
-            if (cat.url === null) {
+            // Check if the category has an image
+            if (cat.url === null || cat.name === null) {
                 continue;
             }
-            let name = cat.name;
-            let path = 'assets/geometrical_objects/categories/' + cat.url;
+
+            let name: string = cat.name;
+            let path: string = 'assets/geometrical_objects/categories/' + cat.url;
             this.load.image(name, path);
         }
 
-        // Get progressbar images
+        // Preload progressbar images
         this.load.image('timefluid', 'assets/ui/timefluid.png');
         this.load.image('gamefluid', 'assets/ui/gamefluid.png');
         this.load.image('progressbar', 'assets/ui/progressbar.png');
@@ -160,56 +209,29 @@ export class GameScene extends BaseScene {
     }
 
     create(): void {
-        // ================================================================================================
-        // Bring MenuUI to the front and set background
-        // ================================================================================================
-
+        // Bring MenuUI to the front and initialize transition
         this.game.scene.sendToBack(this.key);
-
         this.transitionIn();
 
-        let background = this.add.sprite(0, 0, 'gamebackground');
-        background.setOrigin(0, 0);
-        background.setDisplaySize(this.cameras.main.width, this.cameras.main.height);
-        background.setTint(0xffccaa);
-        background.setAlpha(0.9);
+        this.setBackground();
+        this.setHelperMenu();
+        this.loadObjects();
+        this.initObjects();
+        this.setEqualityCheck();
 
-        // ================================================================================================
-        // Add helper menu
-        // ================================================================================================
-
-        this.helperMenu();
-
-        // ================================================================================================
-        // Initialize cards
-        // ================================================================================================
-
-        this.loadCards();
-        this.initiateCards();
-        this.checkForPossibleSet();
-
-        // ================================================================================================
-        // Initialize cards
-        // ================================================================================================
-
-        this.createTimeProgressbar();
-        this.createGameProgressbar();
-
-        // ================================================================================================
-        // Bring MenuUI to the front
-        // ================================================================================================
+        this.setTimeProgressbar();
+        this.setGameProgressbar();
     }
 
     update(time: number): void {
         // Check for correctness of selected cards
         if (this.arrayMarked.getLength() >= 3 && !this.checked) {
             this.checked = true;
-            console.log('isSet: ' + this.isSet(this.arrayMarked.getChildren()));
             this.replaceCards(this.checkEquality(this.arrayMarked.getChildren()));
         }
 
-        // Update timebar
-        let timedata = this.timefluid.getData('timeY');
+        // Update timeprogressbar
+        let timedata: number = this.timefluid.getData('timeY');
         if (timedata <= 0) {
             // Endgame
             this.transitionOut('ScoreScene', {'score': this.points / this.maxPoints, 'previousScene': this.key});
@@ -221,63 +243,80 @@ export class GameScene extends BaseScene {
         }
     }
 
-    // ================================================================================================
-    // Helper menu creation
-    // ================================================================================================
-    private helperMenu(): void {
+    /**
+     * Function for initializing the background
+     */
+    private setBackground() {
+        const background = this.add.sprite(0, 0, 'gamebackground');
+        background.setOrigin(0, 0);
+        background.setDisplaySize(this.cameras.main.width, this.cameras.main.height);
+        background.setTint(0xffccaa);
+        background.setAlpha(0.9);
+    }
+
+    /**
+     * Function for creating the helper menu
+     */
+    private setHelperMenu(): void {
         // Menu background
-        let menuBackground = this.add.sprite(this.cameras.main.width - 64 - 10 - 30, 64 + 10 + 50, 'menubackground');
+        const menuBackground: Phaser.GameObjects.Sprite = this.add.sprite(this.cameras.main.width - 64 - 10 - 30, 64 + 10 + 50, 'menubackground');
         menuBackground.setAngle(180);
         menuBackground.setOrigin(1, 0);
         menuBackground.setDisplaySize(500, this.cameras.main.height + 120);
         menuBackground.setTint(0xdddddd);
 
         // Category indicator
-        let y = 16 + 32;
-        let countCategories = 0;
+        let y: number = 16 + 32;
+        let countCategories: number = 0;
+
 
         for (let cat of this.categorySet) {
-            if (cat.url === null) {
+            if (cat.url === null || cat.name === null) {
                 continue;
             }
             countCategories++;
         }
 
         for (let cat of this.categorySet) {
-            if (cat.url === null) {
+            if (cat.url === null || cat.name === null) {
                 continue;
             }
 
             y += (this.cameras.main.height - (16 + 32)) / (countCategories + 1);
-            let name = cat.name;
-            let sprite = this.add.sprite(this.cameras.main.width + 64, y, name);
+            let name: string = cat.name;
+            const sprite: Phaser.GameObjects.Sprite = this.add.sprite(this.cameras.main.width + 64, y, name);
             sprite.setName(name);
             sprite.setOrigin(0.5, 0.5);
-            let scale = this.imageScalingFactor(64, sprite.width, sprite.height);
+
+            const scale: number = this.imageScalingFactor(this.buttonSize, sprite.width, sprite.height);
             sprite.setScale(scale, scale);
+
             sprite.setVisible(true);
+
             this.arrayCategory.add(sprite);
         }
 
         // MenuButton
-        let menuButton = this.add.sprite(this.cameras.main.width - (10 + 32), 10 + 32, 'help');
-        menuButton.setDisplaySize(64, 64);
+        const menuButton: Phaser.GameObjects.Sprite = this.add.sprite(this.cameras.main.width - (10 + 32), 10 + 32, 'help');
+
+        const scale: number = this.imageScalingFactor(this.buttonSize, menuButton.width, menuButton.height);
+        menuButton.setScale(scale, scale);
         menuButton.setInteractive();
 
         menuButton.on('pointerup', () => this.menuAction(menuButton, menuBackground));
     }
 
-    // ================================================================================================
-    // Card action
-    // ================================================================================================
-    private loadCards(): void {
+    /**
+     * Function fot loading all objects as sprites and data initialization
+     */
+    private loadObjects(): void {
         for (let image of this.gameSet) {
-            let name = image.name;
-            let cat1 = image.cat1;
-            let cat2 = image.cat2;
-            let cat3 = image.cat3;
-            let cat4 = image.cat4;
-            let sprite = this.arrayStack.create(200, 200, name);
+            const name: string = image.name;
+            const cat1: string = image.cat1;
+            const cat2: string = image.cat2;
+            const cat3: string = image.cat3;
+            const cat4: string = image.cat4;
+            const sprite: Phaser.GameObjects.Sprite = this.arrayStack.create(200, 200, name);
 
             sprite.setName(name);
 
@@ -291,17 +330,19 @@ export class GameScene extends BaseScene {
 
             sprite.setVisible(false);
 
-            let diag = Math.sqrt(Math.pow(sprite.height, 2) + Math.pow(sprite.width, 2));
-            let scale = this.imageScalingFactor(Math.min(this.cellWidth, this.cellHeight), diag, diag);
+            const diag: number = Math.sqrt(Math.pow(sprite.height, 2) + Math.pow(sprite.width, 2));
+            const scale: number = this.imageScalingFactor(Math.min(this.cellWidth, this.cellHeight), diag, diag);
             sprite.setScale(scale, scale);
             sprite.setInteractive();
 
-            sprite.on('pointerdown', function(event) {
+            sprite.on('pointerdown', function() {
 
+                // If not already selected and there aren't already three selected
                 if (!this.arrayMarked.contains(sprite) && this.arrayMarked.getLength() < 3) {
-                    // If not already selected and there aren't already three selected
+
                     // Mark card
                     sprite.setTint(0x999999);
+
                     // Add card to marked array
                     this.arrayMarked.add(sprite);
 
@@ -312,77 +353,79 @@ export class GameScene extends BaseScene {
 
                     // Unmark card
                     sprite.clearTint();
+
                     // Remove from marked array
                     this.arrayMarked.remove(sprite);
 
-                    // Remove helper/hint category tint
-                    for (let cat of this.arrayCategory.getChildren()) {
-                        if (cat instanceof Phaser.GameObjects.Sprite) {
-                            cat.clearTint();
-                        }
-                    }
+                    this.resetHelp();
 
                     // Set checked to false
                     this.checked = false;
                 }
-
             }, this);
-
-            // should be redundant because of group.create()... this.arrayStack.add(sprite);
         }
     }
 
-    // ================================================================================================
-    // Initialize cards
-    // ================================================================================================
-    private initiateCards(): void {
+    /**
+     * Function for initializing the first set of displayed objects
+     */
+    private initObjects(): void {
 
         for (let coords of this.arrayCoordinates) {
-            let sprite = Phaser.Utils.Array.GetRandom(this.arrayStack.getChildren());
-            if (sprite instanceof Phaser.GameObjects.Sprite) {
-                sprite.setX(coords[0]);
-                sprite.setY(coords[1]);
-                sprite.setVisible(true);
-                this.arrayStack.remove(sprite);
-                this.arrayDisplayed.add(sprite);
-            } else {
-                console.log('ERROR: element in arrayStack is not a sprite!');
-            }
+            const sprite: Phaser.GameObjects.Sprite = Phaser.Utils.Array.GetRandom(this.arrayStack.getChildren());
 
+            sprite.setX(coords[0]);
+            sprite.setY(coords[1]);
+
+            sprite.setVisible(true);
+
+            this.arrayStack.remove(sprite);
+            this.arrayDisplayed.add(sprite);
         }
     }
 
-    // ================================================================================================
-    // Equality check on a full stack
-    // ================================================================================================
-    private checkEquality(threeCards): boolean {
-        let replaceCards = true;
+    /**
+     * Function for checking for set equality.
+     * All properties of one category have to be equal or inherently different.
+     * Also adjusts the helper menu.
+     * @param threeCards Array with three objects
+     */
+    private checkEquality(threeCards: Phaser.GameObjects.GameObject[]): boolean {
+
+        // Return value
+        let replaceCards: boolean = true;
 
         if (this.arrayMarked.getLength() < 3) {
             replaceCards = false;
         }
 
-        // Boolean: Equal until now?
-        let eqCheck = false;
-        // Boolean Different until now?
-        let unEqCheck = false;
+        // Are all properties of a category equal until now?
+        let eqCheck: boolean = false;
+
+        // Are all properties of a category different until now?
+        let unEqCheck: boolean = false;
+
         for (let cat of this.arrayCategory.getChildren()) {
+
             // Make sure your objects are sprites
             if (cat instanceof Phaser.GameObjects.Sprite) {
+
                 // Clear tint
                 cat.clearTint();
 
                 for (let spriteFirst of threeCards) {
                     for (let spriteSecond of threeCards) {
 
-                        // Check if not the same sprite
+                        // Check if the same sprite
                         if (!(spriteFirst === spriteSecond)) {
 
-                            // Check if category the same or not
+                            // Check if property is the same or not
                             if (spriteFirst.getData(cat.name) === spriteSecond.getData(cat.name)) {
 
-                                // Check if all categories are the same
+                                // Check if all properties are the same
                                 if (unEqCheck) {
+                                    // -> Two are equal, one is not
+
                                     // Block whole category
                                     eqCheck = true;
 
@@ -396,13 +439,17 @@ export class GameScene extends BaseScene {
                                     continue;
                                 }
 
+                                // Mark as equal
                                 if (!eqCheck) {
                                     eqCheck = true;
                                 }
 
                             } else {
+
                                 // Check if all categories are different until now
                                 if (eqCheck) {
+                                    // -> two equal, one different
+
                                     // Block whole category
                                     unEqCheck = true;
 
@@ -416,11 +463,13 @@ export class GameScene extends BaseScene {
                                     continue;
                                 }
 
+                                // Mark as different
                                 if (!unEqCheck) {
                                     unEqCheck = true;
                                 }
                             }
-                            // Cat of all cards are the same or different until now => OK
+
+                            // The properties of one category of all cards are the same or different until now => OK
                             // Mark category as green
                             cat.setTintFill(0x00dd00);
 
@@ -437,21 +486,27 @@ export class GameScene extends BaseScene {
         return replaceCards;
     }
 
-    // ================================================================================================
-    // Equality check on three cards
-    // ================================================================================================
-    private isSet(threeCards): boolean {
-        // Boolean: Equal until now?
-        let eqCheck = false;
-        // Boolean Different until now?
-        let unEqCheck = false;
+    /**
+     * Function only for checking for set equality
+     * @param threeCards Array with three objects
+     */
+    private isSet(threeCards: Phaser.GameObjects.GameObject[]): boolean {
+
+        // Are all properties of a category equal until now?
+        let eqCheck: boolean = false;
+
+        // Are all properties of a category different until now?
+        let unEqCheck: boolean = false;
+
         for (let cat of this.arrayCategory.getChildren()) {
+
             // Make sure your objects are sprites
             if (cat instanceof Phaser.GameObjects.Sprite) {
 
                 // Iterate through all cards. Check in sets of two for equality or inequality and remember this.
                 // Check all 3 pair matchings.
                 for (let spriteFirst of threeCards) {
+
                     for (let spriteSecond of threeCards) {
 
                         // Check if not the same sprite
@@ -472,9 +527,7 @@ export class GameScene extends BaseScene {
                             } else {
                                 // Check if all categories are different until now
                                 if (eqCheck) {
-
                                     return false;
-
                                 }
 
                                 if (!unEqCheck) {
@@ -495,14 +548,15 @@ export class GameScene extends BaseScene {
         return true;
     }
 
-    // ================================================================================================
-    // Replace marked cards
-    // ================================================================================================
+    /**
+     * Function for replacing marked objects
+     * @param replaceCards
+     */
     private replaceCards(replaceCards: boolean): void {
         if (replaceCards) {
             for (let discardedCard of this.arrayMarked.getChildren()) {
-                let newSprite = Phaser.Utils.Array.GetRandom(this.arrayStack.getChildren());
-                if (newSprite instanceof Phaser.GameObjects.Sprite && discardedCard instanceof Phaser.GameObjects.Sprite) {
+                const newSprite: Phaser.GameObjects.Sprite = Phaser.Utils.Array.GetRandom(this.arrayStack.getChildren());
+                if (discardedCard instanceof Phaser.GameObjects.Sprite) {
                     newSprite.setX(discardedCard.x);
                     newSprite.setY(discardedCard.y);
 
@@ -513,87 +567,102 @@ export class GameScene extends BaseScene {
 
                     this.arrayStack.remove(newSprite);
                     this.arrayDisplayed.add(newSprite);
-                } else {
-                    console.log('ERROR: element in arrayStack or arrayMarked is not a sprite!');
                 }
+
                 this.arrayDisplayed.remove(discardedCard);
                 this.arrayDropped.add(discardedCard);
 
             }
+
             this.arrayMarked.clear(true, false);
 
-            // ======================================================================
-            // Update progressbar
-            // ======================================================================
-            this.points += this.gamefluid.getData('gameMax') / this.maxPoints;
+            this.resetHelp();
 
-            if (this.points >= this.gamefluid.getData('gameMax')) {
-                this.gamefluid.setScale(this.gamefluid.getData('gameX'), this.points);
-                // End game
-                this.transitionOut('ScoreScene', {'score': this.points / this.maxPoints, 'previousScene': this.key});
-                return;
-            }
+            this.updateProgressbar();
 
-            this.gamefluid.setScale(this.gamefluid.getData('gameX'), this.points);
-
-            // Remove helper/hint category tint
-            for (let cat of this.arrayCategory.getChildren()) {
-                if (cat instanceof Phaser.GameObjects.Sprite) {
-                    cat.clearTint();
-                }
-            }
-
-            this.checkForPossibleSet();
+            this.setEqualityCheck();
 
             // Set checked to false
             this.checked = false;
         }
     }
 
-    // ================================================================================================
-    // If you think there are no more pairs, refresh cards
-    // ================================================================================================
-    private checkForPossibleSet(): void {
-        let cardSet = this.arrayDisplayed.getChildren();
-        let cardSetLength = cardSet.length;
+    /**
+     * Function for reseting the tint on the helper menu
+     */
+    private resetHelp(): void {
+        for (let cat of this.arrayCategory.getChildren()) {
+            if (cat instanceof Phaser.GameObjects.Sprite) {
+                cat.clearTint();
+            }
+        }
+    }
+
+    /**
+     * Function for updating the progressbar
+     */
+    private updateProgressbar(): void {
+        this.points += this.gamefluid.getData('gameMax') / this.maxPoints;
+
+        if (this.points >= this.gamefluid.getData('gameMax') - Phaser.Math.EPSILON) {
+            this.gamefluid.setScale(this.gamefluid.getData('gameX'), this.points);
+            // End game
+            this.transitionOut('ScoreScene', {'score': this.points / this.maxPoints, 'previousScene': this.key});
+            return;
+        }
+
+        this.gamefluid.setScale(this.gamefluid.getData('gameX'), this.points);
+    }
+
+    /**
+     * Function for checking if there is a occurrence of a set in the displayed objects
+     */
+    private setEqualityCheck(): void {
+        const cardSet: Phaser.GameObjects.GameObject[] = this.arrayDisplayed.getChildren();
+        const cardSetLength: number = cardSet.length;
 
         for (let x = 0; x <= cardSetLength; x++) {
             for (let y = x + 1; y <= cardSetLength - (x + 1); y++) {
                 for (let z = y + 1; z <= cardSetLength - (y + 1); z++) {
                     if (this.isSet([cardSet[x], cardSet[y], cardSet[z]])) {
-                        console.log("Set available");
                         return;
                     }
                 }
             }
         }
-        console.log("no set available");
+
         // Replace/add cards
-        this.refreshCards();
-        // Do not replace/add cards
+        this.rebuildDisplayedObjects();
     }
 
-    private refreshCards(): void {
+    /**
+     * Function for refreshing all displayed objects with new ones
+     * Usually used if there is no occurrence of a set.
+     */
+    private rebuildDisplayedObjects(): void {
+
         // Replace all cards
-        console.log(this.arrayStack.getLength());
         for (let card of this.arrayDisplayed.getChildren()) {
             if (card instanceof Phaser.GameObjects.Sprite) {
                 card.setVisible(false);
                 this.arrayStack.add(card);
             }
         }
+
         this.arrayDisplayed.clear(false, false);
-        console.log(this.arrayStack.getLength());
-        this.initiateCards();
+
+        this.initObjects();
 
     }
 
-    // ================================================================================================
-    // Menu action
-    // ================================================================================================
+    /**
+     * Function for initializing the animation on the helpers menu
+     * @param menuButton The helpers menu button
+     * @param menuBackground The helpers menu background
+     */
     private menuAction(menuButton, menuBackground): void {
         // ButtonAnimation
-        let menuButtonTween1 = this.tweens.add({
+        const menuButtonTween1: Phaser.Tweens.Tween = this.tweens.add({
             targets: menuButton,
             scale: 0.37,
             ease: 'linear',
@@ -603,8 +672,7 @@ export class GameScene extends BaseScene {
 
         // Retract
         if (this.helpDown) {
-            // Animation
-            let menuBackgroundTween = this.tweens.add({
+            const menuBackgroundTween: Phaser.Tweens.Tween = this.tweens.add({
                 targets: menuBackground,
                 y: 64 + 10 + 50,
                 x: this.cameras.main.width - 64 - 10 - 30,
@@ -614,7 +682,7 @@ export class GameScene extends BaseScene {
             });
 
             for (let helperButton of this.arrayCategory.getChildren()) {
-                let helperButtonTween = this.tweens.add({
+                let helperButtonTween: Phaser.Tweens.Tween = this.tweens.add({
                     targets: helperButton,
                     x: this.cameras.main.width + 64,
                     ease: 'Cubic',
@@ -627,8 +695,7 @@ export class GameScene extends BaseScene {
 
             // Extend
         } else {
-            // Animation
-            let menuBackgroundTween = this.tweens.add({
+            let menuBackgroundTween: Phaser.Tweens.Tween = this.tweens.add({
                 targets: menuBackground,
                 y: this.cameras.main.height + 90,
                 x: this.cameras.main.width - 64 - 10 - 50,
@@ -637,7 +704,7 @@ export class GameScene extends BaseScene {
             });
 
             for (let helperButton of this.arrayCategory.getChildren()) {
-                let helperButtonTween = this.tweens.add({
+                let helperButtonTween: Phaser.Tweens.Tween = this.tweens.add({
                     targets: helperButton,
                     x: this.cameras.main.width - (16 + 32) + 4,
                     ease: 'Cubic',
@@ -650,22 +717,22 @@ export class GameScene extends BaseScene {
 
     }
 
-    // ================================================================================================
-    // Game progressbar
-    // ================================================================================================
-    private createGameProgressbar(): void {
-        let multiplierX = 0.4;
-        let multiplierY = 0.3;
-        let progressbarY = this.cameras.main.height - 10;
-        let progressbar = this.add.sprite(0, progressbarY, 'progressbar');
+    /**
+     * Function for initializing the progressbar for ingame game score
+     */
+    private setGameProgressbar(): void {
+        const multiplierX: number = 0.4;
+        const multiplierY: number = 0.3;
+        const progressbarY: number = this.cameras.main.height - 10;
+        const progressbar: Phaser.GameObjects.Sprite = this.add.sprite(0, progressbarY, 'progressbar');
         progressbar.setOrigin(0, 1);
         progressbar.setScale(multiplierX, multiplierY);
 
-        let progressbarX = 10 * 2 + progressbar.width * multiplierX;
+        const progressbarX: number = 10 * 2 + progressbar.width * multiplierX;
         progressbar.setX(progressbarX);
 
-        let progressstar = this.add.sprite(progressbarX, progressbarY - progressbar.height * multiplierY - 10, 'progressstar');
-        let starmultiplier = progressbar.width * multiplierX / progressstar.width;
+        const progressstar: Phaser.GameObjects.Sprite = this.add.sprite(progressbarX, progressbarY - progressbar.height * multiplierY - 10, 'progressstar');
+        const starmultiplier: number = progressbar.width * multiplierX / progressstar.width;
         progressstar.setOrigin(0, 1);
         progressstar.setScale(starmultiplier, starmultiplier);
 
@@ -678,19 +745,19 @@ export class GameScene extends BaseScene {
         this.gamefluid.setAlpha(0.7);
     }
 
-    // ================================================================================================
-    // Timeprogressbar
-    // ================================================================================================
-    private createTimeProgressbar(): void {
-        let multiplierX = 0.4;
-        let multiplierY = 0.3;
-        let progressbarY = this.cameras.main.height - 10;
-        let progressbar = this.add.sprite(10, progressbarY, 'progressbar');
+    /**
+     * Function for initializing the game timer
+     */
+    private setTimeProgressbar(): void {
+        const multiplierX: number = 0.4;
+        const multiplierY: number = 0.3;
+        const progressbarY: number = this.cameras.main.height - 10;
+        const progressbar: Phaser.GameObjects.Sprite = this.add.sprite(10, progressbarY, 'progressbar');
         progressbar.setOrigin(0, 1);
         progressbar.setScale(multiplierX, multiplierY);
 
-        let sandclock = this.add.sprite(10, progressbarY - progressbar.height * multiplierY - 10, 'sandclock');
-        let starmultiplier = progressbar.width * multiplierX / sandclock.width;
+        const sandclock: Phaser.GameObjects.Sprite = this.add.sprite(10, progressbarY - progressbar.height * multiplierY - 10, 'sandclock');
+        const starmultiplier: number = progressbar.width * multiplierX / sandclock.width;
         sandclock.setOrigin(0, 1);
         sandclock.setScale(starmultiplier, starmultiplier);
 
@@ -700,6 +767,5 @@ export class GameScene extends BaseScene {
         this.timefluid.setData('timeY', (progressbar.height * multiplierY - 6) / this.timefluid.height);
         this.timefluid.setScale(this.timefluid.getData('timeX'), this.timefluid.getData('timeY'));
         this.timefluid.setAlpha(0.7);
-
     }
 }

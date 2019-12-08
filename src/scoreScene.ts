@@ -2,7 +2,14 @@ import 'phaser';
 import {BaseScene} from './BaseScene';
 
 export class ScoreScene extends BaseScene {
+    /**
+     * Game score
+     */
     private score: number;
+
+    /**
+     * Name of the previous scene
+     */
     private previousScene: string;
 
     constructor() {
@@ -10,11 +17,13 @@ export class ScoreScene extends BaseScene {
     }
 
     init(data): void {
+        // Initialize data from previous scene
         this.score = data.score;
         this.previousScene = data.previousScene;
     }
 
     preload(): void {
+        // Preload UI
         this.load.image('gamebackground', 'assets/ui/game_background.png');
         this.load.image('star_0', 'assets/ui/star_0.png');
         this.load.image('star_1', 'assets/ui/star_1.png');
@@ -24,23 +33,35 @@ export class ScoreScene extends BaseScene {
     }
 
     create(): void {
-        // MenuUI must be in the front
+        // Bring MenuUI to the front and initialize transition
         this.game.scene.sendToBack(this.key);
+        this.transitionIn();
 
+        this.setBackground();
+        this.initUI();
+        this.initInput();
+    }
+
+    /**
+     * Function for initializing the background
+     */
+    private setBackground() {
         let background = this.add.sprite(0, 0, 'gamebackground');
         background.setOrigin(0, 0);
         background.setDisplaySize(this.cameras.main.width, this.cameras.main.height);
-        //background.setTint(0xffccaa);
-        //background.setAlpha(0.9);
+    }
 
+    /**
+     * Function for initializing replaybutton and reward graphics
+     */
+    private initUI() {
         // Add replay button
-        let replayButton = this.add.sprite(this.cameras.main.width - 100, this.cameras.main.height - 100, 'replay');
+        const replayButton: Phaser.GameObjects.Sprite = this.add.sprite(this.cameras.main.width - 100, this.cameras.main.height - 100, 'replay');
         replayButton.setOrigin(0.5, 0.5);
         replayButton.setScale(0.5, 0.5);
         replayButton.setInteractive();
         replayButton.on('pointerdown', function() {
-            this.scene.start(this.previousScene);
-            this.scene.stop(this.key);
+            this.sceneChange(this.previousScene);
         }, this);
 
         let sprite: Phaser.GameObjects.Sprite;
@@ -56,12 +77,14 @@ export class ScoreScene extends BaseScene {
         }
 
         sprite.setOrigin(0.5, 0.5);
-
-        this.input.on('pointerup', function(/*pointer*/) {
-            this.scene.start('LevelMenuScene');
-            this.scene.stop(this.key);
-        }, this);
-
     }
 
+    /**
+     * Function which initializes all global input actions
+     */
+    private initInput() {
+        this.input.on('pointerup', function() {
+            this.transitionOut('LevelMenuScene');
+        }, this);
+    }
 }

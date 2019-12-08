@@ -2,27 +2,22 @@ import 'phaser';
 import {BaseScene} from './BaseScene';
 
 export class SortingSceneLoader extends BaseScene {
-    key: string = 'SortingSceneLoader';
-
-    setLevel: number;
 
     constructor() {
         super('SortingSceneLoader');
     }
 
-    init(data): void {
+    init(): void {
 
     }
 
     preload(): void {
-        // Load json
+        // Load json file
         this.load.json('objects', 'assets/geometrical_objects/geometrical_objects.json');
     }
 
     create(): void {
-        this.game.scene.start('SortingScene', {'jsonObject': this.cache.json.get('objects')});
-        this.game.scene.stop(this.key);
-        return;
+        this.sceneChange('SortingScene', {'jsonObject': this.cache.json.get('objects')});
     }
 
     update(time: number): void {

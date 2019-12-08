@@ -2,25 +2,27 @@ import 'phaser';
 import {BaseScene} from './BaseScene';
 
 export class GameSceneLoader extends BaseScene {
-    setLevel: number;
+    /**
+     * Game level
+     */
+    level: number;
 
     constructor() {
         super('GameSceneLoader');
     }
 
     init(data): void {
-        this.setLevel = data.setLevel;
+        // Initialize data from previous scene
+        this.level = data.level;
     }
 
     preload(): void {
-        // Load json
+        // Load json file
         this.load.json('objects', 'assets/geometrical_objects/geometrical_objects.json');
     }
 
     create(): void {
-        this.game.scene.start('GameScene', {'jsonObject': this.cache.json.get('objects'), 'setLevel': this.setLevel});
-        this.game.scene.stop(this.key);
-        return;
+        this.sceneChange('GameScene', {'jsonObject': this.cache.json.get('objects'), 'level': this.level});
     }
 
     update(time: number): void {

@@ -2,8 +2,6 @@ import 'phaser';
 import {BaseScene} from './BaseScene';
 
 export class WelcomeScene extends BaseScene {
-    title: Phaser.GameObjects.Text;
-    hint: Phaser.GameObjects.Text;
 
     constructor() {
         super('WelcomeScene');
@@ -14,27 +12,41 @@ export class WelcomeScene extends BaseScene {
     }
 
     preload(): void {
+        // Load UI
         this.load.image('background', 'assets/ui/background1.png');
         this.load.image('title', 'assets/ui/title.png');
     }
 
     create(): void {
-        // MenuUI must be in the front
+        // Bring MenuUI to the front and initialize transition
         this.game.scene.sendToBack(this.key);
-
         this.transitionIn();
 
-        // Add background
+        this.setBackground();
+        this.setTitle();
+        this.initInput();
+    }
+
+    /**
+     * Function for initializing the background
+     */
+    private setBackground() {
         let background = this.add.sprite(0, 0, 'background');
         background.setOrigin(0, 0);
         background.setDisplaySize(this.cameras.main.width, this.cameras.main.height);
+    }
 
+    /**
+     * Function for initializing title and animation
+     */
+    private setTitle() {
         // Add title
-        let title = this.add.sprite(this.cameras.main.width / 2, this.cameras.main.height / 2, 'title');
-        title.setScale(0.7, 0.7);
+        const title: Phaser.GameObjects.Sprite = this.add.sprite(this.cameras.main.width / 2, this.cameras.main.height / 2, 'title');
+        const titleScale: number = 0.7;
+        title.setScale(titleScale, titleScale);
         title.setInteractive();
 
-        let titleTween = this.tweens.add({
+        const titleTween: Phaser.Tweens.Tween = this.tweens.add({
             targets: title,
             alpha: 0.7,
             ease: 'Linear',
@@ -42,9 +54,12 @@ export class WelcomeScene extends BaseScene {
             yoyo: true,
             duration: 1000
         });
+    }
 
-        // Scene transition
-        title.on('pointerup', () => this.transitionOut('LevelMenuScene'));
-        return;
+    /**
+     * Function for initializing event actions
+     */
+    private initInput() {
+        this.input.on('pointerup', () => this.transitionOut('LevelMenuScene'));
     }
 }
