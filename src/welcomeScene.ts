@@ -60,6 +60,8 @@ export class WelcomeScene extends BaseScene {
      * Function for initializing event actions
      */
     private initInput() {
-        this.input.on('pointerup', () => this.transitionOut('LevelMenuScene'));
+        this.input.on('pointerdown', function(){
+            this.input.on('pointerup', () => this.transitionOut('LevelMenuScene'));
+        }, this);
     }
 }

@@ -83,8 +83,10 @@ export class ScoreScene extends BaseScene {
      * Function which initializes all global input actions
      */
     private initInput() {
-        this.input.on('pointerup', function() {
-            this.transitionOut('LevelMenuScene');
+        this.input.on('pointerdown', function() {
+            this.input.on('pointerup', function() {
+                this.transitionOut('LevelMenuScene');
+            }, this);
         }, this);
     }
 }

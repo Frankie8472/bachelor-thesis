@@ -605,7 +605,11 @@ export class GameScene extends BaseScene {
         this.points += this.gamefluid.getData('gameMax') / this.maxPoints;
 
         if (this.points >= this.gamefluid.getData('gameMax') - Phaser.Math.EPSILON) {
+            // Disable further interaction with the objects
+            this.arrayDisplayed.getChildren().forEach((gameObject) => gameObject.disableInteractive());
+
             this.gamefluid.setScale(this.gamefluid.getData('gameX'), this.points);
+
             // End game
             this.transitionOut('ScoreScene', {'score': this.points / this.maxPoints, 'previousScene': this.key});
             return;
