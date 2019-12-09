@@ -122,7 +122,7 @@ export class GameScene extends BaseScene {
         this.buttonSize = 64;
 
         this.maxPoints = 10;
-        this.timedataStepsize = 0.00005;
+        this.timedataStepsize = 0.001;
 
         this.cellsX = 3;
         this.cellsY = 4;
@@ -224,8 +224,9 @@ export class GameScene extends BaseScene {
     }
 
     update(time: number): void {
+
         // Check for correctness of selected cards
-        if (this.arrayMarked.getLength() >= 3 && !this.checked) {
+        if (!this.checked && this.arrayMarked.getLength() >= 3) {
             this.checked = true;
             this.replaceCards(this.checkEquality(this.arrayMarked.getChildren()));
         }
@@ -233,6 +234,7 @@ export class GameScene extends BaseScene {
         // Update timeprogressbar
         let timedata: number = this.timefluid.getData('timeY');
         if (timedata <= 0) {
+            this.checked = true;
             // Endgame
             this.transitionOut('ScoreScene', {'score': this.points / this.maxPoints, 'previousScene': this.key});
             return;
@@ -394,7 +396,6 @@ export class GameScene extends BaseScene {
 
         // Return value
         let replaceCards: boolean = true;
-
         if (this.arrayMarked.getLength() < 3) {
             replaceCards = false;
         }
