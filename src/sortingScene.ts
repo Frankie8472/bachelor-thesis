@@ -60,6 +60,7 @@ export class SortingScene extends BaseScene {
         this.load.image('gamebackground', 'assets/ui/sorting_background.png');
         this.load.image('help', 'assets/ui/help.png'/*{ frameWidth: 512, frameHeight: 512 }*/);
         this.load.image('menubackground', 'assets/ui/menu_background.png');
+        this.load.image('exitbutton', 'assets/ui/exit_button.png');
 
         //Object preselection
         this.imagePreSelection();
@@ -92,6 +93,7 @@ export class SortingScene extends BaseScene {
         this.setBackground();
         this.setControlBar();
         this.loadGameObjects();
+        this.exitButton();
         this.initInput();
     }
 
@@ -299,6 +301,22 @@ export class SortingScene extends BaseScene {
             if (gameObject instanceof Phaser.GameObjects.Sprite){
                 gameObject.setPosition(dragX, dragY);
             }
+        }, this);
+    }
+
+    /**
+     * Function for adding the exit button
+     */
+    private exitButton() {
+        const exitButton: Phaser.GameObjects.Sprite = this.add.sprite(25, this.cameras.main.height - 25, 'exitButton');
+        exitButton.setOrigin(0,1);
+        exitButton.setInteractive();
+
+        const scale: number = this.imageScalingFactor(this.buttonSize, exitButton.width, exitButton.height);
+        exitButton.setScale(scale, scale);
+
+        exitButton.on('pointerup', function() {
+            this.transitionOut("LevelMenuScene");
         }, this);
     }
 

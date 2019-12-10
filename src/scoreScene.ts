@@ -46,7 +46,7 @@ export class ScoreScene extends BaseScene {
      * Function for initializing the background
      */
     private setBackground() {
-        let background = this.add.sprite(0, 0, 'gamebackground');
+        const background = this.add.sprite(0, 0, 'gamebackground');
         background.setOrigin(0, 0);
         background.setDisplaySize(this.cameras.main.width, this.cameras.main.height);
     }
@@ -61,7 +61,7 @@ export class ScoreScene extends BaseScene {
         replayButton.setScale(0.5, 0.5);
         replayButton.setInteractive();
         replayButton.on('pointerdown', function() {
-            this.sceneChange(this.previousScene);
+            this.transitionOut(this.previousScene);
         }, this);
 
         let sprite: Phaser.GameObjects.Sprite;
@@ -77,6 +77,15 @@ export class ScoreScene extends BaseScene {
         }
 
         sprite.setOrigin(0.5, 0.5);
+
+        const starTween: Phaser.Tweens.Tween = this.tweens.add({
+            targets: sprite,
+            ease: 'Linear',
+            scale: 1.1,
+            repeat: 1000,
+            yoyo: true,
+            duration: 1000
+        });
     }
 
     /**
