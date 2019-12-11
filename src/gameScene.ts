@@ -170,7 +170,7 @@ export class GameScene extends BaseScene {
             ) {
                 // If level one, fix the last category
                 if (this.level === 1) {
-                    if (image.cat4 === "full") {
+                    if (image.cat4 === 'full') {
                         this.gameSet.push(image);
                     }
                 } else {
@@ -234,7 +234,8 @@ export class GameScene extends BaseScene {
         // Check for correctness of selected cards
         if (!this.checked && this.arrayMarked.getLength() >= 3) {
             this.checked = true;
-            this.replaceObject(this.checkEquality(this.arrayMarked.getChildren()));
+            const objects: Phaser.GameObjects.GameObject[] = this.arrayMarked.getChildren();
+            this.replaceObject(this.checkEquality(objects[0], objects[1], objects[2]));
         }
 
         // Update timeprogressbar
@@ -396,101 +397,48 @@ export class GameScene extends BaseScene {
      * Function for checking for set equality.
      * All properties of one category have to be equal or inherently different.
      * Also adjusts the helper menu.
-     * @param threeCards Array with three objects
+     * @param objects Array with three objects
      */
-    private checkEquality(threeCards: Phaser.GameObjects.GameObject[]): boolean {
+    private checkEquality(sprite1: Phaser.GameObjects.GameObject, sprite2: Phaser.GameObjects.GameObject, sprite3: Phaser.GameObjects.GameObject): boolean {
+        if (sprite1 instanceof Phaser.GameObjects.Sprite &&
+            sprite2 instanceof Phaser.GameObjects.Sprite &&
+            sprite3 instanceof Phaser.GameObjects.Sprite
+        ) {
+            // Return value
+            let replaceObjects: boolean = true;
 
-        // Return value
-        let replaceCards: boolean = true;
-        if (this.arrayMarked.getLength() < 3) {
-            replaceCards = false;
-        }
+            for (let categoryIndicator of this.arrayCategory.getChildren()) {
 
-        // Are all properties of a category equal until now?
-        let eqCheck: boolean = false;
+                // Make sure your objects are sprites
+                if (categoryIndicator instanceof Phaser.GameObjects.Sprite) {
 
-        // Are all properties of a category different until now?
-        let unEqCheck: boolean = false;
+                    // Clear tint
+                    categoryIndicator.clearTint();
 
-        for (let cat of this.arrayCategory.getChildren()) {
-
-            // Make sure your objects are sprites
-            if (cat instanceof Phaser.GameObjects.Sprite) {
-
-                // Clear tint
-                cat.clearTint();
-
-                for (let spriteFirst of threeCards) {
-                    for (let spriteSecond of threeCards) {
-
-                        // Check if the same sprite
-                        if (!(spriteFirst === spriteSecond)) {
-
-                            // Check if property is the same or not
-                            if (spriteFirst.getData(cat.name) === spriteSecond.getData(cat.name)) {
-
-                                // Check if all properties are the same
-                                if (unEqCheck) {
-                                    // -> Two are equal, one is not
-
-                                    // Block whole category
-                                    eqCheck = true;
-
-                                    // Do not replace cards
-                                    if (replaceCards) {
-                                        replaceCards = false;
-                                    }
-
-                                    // Mark category as red
-                                    cat.setTintFill(0xdd0000);
-                                    continue;
-                                }
-
-                                // Mark as equal
-                                if (!eqCheck) {
-                                    eqCheck = true;
-                                }
-
-                            } else {
-
-                                // Check if all categories are different until now
-                                if (eqCheck) {
-                                    // -> two equal, one different
-
-                                    // Block whole category
-                                    unEqCheck = true;
-
-                                    // Do not replace cards
-                                    if (replaceCards) {
-                                        replaceCards = false;
-                                    }
-
-                                    // Mark category as red
-                                    cat.setTintFill(0xdd0000);
-                                    continue;
-                                }
-
-                                // Mark as different
-                                if (!unEqCheck) {
-                                    unEqCheck = true;
-                                }
-                            }
-
-                            // The properties of one category of all cards are the same or different until now => OK
-                            // Mark category as green
-                            cat.setTintFill(0x00dd00);
-
+                    if (
+                        sprite1.getData(categoryIndicator.name) === sprite2.getData(categoryIndicator.name) &&
+                        sprite2.getData(categoryIndicator.name) === sprite3.getData(categoryIndicator.name) &&
+                        sprite1.getData(categoryIndicator.name) === sprite3.getData(categoryIndicator.name)
+                    ) {
+                        categoryIndicator.setTintFill(0x00dd00);
+                    } else if (
+                        !(sprite1.getData(categoryIndicator.name) === sprite2.getData(categoryIndicator.name)) &&
+                        !(sprite2.getData(categoryIndicator.name) === sprite3.getData(categoryIndicator.name)) &&
+                        !(sprite1.getData(categoryIndicator.name) === sprite3.getData(categoryIndicator.name))
+                    ) {
+                        categoryIndicator.setTintFill(0x00dd00);
+                    } else {
+                        if (replaceObjects) {
+                            replaceObjects = false;
                         }
+
+                        // Mark category as red
+                        categoryIndicator.setTintFill(0xdd0000);
                     }
                 }
             }
-
-            // Reset for every category
-            eqCheck = false;
-            unEqCheck = false;
+            return replaceObjects;
         }
-
-        return replaceCards;
     }
 
     /**
