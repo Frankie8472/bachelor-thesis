@@ -137,7 +137,7 @@ export class PropertySortingScene extends BaseScene {
 
         this.selectedElements = [];
 
-        // Randomization
+        // Randomization of amount of properties to sort
         this.propertyCount = Phaser.Math.RND.between(3, numberOfProperties);
 
         // Debatable initializations

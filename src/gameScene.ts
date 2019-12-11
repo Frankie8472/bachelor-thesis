@@ -235,7 +235,7 @@ export class GameScene extends BaseScene {
         if (!this.checked && this.arrayMarked.getLength() >= 3) {
             this.checked = true;
             const objects: Phaser.GameObjects.GameObject[] = this.arrayMarked.getChildren();
-            this.replaceObject(this.checkEquality(objects[0], objects[1], objects[2]));
+            this.replaceObject(this.checkEquality(objects[0], objects[1], objects[2], true));
         }
 
         // Update timeprogressbar
@@ -396,10 +396,12 @@ export class GameScene extends BaseScene {
     /**
      * Function for checking for set equality.
      * All properties of one category have to be equal or inherently different.
-     * Also adjusts the helper menu.
-     * @param objects Array with three objects
+     * @param sprite1 First set object
+     * @param sprite2 Second set object
+     * @param sprite3 Third set object
+     * @param inGame Boolean: Shall the indicator for ingame help be marked?
      */
-    private checkEquality(sprite1: Phaser.GameObjects.GameObject, sprite2: Phaser.GameObjects.GameObject, sprite3: Phaser.GameObjects.GameObject): boolean {
+    private checkEquality(sprite1: Phaser.GameObjects.GameObject, sprite2: Phaser.GameObjects.GameObject, sprite3: Phaser.GameObjects.GameObject, inGame: boolean): boolean {
         if (sprite1 instanceof Phaser.GameObjects.Sprite &&
             sprite2 instanceof Phaser.GameObjects.Sprite &&
             sprite3 instanceof Phaser.GameObjects.Sprite
@@ -420,87 +422,30 @@ export class GameScene extends BaseScene {
                         sprite2.getData(categoryIndicator.name) === sprite3.getData(categoryIndicator.name) &&
                         sprite1.getData(categoryIndicator.name) === sprite3.getData(categoryIndicator.name)
                     ) {
-                        categoryIndicator.setTintFill(0x00dd00);
+                        if (inGame) {
+                            categoryIndicator.setTintFill(0x00dd00);
+                        }
                     } else if (
                         !(sprite1.getData(categoryIndicator.name) === sprite2.getData(categoryIndicator.name)) &&
                         !(sprite2.getData(categoryIndicator.name) === sprite3.getData(categoryIndicator.name)) &&
                         !(sprite1.getData(categoryIndicator.name) === sprite3.getData(categoryIndicator.name))
                     ) {
-                        categoryIndicator.setTintFill(0x00dd00);
+                        if(inGame){
+                            categoryIndicator.setTintFill(0x00dd00);
+                        }
                     } else {
                         if (replaceObjects) {
                             replaceObjects = false;
                         }
-
-                        // Mark category as red
-                        categoryIndicator.setTintFill(0xdd0000);
+                        if (inGame){
+                            // Mark category as red
+                            categoryIndicator.setTintFill(0xdd0000);
+                        }
                     }
                 }
             }
             return replaceObjects;
         }
-    }
-
-    /**
-     * Function only for checking for set equality
-     * @param threeCards Array with three objects
-     */
-    private isSet(threeCards: Phaser.GameObjects.GameObject[]): boolean {
-
-        // Are all properties of a category equal until now?
-        let eqCheck: boolean = false;
-
-        // Are all properties of a category different until now?
-        let unEqCheck: boolean = false;
-
-        for (let cat of this.arrayCategory.getChildren()) {
-
-            // Make sure your objects are sprites
-            if (cat instanceof Phaser.GameObjects.Sprite) {
-
-                // Iterate through all cards. Check in sets of two for equality or inequality and remember this.
-                // Check all 3 pair matchings.
-                for (let spriteFirst of threeCards) {
-
-                    for (let spriteSecond of threeCards) {
-
-                        // Check if not the same sprite
-                        if (!(spriteFirst === spriteSecond)) {
-
-                            // Check if category the same or not
-                            if (spriteFirst.getData(cat.name) === spriteSecond.getData(cat.name)) {
-
-                                // Check if all categories are the same until now
-                                if (unEqCheck) {
-                                    return false;
-                                }
-
-                                if (!eqCheck) {
-                                    eqCheck = true;
-                                }
-
-                            } else {
-                                // Check if all categories are different until now
-                                if (eqCheck) {
-                                    return false;
-                                }
-
-                                if (!unEqCheck) {
-                                    unEqCheck = true;
-                                }
-                            }
-                            // Cat of all cards are the same or different until now => OK
-                        }
-                    }
-                }
-            }
-
-            // Reset for every category
-            eqCheck = false;
-            unEqCheck = false;
-        }
-
-        return true;
     }
 
     /**
@@ -579,13 +524,13 @@ export class GameScene extends BaseScene {
      * Function for checking if there is a occurrence of a set in the displayed objects
      */
     private setEqualityCheck(): void {
-        const cardSet: Phaser.GameObjects.GameObject[] = this.arrayDisplayed.getChildren();
-        const cardSetLength: number = cardSet.length;
+        const objectSet: Phaser.GameObjects.GameObject[] = this.arrayDisplayed.getChildren();
+        const objectSetLength: number = objectSet.length;
 
-        for (let x = 0; x <= cardSetLength; x++) {
-            for (let y = x + 1; y <= cardSetLength - (x + 1); y++) {
-                for (let z = y + 1; z <= cardSetLength - (y + 1); z++) {
-                    if (this.isSet([cardSet[x], cardSet[y], cardSet[z]])) {
+        for (let x = 0; x <= objectSetLength; x++) {
+            for (let y = x + 1; y <= objectSetLength - (x + 1); y++) {
+                for (let z = y + 1; z <= objectSetLength - (y + 1); z++) {
+                    if (this.checkEquality(objectSet[x], objectSet[y], objectSet[z], false)) {
                         return;
                     }
                 }
