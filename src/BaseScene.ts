@@ -15,6 +15,15 @@ export class BaseScene extends Phaser.Scene {
         });
 
         this.key = key;
+        this.generateNewSeed();
+    }
+
+    /**
+     * Function for generating a new seed so that pseudo randomness is guaranteed
+     */
+    private generateNewSeed(): void {
+        const rndStr: string = Phaser.Math.RND.realInRange(Math.pow(10, 2), Math.pow(10,10)).toString();
+        Phaser.Math.RND.sow([rndStr]);
     }
 
     /**
@@ -49,6 +58,9 @@ export class BaseScene extends Phaser.Scene {
      * Opening transition. Normally used to visually introduce a new scene
      */
     protected transitionIn(): void {
+        // Generating a new seed, so that randomness is guaranteed in every repetition of a scene
+        this.generateNewSeed();
+
         this.transitionInit();
 
         this.children.bringToTop(this.transition[1]);

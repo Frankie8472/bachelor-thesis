@@ -62,12 +62,16 @@ export class RestrictedSortingScene extends BaseScene {
 
             // Copy category array
             const categories: any[] = [...this.jsonObject['categories']];
+            console.log("shuffle");
 
             // Choose a random category
             const rndCat: any = Phaser.Math.RND.shuffle(categories)[0];
+            console.log(rndCat.name);
 
             // Select random fitting images
-            const images: any[] = [...Phaser.Math.RND.shuffle(this.jsonObject['images'])];
+            const images: any[] = [...this.jsonObject['images']];
+            Phaser.Math.RND.shuffle(images);
+
             for (let property of Phaser.Math.RND.shuffle(rndCat['validElements']).slice(0, 3)) {
 
                 // Choose for one category 2, for the other 4 and for the last 6 matching (in one property) images.
@@ -78,7 +82,7 @@ export class RestrictedSortingScene extends BaseScene {
                     maxSize = 12;
                 }
 
-                // Iterate through the images until selectin criteria is fullfilled
+                // Iterate through the images until selecting criteria is fulfilled
                 for (let image of images) {
                     // If selected enough images, break.
                     if (this.preselectedObjects.length >= maxSize) {
