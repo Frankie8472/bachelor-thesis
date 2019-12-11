@@ -122,7 +122,7 @@ export class GameScene extends BaseScene {
         this.buttonSize = 64;
 
         this.maxPoints = 10;
-        this.timedataStepsize = 0.000001;
+        this.timedataStepsize = 0.001;
 
         this.cellsX = 3;
         this.cellsY = 4;
@@ -233,11 +233,11 @@ export class GameScene extends BaseScene {
 
         // Update timeprogressbar
         let timedata: number = this.timefluid.getData('timeY');
-        if (timedata <= 0) {
+        if (!this.checked && timedata <= 0) {
             this.checked = true;
+
             // Endgame
             this.transitionOut('ScoreScene', {'score': this.points / this.maxPoints, 'previousScene': this.key});
-            return;
         } else {
             timedata -= this.timedataStepsize;
             this.timefluid.setData('timeY', timedata);
