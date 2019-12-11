@@ -241,6 +241,28 @@ export class RestrictedSortingScene extends BaseScene {
 
                 let scale: number = gameObject.getData('scale');
                 gameObject.setScale(scale, scale);
+
+                let x: number = gameObject.x;
+                let y: number = gameObject.y;
+                let dist: number = Math.sqrt(Math.pow(gameObject.width*gameObject.getData('scale'), 2) + Math.pow(gameObject.height*gameObject.getData('scale'), 2))/2;
+
+                if (x < 0) {
+                    x = 0 + dist;
+                }
+
+                if (y < 0) {
+                    y = 0 + dist;
+                }
+
+                if (x > this.cameras.main.width) {
+                    x = this.cameras.main.width - dist;
+                }
+
+                if (y > this.cameras.main.height) {
+                    y = this.cameras.main.height - dist;
+                }
+
+                gameObject.setPosition(x, y);
             }
         }, this);
 

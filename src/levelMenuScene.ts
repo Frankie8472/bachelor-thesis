@@ -50,6 +50,7 @@ export class LevelMenuScene extends BaseScene {
 
         this.setBackground();
         this.setLevelButtons();
+        this.initInput();
     }
 
     update(time: number): void {
@@ -102,16 +103,8 @@ export class LevelMenuScene extends BaseScene {
 
         const scaleCatButton: number = this.imageScalingFactor(this.buttonSize / 1.5, catButton.width, catButton.height);
         catButton.setScale(scaleCatButton, scaleCatButton);
+        catButton.setName('catButton');
         catButton.setInteractive();
-
-        catButton.on('pointerdown', function() {
-            catButton.setTint(0xcccccc);
-        }, this);
-
-        catButton.on('pointerup', function() {
-            catButton.clearTint();
-            this.transitionOut('SortingSceneLoader');
-        }, this);
 
         this.levelButtons.getChildren().forEach(function(gameObject) {
             if (gameObject instanceof Phaser.GameObjects.Sprite) {
@@ -121,72 +114,114 @@ export class LevelMenuScene extends BaseScene {
                 const scale: number = this.imageScalingFactor(this.buttonSize, gameObject.width, gameObject.height);
                 gameObject.setScale(scale, scale);
 
+                gameObject.setData('clicked', false);
+
                 gameObject.setInteractive();
-                gameObject.on('pointerdown', function() {
-                    gameObject.setTint(0xcccccc);
-                }, this);
             }
         }, this);
 
-        levelButton11.on('pointerup', function() {
-            levelButton11.clearTint();
-            this.transitionOut('PropertySortingSceneLoader', {'setCat': 1, 'infinite': false});
+        this.levelButtons.add(catButton);
+    }
+
+    /**
+     * Function for initializing all input
+     */
+    private initInput(): void {
+        this.input.on('pointerdown', function(pointer, currentlyOver) {
+            const gameObject: any = currentlyOver[0];
+            if (gameObject instanceof Phaser.GameObjects.Sprite) {
+                gameObject.setTint(0xcccccc);
+                gameObject.setData('clicked', true);
+            }
         }, this);
 
-        levelButton12.on('pointerup', function() {
-            levelButton12.clearTint();
-            this.transitionOut('PropertySortingSceneLoader', {'setCat': 2, 'infinite': false});
-            return;
+        this.input.on('pointerup', function(pointer, currentlyOver) {
+            const gameObject: any = currentlyOver[0];
+            if (gameObject instanceof Phaser.GameObjects.Sprite && gameObject.getData('clicked')) {
+                this.buttonFunction(gameObject);
+            }
+            this.levelButtons.getChildren().forEach(function(gameObject) {
+                if (gameObject instanceof Phaser.GameObjects.Sprite) {
+                    gameObject.clearTint();
+                    gameObject.setData('clicked', false);
+                }
+            }, this);
         }, this);
+    }
 
-        levelButton13.on('pointerup', function() {
-            levelButton13.clearTint();
-            this.transitionOut('PropertySortingSceneLoader', {'setCat': 3, 'infinite': false});
-        }, this);
+    /**
+     * Function for assigning each button an event function
+     * @param gameObject GameObject on which you want the function on
+     */
+    private buttonFunction(gameObject: Phaser.GameObjects.Sprite): void {
+        switch (gameObject.name) {
+            case 'catButton': {
+                this.transitionOut('SortingSceneLoader');
+                break;
+            }
+            case 'levelButton11': {
+                this.transitionOut('PropertySortingSceneLoader', {'setCat': 1, 'infinite': false});
+                break;
+            }
 
-        levelButton14.on('pointerup', function() {
-            levelButton14.clearTint();
-            this.transitionOut('PropertySortingSceneLoader', {'setCat': 4, 'infinite': false});
-        }, this);
+            case 'levelButton12': {
+                this.transitionOut('PropertySortingSceneLoader', {'setCat': 2, 'infinite': false});
 
-        levelButton21.on('pointerup', function() {
-            levelButton21.clearTint();
-            this.transitionOut('PropertySortingSceneLoader', {'setCat': 1, 'infinite': true});
-        }, this);
+                break;
+            }
 
-        levelButton22.on('pointerup', function() {
-            levelButton22.clearTint();
-            this.transitionOut('PropertySortingSceneLoader', {'setCat': 2, 'infinite': true});
-        }, this);
+            case 'levelButton13': {
+                this.transitionOut('PropertySortingSceneLoader', {'setCat': 3, 'infinite': false});
+                break;
+            }
 
-        levelButton23.on('pointerup', function() {
-            levelButton23.clearTint();
-            this.transitionOut('PropertySortingSceneLoader', {'setCat': 3, 'infinite': true});
-        }, this);
+            case 'levelButton14': {
+                this.transitionOut('PropertySortingSceneLoader', {'setCat': 4, 'infinite': false});
+                break;
+            }
 
-        levelButton24.on('pointerup', function() {
-            levelButton24.clearTint();
-            this.transitionOut('PropertySortingSceneLoader', {'setCat': 4, 'infinite': true});
-        }, this);
+            case 'levelButton21': {
+                this.transitionOut('PropertySortingSceneLoader', {'setCat': 1, 'infinite': true});
+                break;
+            }
 
-        levelButton31.on('pointerup', function() {
-            levelButton31.clearTint();
-            this.transitionOut('RestrictedSortingSceneLoader', {'level': 1});
-        }, this);
+            case 'levelButton22': {
+                this.transitionOut('PropertySortingSceneLoader', {'setCat': 2, 'infinite': true});
+                break;
+            }
 
-        levelButton32.on('pointerup', function() {
-            levelButton32.clearTint();
-            this.transitionOut('RestrictedSortingSceneLoader', {'level': 2});
-        }, this);
+            case 'levelButton23': {
+                this.transitionOut('PropertySortingSceneLoader', {'setCat': 3, 'infinite': true});
+                break;
+            }
 
-        levelButton33.on('pointerup', function() {
-            levelButton33.clearTint();
-            this.transitionOut('GameSceneLoader', {'level': 1});
-        }, this);
+            case 'levelButton24': {
+                this.transitionOut('PropertySortingSceneLoader', {'setCat': 4, 'infinite': true});
+                break;
+            }
 
-        levelButton34.on('pointerup', function() {
-            levelButton34.clearTint();
-            this.transitionOut('GameSceneLoader', {'level': 2});
-        }, this);
+            case 'levelButton31': {
+                this.transitionOut('RestrictedSortingSceneLoader', {'level': 1});
+                break;
+            }
+
+            case 'levelButton32': {
+                this.transitionOut('RestrictedSortingSceneLoader', {'level': 2});
+                break;
+            }
+
+            case 'levelButton33': {
+                this.transitionOut('GameSceneLoader', {'level': 1});
+                break;
+            }
+
+            case 'levelButton34': {
+                this.transitionOut('GameSceneLoader', {'level': 2});
+                break;
+            }
+            default: {
+                break;
+            }
+        }
     }
 }

@@ -61,7 +61,9 @@ export class ScoreScene extends BaseScene {
         replayButton.setScale(0.5, 0.5);
         replayButton.setInteractive();
         replayButton.on('pointerdown', function() {
-            this.transitionOut(this.previousScene);
+            replayButton.on('pointerup', function() {
+                this.transitionOut(this.previousScene);
+            }, this);
         }, this);
 
         let sprite: Phaser.GameObjects.Sprite;

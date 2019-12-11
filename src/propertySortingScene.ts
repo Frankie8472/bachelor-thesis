@@ -265,7 +265,7 @@ export class PropertySortingScene extends BaseScene {
             if (gameObject instanceof Phaser.Physics.Arcade.Sprite) {
                 gameObject.setTint(0x999999);
                 gameObject.setVelocityY(0);
-                const zoomSpriteScale: number = gameObject.getData('originScale') * 1.5;
+                const zoomSpriteScale: number = gameObject.getData('scale') * 1.5;
                 gameObject.setScale(zoomSpriteScale, zoomSpriteScale);
                 this.arrayStack.bringToTop(gameObject);
             }
@@ -283,19 +283,41 @@ export class PropertySortingScene extends BaseScene {
             if (!dropped && gameObject instanceof Phaser.Physics.Arcade.Sprite) {
                 gameObject.clearTint();
 
-                let scale: number = gameObject.getData('originScale');
+                let scale: number = gameObject.getData('scale');
                 gameObject.setScale(scale, scale);
 
                 if (this.infinite) {
                     gameObject.setVelocityY(this.velocity);
                 }
+
+                let x: number = gameObject.x;
+                let y: number = gameObject.y;
+                let dist: number = Math.sqrt(Math.pow(gameObject.width*gameObject.getData('scale'), 2) + Math.pow(gameObject.height*gameObject.getData('scale'), 2))/2;
+
+                if (x < 0) {
+                    x = 0 + dist;
+                }
+
+                if (y < 0) {
+                    y = 0 + dist;
+                }
+
+                if (x > this.cameras.main.width) {
+                    x = this.cameras.main.width - dist;
+                }
+
+                if (y > this.cameras.main.height) {
+                    y = this.cameras.main.height - dist;
+                }
+
+                gameObject.setPosition(x, y);
             }
         }, this);
 
         this.input.on('drop', function(pointer, gameObject, dropZone) {
             if (gameObject instanceof Phaser.Physics.Arcade.Sprite && dropZone instanceof Phaser.GameObjects.Zone) {
                 let coords: number[] = [gameObject.input.dragStartX, gameObject.input.dragStartY];
-                let scale: number = gameObject.getData('originScale');
+                let scale: number = gameObject.getData('scale');
                 let point: number = -1;
 
                 if (gameObject.name === dropZone.name) {
@@ -357,7 +379,7 @@ export class PropertySortingScene extends BaseScene {
                 const spriteScale: number = this.imageScalingFactor(size, sprite.width, sprite.height);
                 sprite.setScale(spriteScale, spriteScale);
 
-                sprite.setData('originScale', spriteScale);
+                sprite.setData('scale', spriteScale);
 
                 sprite.setInteractive();
 
