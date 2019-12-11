@@ -122,7 +122,7 @@ export class GameScene extends BaseScene {
         this.buttonSize = 64;
 
         this.maxPoints = 10;
-        this.timedataStepsize = 0.001;
+        this.timedataStepsize = 0.000001;
 
         this.cellsX = 3;
         this.cellsY = 4;
@@ -151,12 +151,17 @@ export class GameScene extends BaseScene {
 
         // Preselect objects and preload images
         const selectedProperties: any[] = [];
+
+        // Choose three random properties of each category
         for (let cat of this.jsonObject['categories']) {
             const selectedProperty: any[] = Phaser.Math.RND.shuffle(cat['validElements']).slice(0, 3);
             selectedProperty.forEach((object, index, array) => array[index] = object.name);
             selectedProperties.push(selectedProperty);
         }
 
+        console.log(selectedProperties);
+
+        // Choose all image
         for (let image of this.jsonObject['images']) {
             if (
                 selectedProperties[0].indexOf(image.cat1) > -1 &&
@@ -172,6 +177,7 @@ export class GameScene extends BaseScene {
                     this.gameSet.push(image);
                 }
             }
+            console.log(this.gameSet.length);
 
         }
 
@@ -228,7 +234,7 @@ export class GameScene extends BaseScene {
         // Check for correctness of selected cards
         if (!this.checked && this.arrayMarked.getLength() >= 3) {
             this.checked = true;
-            this.replaceCards(this.checkEquality(this.arrayMarked.getChildren()));
+            this.replaceObject(this.checkEquality(this.arrayMarked.getChildren()));
         }
 
         // Update timeprogressbar
@@ -374,7 +380,7 @@ export class GameScene extends BaseScene {
     private initObjects(): void {
 
         for (let coords of this.arrayCoordinates) {
-            const sprite: Phaser.GameObjects.Sprite = Phaser.Utils.Array.GetRandom(this.arrayStack.getChildren());
+            const sprite: Phaser.GameObjects.Sprite = Phaser.Math.RND.pick(this.arrayStack.getChildren());
 
             sprite.setX(coords[0]);
             sprite.setY(coords[1]);
@@ -551,40 +557,40 @@ export class GameScene extends BaseScene {
 
     /**
      * Function for replacing marked objects
-     * @param replaceCards
+     * @param replaceObject
      */
-    private replaceCards(replaceCards: boolean): void {
-        if (replaceCards) {
-            for (let discardedCard of this.arrayMarked.getChildren()) {
-                const newSprite: Phaser.GameObjects.Sprite = Phaser.Utils.Array.GetRandom(this.arrayStack.getChildren());
-                if (discardedCard instanceof Phaser.GameObjects.Sprite) {
-                    newSprite.setX(discardedCard.x);
-                    newSprite.setY(discardedCard.y);
+    private replaceObject(replaceObject: boolean): void {
+        if (replaceObject) {
+            for (let oldSprite of this.arrayMarked.getChildren()) {
+                if (oldSprite instanceof Phaser.GameObjects.Sprite) {
+                    oldSprite.clearTint();
+                    oldSprite.setVisible(false);
+                    this.arrayDisplayed.remove(oldSprite);
+                    this.arrayDropped.add(oldSprite);
 
-                    discardedCard.clearTint();
-                    discardedCard.setVisible(false);
+                    if (this.arrayStack.getLength() <= 0) {
+                        this.arrayDropped.getChildren().forEach((element) => this.arrayStack.add(element));
+                        this.arrayDropped.clear(false, false);
+                    }
 
+                    const newSprite: Phaser.GameObjects.Sprite = Phaser.Math.RND.pick(this.arrayStack.getChildren());
+                    newSprite.setPosition(oldSprite.x, oldSprite.y);
                     newSprite.setVisible(true);
-
                     this.arrayStack.remove(newSprite);
                     this.arrayDisplayed.add(newSprite);
                 }
-
-                this.arrayDisplayed.remove(discardedCard);
-                this.arrayDropped.add(discardedCard);
-
             }
 
-            this.arrayMarked.clear(true, false);
+            this.arrayMarked.clear(false, false);
 
             this.resetHelp();
-
-            this.updateProgressbar();
 
             this.setEqualityCheck();
 
             // Set checked to false
             this.checked = false;
+
+            this.updateProgressbar();
         }
     }
 
@@ -606,6 +612,8 @@ export class GameScene extends BaseScene {
         this.points += this.gamefluid.getData('gameMax') / this.maxPoints;
 
         if (this.points >= this.gamefluid.getData('gameMax') - Phaser.Math.EPSILON) {
+            this.checked = true;
+
             // Disable further interaction with the objects
             this.arrayDisplayed.getChildren().forEach((gameObject) => gameObject.disableInteractive());
 
@@ -613,7 +621,7 @@ export class GameScene extends BaseScene {
 
             // End game
             this.transitionOut('ScoreScene', {'score': this.points / this.maxPoints, 'previousScene': this.key});
-            return;
+
         }
 
         this.gamefluid.setScale(this.gamefluid.getData('gameX'), this.points);
