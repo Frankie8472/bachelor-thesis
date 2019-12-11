@@ -360,8 +360,6 @@ export class PropertySortingScene extends BaseScene {
                 const size: number = Phaser.Math.RND.between(this.objectDisplaySize * 0.8, this.objectDisplaySize * 1.3);
 
                 const sprite: Phaser.Physics.Arcade.Sprite = this.physics.add.sprite(Phaser.Math.RND.between(100 + this.objectDisplaySize / 2, this.cameras.main.width - this.objectDisplaySize / 2), Phaser.Math.RND.between(this.objectDisplaySize / 2, this.cameras.main.height - this.objectDisplaySize * 2 - this.objectDisplaySize / 2), propImageName);
-                this.arrayStack.add(sprite);
-                this.arrayStatic.add(sprite);
                 sprite.setName(propImageName);
 
                 if (this.infinite) {
@@ -382,6 +380,9 @@ export class PropertySortingScene extends BaseScene {
                 sprite.setData('scale', spriteScale);
 
                 sprite.setInteractive();
+
+                this.arrayStatic.add(sprite);
+                this.arrayStack.add(sprite);
 
                 this.input.setDraggable(sprite);
             }
@@ -428,6 +429,8 @@ export class PropertySortingScene extends BaseScene {
                                 this.arrayDropped.add(sprite);
                                 sprite.disableInteractive();
                                 this.arrayStatic.remove(sprite);
+
+                                this.arrayStack.sendToBack(sprite);
                             }
                         }
                     }
