@@ -124,8 +124,8 @@ export class GameScene extends BaseScene {
         this.maxPoints = 10;
         this.timedataStepsize = 0.0001;
 
-        this.cellsX = 3;
-        this.cellsY = 4;
+        this.cellsX = 4;
+        this.cellsY = 3;
 
         this.arrayCoordinates = [];
         let offsetX = 100;
