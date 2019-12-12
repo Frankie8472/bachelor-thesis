@@ -122,7 +122,7 @@ export class GameScene extends BaseScene {
         this.buttonSize = 64;
 
         this.maxPoints = 10;
-        this.timedataStepsize = 0.000001;
+        this.timedataStepsize = 0.0001;
 
         this.cellsX = 3;
         this.cellsY = 4;
@@ -159,8 +159,6 @@ export class GameScene extends BaseScene {
             selectedProperties.push(selectedProperty);
         }
 
-        console.log(selectedProperties);
-
         // Choose all image
         for (let image of this.jsonObject['images']) {
             if (
@@ -177,8 +175,6 @@ export class GameScene extends BaseScene {
                     this.gameSet.push(image);
                 }
             }
-            console.log(this.gameSet.length);
-
         }
 
         for (let image of this.gameSet) {
@@ -504,6 +500,16 @@ export class GameScene extends BaseScene {
     private updateProgressbar(): void {
         this.points += this.gamefluid.getData('gameMax') / this.maxPoints;
 
+        // Add time but not more than max
+        let timedata: number = this.timefluid.getData('timeY');
+        timedata += this.timedataStepsize*5000;
+        if (timedata > this.timefluid.getData('timeYMax')){
+            timedata = this.timefluid.getData('timeYMax');
+        }
+
+        this.timefluid.setScale(this.timefluid.getData('timeX'), timedata);
+        this.timefluid.setData('timeY', timedata);
+
         if (this.points >= this.gamefluid.getData('gameMax') - Phaser.Math.EPSILON) {
             this.checked = true;
 
@@ -513,7 +519,7 @@ export class GameScene extends BaseScene {
             this.gamefluid.setScale(this.gamefluid.getData('gameX'), this.points);
 
             // End game
-            this.transitionOut('ScoreScene', {'score': this.points / this.maxPoints, 'previousScene': this.key});
+            this.transitionOut('ScoreScene', {'score': 1, 'previousScene': this.key});
 
         }
 
@@ -671,6 +677,7 @@ export class GameScene extends BaseScene {
         this.timefluid.setOrigin(0.5, 1);
         this.timefluid.setData('timeX', multiplierX);
         this.timefluid.setData('timeY', (progressbar.height * multiplierY - 6) / this.timefluid.height);
+        this.timefluid.setData('timeYMax', (progressbar.height * multiplierY - 6) / this.timefluid.height);
         this.timefluid.setScale(this.timefluid.getData('timeX'), this.timefluid.getData('timeY'));
         this.timefluid.setAlpha(0.7);
     }

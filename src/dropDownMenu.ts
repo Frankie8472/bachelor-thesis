@@ -43,12 +43,18 @@ export class DropDownMenu extends BaseScene {
      */
     private menuBackground: Phaser.GameObjects.Sprite;
 
+    /**
+     * Pause background
+     */
+    private pauseBackground: Phaser.GameObjects.Container;
+
     constructor() {
         super('DropDownMenu');
     }
 
     init(): void {
         // Initialize fields
+        this.pauseBackground = this.add.container(0, 0);
         this.key_paused_scene = null;
         this.lock = false;
         this.menuDown = false;
@@ -61,9 +67,11 @@ export class DropDownMenu extends BaseScene {
         this.load.spritesheet('fullscreenbuttonblack', 'assets/ui/fullscreen_button_black.png', {frameWidth: 64, frameHeight: 64});
         this.load.image('exitbutton', 'assets/ui/exit_button.png' /*{ frameWidth: 512, frameHeight: 512 }*/);
         this.load.image('menubackground', 'assets/ui/menu_background.png' /*{ frameWidth: 352, frameHeight: 728 }*/);
+        this.load.image('sandClock', 'assets/ui/sandclock.png');
     }
 
     create(): void {
+        this.setPixelScreen();
         this.setMenu();
         this.initInput();
     }
@@ -242,6 +250,8 @@ export class DropDownMenu extends BaseScene {
                 duration: 500
             });
 
+            this.pauseBackground.setVisible(false);
+
             this.menuDown = false;
 
             // Resume current scene
@@ -286,7 +296,26 @@ export class DropDownMenu extends BaseScene {
                 delay: 200
             });
 
+            this.pauseBackground.setVisible(true);
+
             this.menuDown = true;
         }
+    }
+
+    private setPixelScreen() {
+        const pixelScreen = this.add.grid(0, 0, this.cameras.main.width, this.cameras.main.height, this.cameras.main.width/100, this.cameras.main.width/100);
+        pixelScreen.setOrigin(0, 0);
+        pixelScreen.setFillStyle(0x777777);
+        pixelScreen.setAltFillStyle(0x555555);
+        pixelScreen.setOutlineStyle(0x555555);
+        pixelScreen.setAlpha(0.8);
+        this.pauseBackground.add(pixelScreen);
+
+        const sandClock = this.add.sprite(this.cameras.main.width/2, this.cameras.main.height/2, 'sandClock');
+        sandClock.setOrigin(0.5, 0.5);
+        this.pauseBackground.add(sandClock);
+
+        this.pauseBackground.setVisible(false);
+        this.children.sendToBack(this.pauseBackground);
     }
 }
