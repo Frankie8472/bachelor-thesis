@@ -330,7 +330,7 @@ export class SortingScene extends BaseScene {
      * Function for adding the exit button
      */
     private exitButton() {
-        const exitButton: Phaser.GameObjects.Sprite = this.add.sprite(25, this.cameras.main.height - 25, 'exitButton');
+        const exitButton: Phaser.GameObjects.Sprite = this.add.sprite(25, this.cameras.main.height - 25, 'exitbutton');
         exitButton.setOrigin(0,1);
         exitButton.setInteractive();
 

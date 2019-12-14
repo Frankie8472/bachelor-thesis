@@ -21,140 +21,90 @@ def main():
     fillings = ["none", "url(#stripe)", "url(#dotted)"]
     numbers = ["one", "two", "three", "four", "five", "six"]
 
-    for single in [True, False]:
+    for single in [True, True]:
         if single:
             for shape in shapes:
-                square = "none"
-                circle = "none"
-                triangle = "none"
-                ellipse = "none"
-                octagon = "none"
-                rhombus = "none"
-                one = "none"
-                two = "none"
-                three = "none"
-                four = "none"
-                five = "none"
-                six = "none"
+                i = 1
+                for [colordefault, colordark] in colors:
+                    square = "none"
+                    circle = "none"
+                    triangle = "none"
+                    ellipse = "none"
+                    octagon = "none"
+                    rhombus = "none"
+                    one = "none"
+                    two = "none"
+                    three = "none"
+                    four = "none"
+                    five = "none"
+                    six = "none"
 
-                filling = "none"
+                    filling = "none"
 
-                [colordefault, colordark] = colors[0]
+                    if shape == "square":
+                        square = "inherit"
+                    elif shape == "circle":
+                        circle = "inherit"
+                    elif shape == "triangle":
+                        triangle = "inherit"
+                    elif shape == "ellipse":
+                        ellipse = "inherit"
+                    elif shape == "octagon":
+                        octagon = "inherit"
+                    else:
+                        rhombus = "inherit"
 
-                if shape == "square":
-                    square = "inherit"
-                elif shape == "circle":
-                    circle = "inherit"
-                elif shape == "triangle":
-                    triangle = "inherit"
-                elif shape == "ellipse":
-                    ellipse = "inherit"
-                elif shape == "octagon":
-                    octagon = "inherit"
-                else:
-                    rhombus = "inherit"
+                    imageString = imgStr(colordefault, colordark, square, circle, triangle, ellipse, octagon, rhombus, filling, one, two,
+                                         three, four, five, six)
 
-                imageString = imgStr(colordefault, colordark, square, circle, triangle, ellipse, octagon, rhombus, filling, one, two,
-                                     three, four, five, six)
+                    with open("images/svg/" + shape + str(i) + ".svg", "w+") as file:
+                        file.write(imageString)
 
-                with open("images/svg/" + shape + ".svg", "w+") as file:
-                    file.write(imageString)
+                    i = i + 1
 
             for [colordefault, colordark] in colors:
-                square = "inherit"
-                circle = "none"
-                triangle = "none"
-                ellipse = "none"
-                octagon = "none"
-                rhombus = "none"
-                one = "none"
-                two = "none"
-                three = "none"
-                four = "none"
-                five = "none"
-                six = "none"
+                i = 1
+                for shape in shapes:
+                    square = "none"
+                    circle = "none"
+                    triangle = "none"
+                    ellipse = "none"
+                    octagon = "none"
+                    rhombus = "none"
+                    one = "none"
+                    two = "none"
+                    three = "none"
+                    four = "none"
+                    five = "none"
+                    six = "none"
 
-                filling = "none"
+                    filling = "none"
 
-                imageString = imgStr(colordefault, colordark, square, circle, triangle, ellipse, octagon, rhombus, filling, one, two,
-                                     three, four, five, six)
+                    if shape == "square":
+                        square = "inherit"
+                    elif shape == "circle":
+                        circle = "inherit"
+                    elif shape == "triangle":
+                        triangle = "inherit"
+                    elif shape == "ellipse":
+                        ellipse = "inherit"
+                    elif shape == "octagon":
+                        octagon = "inherit"
+                    else:
+                        rhombus = "inherit"
 
-                with open("images/svg/" + colordefault + ".svg", "w+") as file:
-                    file.write(imageString)
+                    imageString = imgStr(colordefault, colordark, square, circle, triangle, ellipse, octagon, rhombus, filling, one, two,
+                                         three, four, five, six)
+
+                    with open("images/svg/" + colordefault + str(i) + ".svg", "w+") as file:
+                        file.write(imageString)
+
+                    i = i + 1
 
             for filling in fillings:
-                square = "inherit"
-                circle = "none"
-                triangle = "none"
-                ellipse = "none"
-                octagon = "none"
-                rhombus = "none"
-                one = "none"
-                two = "none"
-                three = "none"
-                four = "none"
-                five = "none"
-                six = "none"
-
-                [colordefault, colordark] = colors[0]
-
-                fillingname = "full"
-                if filling != "none":
-                    fillingname = filling[5:len(filling) - 1]
-
-                imageString = imgStr(colordefault, colordark, square, circle, triangle, ellipse, octagon, rhombus, filling, one, two,
-                                     three, four, five, six)
-
-                with open("images/svg/" + fillingname + ".svg", "w+") as file:
-                    file.write(imageString)
-
-            for number in numbers:
-                square = "inherit"
-                circle = "none"
-                triangle = "none"
-                ellipse = "none"
-                octagon = "none"
-                rhombus = "none"
-                one = "none"
-                two = "none"
-                three = "none"
-                four = "none"
-                five = "none"
-                six = "none"
-
-                filling = "none"
-
-                [colordefault, colordark] = colors[0]
-
-                if number == "one":
-                    one = "inherit"
-                elif number == "two":
-                    two = "inherit"
-                elif number == "three":
-                    three = "inherit"
-                elif number == "four":
-                    four = "inherit"
-                elif number == "five":
-                    five = "inherit"
-                else:
-                    six = "inherit"
-
-                imageString = imgStr(colordefault, colordark, square, circle, triangle, ellipse, octagon, rhombus, filling, one, two,
-                                     three, four, five, six)
-
-                with open("images/svg/" + number + ".svg", "w+") as file:
-                    file.write(imageString)
-
-            continue
-
-        with open("temp.txt", "w") as file:
-            file.write("")
-            file.close()
-
-        for colordefault, colordark in colors:
-            for shape in shapes:
-                for filling in fillings:
-                    for number in numbers:
+                i = 1
+                for shape in shapes:
+                    for [colordefault, colordark] in colors:
                         square = "none"
                         circle = "none"
                         triangle = "none"
@@ -181,6 +131,49 @@ def main():
                         else:
                             rhombus = "inherit"
 
+                        fillingname = "full"
+                        if filling != "none":
+                            fillingname = filling[5:len(filling) - 1]
+
+                        imageString = imgStr(colordefault, colordark, square, circle, triangle, ellipse, octagon, rhombus, filling, one, two,
+                                             three, four, five, six)
+
+                        with open("images/svg/" + fillingname + str(i) + ".svg", "w+") as file:
+                            file.write(imageString)
+
+                        i = i + 1
+
+            for number in numbers:
+                i = 1
+                for shape in shapes:
+                    for [colordefault, colordark] in colors:
+                        square = "none"
+                        circle = "none"
+                        triangle = "none"
+                        ellipse = "none"
+                        octagon = "none"
+                        rhombus = "none"
+                        one = "none"
+                        two = "none"
+                        three = "none"
+                        four = "none"
+                        five = "none"
+                        six = "none"
+
+                        filling = "none"
+
+                        if shape == "square":
+                            square = "inherit"
+                        elif shape == "circle":
+                            circle = "inherit"
+                        elif shape == "triangle":
+                            triangle = "inherit"
+                        elif shape == "ellipse":
+                            ellipse = "inherit"
+                        elif shape == "octagon":
+                            octagon = "inherit"
+                        else:
+                            rhombus = "inherit"
 
                         if number == "one":
                             one = "inherit"
@@ -195,29 +188,86 @@ def main():
                         else:
                             six = "inherit"
 
-                        fillingname = "full"
-                        if filling != "none":
-                            fillingname = filling[5:len(filling) - 1]
+                        imageString = imgStr(colordefault, colordark, square, circle, triangle, ellipse, octagon, rhombus, filling, one, two,
+                                             three, four, five, six)
 
-                        imageString = imgStr(colordefault, colordark, square, circle, triangle, ellipse, octagon, rhombus, filling, one,
-                                             two, three, four, five, six)
-
-                        filename = colordefault + shape + number + fillingname
-
-                        with open("images/svg/" + filename + ".svg", "w+") as file:
+                        with open("images/svg/" + number + str(i) + ".svg", "w+") as file:
                             file.write(imageString)
-                            file.close()
 
-                        with open("temp.txt", "a") as file:
-                            file.seek(0, 2)
-                            file.writelines([
-                                "- name: " + colordefault + shape + number + fillingname + ".png\n",
-                                "  cat1: " + colordefault + "\n",
-                                "  cat2: " + shape + "\n",
-                                "  cat3: " + number + "\n",
-                                "  cat4: " + fillingname + "\n"
-                            ])
-                            file.close()
+                        i = i + 1
+
+        if not single:
+            with open("temp.txt", "w") as file:
+                file.write("")
+                file.close()
+
+            for colordefault, colordark in colors:
+                for shape in shapes:
+                    for filling in fillings:
+                        for number in numbers:
+                            square = "none"
+                            circle = "none"
+                            triangle = "none"
+                            ellipse = "none"
+                            octagon = "none"
+                            rhombus = "none"
+                            one = "none"
+                            two = "none"
+                            three = "none"
+                            four = "none"
+                            five = "none"
+                            six = "none"
+
+                            if shape == "square":
+                                square = "inherit"
+                            elif shape == "circle":
+                                circle = "inherit"
+                            elif shape == "triangle":
+                                triangle = "inherit"
+                            elif shape == "ellipse":
+                                ellipse = "inherit"
+                            elif shape == "octagon":
+                                octagon = "inherit"
+                            else:
+                                rhombus = "inherit"
+
+
+                            if number == "one":
+                                one = "inherit"
+                            elif number == "two":
+                                two = "inherit"
+                            elif number == "three":
+                                three = "inherit"
+                            elif number == "four":
+                                four = "inherit"
+                            elif number == "five":
+                                five = "inherit"
+                            else:
+                                six = "inherit"
+
+                            fillingname = "full"
+                            if filling != "none":
+                                fillingname = filling[5:len(filling) - 1]
+
+                            imageString = imgStr(colordefault, colordark, square, circle, triangle, ellipse, octagon, rhombus, filling, one,
+                                                 two, three, four, five, six)
+
+                            filename = colordefault + shape + number + fillingname
+
+                            with open("images/svg/" + filename + ".svg", "w+") as file:
+                                file.write(imageString)
+                                file.close()
+
+                            with open("temp.txt", "a") as file:
+                                file.seek(0, 2)
+                                file.writelines([
+                                    "- name: " + colordefault + shape + number + fillingname + ".png\n",
+                                    "  cat1: " + colordefault + "\n",
+                                    "  cat2: " + shape + "\n",
+                                    "  cat3: " + number + "\n",
+                                    "  cat4: " + fillingname + "\n"
+                                ])
+                                file.close()
 
 
 def imgStr(colordefault, colordark, square, circle, triangle, ellipse, octagon, rhombus, filling, one, two, three, four, five, six):
