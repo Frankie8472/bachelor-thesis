@@ -106,7 +106,7 @@ export class PropertySortingScene extends BaseScene {
     /**
      * Array of preselected objects for faster loading
      */
-    private selectedElements: string[];
+    private selectedElements: any[];
 
     constructor() {
         super('PropertySortingScene');
@@ -156,7 +156,7 @@ export class PropertySortingScene extends BaseScene {
 
         // Preselect properties
         for (let property of this.jsonObject['categories'][this.setCat - 1].validElements) {
-            this.selectedElements.push(property.name);
+            this.selectedElements.push(property);
         }
 
         // Pick the elements
@@ -166,13 +166,12 @@ export class PropertySortingScene extends BaseScene {
         }
 
         // Get property images
-        for (let prop of this.jsonObject['categories'][this.setCat - 1].validElements) {
-            if (prop.url === null || !(this.selectedElements.indexOf(prop.name) > -1)) {
-                continue;
-            }
+        let propLength: number = this.selectedElements[0].urls.length;
+        let rndIndex: number = Phaser.Math.RND.between(0, propLength);
+        for (let prop of this.selectedElements) {
 
             let name = prop.name;
-            let path = 'assets/geometrical_objects/images/' + prop.url;
+            let path = 'assets/geometrical_objects/images/' + prop.urls[rndIndex];
             this.load.image(name, path);
         }
 

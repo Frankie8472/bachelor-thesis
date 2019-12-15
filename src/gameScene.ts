@@ -240,7 +240,7 @@ export class GameScene extends BaseScene {
             this.checked = true;
 
             // Endgame
-            this.transitionOut('ScoreScene', {'score': this.points / this.maxPoints, 'previousScene': this.key});
+            this.transitionOut('ScoreScene', {'score': this.points / this.gamefluid.getData('gameMax'), 'previousScene': this.key});
         } else {
             timedata -= this.timedataStepsize;
             this.timefluid.setData('timeY', timedata);
