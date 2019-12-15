@@ -239,13 +239,13 @@ export class PropertySortingScene extends BaseScene {
      * Functions for initializing the drop zones
      */
     private setDropzones(): void {
-        const stepSize: number = this.cameras.main.width / (this.propertyCount + 1);
-        const crateSize: number = Math.min(this.objectDisplaySize * 2, this.cameras.main.width/(this.selectedElements.length+1));
-        let iteration: number = 1;
+        const stepSize: number = (this.cameras.main.width - this.correctBar.x) / (this.propertyCount);
+        const crateSize: number = Math.min(this.objectDisplaySize * 2, (this.cameras.main.width - this.correctBar.x)/(this.selectedElements.length+1));
+        let iteration: number = 0.5;
 
         for (let property of this.selectedElements) {
             // Add crate
-            const crate: Phaser.GameObjects.Sprite = this.add.sprite(stepSize * iteration, this.cameras.main.height - crateSize / 2, 'wooden_crate');
+            const crate: Phaser.GameObjects.Sprite = this.add.sprite(this.correctBar.x + stepSize * iteration, this.cameras.main.height - crateSize / 2, 'wooden_crate');
             crate.setOrigin(0.5, 0.5);
 
             const imageScalingFactor: number = this.imageScalingFactor(crateSize, crate.width, crate.height);
