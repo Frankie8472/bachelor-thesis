@@ -15,6 +15,8 @@ export class WelcomeScene extends BaseScene {
         // Load UI
         this.load.image('background', 'assets/ui/background1.png');
         this.load.image('title', 'assets/ui/title.png');
+
+        this.load.audio('welcome', 'assets/ui_audio/welcome.mp3');
     }
 
     create(): void {
@@ -25,6 +27,7 @@ export class WelcomeScene extends BaseScene {
         this.setBackground();
         this.setTitle();
         this.initInput();
+        this.initAudio();
     }
 
     /**
@@ -63,5 +66,12 @@ export class WelcomeScene extends BaseScene {
         this.input.on('pointerdown', function(){
             this.input.on('pointerup', () => this.transitionOut('LevelMenuScene'));
         }, this);
+    }
+
+    /**
+     * Function for initializing soundeffects
+     */
+    private initAudio() {
+        this.sound.add('welcome').play('', {loop: true});
     }
 }

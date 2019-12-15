@@ -217,6 +217,11 @@ export class GameScene extends BaseScene {
         this.load.image('progressbar', 'assets/ui/progressbar.png');
         this.load.image('progressstar', 'assets/ui/star.png');
         this.load.image('sandclock', 'assets/ui/sandclock.png');
+
+        if (this.textures.exists('loading')){
+            this.textures.remove('loading')
+        }
+        this.load.audio('loading', 'assets/ui_audio/loading.mp3');
     }
 
     create(): void {
@@ -229,11 +234,10 @@ export class GameScene extends BaseScene {
         this.loadObjects();
         this.initObjects();
         this.setEqualityCheck();
-
         this.setTimeProgressbar();
         this.setGameProgressbar();
-
         this.introduction();
+        this.initAudio();
     }
 
     update(time: number): void {
@@ -701,5 +705,12 @@ export class GameScene extends BaseScene {
     private introduction() {
         this.scene.pause();
         this.game.scene.start("IntroScene", {"pausedScene": this.getKey()});
+    }
+
+    /**
+     * Function for initializing soundeffects
+     */
+    private initAudio() {
+        this.sound.add('loading').play('', {loop: true});
     }
 }

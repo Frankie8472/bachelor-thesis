@@ -197,6 +197,14 @@ export class PropertySortingScene extends BaseScene {
         this.load.image('progressbarRed', 'assets/ui/progressbar_red.png');
         this.load.image('plus', 'assets/ui/plus.png');
         this.load.image('minus', 'assets/ui/minus.png');
+        if (this.infinite){
+            this.load.audio('battle', 'assets/ui_audio/battle.mp3');
+        } else {
+            if (this.textures.exists('loading')){
+                this.textures.remove('loading')
+            }
+            this.load.audio('loading', 'assets/ui_audio/loading.mp3');
+        }
     }
 
     create(): void {
@@ -210,6 +218,7 @@ export class PropertySortingScene extends BaseScene {
         this.setDropzones();
         this.initInput();
         this.initFirstDrop();
+        this.initAudio();
     }
 
     update(time: number): void {
@@ -594,6 +603,17 @@ export class PropertySortingScene extends BaseScene {
                 'score': this.correctCount / this.correctBar.getData('gameMax') - this.wrongCount / this.wrongBar.getData('gameMax'),
                 'previousScene': this.getKey()
             });
+        }
+    }
+
+    /**
+     * Function for initializing soundeffects
+     */
+    private initAudio() {
+        if (this.infinite){
+            this.sound.add('battle').play('', {loop: true});
+        } else {
+            this.sound.add('loading').play('', {loop: true});
         }
     }
 }

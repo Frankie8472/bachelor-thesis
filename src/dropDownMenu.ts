@@ -201,6 +201,7 @@ export class DropDownMenu extends BaseScene {
                 this.game.scene.getScenes(true).forEach(function(scene){
                     // @ts-ignore
                     if (!(scene.key === this.getKey())) {
+                        scene.sound.stopAll();
                         // @ts-ignore
                         this.game.scene.stop(scene.key);
                     }

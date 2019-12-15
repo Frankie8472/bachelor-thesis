@@ -41,6 +41,10 @@ export class LevelMenuScene extends BaseScene {
         this.load.image('levelButton33', 'assets/ui/level33_button.png');
         this.load.image('levelButton34', 'assets/ui/level34_button.png');
 
+        if (this.textures.exists('loading')){
+            this.textures.remove('loading')
+        }
+        this.load.audio('loading', 'assets/ui_audio/loading.mp3');
     }
 
     create(): void {
@@ -51,6 +55,7 @@ export class LevelMenuScene extends BaseScene {
         this.setBackground();
         this.setLevelButtons();
         this.initInput();
+        this.initAudio();
     }
 
     update(time: number): void {
@@ -225,5 +230,12 @@ export class LevelMenuScene extends BaseScene {
                 break;
             }
         }
+    }
+
+    /**
+     * Function for initializing soundeffects
+     */
+    private initAudio() {
+        this.sound.add('loading').play('', {loop: true});
     }
 }

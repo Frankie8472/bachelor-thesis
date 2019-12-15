@@ -105,6 +105,7 @@ export class BaseScene extends Phaser.Scene {
      * @param data Additional data you want to give to the next scene.
      */
     protected sceneChange(scene: string, data?: any): void {
+        this.sound.stopAll();
         this.game.scene.start(scene, data);
         this.game.scene.stop(this.key);
     }

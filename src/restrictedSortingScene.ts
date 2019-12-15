@@ -148,6 +148,11 @@ export class RestrictedSortingScene extends BaseScene {
                 }, this);
             }
         }
+
+        if (this.textures.exists('loading')){
+            this.textures.remove('loading')
+        }
+        this.load.audio('loading', 'assets/ui_audio/loading.mp3');
     }
 
     create(): void {
@@ -159,6 +164,7 @@ export class RestrictedSortingScene extends BaseScene {
         this.setDropZones();
         this.setObjects();
         this.initInput();
+        this.initAudio();
     }
 
     update(time: number): void {
@@ -428,6 +434,13 @@ export class RestrictedSortingScene extends BaseScene {
 
         // Return false if there are no mutual properties
         return (mergeArray.length > 0);
+    }
+
+    /**
+     * Function for initializing soundeffects
+     */
+    private initAudio() {
+        this.sound.add('loading').play('', {loop: true});
     }
 }
 

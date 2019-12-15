@@ -55,12 +55,11 @@ export class SortingScene extends BaseScene {
     }
 
     preload(): void {
-
         // Preload UI
-        if (this.textures.exists('gamebackground')){
-            this.textures.remove('gamebackground')
+        if (this.textures.exists('sortingbackground')){
+            this.textures.remove('sortingbackground')
         }
-        this.load.image('gamebackground', 'assets/ui/background2.png');
+        this.load.image('sortingbackground', 'assets/ui/background2.png');
 
         if (this.textures.exists('help')){
             this.textures.remove('help')
@@ -72,10 +71,10 @@ export class SortingScene extends BaseScene {
         }
         this.load.image('helpermenubackground', 'assets/ui/menu_background.png');
 
-        if (this.textures.exists('exitbutton')){
-            this.textures.remove('exitbutton')
+        if (this.textures.exists('sorting_exitbutton')){
+            this.textures.remove('sorting_exitbutton')
         }
-        this.load.image('exitbutton', 'assets/ui/exit_button.png');
+        this.load.image('sorting_exitbutton', 'assets/ui/exit_button.png');
 
         //Object preselection
         this.imagePreSelection();
@@ -96,11 +95,16 @@ export class SortingScene extends BaseScene {
             let name: string = cat.name;
             let path: string = 'assets/geometrical_objects/categories/' + cat.url;
             this.load.image(name, path);
-
         }
+
+        if (this.textures.exists('loading')){
+            this.textures.remove('loading')
+        }
+        this.load.audio('loading', 'assets/ui_audio/loading.mp3');
     }
 
     create(): void {
+
         // Bring MenuUI to the front and initialize transition
         this.game.scene.sendToBack(this.getKey());
         this.transitionIn();
@@ -110,9 +114,10 @@ export class SortingScene extends BaseScene {
         this.loadGameObjects();
         this.exitButton();
         this.initInput();
+        this.initAudio();
     }
 
-    update(time: number): void {
+    update(time: number, delta: number): void {
     }
 
     /**
@@ -172,7 +177,7 @@ export class SortingScene extends BaseScene {
      * Function for initializing the background
      */
     private setBackground() {
-        const background: Phaser.GameObjects.Sprite = this.add.sprite(0, 0, 'gamebackground');
+        const background: Phaser.GameObjects.Sprite = this.add.sprite(0, 0, 'sortingbackground');
         background.setOrigin(0, 0);
         background.setDisplaySize(this.cameras.main.width, this.cameras.main.height);
         background.setTint(0xffccaa);
@@ -345,7 +350,7 @@ export class SortingScene extends BaseScene {
      * Function for adding the exit button
      */
     private exitButton() {
-        const exitButton: Phaser.GameObjects.Sprite = this.add.sprite(10, this.cameras.main.height - 10, 'exitbutton');
+        const exitButton: Phaser.GameObjects.Sprite = this.add.sprite(10, this.cameras.main.height - 10, 'sorting_exitbutton');
         exitButton.setOrigin(0,1);
         exitButton.setInteractive();
 
@@ -371,5 +376,12 @@ export class SortingScene extends BaseScene {
                 gameObject.setPosition(coords[0], coords[1]);
             }
         }, this);
+    }
+
+    /**
+     * Function for initializing soundeffects
+     */
+    private initAudio() {
+        this.sound.add('loading').play('', {loop: true});
     }
 }
