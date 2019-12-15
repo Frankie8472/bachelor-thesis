@@ -264,11 +264,13 @@ export class GameScene extends BaseScene {
      */
     private setHelperMenu(): void {
         // Menu background
-        const menuBackground: Phaser.GameObjects.Sprite = this.add.sprite(this.cameras.main.width - 64 - 10 - 30, 64 + 10 + 50, 'menubackground');
+        const backgroundY: number = 64 + 10 + 30;
+        const menuBackground: Phaser.GameObjects.Sprite = this.add.sprite(this.cameras.main.width - 64 - 10 - 30, backgroundY, 'menubackground');
         menuBackground.setAngle(180);
         menuBackground.setOrigin(1, 0);
         menuBackground.setDisplaySize(500, this.cameras.main.height + 120);
         menuBackground.setTint(0xdddddd);
+        menuBackground.setData('y', backgroundY);
 
         // Category indicator
         let y: number = 16 + 32;
@@ -586,7 +588,7 @@ export class GameScene extends BaseScene {
         if (this.helpDown) {
             const menuBackgroundTween: Phaser.Tweens.Tween = this.tweens.add({
                 targets: menuBackground,
-                y: 64 + 10 + 50,
+                y: menuBackground.getData('y'),
                 x: this.cameras.main.width - 64 - 10 - 30,
                 ease: 'Cubic',
                 duration: 500,
@@ -633,10 +635,10 @@ export class GameScene extends BaseScene {
      * Function for initializing the progressbar for ingame game score
      */
     private setGameProgressbar(): void {
-        const multiplierX: number = 0.4;
-        const multiplierY: number = 0.3;
         const progressbarY: number = this.cameras.main.height - 10;
         const progressbar: Phaser.GameObjects.Sprite = this.add.sprite(0, progressbarY, 'progressbar');
+        const multiplierX: number = 0.4;
+        const multiplierY: number = this.imageScalingFactor(this.cameras.main.height*3/5, progressbar.height, progressbar.height);//0.3;
         progressbar.setOrigin(0, 1);
         progressbar.setScale(multiplierX, multiplierY);
 
@@ -661,10 +663,10 @@ export class GameScene extends BaseScene {
      * Function for initializing the game timer
      */
     private setTimeProgressbar(): void {
-        const multiplierX: number = 0.4;
-        const multiplierY: number = 0.3;
         const progressbarY: number = this.cameras.main.height - 10;
         const progressbar: Phaser.GameObjects.Sprite = this.add.sprite(10, progressbarY, 'progressbar');
+        const multiplierX: number = 0.4;
+        const multiplierY: number = this.imageScalingFactor(this.cameras.main.height*3/5, progressbar.height, progressbar.height);//0.3;
         progressbar.setOrigin(0, 1);
         progressbar.setScale(multiplierX, multiplierY);
 
