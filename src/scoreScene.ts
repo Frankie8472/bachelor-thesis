@@ -39,16 +39,20 @@ export class ScoreScene extends BaseScene {
         this.load.image('star_2', 'assets/ui/star_2.png');
         this.load.image('star_3', 'assets/ui/star_3.png');
         this.load.image('replay', 'assets/ui/reload_button.png');
+
+        this.load.audio('sparkle', 'assets/ui_audio/sparkle_loop.mp3');
     }
 
     create(): void {
         // Bring MenuUI to the front and initialize transition
-        this.game.scene.sendToBack(this.key);
+        this.game.scene.sendToBack(this.getKey());
         this.transitionIn();
 
         this.setBackground();
         this.initUI();
         this.initInput();
+
+        this.initAudio();
     }
 
     /**
@@ -112,5 +116,12 @@ export class ScoreScene extends BaseScene {
                 this.transitionOut('LevelMenuScene');
             }, this);
         }, this);
+    }
+
+    /**
+     * Function for initializing soundeffects
+     */
+    private initAudio() {
+        this.sound.add('sparkle').play('', {loop: false});
     }
 }

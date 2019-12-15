@@ -5,6 +5,7 @@ import {DropDownMenu} from './dropDownMenu';
 import {WelcomeScene} from './welcomeScene';
 import {LevelMenuScene} from './levelMenuScene';
 import {GameSceneLoader} from './gameSceneLoader';
+import {IntroScene} from './introScene';
 import {GameScene} from './gameScene';
 import {ScoreScene} from './scoreScene';
 import {SortingScene} from './sortingScene';
@@ -33,7 +34,7 @@ const config: GameConfig = {
     type: Phaser.AUTO,
     scene: [
         DropDownMenu, WelcomeScene, LevelMenuScene,
-        GameSceneLoader, GameScene,
+        IntroScene, GameSceneLoader, GameScene,
         SortingSceneLoader, SortingScene,
         PropertySortingSceneLoader, PropertySortingScene,
         RestrictedSortingSceneLoader, RestrictedSortingScene,

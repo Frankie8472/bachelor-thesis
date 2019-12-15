@@ -19,6 +19,13 @@ export class BaseScene extends Phaser.Scene {
     }
 
     /**
+     * Function for returning the key of this scene
+     */
+    public getKey(): string{
+        return this.key;
+    }
+
+    /**
      * Function for generating a new seed so that pseudo randomness is guaranteed
      */
     private generateNewSeed(): void {
@@ -69,7 +76,7 @@ export class BaseScene extends Phaser.Scene {
             targets: this.transition[0],
             scale: 10 * 0.5 * Math.sqrt(Math.pow(this.cameras.main.width, 2) + Math.pow(this.cameras.main.height, 2)),
             ease: 'linear',
-            duration: 700,
+            duration: 700
         });
     }
 

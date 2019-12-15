@@ -152,7 +152,7 @@ export class RestrictedSortingScene extends BaseScene {
 
     create(): void {
         // Bring MenuUI to the front and initialize transition
-        this.game.scene.sendToBack(this.key);
+        this.game.scene.sendToBack(this.getKey());
         this.transitionIn();
 
         this.setBackground();
@@ -366,7 +366,7 @@ export class RestrictedSortingScene extends BaseScene {
 
                     // If all elements are sorted, end game with score
                     if (this.displayedObjects.getLength() <= 0) {
-                        this.transitionOut('ScoreScene', {'score': 1, 'previousScene': this.key});
+                        this.transitionOut('ScoreScene', {'score': 1, 'previousScene': this.getKey()});
                     }
                 }
 

@@ -201,7 +201,7 @@ export class PropertySortingScene extends BaseScene {
 
     create(): void {
         // Bring MenuUI to the front and initialize transition
-        this.game.scene.sendToBack(this.key);
+        this.game.scene.sendToBack(this.getKey());
         this.transitionIn();
 
         this.setBackground();
@@ -592,7 +592,7 @@ export class PropertySortingScene extends BaseScene {
         if ((this.wrongCount >= this.wrongBar.getData('gameMax') - Phaser.Math.EPSILON) || (this.correctCount >= this.correctBar.getData('gameMax') - Phaser.Math.EPSILON)) {
             this.transitionOut('ScoreScene', {
                 'score': this.correctCount / this.correctBar.getData('gameMax') - this.wrongCount / this.wrongBar.getData('gameMax'),
-                'previousScene': this.key
+                'previousScene': this.getKey()
             });
         }
     }

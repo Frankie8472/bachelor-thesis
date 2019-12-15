@@ -221,7 +221,7 @@ export class GameScene extends BaseScene {
 
     create(): void {
         // Bring MenuUI to the front and initialize transition
-        this.game.scene.sendToBack(this.key);
+        this.game.scene.sendToBack(this.getKey());
         this.transitionIn();
 
         this.setBackground();
@@ -232,6 +232,8 @@ export class GameScene extends BaseScene {
 
         this.setTimeProgressbar();
         this.setGameProgressbar();
+
+        this.introduction();
     }
 
     update(time: number): void {
@@ -249,7 +251,7 @@ export class GameScene extends BaseScene {
             this.checked = true;
 
             // Endgame
-            this.transitionOut('ScoreScene', {'score': this.points / this.gamefluid.getData('gameMax'), 'previousScene': this.key});
+            this.transitionOut('ScoreScene', {'score': this.points / this.gamefluid.getData('gameMax'), 'previousScene': this.getKey()});
         } else {
             timedata -= this.timedataStepsize;
             this.timefluid.setData('timeY', timedata);
@@ -530,7 +532,7 @@ export class GameScene extends BaseScene {
             this.gamefluid.setScale(this.gamefluid.getData('gameX'), this.points);
 
             // End game
-            this.transitionOut('ScoreScene', {'score': 1, 'previousScene': this.key});
+            this.transitionOut('ScoreScene', {'score': 1, 'previousScene': this.getKey()});
 
         }
 
@@ -691,5 +693,13 @@ export class GameScene extends BaseScene {
         this.timefluid.setData('timeYMax', (progressbar.height * multiplierY - 6) / this.timefluid.height);
         this.timefluid.setScale(this.timefluid.getData('timeX'), this.timefluid.getData('timeY'));
         this.timefluid.setAlpha(0.7);
+    }
+
+    /**
+     * Function for calling the introduction and pause this scene
+     */
+    private introduction() {
+        this.scene.pause();
+        this.game.scene.start("IntroScene", {"pausedScene": this.getKey()});
     }
 }

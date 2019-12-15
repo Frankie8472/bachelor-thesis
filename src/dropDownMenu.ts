@@ -198,7 +198,14 @@ export class DropDownMenu extends BaseScene {
 
             case 'exitButton': {
                 this.menuAction();
-                this.game.scene.stop(this.key_paused_scene);
+                this.game.scene.getScenes(true).forEach(function(scene){
+                    // @ts-ignore
+                    if (!(scene.key === this.getKey())) {
+                        // @ts-ignore
+                        this.game.scene.stop(scene.key);
+                    }
+                }, this);
+
                 if (this.key_paused_scene === 'LevelMenuScene' || this.key_paused_scene === 'WelcomeScene') {
                     this.game.scene.start('WelcomeScene');
                 } else {

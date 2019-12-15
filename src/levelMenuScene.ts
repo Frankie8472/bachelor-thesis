@@ -45,7 +45,7 @@ export class LevelMenuScene extends BaseScene {
 
     create(): void {
         // Bring MenuUI to the front and initialize transition
-        this.game.scene.sendToBack(this.key);
+        this.game.scene.sendToBack(this.getKey());
         this.transitionIn();
 
         this.setBackground();
