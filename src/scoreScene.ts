@@ -68,11 +68,11 @@ export class ScoreScene extends BaseScene {
 
         let sprite: Phaser.GameObjects.Sprite;
 
-        if (this.score > 0) {
+        if (this.score < 0.2) {
             sprite = this.add.sprite(this.cameras.main.width / 2, this.cameras.main.height / 2, 'star_0');
-        } else if (this.score < 0.5 - Phaser.Math.EPSILON) {
+        } else if (this.score < 0.6) {
             sprite = this.add.sprite(this.cameras.main.width / 2, this.cameras.main.height / 2, 'star_1');
-        } else if (this.score <= 1 - Phaser.Math.EPSILON) {
+        } else if (this.score < 1) {
             sprite = this.add.sprite(this.cameras.main.width / 2, this.cameras.main.height / 2, 'star_2');
         } else {
             sprite = this.add.sprite(this.cameras.main.width / 2, this.cameras.main.height / 2, 'star_3');

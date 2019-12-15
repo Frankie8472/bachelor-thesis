@@ -411,44 +411,44 @@ categories:
           - dotted34.png
           - dotted35.png
           - dotted36.png
-        - name: striped
+        - name: stripe
           urls:
-          - striped1.png
-          - striped2.png
-          - striped3.png
-          - striped4.png
-          - striped5.png
-          - striped6.png
-          - striped7.png
-          - striped8.png
-          - striped9.png
-          - striped0.png
-          - striped11.png
-          - striped12.png
-          - striped13.png
-          - striped14.png
-          - striped15.png
-          - striped16.png
-          - striped17.png
-          - striped18.png
-          - striped19.png
-          - striped10.png
-          - striped21.png
-          - striped22.png
-          - striped23.png
-          - striped24.png
-          - striped25.png
-          - striped26.png
-          - striped27.png
-          - striped28.png
-          - striped29.png
-          - striped30.png
-          - striped31.png
-          - striped32.png
-          - striped33.png
-          - striped34.png
-          - striped35.png
-          - striped36.png
+          - stripe1.png
+          - stripe2.png
+          - stripe3.png
+          - stripe4.png
+          - stripe5.png
+          - stripe6.png
+          - stripe7.png
+          - stripe8.png
+          - stripe9.png
+          - stripe0.png
+          - stripe11.png
+          - stripe12.png
+          - stripe13.png
+          - stripe14.png
+          - stripe15.png
+          - stripe16.png
+          - stripe17.png
+          - stripe18.png
+          - stripe19.png
+          - stripe10.png
+          - stripe21.png
+          - stripe22.png
+          - stripe23.png
+          - stripe24.png
+          - stripe25.png
+          - stripe26.png
+          - stripe27.png
+          - stripe28.png
+          - stripe29.png
+          - stripe30.png
+          - stripe31.png
+          - stripe32.png
+          - stripe33.png
+          - stripe34.png
+          - stripe35.png
+          - stripe36.png
 images:
     - name: purplesquareonefull.png
       cat1: purple

@@ -353,8 +353,7 @@ export class SortingScene extends BaseScene {
         this.arrayStack.each(function(gameObject) {
             if (gameObject instanceof Phaser.GameObjects.Sprite) {
                 let coords: number[] = this.returnQuad(validElements.indexOf(gameObject.getData(categoryName)), validElements.length, this.objectDisplaySize);
-                gameObject.setX(coords[0]);
-                gameObject.setY(coords[1]);
+                gameObject.setPosition(coords[0], coords[1]);
             }
         }, this);
     }

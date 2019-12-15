@@ -108,6 +108,11 @@ export class PropertySortingScene extends BaseScene {
      */
     private selectedElements: any[];
 
+    /**
+     * Amount of dummies in play
+     */
+    private numberOfDummies: number;
+
     constructor() {
         super('PropertySortingScene');
     }
@@ -134,6 +139,7 @@ export class PropertySortingScene extends BaseScene {
 
         this.correctCount = 0;
         this.wrongCount = 0;
+        this.numberOfDummies = 0;
 
         this.selectedElements = [];
 
@@ -142,10 +148,10 @@ export class PropertySortingScene extends BaseScene {
 
         // Debatable initializations
         this.objectDisplaySize = 100;
-        this.velocity = 150;
+        this.velocity = 200;
         this.lastEmitTime = 0;
-        this.delay = 2000;
-        this.numberOfObjectsEach = 3;
+        this.delay = 1500;
+        this.numberOfObjectsEach = Phaser.Math.RND.between(3, 5);
     }
 
     preload(): void {
@@ -167,11 +173,13 @@ export class PropertySortingScene extends BaseScene {
 
         // Get property images
         let propLength: number = this.selectedElements[0].urls.length;
-        let rndIndex: number = Phaser.Math.RND.between(0, propLength);
+        let rndIndex: number = Phaser.Math.RND.between(0, propLength - 1);
         for (let prop of this.selectedElements) {
-
             let name = prop.name;
             let path = 'assets/geometrical_objects/images/' + prop.urls[rndIndex];
+            if (this.textures.exists(name)){
+                this.textures.remove(name);
+            }
             this.load.image(name, path);
         }
 
@@ -207,9 +215,10 @@ export class PropertySortingScene extends BaseScene {
                 }
                 if (this.arrayStatic.getLength() != 0) {
                     const sprite: Phaser.Physics.Arcade.Sprite = Phaser.Math.RND.pick(this.arrayStatic.getChildren());
+                    this.arrayStack.bringToTop(sprite);
                     this.arrayStatic.remove(sprite);
                     sprite.setVelocityY(this.velocity);
-
+                    sprite.setAngularVelocity(sprite.getData('spin'));
                 }
             }
         }
@@ -246,7 +255,7 @@ export class PropertySortingScene extends BaseScene {
             const zone: Phaser.GameObjects.Zone = this.add.zone(crate.x, crate.y, crate.width * imageScalingFactor, crate.height * imageScalingFactor);
             zone.setOrigin(0.5, 0.5);
             zone.setRectangleDropZone(crate.width * imageScalingFactor, crate.height * imageScalingFactor);
-            zone.setName(property);
+            zone.setName(property.name);
 
             this.arrayDropZone.add(zone);
 
@@ -262,8 +271,11 @@ export class PropertySortingScene extends BaseScene {
         // On dragstart
         this.input.on('dragstart', function(pointer, gameObject) {
             if (gameObject instanceof Phaser.Physics.Arcade.Sprite) {
-                gameObject.setTint(0x999999);
+                if (gameObject.getData('active')){
+                    gameObject.setTint(0x999999);
+                }
                 gameObject.setVelocityY(0);
+                gameObject.setAngularVelocity(0);
                 const zoomSpriteScale: number = gameObject.getData('scale') * 1.5;
                 gameObject.setScale(zoomSpriteScale, zoomSpriteScale);
                 this.arrayStack.bringToTop(gameObject);
@@ -280,13 +292,16 @@ export class PropertySortingScene extends BaseScene {
         this.input.on('dragend', function(pointer, gameObject, dropped) {
             // If not dropped set default visual effects
             if (!dropped && gameObject instanceof Phaser.Physics.Arcade.Sprite) {
-                gameObject.clearTint();
+                if (gameObject.getData('active')) {
+                    gameObject.clearTint();
+                }
 
                 let scale: number = gameObject.getData('scale');
                 gameObject.setScale(scale, scale);
 
                 if (this.infinite) {
                     gameObject.setVelocityY(this.velocity);
+                    gameObject.setAngularVelocity(gameObject.getData('spin'));
                 }
 
                 let x: number = gameObject.x;
@@ -319,7 +334,7 @@ export class PropertySortingScene extends BaseScene {
                 let scale: number = gameObject.getData('scale');
                 let point: number = -1;
 
-                if (gameObject.name === dropZone.name) {
+                if (gameObject.name === dropZone.name && gameObject.getData('active')) {
                     coords = [dropZone.x + dropZone.width * 0.15, dropZone.y - dropZone.height * 0.2];
 
                     scale = this.imageScalingFactor(Math.min(dropZone.width, dropZone.height) * 0.4, gameObject.width, gameObject.height);
@@ -334,11 +349,14 @@ export class PropertySortingScene extends BaseScene {
                 } else {
                     if (this.infinite) {
                         gameObject.setVelocityY(this.velocity);
+                        gameObject.setAngularVelocity(gameObject.getData('spin'));
                     }
                 }
 
                 this.updateProgressbar(point);
-                gameObject.clearTint();
+                if (gameObject.getData('active')){
+                    gameObject.clearTint();
+                }
                 gameObject.setScale(scale, scale);
                 gameObject.setPosition(coords[0], coords[1]);
             }
@@ -351,15 +369,15 @@ export class PropertySortingScene extends BaseScene {
     private loadObjects(): void {
         this.arrayStack.setDepth(1);
 
-        for (let propImageName of this.selectedElements) {
+        for (let propImage of this.selectedElements) {
 
             // Create 10 of each property
             for (let i = 0; i < this.numberOfObjectsEach; i++) {
                 // RND size
                 const size: number = Phaser.Math.RND.between(this.objectDisplaySize * 0.8, this.objectDisplaySize * 1.3);
 
-                const sprite: Phaser.Physics.Arcade.Sprite = this.physics.add.sprite(Phaser.Math.RND.between(100 + this.objectDisplaySize / 2, this.cameras.main.width - this.objectDisplaySize / 2), Phaser.Math.RND.between(this.objectDisplaySize / 2, this.cameras.main.height - this.objectDisplaySize * 2 - this.objectDisplaySize / 2), propImageName);
-                sprite.setName(propImageName);
+                const sprite: Phaser.Physics.Arcade.Sprite = this.physics.add.sprite(Phaser.Math.RND.between(100 + this.objectDisplaySize / 2, this.cameras.main.width - this.objectDisplaySize / 2), Phaser.Math.RND.between(this.objectDisplaySize / 2, this.cameras.main.height - this.objectDisplaySize * 2 - this.objectDisplaySize / 2), propImage.name);
+                sprite.setName(propImage.name);
 
                 if (this.infinite) {
                     sprite.setY(0 - 2 * this.objectDisplaySize);
@@ -377,6 +395,47 @@ export class PropertySortingScene extends BaseScene {
                 sprite.setScale(spriteScale, spriteScale);
 
                 sprite.setData('scale', spriteScale);
+                sprite.setData('spin', Phaser.Math.RND.between(10, 50));
+                sprite.setData('active', true);
+
+                sprite.setInteractive();
+
+                this.arrayStatic.add(sprite);
+                this.arrayStack.add(sprite);
+
+                this.input.setDraggable(sprite);
+            }
+
+            let rndDummy: number = Phaser.Math.RND.between(0, this.numberOfObjectsEach/2);
+            this.numberOfDummies += rndDummy;
+
+            for (let i = 0; i < rndDummy; i++) {
+                // RND size
+                const size: number = Phaser.Math.RND.between(this.objectDisplaySize * 0.8, this.objectDisplaySize * 1.3);
+
+                const sprite: Phaser.Physics.Arcade.Sprite = this.physics.add.sprite(Phaser.Math.RND.between(100 + this.objectDisplaySize / 2, this.cameras.main.width - this.objectDisplaySize / 2), Phaser.Math.RND.between(this.objectDisplaySize / 2, this.cameras.main.height - this.objectDisplaySize * 2 - this.objectDisplaySize / 2), propImage.name);
+                sprite.setName(propImage.name);
+
+                if (this.infinite) {
+                    sprite.setY(0 - 2 * this.objectDisplaySize);
+                }
+
+                sprite.setVelocity(0, 0);
+                sprite.setOrigin(0.5, 0.5);
+
+                sprite.setTintFill(0xffffff);
+
+                // RND spin
+                sprite.setAngle(Phaser.Math.RND.angle());
+
+                sprite.setVisible(true);
+
+                const spriteScale: number = this.imageScalingFactor(size, sprite.width, sprite.height);
+                sprite.setScale(spriteScale, spriteScale);
+
+                sprite.setData('scale', spriteScale);
+                sprite.setData('spin', Phaser.Math.RND.between(10, 50));
+                sprite.setData('active', false);
 
                 sprite.setInteractive();
 
@@ -387,7 +446,7 @@ export class PropertySortingScene extends BaseScene {
             }
         }
 
-        this.maxPoints = this.arrayStack.length - this.propertyCount;
+        this.maxPoints = this.arrayStack.length - this.propertyCount - this.numberOfDummies;
 
         const floor: Phaser.Physics.Arcade.Sprite = this.physics.add.sprite(0, this.cameras.main.height + 2 * this.objectDisplaySize, 'background');
         floor.setDisplaySize(this.cameras.main.width, 1);
@@ -396,9 +455,12 @@ export class PropertySortingScene extends BaseScene {
         floor.setImmovable(true);
 
         this.physics.add.collider(this.arrayStack.getAll(), floor, function(gameObject1) {
-            this.updateProgressbar(-1);
             if (gameObject1 instanceof Phaser.Physics.Arcade.Sprite) {
+                if (gameObject1.getData('active')){
+                    this.updateProgressbar(-1);
+                }
                 gameObject1.setVelocityY(0);
+                gameObject1.setAngularVelocity(0);
                 gameObject1.setPosition(Phaser.Math.RND.between(100 + this.objectDisplaySize / 2, this.cameras.main.width - this.objectDisplaySize / 2), 0 - 2 * this.objectDisplaySize);
                 this.arrayStatic.add(gameObject1);
                 this.arrayFalling.remove(gameObject1);
@@ -413,7 +475,7 @@ export class PropertySortingScene extends BaseScene {
         let counterSet: string[] = [];
 
         for (let sprite of this.arrayStack.getAll()) {
-            if (sprite instanceof Phaser.Physics.Arcade.Sprite) {
+            if (sprite instanceof Phaser.Physics.Arcade.Sprite && sprite.getData('active')) {
                 const spriteName: string = sprite.name;
                 if (!(counterSet.indexOf(spriteName) > -1)) {
                     for (let dropZone of this.arrayDropZone.getChildren()) {
@@ -464,7 +526,7 @@ export class PropertySortingScene extends BaseScene {
         progressbarWrong.setOrigin(0, 1);
         progressbarWrong.setScale(multiplierX, multiplierY);
 
-        const progressbarWrongX: number = 10; //10*2+progressbarWrong.width*multiplierX;
+        const progressbarWrongX: number = 10;
         progressbarWrong.setX(progressbarWrongX);
 
         const plus: Phaser.GameObjects.Sprite = this.add.sprite(progressbarCorrectX, progressbarY - progressbarWrong.height * multiplierY - 10, 'plus');

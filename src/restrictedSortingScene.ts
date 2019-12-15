@@ -62,11 +62,9 @@ export class RestrictedSortingScene extends BaseScene {
 
             // Copy category array
             const categories: any[] = [...this.jsonObject['categories']];
-            console.log("shuffle");
 
             // Choose a random category
             const rndCat: any = Phaser.Math.RND.shuffle(categories)[0];
-            console.log(rndCat.name);
 
             // Select random fitting images
             const images: any[] = [...this.jsonObject['images']];
