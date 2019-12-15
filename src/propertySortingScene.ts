@@ -240,7 +240,7 @@ export class PropertySortingScene extends BaseScene {
      */
     private setDropzones(): void {
         const stepSize: number = this.cameras.main.width / (this.propertyCount + 1);
-        const crateSize: number = this.objectDisplaySize * 2;
+        const crateSize: number = Math.min(this.objectDisplaySize * 2, this.cameras.main.width/(this.selectedElements.length+1));
         let iteration: number = 1;
 
         for (let property of this.selectedElements) {
@@ -517,10 +517,11 @@ export class PropertySortingScene extends BaseScene {
      * Function for initializing the progressbar
      */
     private addProgressbar(): void {
-        const multiplierX: number = 0.4;
-        const multiplierY: number = 0.3;
         const progressbarY: number = this.cameras.main.height - 10;
         const progressbarCorrect: Phaser.GameObjects.Sprite = this.add.sprite(0, progressbarY, 'progressbar');
+        const multiplierX: number = 0.4;
+        const multiplierY: number = this.imageScalingFactor(this.cameras.main.height*3/5, progressbarCorrect.height, progressbarCorrect.height);//0.3;
+
         progressbarCorrect.setOrigin(0, 1);
         progressbarCorrect.setScale(multiplierX, multiplierY);
 
