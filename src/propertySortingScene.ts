@@ -520,7 +520,7 @@ export class PropertySortingScene extends BaseScene {
         const progressbarY: number = this.cameras.main.height - 10;
         const progressbarCorrect: Phaser.GameObjects.Sprite = this.add.sprite(0, progressbarY, 'progressbar');
         const multiplierX: number = 0.4;
-        const multiplierY: number = this.imageScalingFactor(this.cameras.main.height*3/5, progressbarCorrect.height, progressbarCorrect.height);//0.3;
+        const multiplierY: number = this.imageScalingFactor(this.cameras.main.height*0.5, progressbarCorrect.height, progressbarCorrect.height);//0.3;
 
         progressbarCorrect.setOrigin(0, 1);
         progressbarCorrect.setScale(multiplierX, multiplierY);

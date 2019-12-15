@@ -638,7 +638,7 @@ export class GameScene extends BaseScene {
         const progressbarY: number = this.cameras.main.height - 10;
         const progressbar: Phaser.GameObjects.Sprite = this.add.sprite(0, progressbarY, 'progressbar');
         const multiplierX: number = 0.4;
-        const multiplierY: number = this.imageScalingFactor(this.cameras.main.height*3/5, progressbar.height, progressbar.height);//0.3;
+        const multiplierY: number = this.imageScalingFactor(this.cameras.main.height*0.5, progressbar.height, progressbar.height);//0.3;
         progressbar.setOrigin(0, 1);
         progressbar.setScale(multiplierX, multiplierY);
 
@@ -666,7 +666,7 @@ export class GameScene extends BaseScene {
         const progressbarY: number = this.cameras.main.height - 10;
         const progressbar: Phaser.GameObjects.Sprite = this.add.sprite(10, progressbarY, 'progressbar');
         const multiplierX: number = 0.4;
-        const multiplierY: number = this.imageScalingFactor(this.cameras.main.height*3/5, progressbar.height, progressbar.height);//0.3;
+        const multiplierY: number = this.imageScalingFactor(this.cameras.main.height*0.5, progressbar.height, progressbar.height);//0.3;
         progressbar.setOrigin(0, 1);
         progressbar.setScale(multiplierX, multiplierY);
 

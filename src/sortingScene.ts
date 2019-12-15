@@ -171,7 +171,7 @@ export class SortingScene extends BaseScene {
         const controlbar: Phaser.GameObjects.Sprite = this.add.sprite(this.cameras.main.width / 2, this.cameras.main.height, 'menubackground');
         controlbar.setOrigin(0.5, 0.5);
         controlbar.setAngle(-90);
-        controlbar.setScale(0.13, 0.24);
+        controlbar.setScale(0.13, 0.20);
 
         // Category indicator
         let x: number = this.cameras.main.width / 2 - (controlbar.height * 0.24) / 2;
@@ -330,7 +330,7 @@ export class SortingScene extends BaseScene {
      * Function for adding the exit button
      */
     private exitButton() {
-        const exitButton: Phaser.GameObjects.Sprite = this.add.sprite(25, this.cameras.main.height - 25, 'exitbutton');
+        const exitButton: Phaser.GameObjects.Sprite = this.add.sprite(10, this.cameras.main.height - 10, 'exitbutton');
         exitButton.setOrigin(0,1);
         exitButton.setInteractive();
 

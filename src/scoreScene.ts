@@ -62,7 +62,7 @@ export class ScoreScene extends BaseScene {
      */
     private initUI() {
         // Add replay button
-        const replayButton: Phaser.GameObjects.Sprite = this.add.sprite(this.cameras.main.width - 100, this.cameras.main.height - 100, 'replay');
+        const replayButton: Phaser.GameObjects.Sprite = this.add.sprite(this.cameras.main.width - 100 + 34, this.cameras.main.height - 100 + 34, 'replay');
         replayButton.setOrigin(0.5, 0.5);
         const buttonScale: number = this.imageScalingFactor(this.buttonSize*1.5, replayButton.width, replayButton.height);
         replayButton.setScale(buttonScale, buttonScale);
@@ -88,11 +88,12 @@ export class ScoreScene extends BaseScene {
         sprite.setOrigin(0.5, 0.5);
         const starScale: number = this.imageScalingFactor(this.cameras.main.width*3/5, sprite.height, sprite.width);
         sprite.setScale(starScale, starScale);
+        sprite.setData('scale', starScale);
 
         const starTween: Phaser.Tweens.Tween = this.tweens.add({
             targets: sprite,
             ease: 'Linear',
-            scale: 1.1,
+            scale: 1.1*sprite.getData('scale'),
             repeat: 1000,
             yoyo: true,
             duration: 1000
