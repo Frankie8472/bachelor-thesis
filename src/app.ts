@@ -19,6 +19,14 @@ const renderConfig: RenderConfig = {
     pixelArt: false
 };
 
+let width: number = window.screen.width;
+let height: number = window.screen.height;
+
+if (window.screen.width <= window.screen.height) {
+    width = window.screen.height;
+    height = window.screen.width;
+}
+
 const config: GameConfig = {
     title: 'Gotscha!',
     parent: 'game',
@@ -45,9 +53,8 @@ const config: GameConfig = {
         parent: 'phaser-example',
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
-        width: window.screen.width,
-        height: window.screen.height
-
+        width: width,
+        height: height
     }
 };
 
@@ -58,5 +65,5 @@ export class Gotscha extends Phaser.Game {
 }
 
 window.onload = () => {
-    let game = new Gotscha(config);
+    const game = new Gotscha(config);
 };

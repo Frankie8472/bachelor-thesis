@@ -137,9 +137,11 @@ export class LevelMenuScene extends BaseScene {
 
         this.input.on('pointerup', function(pointer, currentlyOver) {
             const gameObject: any = currentlyOver[0];
+
             if (gameObject instanceof Phaser.GameObjects.Sprite && gameObject.getData('clicked')) {
                 this.buttonFunction(gameObject);
             }
+
             this.levelButtons.getChildren().forEach(function(gameObject) {
                 if (gameObject instanceof Phaser.GameObjects.Sprite) {
                     gameObject.clearTint();

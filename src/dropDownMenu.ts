@@ -217,6 +217,7 @@ export class DropDownMenu extends BaseScene {
      * Function which defines the graphical behaviour of the drop down menu
      */
     private menuAction(): void {
+
         if (this.menuDown) {
             // Animation
             const menuButtonTween: Phaser.Tweens.Tween = this.tweens.add({
@@ -224,7 +225,7 @@ export class DropDownMenu extends BaseScene {
                 angle: 0,
                 ease: 'Cubic',
                 duration: 700,
-                onComplete: () => this.lock = false,
+                onComplete: () => this.lock = false
             });
 
             const menuBackgroundTween: Phaser.Tweens.Tween = this.tweens.add({
@@ -250,7 +251,14 @@ export class DropDownMenu extends BaseScene {
                 duration: 500
             });
 
-            this.pauseBackground.setVisible(false);
+            const pixelScreenTween: Phaser.Tweens.Tween = this.tweens.add({
+                targets: this.pauseBackground.getAll(),
+                alpha: 0,
+                ease: 'linear',
+                duration: 700,
+                delay: 0,
+                onComplete: () => this.pauseBackground.setVisible(false)
+            });
 
             this.menuDown = false;
 
@@ -298,6 +306,14 @@ export class DropDownMenu extends BaseScene {
 
             this.pauseBackground.setVisible(true);
 
+            const pixelScreenTween: Phaser.Tweens.Tween = this.tweens.add({
+               targets: this.pauseBackground.getAll(),
+               alpha: 0.9,
+               ease: 'linear',
+               duration: 700,
+               delay: 0
+            });
+
             this.menuDown = true;
         }
     }
@@ -308,11 +324,16 @@ export class DropDownMenu extends BaseScene {
         pixelScreen.setFillStyle(0x777777);
         pixelScreen.setAltFillStyle(0x555555);
         pixelScreen.setOutlineStyle(0x555555);
-        pixelScreen.setAlpha(0.8);
+        pixelScreen.setAlpha(0);
         this.pauseBackground.add(pixelScreen);
 
         const sandClock = this.add.sprite(this.cameras.main.width/2, this.cameras.main.height/2, 'sandClock');
         sandClock.setOrigin(0.5, 0.5);
+
+        let clockScale: number = this.imageScalingFactor(3/5*this.cameras.main.height, sandClock.width, sandClock.height);
+        sandClock.setScale(clockScale, clockScale);
+        sandClock.setAlpha(0);
+
         this.pauseBackground.add(sandClock);
 
         this.pauseBackground.setVisible(false);

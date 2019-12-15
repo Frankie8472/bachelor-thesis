@@ -42,7 +42,7 @@ export class WelcomeScene extends BaseScene {
     private setTitle() {
         // Add title
         const title: Phaser.GameObjects.Sprite = this.add.sprite(this.cameras.main.width / 2, this.cameras.main.height / 2, 'title');
-        const titleScale: number = 0.7;
+        const titleScale: number = this.imageScalingFactor(4/6*this.cameras.main.width, title.width, title.height);
         title.setScale(titleScale, titleScale);
         title.setInteractive();
 

@@ -147,8 +147,8 @@ export class PropertySortingScene extends BaseScene {
         this.propertyCount = Phaser.Math.RND.between(3, numberOfProperties);
 
         // Debatable initializations
-        this.objectDisplaySize = 100;
-        this.velocity = 200;
+        this.objectDisplaySize = 100; // TODO: OK on tablets and phones?!
+        this.velocity = 150;
         this.lastEmitTime = 0;
         this.delay = 1500;
         this.numberOfObjectsEach = Phaser.Math.RND.between(3, 5);
@@ -406,7 +406,12 @@ export class PropertySortingScene extends BaseScene {
                 this.input.setDraggable(sprite);
             }
 
-            let rndDummy: number = Phaser.Math.RND.between(0, this.numberOfObjectsEach/2);
+            let rndDummy: number = 0;
+
+            if (this.infinite) {
+                rndDummy = Phaser.Math.RND.between(0, this.numberOfObjectsEach/2)
+            }
+
             this.numberOfDummies += rndDummy;
 
             for (let i = 0; i < rndDummy; i++) {
