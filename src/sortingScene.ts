@@ -67,10 +67,10 @@ export class SortingScene extends BaseScene {
         }
         this.load.image('help', 'assets/ui/help.png');
 
-        if (this.textures.exists('menubackground')){
-            this.textures.remove('menubackground')
+        if (this.textures.exists('helpermenubackground')){
+            this.textures.remove('helpermenubackground')
         }
-        this.load.image('menubackground', 'assets/ui/menu_background.png');
+        this.load.image('helpermenubackground', 'assets/ui/menu_background.png');
 
         if (this.textures.exists('exitbutton')){
             this.textures.remove('exitbutton')
@@ -183,7 +183,7 @@ export class SortingScene extends BaseScene {
      * Function for initializing the control bar
      */
     private setControlBar(): void {
-        const controlbar: Phaser.GameObjects.Sprite = this.add.sprite(this.cameras.main.width / 2, this.cameras.main.height, 'menubackground');
+        const controlbar: Phaser.GameObjects.Sprite = this.add.sprite(this.cameras.main.width / 2, this.cameras.main.height, 'helpermenubackground');
         controlbar.setOrigin(0.5, 0.5);
         controlbar.setAngle(-90);
         controlbar.setScale(0.13, 0.20);

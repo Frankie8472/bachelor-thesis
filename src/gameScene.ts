@@ -152,16 +152,15 @@ export class GameScene extends BaseScene {
         if (this.textures.exists('help')){
             this.textures.remove('help')
         }
-        this.load.image('help', 'assets/ui/help.png'/*{ frameWidth: 512, frameHeight: 512 }*/);
+        this.load.image('help', 'assets/ui/help.png');
 
-        if (this.textures.exists('menubackground')){
-            this.textures.remove('menubackground')
+        if (this.textures.exists('helpermenubackground')){
+            this.textures.remove('helpermenubackground')
         }
-        this.load.image('menubackground', 'assets/ui/menu_background.png');
+        this.load.image('helpermenubackground', 'assets/ui/menu_background.png');
 
         // Preselect objects and preload images
         const selectedProperties: any[] = [];
-
         // Choose three random properties of each category
         for (let cat of this.jsonObject['categories']) {
             const selectedProperty: any[] = Phaser.Math.RND.shuffle(cat['validElements']).slice(0, 3);
@@ -275,7 +274,7 @@ export class GameScene extends BaseScene {
     private setHelperMenu(): void {
         // Menu background
         const backgroundY: number = 64 + 10 + 30;
-        const menuBackground: Phaser.GameObjects.Sprite = this.add.sprite(this.cameras.main.width - 64 - 10 - 30, backgroundY, 'menubackground');
+        const menuBackground: Phaser.GameObjects.Sprite = this.add.sprite(this.cameras.main.width - 64 - 10 - 30, backgroundY, 'helpermenubackground');
         menuBackground.setAngle(180);
         menuBackground.setOrigin(1, 0);
         menuBackground.setDisplaySize(500, this.cameras.main.height + 120);
