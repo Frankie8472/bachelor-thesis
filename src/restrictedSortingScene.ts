@@ -102,7 +102,48 @@ export class RestrictedSortingScene extends BaseScene {
                 }, this);
             }
         } else {
-            // TODO: Level 2
+
+            // Copy category array
+            const categories: any[] = [...this.jsonObject['categories']];
+
+            // Choose a random category
+            const rndCat: any = Phaser.Math.RND.shuffle(categories)[0];
+
+            // Select random fitting images
+            const images: any[] = [...this.jsonObject['images']];
+            Phaser.Math.RND.shuffle(images);
+
+            for (let property of Phaser.Math.RND.shuffle(rndCat['validElements']).slice(0, 3)) {
+
+                // Choose for one category 2, for the other 4 and for the last 6 matching (in one property) images.
+                let maxSize: number = 5;
+                if (this.preselectedObjects.length === 5) {
+                    maxSize = 9;
+                } else if (this.preselectedObjects.length === 9) {
+                    maxSize = 15;
+                }
+
+                // Iterate through the images until selecting criteria is fulfilled
+                for (let image of images) {
+                    // If selected enough images, break.
+                    if (this.preselectedObjects.length >= maxSize) {
+                        break;
+                    }
+
+                    // Load and add image if is has the same property as the selected one
+                    if (image[rndCat.name] === property.name) {
+                        this.load.image(image.name, 'assets/geometrical_objects/images/' + image.name);
+                        this.preselectedObjects.push(image);
+                    }
+                }
+
+                // Remove the selected images from the images array to avoid duplicates
+                this.preselectedObjects.forEach(function (element) {
+                    if (images.indexOf(element, 0) > -1) {
+                        images.splice(images.indexOf(element, 0), 1);
+                    }
+                }, this);
+            }
         }
     }
 
@@ -136,49 +177,49 @@ export class RestrictedSortingScene extends BaseScene {
      * Function which initializes the dropZones and their graphics
      */
     private setDropZones() {
-        let crate1 = this.add.sprite(this.cameras.main.width*(1/6), this.cameras.main.height*(3/4),'crate');
-        let crate2 = this.add.sprite(this.cameras.main.width*(3/6), this.cameras.main.height*(3/4),'crate');
-        let crate3 = this.add.sprite(this.cameras.main.width*(5/6), this.cameras.main.height*(3/4),'crate');
+        let crate1: Phaser.GameObjects.Sprite = this.add.sprite(this.cameras.main.width*(1/6), this.cameras.main.height*(3/4),'crate');
+        let crate2: Phaser.GameObjects.Sprite = this.add.sprite(this.cameras.main.width*(3/6), this.cameras.main.height*(3/4),'crate');
+        let crate3: Phaser.GameObjects.Sprite = this.add.sprite(this.cameras.main.width*(5/6), this.cameras.main.height*(3/4),'crate');
 
         crate1.setOrigin(0.5, 0.5);
         crate2.setOrigin(0.5, 0.5);
         crate3.setOrigin(0.5, 0.5);
 
-        let scale = this.imageScalingFactor(Math.min(this.cameras.main.width/3, this.cameras.main.height/2) - 40, crate1.width, crate1.height);
+        let scale: number = this.imageScalingFactor(Math.min(this.cameras.main.width/3, this.cameras.main.height/2) - 40, crate1.width, crate1.height);
         crate1.setScale(scale, scale);
         crate2.setScale(scale, scale);
         crate3.setScale(scale, scale);
 
         for (let i: number = 0; i < 6; i++) {
-            let heightPosition = 0;
+            let heightPosition: number = 0;
             if (i > 2) {
                 heightPosition = 1;
             }
 
-            let x = crate1.x - crate1.width*scale/2;
-            let y = crate1.y - crate1.height*scale/2;
-            let zone = this.add.zone(x+(i%3)*crate1.width*scale/3, y+heightPosition*crate1.height*scale/2, crate1.width*scale/3, crate1.height*scale/2);
+            let x: number = crate1.x - crate1.width*scale/2;
+            let y: number = crate1.y - crate1.height*scale/2;
+            let zone: Phaser.GameObjects.Zone = this.add.zone(x+(i%3)*crate1.width*scale/3, y+heightPosition*crate1.height*scale/2, crate1.width*scale/3, crate1.height*scale/2);
             zone.setRectangleDropZone(crate1.width*scale/3, crate1.height*scale/2);
             zone.setOrigin(0, 0);
             zone.setName("dropZone1");
             this.zoneObjMap.push(zone);
 
             // Display border of drop zones
-            let graphics = this.add.graphics();
+            let graphics: Phaser.GameObjects.Graphics = this.add.graphics();
             graphics.lineStyle(10, 0x000000);
             graphics.strokeRect(zone.x, zone.y, zone.input.hitArea.width, zone.input.hitArea.height);
 
         }
 
         for (let i: number = 0; i < 4; i++) {
-            let heightPosition = 0;
+            let heightPosition: number = 0;
             if (i > 1) {
                 heightPosition = 1;
             }
 
-            let x = crate2.x - crate2.width*scale/2;
-            let y = crate2.y - crate2.height*scale/2;
-            let zone = this.add.zone(x+(i%2)*crate2.width*scale/2, y+heightPosition*crate2.height*scale/2, crate2.width*scale/2, crate2.height*scale/2);
+            let x: number = crate2.x - crate2.width*scale/2;
+            let y: number = crate2.y - crate2.height*scale/2;
+            let zone: Phaser.GameObjects.Zone = this.add.zone(x+(i%2)*crate2.width*scale/2, y+heightPosition*crate2.height*scale/2, crate2.width*scale/2, crate2.height*scale/2);
             zone.setRectangleDropZone(crate2.width*scale/2, crate2.height*scale/2);
             zone.setOrigin(0, 0);
             zone.setName("dropZone2");
@@ -186,26 +227,51 @@ export class RestrictedSortingScene extends BaseScene {
             this.zoneObjMap.push(zone);
 
             // Display border of drop zones
-            let graphics = this.add.graphics();
+            let graphics: Phaser.GameObjects.Graphics = this.add.graphics();
             graphics.lineStyle(10, 0x000000);
             graphics.strokeRect(zone.x, zone.y, zone.input.hitArea.width, zone.input.hitArea.height);
         }
 
-        for (let i: number = 0; i < 2; i++) {
-            let x = crate3.x - crate3.width*scale/2;
-            let y = crate3.y - crate3.height*scale/2;
-            let zone = this.add.zone(x+(i%2)*crate3.width*scale/2, y, crate3.width*scale/2, crate3.height*scale);
-            zone.setRectangleDropZone(crate3.width*scale/2, crate3.height*scale);
-            zone.setOrigin(0, 0);
-            zone.setName("dropZone3");
+        if (this.level == 1) {
+            for (let i: number = 0; i < 2; i++) {
+                let x: number = crate3.x - crate3.width*scale/2;
+                let y: number = crate3.y - crate3.height*scale/2;
+                let zone: Phaser.GameObjects.Zone = this.add.zone(x+(i%2)*crate3.width*scale/2, y, crate3.width*scale/2, crate3.height*scale);
+                zone.setRectangleDropZone(crate3.width*scale/2, crate3.height*scale);
+                zone.setOrigin(0, 0);
+                zone.setName("dropZone3");
 
-            this.zoneObjMap.push(zone);
+                this.zoneObjMap.push(zone);
 
-            // Display border of drop zones
-            let graphics = this.add.graphics();
-            graphics.lineStyle(10, 0x000000);
-            graphics.strokeRect(zone.x, zone.y, zone.input.hitArea.width, zone.input.hitArea.height);
+                // Display border of drop zones
+                let graphics: Phaser.GameObjects.Graphics = this.add.graphics();
+                graphics.lineStyle(10, 0x000000);
+                graphics.strokeRect(zone.x, zone.y, zone.input.hitArea.width, zone.input.hitArea.height);
+            }
+        } else {
+            for (let i: number = 0; i < 5; i++) {
+                let mod: number = 3;
+                let heightPosition: number = 0;
+                if (i > 2) {
+                    heightPosition = 1;
+                    mod = 2;
+                }
+                let x: number = crate3.x - crate3.width*scale/2;
+                let y: number = crate3.y - crate3.height*scale/2;
+                let zone: Phaser.GameObjects.Zone = this.add.zone(x+(i%mod)*crate3.width*scale/mod, y+heightPosition*crate3.height*scale/2, crate3.width*scale/mod, crate3.height*scale/2);
+                zone.setRectangleDropZone(crate3.width*scale/mod, crate3.height*scale/2);
+                zone.setOrigin(0, 0);
+                zone.setName("dropZone3");
+
+                this.zoneObjMap.push(zone);
+
+                // Display border of drop zones
+                let graphics: Phaser.GameObjects.Graphics = this.add.graphics();
+                graphics.lineStyle(10, 0x000000);
+                graphics.strokeRect(zone.x, zone.y, zone.input.hitArea.width, zone.input.hitArea.height);
+            }
         }
+
     }
 
     /**
