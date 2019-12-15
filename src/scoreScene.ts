@@ -30,6 +30,9 @@ export class ScoreScene extends BaseScene {
 
     preload(): void {
         // Preload UI
+        if (this.textures.exists('gamebackground')){
+            this.textures.remove('gamebackground')
+        }
         this.load.image('gamebackground', 'assets/ui/game_background.png');
         this.load.image('star_0', 'assets/ui/star_0.png');
         this.load.image('star_1', 'assets/ui/star_1.png');

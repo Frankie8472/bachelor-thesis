@@ -143,10 +143,20 @@ export class GameScene extends BaseScene {
 
     preload(): void {
         // Preload background graphic
+        if (this.textures.exists('gamebackground')){
+            this.textures.remove('gamebackground')
+        }
         this.load.image('gamebackground', 'assets/ui/game_background.png');
 
         // Preload helper menu graphics
+        if (this.textures.exists('help')){
+            this.textures.remove('help')
+        }
         this.load.image('help', 'assets/ui/help.png'/*{ frameWidth: 512, frameHeight: 512 }*/);
+
+        if (this.textures.exists('menubackground')){
+            this.textures.remove('menubackground')
+        }
         this.load.image('menubackground', 'assets/ui/menu_background.png');
 
         // Preselect objects and preload images

@@ -54,7 +54,10 @@ export class RestrictedSortingScene extends BaseScene {
 
     preload(): void {
         // Preload background and ui images
-        this.load.image('gamebackground', 'assets/ui/game_background.png');
+        if (this.textures.exists('gamebackground')){
+            this.textures.remove('gamebackground')
+        }
+        this.load.image('gamebackground', 'assets/ui/background2.png');
         this.load.image('crate', 'assets/ui/crate_topview.png');
 
         // Load accordingly to level

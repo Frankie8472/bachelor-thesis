@@ -157,7 +157,15 @@ export class PropertySortingScene extends BaseScene {
     preload(): void {
 
         // Preload UI
-        this.load.image('gamebackground', 'assets/ui/sorting_background.png');
+        if (this.textures.exists('gamebackground')){
+            this.textures.remove('gamebackground')
+        }
+        if (this.infinite){
+            this.load.image('gamebackground', 'assets/ui/background3.png');
+        } else {
+            this.load.image('gamebackground', 'assets/ui/sorting_background.png');
+        }
+
         this.load.image('wooden_crate', 'assets/ui/wooden_crate.png');
 
         // Preselect properties

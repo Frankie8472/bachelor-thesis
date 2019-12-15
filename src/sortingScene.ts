@@ -57,9 +57,24 @@ export class SortingScene extends BaseScene {
     preload(): void {
 
         // Preload UI
-        this.load.image('gamebackground', 'assets/ui/sorting_background.png');
-        this.load.image('help', 'assets/ui/help.png'/*{ frameWidth: 512, frameHeight: 512 }*/);
+        if (this.textures.exists('gamebackground')){
+            this.textures.remove('gamebackground')
+        }
+        this.load.image('gamebackground', 'assets/ui/background2.png');
+
+        if (this.textures.exists('help')){
+            this.textures.remove('help')
+        }
+        this.load.image('help', 'assets/ui/help.png');
+
+        if (this.textures.exists('menubackground')){
+            this.textures.remove('menubackground')
+        }
         this.load.image('menubackground', 'assets/ui/menu_background.png');
+
+        if (this.textures.exists('exitbutton')){
+            this.textures.remove('exitbutton')
+        }
         this.load.image('exitbutton', 'assets/ui/exit_button.png');
 
         //Object preselection
