@@ -117,15 +117,12 @@ export class DropDownMenu extends BaseScene {
 
         // Enable key F for enabling/disabling fullscreen
         const FKey: Phaser.Input.Keyboard.Key = this.input.keyboard.addKey('F');
-
         FKey.on('down', function() {
-
+            this.scale.toggleFullscreen();
             if (this.scale.isFullscreen) {
                 this.fullscreenButton.setFrame(0);
-                this.scale.stopFullscreen();
             } else {
                 this.fullscreenButton.setFrame(1);
-                this.scale.startFullscreen();
             }
 
         }, this);
@@ -186,12 +183,12 @@ export class DropDownMenu extends BaseScene {
             }
 
             case 'fullscreenButton': {
+                this.scale.toggleFullscreen();
+
                 if (this.scale.isFullscreen) {
                     gameObject.setFrame(0);
-                    this.scale.stopFullscreen();
                 } else {
                     gameObject.setFrame(1);
-                    this.scale.startFullscreen();
                 }
                 break;
             }
