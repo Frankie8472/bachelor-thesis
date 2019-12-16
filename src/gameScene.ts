@@ -122,7 +122,12 @@ export class GameScene extends BaseScene {
         this.buttonSize = 64;
 
         this.maxPoints = 10;
+
         this.timedataStepsize = 0.0001;
+
+        if (this.level > 1) {
+            this.timedataStepsize = 0.00005;
+        }
 
         this.cellsX = 4;
         this.cellsY = 3;

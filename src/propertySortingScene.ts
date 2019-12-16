@@ -227,7 +227,7 @@ export class PropertySortingScene extends BaseScene {
             let diff: number = time - this.lastEmitTime;
             if (diff > this.delay) {
                 this.lastEmitTime = time;
-                if (this.delay > 500) {
+                if (this.delay > 300) {
                     this.delay -= 20;
                 }
                 if (this.arrayStatic.getLength() != 0) {
@@ -506,7 +506,7 @@ export class PropertySortingScene extends BaseScene {
                                 sprite.clearTint();
                                 sprite.setPosition(dropZone.x + dropZone.width * 0.15, dropZone.y - dropZone.height * 0.2);
 
-                                const imageScale: number = this.imageScalingFactor(Math.min(dropZone.width, dropZone.height) * 0.4, sprite.width, sprite.height);
+                                const imageScale: number = this.imageScalingFactor(Math.min(dropZone.width, dropZone.height) * 0.6, sprite.width, sprite.height);
                                 sprite.setScale(imageScale, imageScale);
 
                                 this.arrayDropped.add(sprite);
