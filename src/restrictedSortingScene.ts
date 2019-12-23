@@ -299,14 +299,6 @@ export class RestrictedSortingScene extends BaseScene {
 
                 let scale: number = gameObject.getData('scale')*1.2;
                 gameObject.setScale(scale, scale);
-
-                // Check if the gameObject is already in a zone
-                let index = this.objZoneMap.indexOf(gameObject);
-                if (index > -1) {
-                    // Clear gameObject from this zone
-                    delete this.objZoneMap[index];
-                    this.displayedObjects.add(gameObject);
-                }
             }
         }, this);
 
@@ -340,6 +332,14 @@ export class RestrictedSortingScene extends BaseScene {
                 }
 
                 gameObject.setPosition(x, y);
+
+                // Check if the gameObject is already in a zone
+                let index = this.objZoneMap.indexOf(gameObject);
+                if (index > -1) {
+                    // Clear gameObject from this zone
+                    delete this.objZoneMap[index];
+                    this.displayedObjects.add(gameObject);
+                }
             }
         }, this);
 
@@ -357,8 +357,15 @@ export class RestrictedSortingScene extends BaseScene {
                 let coords: number[] = [gameObject.input.dragStartX, gameObject.input.dragStartY];
 
                 // Check if there is already an object in the dropZone and if the current gameObject fits with the other elements
-                let index = this.zoneObjMap.indexOf(dropZone);
+                let index: number = this.zoneObjMap.indexOf(dropZone);
+                let index2:number = this.objZoneMap.indexOf(gameObject);
                 if (typeof this.objZoneMap[index] == 'undefined' && this.equalityCheck(gameObject, dropZone)){
+                    // Check if the gameObject is already in a zone
+                    if (index2 > -1) {
+                        // Clear gameObject from this zone
+                        delete this.objZoneMap[index2];
+                        this.displayedObjects.add(gameObject);
+                    }
 
                     // Set scale and coordinates
                     scale = this.imageScalingFactor(Math.min(dropZone.width, dropZone.height)*0.9, gameObject.width, gameObject.height);
@@ -374,6 +381,12 @@ export class RestrictedSortingScene extends BaseScene {
                     if (this.displayedObjects.getLength() <= 0) {
                         this.transitionOut('ScoreScene', {'score': 1, 'previousScene': this.getKey()});
                     }
+
+
+                } else if (index2 > -1) {
+                    // Check if the gameObject was already in a zone
+                    let dropZoneOld: Phaser.GameObjects.Zone = this.objZoneMap[index2];
+                    scale = this.imageScalingFactor(Math.min(dropZoneOld.width, dropZoneOld.height)*0.9, gameObject.width, gameObject.height);
                 }
 
                 // Set default visual effect and position
