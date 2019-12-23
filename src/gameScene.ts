@@ -328,7 +328,7 @@ export class GameScene extends BaseScene {
 
         const scale: number = this.imageScalingFactor(this.buttonSize, menuButton.width, menuButton.height);
         menuButton.setScale(scale, scale);
-        menuButton.setInteractive();
+        menuButton.setInteractive({ cursor: 'pointer' });
 
         menuButton.on('pointerup', () => this.menuAction(menuButton, menuBackground));
     }
@@ -360,7 +360,7 @@ export class GameScene extends BaseScene {
             const diag: number = Math.sqrt(Math.pow(sprite.height, 2) + Math.pow(sprite.width, 2));
             const scale: number = this.imageScalingFactor(Math.min(this.cellWidth, this.cellHeight), diag, diag);
             sprite.setScale(scale, scale);
-            sprite.setInteractive();
+            sprite.setInteractive({ cursor: 'pointer' });
 
             sprite.on('pointerdown', function() {
 

@@ -25,6 +25,7 @@ export class IntroScene extends BaseScene {
         // Bring MenuUI to the front and initialize transition
         this.game.scene.sendToBack(this.getKey());
         this.game.scene.moveUp(this.getKey());
+        // TODO: Make gifs for each first scene
 
         const background: Phaser.GameObjects.Rectangle = this.add.rectangle(0, 0, this.cameras.main.width, this.cameras.main.height);
         background.setOrigin(0, 0);

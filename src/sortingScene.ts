@@ -228,7 +228,7 @@ export class SortingScene extends BaseScene {
 
             this.arrayCategory.add(sprite);
 
-            sprite.setInteractive();
+            sprite.setInteractive({ cursor: 'pointer' });
 
             sprite.on('pointerdown', function() {
                 for (let item of this.arrayCategory.getChildren()) {
@@ -275,7 +275,7 @@ export class SortingScene extends BaseScene {
             sprite.setData('cat4', cat4);
             sprite.setData('scale', scale);
 
-            sprite.setInteractive();
+            sprite.setInteractive({ cursor: 'pointer' });
 
             this.arrayStack.add(sprite);
             this.arrayStack.bringToTop(sprite);
@@ -352,7 +352,7 @@ export class SortingScene extends BaseScene {
     private exitButton() {
         const exitButton: Phaser.GameObjects.Sprite = this.add.sprite(10, this.cameras.main.height - 10, 'sorting_exitbutton');
         exitButton.setOrigin(0,1);
-        exitButton.setInteractive();
+        exitButton.setInteractive({ cursor: 'pointer' });
 
         const scale: number = this.imageScalingFactor(this.buttonSize, exitButton.width, exitButton.height);
         exitButton.setScale(scale, scale);

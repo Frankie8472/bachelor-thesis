@@ -73,7 +73,7 @@ export class ScoreScene extends BaseScene {
         replayButton.setOrigin(0.5, 0.5);
         const buttonScale: number = this.imageScalingFactor(this.buttonSize*1.5, replayButton.width, replayButton.height);
         replayButton.setScale(buttonScale, buttonScale);
-        replayButton.setInteractive();
+        replayButton.setInteractive({ cursor: 'pointer' });
         replayButton.on('pointerdown', function() {
             replayButton.on('pointerup', function() {
                 this.transitionOut(this.previousScene);

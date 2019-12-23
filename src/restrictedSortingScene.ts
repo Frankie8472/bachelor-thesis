@@ -418,7 +418,7 @@ export class RestrictedSortingScene extends BaseScene {
             sprite.setData('scale', scale);
             sprite.setData('properties', [image.cat1, image.cat2, image.cat3, image.cat4]);
 
-            sprite.setInteractive();
+            sprite.setInteractive({ cursor: 'pointer' });
             this.input.setDraggable(sprite);
 
             this.displayedObjects.add(sprite);

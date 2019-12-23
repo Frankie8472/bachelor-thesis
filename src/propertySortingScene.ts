@@ -415,7 +415,7 @@ export class PropertySortingScene extends BaseScene {
                 sprite.setData('spin', Phaser.Math.RND.between(10, 50));
                 sprite.setData('active', true);
 
-                sprite.setInteractive();
+                sprite.setInteractive({ cursor: 'pointer' });
 
                 this.arrayStatic.add(sprite);
                 this.arrayStack.add(sprite);
@@ -459,7 +459,7 @@ export class PropertySortingScene extends BaseScene {
                 sprite.setData('spin', Phaser.Math.RND.between(10, 50));
                 sprite.setData('active', false);
 
-                sprite.setInteractive();
+                sprite.setInteractive({ cursor: 'pointer' });
 
                 this.arrayStatic.add(sprite);
                 this.arrayStack.add(sprite);

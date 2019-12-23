@@ -101,7 +101,7 @@ export class DropDownMenu extends BaseScene {
         scale = this.imageScalingFactor(this.buttonSize, this.exitButton.width, this.exitButton.height);
         this.exitButton.setScale(scale, scale);
 
-        this.exitButton.setInteractive();
+        this.exitButton.setInteractive({ cursor: 'pointer' });
 
         // Fullscreen Button
         this.fullscreenButton = this.add.sprite(-64, 10 + 32 + (10 + 64), 'fullscreenbuttonblack', 0);
@@ -113,7 +113,7 @@ export class DropDownMenu extends BaseScene {
         this.fullscreenButton.setName("fullscreenButton");
         this.fullscreenButton.setData('clicked', false);
 
-        this.fullscreenButton.setInteractive();
+        this.fullscreenButton.setInteractive({ cursor: 'pointer' });
 
         // Enable key F for enabling/disabling fullscreen
         const FKey: Phaser.Input.Keyboard.Key = this.input.keyboard.addKey('F');
@@ -137,7 +137,7 @@ export class DropDownMenu extends BaseScene {
         this.menuButton.setName("menuButton");
         this.menuButton.setData('clicked', false);
 
-        this.menuButton.setInteractive();
+        this.menuButton.setInteractive({ cursor: 'pointer' });
 
         // StartGame
         this.game.scene.start('WelcomeScene');

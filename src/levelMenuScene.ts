@@ -109,7 +109,7 @@ export class LevelMenuScene extends BaseScene {
         const scaleCatButton: number = this.imageScalingFactor(this.buttonSize / 1.5, catButton.width, catButton.height);
         catButton.setScale(scaleCatButton, scaleCatButton);
         catButton.setName('catButton');
-        catButton.setInteractive();
+        catButton.setInteractive({ cursor: 'pointer' });
 
         this.levelButtons.getChildren().forEach(function(gameObject) {
             if (gameObject instanceof Phaser.GameObjects.Sprite) {
@@ -121,7 +121,7 @@ export class LevelMenuScene extends BaseScene {
 
                 gameObject.setData('clicked', false);
 
-                gameObject.setInteractive();
+                gameObject.setInteractive({ cursor: 'pointer' });
             }
         }, this);
 
