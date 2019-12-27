@@ -104,9 +104,10 @@ export class PropertySortingScene extends BaseScene {
     private numberOfObjectsEach: number;
 
     /**
-     * Array of preselected objects for faster loading
+     * Array of preselected objects with name for faster loading
      */
     private selectedElements: any[];
+    private selectedElementsName: string[];
 
     /**
      * Amount of dummies in play
@@ -125,7 +126,7 @@ export class PropertySortingScene extends BaseScene {
     init(data): void {
 
         // Initialize data from previous scene
-        this.jsonObject = data.jsonObject;
+        this.jsonObject = this.cache.json.get('objects');
         this.infinite = data.infinite;
         this.setCat = data.setCat;
 
@@ -147,12 +148,13 @@ export class PropertySortingScene extends BaseScene {
         this.numberOfDummies = 0;
 
         this.selectedElements = [];
+        this.selectedElementsName = [];
 
         // Randomization of amount of properties to sort
         this.propertyCount = Phaser.Math.RND.between(3, numberOfProperties);
 
         // Debatable initializations
-        this.objectDisplaySize = 100; // TODO: OK on tablets and phones?!
+        this.objectDisplaySize = 100;
         this.droppedObjectScale = 0.4;
         this.velocity = 150;
         this.lastEmitTime = 0;
@@ -162,55 +164,6 @@ export class PropertySortingScene extends BaseScene {
 
     preload(): void {
 
-        // Preload UI
-        if (this.textures.exists('gamebackground')){
-            this.textures.remove('gamebackground')
-        }
-        if (this.infinite){
-            this.load.image('gamebackground', 'assets/ui/background3.png');
-        } else {
-            this.load.image('gamebackground', 'assets/ui/sorting_background.png');
-        }
-
-        this.load.image('wooden_crate', 'assets/ui/wooden_crate.png');
-
-        // Preselect properties
-        for (let property of this.jsonObject['categories'][this.setCat - 1].validElements) {
-            this.selectedElements.push(property);
-        }
-
-        // Pick the elements
-        while (this.selectedElements.length > this.propertyCount) {
-            this.selectedElements = Phaser.Math.RND.shuffle(this.selectedElements);
-            this.selectedElements.pop();
-        }
-
-        // Get property images
-        let propLength: number = this.selectedElements[0].urls.length;
-        let rndIndex: number = Phaser.Math.RND.between(0, propLength - 1);
-        for (let prop of this.selectedElements) {
-            let name = prop.name;
-            let path = 'assets/geometrical_objects/images/' + prop.urls[rndIndex];
-            if (this.textures.exists(name)){
-                this.textures.remove(name);
-            }
-            this.load.image(name, path);
-        }
-
-        // Preload progressbar images
-        this.load.image('progressbar', 'assets/ui/progressbar.png');
-        this.load.image('progressbarGreen', 'assets/ui/progressbar_green.png');
-        this.load.image('progressbarRed', 'assets/ui/progressbar_red.png');
-        this.load.image('plus', 'assets/ui/plus.png');
-        this.load.image('minus', 'assets/ui/minus.png');
-        if (this.infinite){
-            this.load.audio('battle', 'assets/ui_audio/battle.mp3');
-        } else {
-            if (this.textures.exists('loading')){
-                this.textures.remove('loading')
-            }
-            this.load.audio('loading', 'assets/ui_audio/loading.mp3');
-        }
     }
 
     create(): void {
@@ -218,6 +171,7 @@ export class PropertySortingScene extends BaseScene {
         this.game.scene.sendToBack(this.getKey());
         this.transitionIn();
 
+        this.preselectObjects();
         this.setBackground();
         this.addProgressbar();
         this.loadObjects();
@@ -248,10 +202,15 @@ export class PropertySortingScene extends BaseScene {
     }
 
     /**
-     * Function for initializing the background
+     * Method for initializing the background
      */
     private setBackground() {
-        const background: Phaser.GameObjects.Sprite = this.add.sprite(0, 0, 'gamebackground');
+        let background: Phaser.GameObjects.Sprite;
+        if (this.infinite) {
+            background = this.add.sprite(0, 0, 'background3');
+        } else {
+            background = this.add.sprite(0, 0, 'background2');
+        }
         background.setOrigin(0, 0);
         background.setDisplaySize(this.cameras.main.width, this.cameras.main.height);
         background.setTint(0xffccaa);
@@ -259,7 +218,7 @@ export class PropertySortingScene extends BaseScene {
     }
 
     /**
-     * Functions for initializing the drop zones
+     * Methods for initializing the drop zones
      */
     private setDropzones(): void {
         const leftBound: number = this.correctBar.getTopRight().x + 10;
@@ -281,7 +240,6 @@ export class PropertySortingScene extends BaseScene {
             zone.setOrigin(0.5, 0.5);
             zone.setRectangleDropZone(zone.width, zone.height);
             zone.setName(property.name);
-            this.input.enableDebug(zone);
 
             this.arrayDropZone.add(zone);
 
@@ -290,7 +248,7 @@ export class PropertySortingScene extends BaseScene {
     }
 
     /**
-     * Function which initializes all input actions
+     * Method which initializes all input actions
      */
     private initInput() {
 
@@ -335,11 +293,11 @@ export class PropertySortingScene extends BaseScene {
                 let dist: number = Math.sqrt(Math.pow(gameObject.width*gameObject.getData('scale'), 2) + Math.pow(gameObject.height*gameObject.getData('scale'), 2))/2;
 
                 if (x < 0) {
-                    x = 0 + dist;
+                    x = dist;
                 }
 
                 if (y < 0) {
-                    y = 0 + dist;
+                    y = dist;
                 }
 
                 if (x > this.cameras.main.width) {
@@ -390,7 +348,7 @@ export class PropertySortingScene extends BaseScene {
     }
 
     /**
-     * function for initializing all game objects
+     * Method for initializing all game objects
      */
     private loadObjects(): void {
         this.arrayStack.setDepth(1);
@@ -402,7 +360,7 @@ export class PropertySortingScene extends BaseScene {
                 // RND size
                 const size: number = Phaser.Math.RND.between(this.objectDisplaySize, this.objectDisplaySize*1.3);
 
-                const sprite: Phaser.Physics.Arcade.Sprite = this.physics.add.sprite(Phaser.Math.RND.between(100 + this.objectDisplaySize / 2, this.cameras.main.width - this.objectDisplaySize / 1.5), Phaser.Math.RND.between(this.objectDisplaySize / 2, this.cameras.main.height - this.objectDisplaySize * 2 - this.objectDisplaySize / 2), propImage.name);
+                const sprite: Phaser.Physics.Arcade.Sprite = this.physics.add.sprite(Phaser.Math.RND.between(100 + this.objectDisplaySize / 2, this.cameras.main.width - this.objectDisplaySize / 1.5), Phaser.Math.RND.between(this.objectDisplaySize / 2, this.cameras.main.height - this.objectDisplaySize * 2 - this.objectDisplaySize / 2), this.selectedElementsName[this.selectedElements.indexOf(propImage)]);
                 sprite.setName(propImage.name);
 
                 if (this.infinite) {
@@ -444,7 +402,7 @@ export class PropertySortingScene extends BaseScene {
                 // RND size
                 const size: number = Phaser.Math.RND.between(this.objectDisplaySize * 0.8, this.objectDisplaySize * 1.3);
 
-                const sprite: Phaser.Physics.Arcade.Sprite = this.physics.add.sprite(Phaser.Math.RND.between(100 + this.objectDisplaySize / 2, this.cameras.main.width - this.objectDisplaySize / 2), Phaser.Math.RND.between(this.objectDisplaySize / 2, this.cameras.main.height - this.objectDisplaySize * 2 - this.objectDisplaySize / 2), propImage.name);
+                const sprite: Phaser.Physics.Arcade.Sprite = this.physics.add.sprite(Phaser.Math.RND.between(100 + this.objectDisplaySize / 2, this.cameras.main.width - this.objectDisplaySize / 2), Phaser.Math.RND.between(this.objectDisplaySize / 2, this.cameras.main.height - this.objectDisplaySize * 2 - this.objectDisplaySize / 2), this.selectedElementsName[this.selectedElements.indexOf(propImage)]);
                 sprite.setName(propImage.name);
 
                 if (this.infinite) {
@@ -500,7 +458,7 @@ export class PropertySortingScene extends BaseScene {
     }
 
     /**
-     * Function for visually marking the drop zones
+     * Method for visually marking the drop zones
      */
     private initFirstDrop(): void {
         let counterSet: string[] = [];
@@ -540,7 +498,7 @@ export class PropertySortingScene extends BaseScene {
     }
 
     /**
-     * Function for initializing the progressbar
+     * Method for initializing the progressbar
      */
     private addProgressbar(): void {
         const progressbarY: number = this.cameras.main.height - 10;
@@ -589,7 +547,7 @@ export class PropertySortingScene extends BaseScene {
     }
 
     /**
-     * Function for updating the progressbar
+     * Method for updating the progressbar
      * @param point Number of points made (+1 or -1)
      */
     private updateProgressbar(point: number): void {
@@ -616,13 +574,37 @@ export class PropertySortingScene extends BaseScene {
     }
 
     /**
-     * Function for initializing soundeffects
+     * Method for initializing sound effects
      */
     private initAudio() {
         if (this.infinite){
             this.sound.add('battle').play('', {loop: true});
         } else {
             this.sound.add('loading').play('', {loop: true});
+        }
+    }
+
+    /**
+     * Method for preselecting objects
+     */
+    private preselectObjects() {
+        // Preselect properties
+        for (let property of this.jsonObject['categories'][this.setCat - 1].validElements) {
+            this.selectedElements.push(property);
+        }
+
+        // Pick the elements
+        while (this.selectedElements.length > this.propertyCount) {
+            this.selectedElements = Phaser.Math.RND.shuffle(this.selectedElements);
+            this.selectedElements.pop();
+        }
+
+        // Get property images
+        let propLength: number = this.selectedElements[0].urls.length;
+        let rndIndex: number = Phaser.Math.RND.between(0, propLength - 1);
+        for (let prop of this.selectedElements) {
+            const name = prop.urls[rndIndex];
+            this.selectedElementsName.push(name);
         }
     }
 }

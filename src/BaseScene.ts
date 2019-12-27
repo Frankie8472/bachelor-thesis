@@ -19,14 +19,14 @@ export class BaseScene extends Phaser.Scene {
     }
 
     /**
-     * Function for returning the key of this scene
+     * Method for returning the key of this scene
      */
     public getKey(): string{
         return this.key;
     }
 
     /**
-     * Function for generating a new seed so that pseudo randomness is guaranteed
+     * Method for generating a new seed so that pseudo randomness is guaranteed
      */
     private generateNewSeed(): void {
         const rndStr: string = Phaser.Math.RND.realInRange(Math.pow(10, 2), Math.pow(10,10)).toString();
@@ -34,7 +34,7 @@ export class BaseScene extends Phaser.Scene {
     }
 
     /**
-     * Function for initializing the shape, position and properties of the graphical scene transition
+     * Method for initializing the shape, position and properties of the graphical scene transition
      */
     private transitionInit(): void {
         // Shape of the graphical transition
@@ -98,7 +98,7 @@ export class BaseScene extends Phaser.Scene {
     }
 
     /**
-     * Helper function for starting a new scene and stopping the current one
+     * Helper method for starting a new scene and stopping the current one
      * as the behaviour of the current scene when starting a new one is
      * not clearly defined in the framework at this point of time.
      * @param scene The scene you want to start next

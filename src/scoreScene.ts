@@ -29,21 +29,7 @@ export class ScoreScene extends BaseScene {
     }
 
     preload(): void {
-        // Preload UI
-        if (this.textures.exists('gamebackground')){
-            this.textures.remove('gamebackground')
-        }
 
-        this.load.image('finger', 'assets/ui/finger.png');
-
-        this.load.image('gamebackground', 'assets/ui/game_background.png');
-        this.load.image('star_0', 'assets/ui/star_0.png');
-        this.load.image('star_1', 'assets/ui/star_1.png');
-        this.load.image('star_2', 'assets/ui/star_2.png');
-        this.load.image('star_3', 'assets/ui/star_3.png');
-        this.load.image('replay', 'assets/ui/reload_button.png');
-
-        this.load.audio('sparkle', 'assets/ui_audio/sparkle_loop.mp3');
     }
 
     create(): void {
@@ -54,21 +40,20 @@ export class ScoreScene extends BaseScene {
         this.setBackground();
         this.initUI();
         this.initInput();
-
         this.initAudio();
     }
 
     /**
-     * Function for initializing the background
+     * Method for initializing the background
      */
     private setBackground() {
-        const background = this.add.sprite(0, 0, 'gamebackground');
+        const background: Phaser.GameObjects.Sprite = this.add.sprite(0, 0, 'background5');
         background.setOrigin(0, 0);
         background.setDisplaySize(this.cameras.main.width, this.cameras.main.height);
     }
 
     /**
-     * Function for initializing replaybutton and reward graphics
+     * Method for initializing replaybutton and reward graphics
      */
     private initUI() {
         // Add replay button
@@ -127,7 +112,7 @@ export class ScoreScene extends BaseScene {
     }
 
     /**
-     * Function which initializes all global input actions
+     * Method which initializes all global input actions
      */
     private initInput() {
         this.input.on('pointerdown', function() {
@@ -138,7 +123,7 @@ export class ScoreScene extends BaseScene {
     }
 
     /**
-     * Function for initializing soundeffects
+     * Method for initializing soundeffects
      */
     private initAudio() {
         this.sound.add('sparkle').play('', {loop: false});

@@ -25,27 +25,7 @@ export class LevelMenuScene extends BaseScene {
     }
 
     preload(): void {
-        // Load UI
-        this.load.image('background', 'assets/ui/background1.png');
-        this.load.image('title', 'assets/ui/title.png');
-        this.load.image('catButton', 'assets/ui/cat_button.png');
-        this.load.image('levelButton11', 'assets/ui/level11_button.png');
-        this.load.image('levelButton12', 'assets/ui/level12_button.png');
-        this.load.image('levelButton13', 'assets/ui/level13_button.png');
-        this.load.image('levelButton14', 'assets/ui/level14_button.png');
-        this.load.image('levelButton21', 'assets/ui/level21_button.png');
-        this.load.image('levelButton22', 'assets/ui/level22_button.png');
-        this.load.image('levelButton23', 'assets/ui/level23_button.png');
-        this.load.image('levelButton24', 'assets/ui/level24_button.png');
-        this.load.image('levelButton31', 'assets/ui/level31_button.png');
-        this.load.image('levelButton32', 'assets/ui/level32_button.png');
-        this.load.image('levelButton33', 'assets/ui/level33_button.png');
-        this.load.image('levelButton34', 'assets/ui/level34_button.png');
 
-        if (this.textures.exists('loading')){
-            this.textures.remove('loading')
-        }
-        this.load.audio('loading', 'assets/ui_audio/loading.mp3');
     }
 
     create(): void {
@@ -69,7 +49,7 @@ export class LevelMenuScene extends BaseScene {
      * Function for initializing background graphics
      */
     private setBackground() {
-        const background: Phaser.GameObjects.Sprite = this.add.sprite(0, 0, 'background');
+        const background: Phaser.GameObjects.Sprite = this.add.sprite(0, 0, 'background1');
         background.setOrigin(0, 0);
         background.setDisplaySize(this.cameras.main.width, this.cameras.main.height);
     }
@@ -166,67 +146,67 @@ export class LevelMenuScene extends BaseScene {
     private buttonFunction(gameObject: Phaser.GameObjects.Sprite): void {
         switch (gameObject.name) {
             case 'catButton': {
-                this.transitionOut('SortingSceneLoader');
+                this.transitionOut('SortingScene');
                 break;
             }
             case 'levelButton11': {
-                this.transitionOut('PropertySortingSceneLoader', {'setCat': 1, 'infinite': false});
+                this.transitionOut('PropertySortingScene', {'setCat': 1, 'infinite': false});
                 break;
             }
 
             case 'levelButton12': {
-                this.transitionOut('PropertySortingSceneLoader', {'setCat': 2, 'infinite': false});
+                this.transitionOut('PropertySortingScene', {'setCat': 2, 'infinite': false});
 
                 break;
             }
 
             case 'levelButton13': {
-                this.transitionOut('PropertySortingSceneLoader', {'setCat': 3, 'infinite': false});
+                this.transitionOut('PropertySortingScene', {'setCat': 3, 'infinite': false});
                 break;
             }
 
             case 'levelButton14': {
-                this.transitionOut('PropertySortingSceneLoader', {'setCat': 4, 'infinite': false});
+                this.transitionOut('PropertySortingScene', {'setCat': 4, 'infinite': false});
                 break;
             }
 
             case 'levelButton21': {
-                this.transitionOut('PropertySortingSceneLoader', {'setCat': 1, 'infinite': true});
+                this.transitionOut('PropertySortingScene', {'setCat': 1, 'infinite': true});
                 break;
             }
 
             case 'levelButton22': {
-                this.transitionOut('PropertySortingSceneLoader', {'setCat': 2, 'infinite': true});
+                this.transitionOut('PropertySortingScene', {'setCat': 2, 'infinite': true});
                 break;
             }
 
             case 'levelButton23': {
-                this.transitionOut('PropertySortingSceneLoader', {'setCat': 3, 'infinite': true});
+                this.transitionOut('PropertySortingScene', {'setCat': 3, 'infinite': true});
                 break;
             }
 
             case 'levelButton24': {
-                this.transitionOut('PropertySortingSceneLoader', {'setCat': 4, 'infinite': true});
+                this.transitionOut('PropertySortingScene', {'setCat': 4, 'infinite': true});
                 break;
             }
 
             case 'levelButton31': {
-                this.transitionOut('RestrictedSortingSceneLoader', {'level': 1});
+                this.transitionOut('RestrictedSortingScene', {'level': 1});
                 break;
             }
 
             case 'levelButton32': {
-                this.transitionOut('RestrictedSortingSceneLoader', {'level': 2});
+                this.transitionOut('RestrictedSortingScene', {'level': 2});
                 break;
             }
 
             case 'levelButton33': {
-                this.transitionOut('GameSceneLoader', {'level': 1});
+                this.transitionOut('GameScene', {'level': 1});
                 break;
             }
 
             case 'levelButton34': {
-                this.transitionOut('GameSceneLoader', {'level': 2});
+                this.transitionOut('GameScene', {'level': 2});
                 break;
             }
 
@@ -258,17 +238,17 @@ export class LevelMenuScene extends BaseScene {
      */
     private setVisualLink() {
         // Add lines
-        const dashedLine1: Phaser.GameObjects.Grid = this.add.grid(this.cameras.main.width/2, 1/4*this.cameras.main.height, 3/5*this.cameras.main.width, this.buttonSize/6, this.buttonSize/5, this.buttonSize/6);
+        const dashedLine1: Phaser.GameObjects.Grid = this.add.grid(this.cameras.main.width/2, 1/4*this.cameras.main.height, 3/5*this.cameras.main.width, this.buttonSize/6, this.buttonSize/10, this.buttonSize/6);
         dashedLine1.setFillStyle(0x000000);
         dashedLine1.setOrigin(0.5, 0.5);
         dashedLine1.setAltFillStyle(0x000000, 0);
 
-        const dashedLine2: Phaser.GameObjects.Grid = this.add.grid(this.cameras.main.width/2, 2/4*this.cameras.main.height, 3/5*this.cameras.main.width, this.buttonSize/6, this.buttonSize/5, this.buttonSize/6);
+        const dashedLine2: Phaser.GameObjects.Grid = this.add.grid(this.cameras.main.width/2, 2/4*this.cameras.main.height, 3/5*this.cameras.main.width, this.buttonSize/6, this.buttonSize/10, this.buttonSize/6);
         dashedLine2.setFillStyle(0x000000);
         dashedLine2.setOrigin(0.5, 0.5);
         dashedLine2.setAltFillStyle(0x000000, 0);
 
-        const dashedLine3: Phaser.GameObjects.Grid = this.add.grid(this.cameras.main.width/2, 3/4*this.cameras.main.height, 3/5*this.cameras.main.width, this.buttonSize/6, this.buttonSize/5, this.buttonSize/6);
+        const dashedLine3: Phaser.GameObjects.Grid = this.add.grid(this.cameras.main.width/2, 3/4*this.cameras.main.height, 3/5*this.cameras.main.width, this.buttonSize/6, this.buttonSize/10, this.buttonSize/6);
         dashedLine3.setFillStyle(0x000000);
         dashedLine3.setOrigin(0.5, 0.5);
         dashedLine3.setAltFillStyle(0x000000, 0);

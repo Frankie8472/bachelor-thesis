@@ -1,19 +1,16 @@
 import 'phaser';
 import GameConfig = Phaser.Types.Core.GameConfig;
 import RenderConfig = Phaser.Types.Core.RenderConfig;
+import {PreloadAssets} from './preloadAssets';
 import {DropDownMenu} from './dropDownMenu';
 import {WelcomeScene} from './welcomeScene';
 import {LevelMenuScene} from './levelMenuScene';
-import {GameSceneLoader} from './gameSceneLoader';
 import {IntroScene} from './introScene';
 import {GameScene} from './gameScene';
 import {ScoreScene} from './scoreScene';
 import {SortingScene} from './sortingScene';
-import {SortingSceneLoader} from './sortingSceneLoader';
-import {PropertySortingSceneLoader} from './propertySortingSceneLoader';
 import {PropertySortingScene} from './propertySortingScene';
 import {RestrictedSortingScene} from './restrictedSortingScene';
-import {RestrictedSortingSceneLoader} from './restrictedSortingSceneLoader';
 
 const renderConfig: RenderConfig = {
     antialias: true,
@@ -33,11 +30,12 @@ const config: GameConfig = {
     parent: 'game',
     type: Phaser.AUTO,
     scene: [
+        PreloadAssets,
         DropDownMenu, WelcomeScene, LevelMenuScene,
-        IntroScene, GameSceneLoader, GameScene,
-        SortingSceneLoader, SortingScene,
-        PropertySortingSceneLoader, PropertySortingScene,
-        RestrictedSortingSceneLoader, RestrictedSortingScene,
+        SortingScene,
+        PropertySortingScene,
+        RestrictedSortingScene,
+        IntroScene, GameScene,
         ScoreScene
     ],
     physics: {

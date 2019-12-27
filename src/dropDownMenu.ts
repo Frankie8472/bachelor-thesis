@@ -62,12 +62,7 @@ export class DropDownMenu extends BaseScene {
     }
 
     preload(): void {
-        // Load UI
-        this.load.image('menubutton', 'assets/ui/menu_button.png'/*{ frameWidth: 512, frameHeight: 512 }*/);
-        this.load.spritesheet('fullscreenbuttonblack', 'assets/ui/fullscreen_button_black.png', {frameWidth: 64, frameHeight: 64});
-        this.load.image('exitbutton', 'assets/ui/exit_button.png' /*{ frameWidth: 512, frameHeight: 512 }*/);
-        this.load.image('menubackground', 'assets/ui/menu_background.png' /*{ frameWidth: 352, frameHeight: 728 }*/);
-        this.load.image('sandClock', 'assets/ui/sandclock.png');
+
     }
 
     create(): void {
@@ -81,7 +76,7 @@ export class DropDownMenu extends BaseScene {
     }
 
     /**
-     * Function for initializing the menu buttons, background and action
+     * Method for initializing the menu buttons, background and action
      */
     private setMenu() {
         let scale: number;
@@ -144,7 +139,7 @@ export class DropDownMenu extends BaseScene {
     }
 
     /**
-     * Function for initializing all input
+     * Method for initializing all input
      */
     private initInput(): void {
         this.input.on('pointerdown', function(pointer, currentlyOver) {
@@ -168,7 +163,7 @@ export class DropDownMenu extends BaseScene {
     }
 
     /**
-     * Function for assigning each button an event function
+     * Method for assigning each button an event function
      * @param gameObject GameObject on which you want the function on
      */
     private buttonFunction(gameObject: Phaser.GameObjects.Sprite): void {
@@ -219,7 +214,7 @@ export class DropDownMenu extends BaseScene {
     }
 
     /**
-     * Function which defines the graphical behaviour of the drop down menu
+     * Method which defines the graphical behaviour of the drop down menu
      */
     private menuAction(): void {
 
@@ -323,8 +318,11 @@ export class DropDownMenu extends BaseScene {
         }
     }
 
+    /**
+     * Method for setting the pixeled overlay and the hourglass
+     */
     private setPixelScreen() {
-        const pixelScreen = this.add.grid(0, 0, this.cameras.main.width, this.cameras.main.height, this.cameras.main.width/100, this.cameras.main.width/100);
+        const pixelScreen: Phaser.GameObjects.Grid = this.add.grid(0, 0, this.cameras.main.width, this.cameras.main.height, this.cameras.main.width/100, this.cameras.main.width/100);
         pixelScreen.setOrigin(0, 0);
         pixelScreen.setFillStyle(0x777777);
         pixelScreen.setAltFillStyle(0x555555);
@@ -332,14 +330,14 @@ export class DropDownMenu extends BaseScene {
         pixelScreen.setAlpha(0);
         this.pauseBackground.add(pixelScreen);
 
-        const sandClock = this.add.sprite(this.cameras.main.width/2, this.cameras.main.height/2, 'sandClock');
-        sandClock.setOrigin(0.5, 0.5);
+        const hourglass: Phaser.GameObjects.Sprite = this.add.sprite(this.cameras.main.width/2, this.cameras.main.height/2, 'hourglass');
+        hourglass.setOrigin(0.5, 0.5);
 
-        let clockScale: number = this.imageScalingFactor(3/5*this.cameras.main.height, sandClock.width, sandClock.height);
-        sandClock.setScale(clockScale, clockScale);
-        sandClock.setAlpha(0);
+        const clockScale: number = this.imageScalingFactor(3/5*this.cameras.main.height, hourglass.width, hourglass.height);
+        hourglass.setScale(clockScale, clockScale);
+        hourglass.setAlpha(0);
 
-        this.pauseBackground.add(sandClock);
+        this.pauseBackground.add(hourglass);
 
         this.pauseBackground.setVisible(false);
         this.children.sendToBack(this.pauseBackground);

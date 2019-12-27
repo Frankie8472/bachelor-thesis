@@ -44,7 +44,7 @@ export class SortingScene extends BaseScene {
     init(data): void {
 
         // Initialize data from previous scene
-        this.jsonObject = data.jsonObject;
+        this.jsonObject = this.cache.json.get('objects');
 
         // Initialize fields
         this.arrayStack = this.add.container(0, 0);
@@ -55,60 +55,15 @@ export class SortingScene extends BaseScene {
     }
 
     preload(): void {
-        // Preload UI
-        if (this.textures.exists('sortingbackground')){
-            this.textures.remove('sortingbackground')
-        }
-        this.load.image('sortingbackground', 'assets/ui/background2.png');
 
-        if (this.textures.exists('help')){
-            this.textures.remove('help')
-        }
-        this.load.image('help', 'assets/ui/help.png');
-
-        if (this.textures.exists('helpermenubackground')){
-            this.textures.remove('helpermenubackground')
-        }
-        this.load.image('helpermenubackground', 'assets/ui/menu_background.png');
-
-        if (this.textures.exists('sorting_exitbutton')){
-            this.textures.remove('sorting_exitbutton')
-        }
-        this.load.image('sorting_exitbutton', 'assets/ui/exit_button.png');
-
-        //Object preselection
-        this.imagePreSelection();
-
-        // Get Image names from json and save them in array
-        for (let image of this.selectedObjects) {
-            let name: string = image.name;
-            let path: string = 'assets/geometrical_objects/images/' + name;
-            this.load.image(name, path);
-        }
-
-        // Get categories
-        for (let cat of this.jsonObject['categories']) {
-            if (cat.url === null) {
-                continue;
-            }
-
-            let name: string = cat.name;
-            let path: string = 'assets/geometrical_objects/categories/' + cat.url;
-            this.load.image(name, path);
-        }
-
-        if (this.textures.exists('loading')){
-            this.textures.remove('loading')
-        }
-        this.load.audio('loading', 'assets/ui_audio/loading.mp3');
     }
 
     create(): void {
-
         // Bring MenuUI to the front and initialize transition
         this.game.scene.sendToBack(this.getKey());
         this.transitionIn();
 
+        this.imagePreSelection();
         this.setBackground();
         this.setControlBar();
         this.loadGameObjects();
@@ -121,7 +76,7 @@ export class SortingScene extends BaseScene {
     }
 
     /**
-     * Function for pre-selecting a subgroup of images so that every property of each category has X representatives.
+     * Method for pre-selecting a subgroup of images so that every property of each category has X representatives.
      */
     private imagePreSelection(): void {
         // Select an manageable amount of images to be displayed
@@ -160,13 +115,12 @@ export class SortingScene extends BaseScene {
                 }
 
                 for (let image of temporaryArray) {
-                    const index = originArray.indexOf(image, 0);
+                    let index: number = originArray.indexOf(image, 0);
                     if (index > -1) {
                         originArray.splice(index, 1);
                     }
                 }
             }
-            // Da concat auf leeren listen nicht zu funktionieren schein, machen wir ein bischen lambda magic
             temporaryArray.forEach((x) => selectiveArray.push(x));
         }
 
@@ -174,10 +128,10 @@ export class SortingScene extends BaseScene {
     }
 
     /**
-     * Function for initializing the background
+     * Method for initializing the background
      */
     private setBackground() {
-        const background: Phaser.GameObjects.Sprite = this.add.sprite(0, 0, 'sortingbackground');
+        const background: Phaser.GameObjects.Sprite = this.add.sprite(0, 0, 'background4');
         background.setOrigin(0, 0);
         background.setDisplaySize(this.cameras.main.width, this.cameras.main.height);
         background.setTint(0xffccaa);
@@ -185,10 +139,10 @@ export class SortingScene extends BaseScene {
     }
 
     /**
-     * Function for initializing the control bar
+     * Method for initializing the control bar
      */
     private setControlBar(): void {
-        const controlbar: Phaser.GameObjects.Sprite = this.add.sprite(this.cameras.main.width / 2, this.cameras.main.height, 'helpermenubackground');
+        const controlbar: Phaser.GameObjects.Sprite = this.add.sprite(this.cameras.main.width / 2, this.cameras.main.height, 'menubackground');
         controlbar.setOrigin(0.5, 0.5);
         controlbar.setAngle(-90);
         controlbar.setScale(0.13, 0.20);
@@ -246,7 +200,7 @@ export class SortingScene extends BaseScene {
     }
 
     /**
-     * Function for loading all game objects
+     * Method for loading all game objects
      */
     private loadGameObjects(): void {
         for (let image of this.selectedObjects) {
@@ -285,7 +239,7 @@ export class SortingScene extends BaseScene {
     }
 
     /**
-     * Function which initializes all global input actions
+     * Method which initializes all global input actions
      */
     private initInput(): void {
         // On start dragging
@@ -347,10 +301,10 @@ export class SortingScene extends BaseScene {
     }
 
     /**
-     * Function for adding the exit button
+     * Method for adding the exit button
      */
     private exitButton() {
-        const exitButton: Phaser.GameObjects.Sprite = this.add.sprite(10, this.cameras.main.height - 10, 'sorting_exitbutton');
+        const exitButton: Phaser.GameObjects.Sprite = this.add.sprite(10, this.cameras.main.height - 10, 'exitbutton');
         exitButton.setOrigin(0,1);
         exitButton.setInteractive({ cursor: 'pointer' });
 
@@ -365,7 +319,7 @@ export class SortingScene extends BaseScene {
     }
 
     /**
-     * Function for ordering objects by the properties of a category in a grid
+     * Method for ordering objects by the properties of a category in a grid
      * @param categoryName Name of the category
      * @param validElements Properties of this category
      */
@@ -379,7 +333,7 @@ export class SortingScene extends BaseScene {
     }
 
     /**
-     * Function for initializing soundeffects
+     * Method for initializing soundeffects
      */
     private initAudio() {
         this.sound.add('loading').play('', {loop: true});

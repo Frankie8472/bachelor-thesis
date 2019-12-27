@@ -102,7 +102,7 @@ export class GameScene extends BaseScene {
     init(data): void {
 
         // Initialize data from previous scene
-        this.jsonObject = data.jsonObject;
+        this.jsonObject = this.cache.json.get('objects');
         this.level = data.level;
 
         // Initialize fields
@@ -123,10 +123,10 @@ export class GameScene extends BaseScene {
 
         this.maxPoints = 10;
 
-        this.timedataStepsize = 0.0001;
+        this.timedataStepsize = 0.0003;
 
         if (this.level > 1) {
-            this.timedataStepsize = 0.000001
+            this.timedataStepsize = 0.00001;
         }
 
         this.cellsX = 4;
@@ -147,22 +147,6 @@ export class GameScene extends BaseScene {
     }
 
     preload(): void {
-        // Preload background graphic
-        if (this.textures.exists('gamebackground')){
-            this.textures.remove('gamebackground')
-        }
-        this.load.image('gamebackground', 'assets/ui/game_background.png');
-
-        // Preload helper menu graphics
-        if (this.textures.exists('help')){
-            this.textures.remove('help')
-        }
-        this.load.image('help', 'assets/ui/help.png');
-
-        if (this.textures.exists('helpermenubackground')){
-            this.textures.remove('helpermenubackground')
-        }
-        this.load.image('helpermenubackground', 'assets/ui/menu_background.png');
 
         // Preselect objects and preload images
         const selectedProperties: any[] = [];
@@ -191,12 +175,6 @@ export class GameScene extends BaseScene {
             }
         }
 
-        for (let image of this.gameSet) {
-            let name: string = image.name;
-            let path: string = 'assets/geometrical_objects/images/' + name;
-            this.load.image(name, path);
-        }
-
         // Preload category images
         this.categorySet = [...this.jsonObject['categories']]; // Full copy the array instead of referencing
 
@@ -205,28 +183,6 @@ export class GameScene extends BaseScene {
             this.categorySet.pop();
         }
 
-        for (let cat of this.categorySet) {
-            // Check if the category has an image
-            if (cat.url === null || cat.name === null) {
-                continue;
-            }
-
-            let name: string = cat.name;
-            let path: string = 'assets/geometrical_objects/categories/' + cat.url;
-            this.load.image(name, path);
-        }
-
-        // Preload progressbar images
-        this.load.image('timefluid', 'assets/ui/timefluid.png');
-        this.load.image('gamefluid', 'assets/ui/gamefluid.png');
-        this.load.image('progressbar', 'assets/ui/progressbar.png');
-        this.load.image('progressstar', 'assets/ui/star.png');
-        this.load.image('sandclock', 'assets/ui/sandclock.png');
-
-        if (this.textures.exists('loading')){
-            this.textures.remove('loading')
-        }
-        this.load.audio('loading', 'assets/ui_audio/loading.mp3');
     }
 
     create(): void {
@@ -272,7 +228,7 @@ export class GameScene extends BaseScene {
      * Function for initializing the background
      */
     private setBackground() {
-        const background = this.add.sprite(0, 0, 'gamebackground');
+        const background = this.add.sprite(0, 0, 'background5');
         background.setOrigin(0, 0);
         background.setDisplaySize(this.cameras.main.width, this.cameras.main.height);
         background.setTint(0xffccaa);
@@ -285,7 +241,7 @@ export class GameScene extends BaseScene {
     private setHelperMenu(): void {
         // Menu background
         const backgroundY: number = 64 + 10 + 30;
-        const menuBackground: Phaser.GameObjects.Sprite = this.add.sprite(this.cameras.main.width - 64 - 10 - 30, backgroundY, 'helpermenubackground');
+        const menuBackground: Phaser.GameObjects.Sprite = this.add.sprite(this.cameras.main.width - 64 - 10 - 30, backgroundY, 'menubackground');
         menuBackground.setAngle(180);
         menuBackground.setOrigin(1, 0);
         menuBackground.setDisplaySize(500, this.cameras.main.height + 120);
@@ -690,10 +646,10 @@ export class GameScene extends BaseScene {
         progressbar.setOrigin(0, 1);
         progressbar.setScale(multiplierX, multiplierY);
 
-        const sandclock: Phaser.GameObjects.Sprite = this.add.sprite(10, progressbarY - progressbar.height * multiplierY - 10, 'sandclock');
-        const starmultiplier: number = progressbar.width * multiplierX / sandclock.width;
-        sandclock.setOrigin(0, 1);
-        sandclock.setScale(starmultiplier, starmultiplier);
+        const hourglass: Phaser.GameObjects.Sprite = this.add.sprite(10, progressbarY - progressbar.height * multiplierY - 10, 'hourglass');
+        const starmultiplier: number = progressbar.width * multiplierX / hourglass.width;
+        hourglass.setOrigin(0, 1);
+        hourglass.setScale(starmultiplier, starmultiplier);
 
         this.timefluid = this.add.sprite(10 + progressbar.width * multiplierX / 2 + 2, progressbarY - 6, 'timefluid');
         this.timefluid.setOrigin(0.5, 1);

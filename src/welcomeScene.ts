@@ -12,12 +12,7 @@ export class WelcomeScene extends BaseScene {
     }
 
     preload(): void {
-        // Load UI
-        this.load.image('background', 'assets/ui/background1.png');
-        this.load.image('title', 'assets/ui/title.png');
-        this.load.image('finger', 'assets/ui/finger.png');
 
-        this.load.audio('welcome', 'assets/ui_audio/welcome.mp3');
     }
 
     create(): void {
@@ -32,16 +27,16 @@ export class WelcomeScene extends BaseScene {
     }
 
     /**
-     * Function for initializing the background
+     * Method for initializing the background
      */
     private setBackground() {
-        let background = this.add.sprite(0, 0, 'background');
+        let background = this.add.sprite(0, 0, 'background1');
         background.setOrigin(0, 0);
         background.setDisplaySize(this.cameras.main.width, this.cameras.main.height);
     }
 
     /**
-     * Function for initializing title and animation
+     * Method for initializing title and animation
      */
     private setTitle() {
         // Add title
@@ -78,7 +73,7 @@ export class WelcomeScene extends BaseScene {
     }
 
     /**
-     * Function for initializing event actions
+     * Method for initializing event actions
      */
     private initInput() {
         this.input.on('pointerdown', function(){
@@ -87,7 +82,7 @@ export class WelcomeScene extends BaseScene {
     }
 
     /**
-     * Function for initializing soundeffects
+     * Method for initializing sound effects
      */
     private initAudio() {
         this.sound.add('welcome').play('', {loop: true});
