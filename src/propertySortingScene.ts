@@ -113,6 +113,11 @@ export class PropertySortingScene extends BaseScene {
      */
     private numberOfDummies: number;
 
+    /**
+     * Scaling value of the dropped object
+     */
+    private droppedObjectScale: number;
+
     constructor() {
         super('PropertySortingScene');
     }
@@ -148,6 +153,7 @@ export class PropertySortingScene extends BaseScene {
 
         // Debatable initializations
         this.objectDisplaySize = 100; // TODO: OK on tablets and phones?!
+        this.droppedObjectScale = 0.4;
         this.velocity = 150;
         this.lastEmitTime = 0;
         this.delay = 1500;
@@ -256,23 +262,26 @@ export class PropertySortingScene extends BaseScene {
      * Functions for initializing the drop zones
      */
     private setDropzones(): void {
-        const stepSize: number = (this.cameras.main.width - this.correctBar.x) / (this.propertyCount);
-        const crateSize: number = Math.min(this.objectDisplaySize * 2, (this.cameras.main.width - this.correctBar.x)/(this.selectedElements.length+1));
+        const leftBound: number = this.correctBar.getTopRight().x + 10;
+        const stepSize: number = (this.cameras.main.width - leftBound) / (this.propertyCount);
+        const zoneWidth: number = (this.cameras.main.width - leftBound)/(this.selectedElements.length);
+        const crateSize: number = Math.min(this.objectDisplaySize * 2, zoneWidth);
         let iteration: number = 0.5;
 
         for (let property of this.selectedElements) {
             // Add crate
-            const crate: Phaser.GameObjects.Sprite = this.add.sprite(this.correctBar.x + stepSize * iteration, this.cameras.main.height - crateSize / 2, 'wooden_crate');
+            const crate: Phaser.GameObjects.Sprite = this.add.sprite(leftBound + stepSize * iteration, this.cameras.main.height - crateSize / 2, 'wooden_crate');
             crate.setOrigin(0.5, 0.5);
 
             const imageScalingFactor: number = this.imageScalingFactor(crateSize, crate.width, crate.height);
             crate.setScale(imageScalingFactor, imageScalingFactor);
 
             // Add zone around crate
-            const zone: Phaser.GameObjects.Zone = this.add.zone(crate.x, crate.y, crate.width * imageScalingFactor, crate.height * imageScalingFactor);
+            const zone: Phaser.GameObjects.Zone = this.add.zone(crate.x, crate.y, zoneWidth, crate.height * imageScalingFactor + this.objectDisplaySize);
             zone.setOrigin(0.5, 0.5);
-            zone.setRectangleDropZone(crate.width * imageScalingFactor, crate.height * imageScalingFactor);
+            zone.setRectangleDropZone(zone.width, zone.height);
             zone.setName(property.name);
+            this.input.enableDebug(zone);
 
             this.arrayDropZone.add(zone);
 
@@ -354,7 +363,7 @@ export class PropertySortingScene extends BaseScene {
                 if (gameObject.name === dropZone.name && gameObject.getData('active')) {
                     coords = [dropZone.x + dropZone.width * 0.15, dropZone.y - dropZone.height * 0.2];
 
-                    scale = this.imageScalingFactor(Math.min(dropZone.width, dropZone.height) * 0.4, gameObject.width, gameObject.height);
+                    scale = this.imageScalingFactor(Math.min(dropZone.width, dropZone.height) * this.droppedObjectScale, gameObject.width, gameObject.height);
 
                     this.arrayDropped.add(gameObject);
 
@@ -391,9 +400,9 @@ export class PropertySortingScene extends BaseScene {
             // Create 10 of each property
             for (let i = 0; i < this.numberOfObjectsEach; i++) {
                 // RND size
-                const size: number = Phaser.Math.RND.between(this.objectDisplaySize * 0.8, this.objectDisplaySize * 1.3);
+                const size: number = Phaser.Math.RND.between(this.objectDisplaySize, this.objectDisplaySize*1.3);
 
-                const sprite: Phaser.Physics.Arcade.Sprite = this.physics.add.sprite(Phaser.Math.RND.between(100 + this.objectDisplaySize / 2, this.cameras.main.width - this.objectDisplaySize / 2), Phaser.Math.RND.between(this.objectDisplaySize / 2, this.cameras.main.height - this.objectDisplaySize * 2 - this.objectDisplaySize / 2), propImage.name);
+                const sprite: Phaser.Physics.Arcade.Sprite = this.physics.add.sprite(Phaser.Math.RND.between(100 + this.objectDisplaySize / 2, this.cameras.main.width - this.objectDisplaySize / 1.5), Phaser.Math.RND.between(this.objectDisplaySize / 2, this.cameras.main.height - this.objectDisplaySize * 2 - this.objectDisplaySize / 2), propImage.name);
                 sprite.setName(propImage.name);
 
                 if (this.infinite) {
@@ -506,7 +515,7 @@ export class PropertySortingScene extends BaseScene {
                                 sprite.clearTint();
                                 sprite.setPosition(dropZone.x + dropZone.width * 0.15, dropZone.y - dropZone.height * 0.2);
 
-                                const imageScale: number = this.imageScalingFactor(Math.min(dropZone.width, dropZone.height) * 0.6, sprite.width, sprite.height);
+                                const imageScale: number = this.imageScalingFactor(Math.min(dropZone.width, dropZone.height) * this.droppedObjectScale, sprite.width, sprite.height);
                                 sprite.setScale(imageScale, imageScale);
 
                                 this.arrayDropped.add(sprite);

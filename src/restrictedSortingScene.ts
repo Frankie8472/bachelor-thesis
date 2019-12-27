@@ -357,9 +357,9 @@ export class RestrictedSortingScene extends BaseScene {
                 let coords: number[] = [gameObject.input.dragStartX, gameObject.input.dragStartY];
 
                 // Check if there is already an object in the dropZone and if the current gameObject fits with the other elements
-                let index: number = this.zoneObjMap.indexOf(dropZone);
+                let index1: number = this.zoneObjMap.indexOf(dropZone);
                 let index2:number = this.objZoneMap.indexOf(gameObject);
-                if (typeof this.objZoneMap[index] == 'undefined' && this.equalityCheck(gameObject, dropZone)){
+                if (typeof this.objZoneMap[index1] == 'undefined' && this.equalityCheck(gameObject, dropZone)){
                     // Check if the gameObject is already in a zone
                     if (index2 > -1) {
                         // Clear gameObject from this zone
@@ -372,7 +372,7 @@ export class RestrictedSortingScene extends BaseScene {
                     coords = [dropZone.getCenter().x, dropZone.getCenter().y];
 
                     // Add object to the dropZone
-                    this.objZoneMap[index] = gameObject;
+                    this.objZoneMap[index1] = gameObject;
 
                     // Remove from displayed array
                     this.displayedObjects.remove(gameObject);
@@ -385,7 +385,7 @@ export class RestrictedSortingScene extends BaseScene {
 
                 } else if (index2 > -1) {
                     // Check if the gameObject was already in a zone
-                    let dropZoneOld: Phaser.GameObjects.Zone = this.objZoneMap[index2];
+                    let dropZoneOld: Phaser.GameObjects.Zone = this.zoneObjMap[index2];
                     scale = this.imageScalingFactor(Math.min(dropZoneOld.width, dropZoneOld.height)*0.9, gameObject.width, gameObject.height);
                 }
 
@@ -407,8 +407,8 @@ export class RestrictedSortingScene extends BaseScene {
 
             let sprite = this.add.sprite(x, y, image.name);
 
-            const variance = 0.01;
-            const scale = this.imageScalingFactor(this.objectSize, sprite.width, sprite.height) + Phaser.Math.RND.realInRange(-variance, variance);
+            const size: number = Phaser.Math.RND.between(this.objectSize, this.objectSize*1.3);
+            const scale = this.imageScalingFactor(size, sprite.width, sprite.height);
 
             sprite.setScale(scale, scale);
             sprite.setOrigin(0.5, 0.5);

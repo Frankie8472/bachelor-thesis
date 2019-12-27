@@ -33,6 +33,9 @@ export class ScoreScene extends BaseScene {
         if (this.textures.exists('gamebackground')){
             this.textures.remove('gamebackground')
         }
+
+        this.load.image('finger', 'assets/ui/finger.png');
+
         this.load.image('gamebackground', 'assets/ui/game_background.png');
         this.load.image('star_0', 'assets/ui/star_0.png');
         this.load.image('star_1', 'assets/ui/star_1.png');
@@ -101,6 +104,22 @@ export class ScoreScene extends BaseScene {
             targets: sprite,
             ease: 'Linear',
             scale: 1.1*sprite.getData('scale'),
+            repeat: 1000,
+            yoyo: true,
+            duration: 1000
+        });
+
+        // Add finger
+        const finger: Phaser.GameObjects.Sprite = this.add.sprite(this.cameras.main.width / 2, 6/7*this.cameras.main.height, 'finger');
+        const fingerScale: number = this.imageScalingFactor(1/6*this.cameras.main.height, finger.width, finger.height, true);
+        finger.setOrigin(0.5, 0.5);
+        finger.setScale(fingerScale, fingerScale);
+        finger.setInteractive({ cursor: 'pointer' });
+
+        const fingerTween: Phaser.Tweens.Tween = this.tweens.add({
+            targets: finger,
+            alpha: 0.1,
+            ease: 'Linear',
             repeat: 1000,
             yoyo: true,
             duration: 1000
