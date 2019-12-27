@@ -27,6 +27,7 @@ export class LevelMenuScene extends BaseScene {
     preload(): void {
         // Load UI
         this.load.image('background', 'assets/ui/background1.png');
+        this.load.image('title', 'assets/ui/title.png');
         this.load.image('catButton', 'assets/ui/cat_button.png');
         this.load.image('levelButton11', 'assets/ui/level11_button.png');
         this.load.image('levelButton12', 'assets/ui/level12_button.png');
@@ -53,6 +54,8 @@ export class LevelMenuScene extends BaseScene {
         this.transitionIn();
 
         this.setBackground();
+        this.setTitle();
+        this.setVisualLink();
         this.setLevelButtons();
         this.initInput();
         this.initAudio();
@@ -226,6 +229,10 @@ export class LevelMenuScene extends BaseScene {
                 this.transitionOut('GameSceneLoader', {'level': 2});
                 break;
             }
+
+            case 'title': {
+                this.transitionOut('WelcomeScene');
+            }
             default: {
                 break;
             }
@@ -233,6 +240,41 @@ export class LevelMenuScene extends BaseScene {
     }
 
     /**
+     * Function for initializing title and animation
+     */
+    private setTitle() {
+        // Add title
+        const y: number = (this.cameras.main.height/4 - this.buttonSize/2)/2;
+        const title: Phaser.GameObjects.Sprite = this.add.sprite(this.cameras.main.width / 2, y, 'title');
+        const titleScale: number = this.imageScalingFactor(y*1.3, title.width, title.height, true);
+        title.setOrigin(0.5, 0.5);
+        title.setScale(titleScale, titleScale);
+        title.setName('title');
+        title.setInteractive({cursor: 'pointer'});
+    }
+
+    /**
+     * Function for initializing the dashed line under the level buttons
+     */
+    private setVisualLink() {
+        // Add lines
+        const dashedLine1: Phaser.GameObjects.Grid = this.add.grid(this.cameras.main.width/2, 1/4*this.cameras.main.height, 3/5*this.cameras.main.width, this.buttonSize/6, this.buttonSize/5, this.buttonSize/6);
+        dashedLine1.setFillStyle(0x000000);
+        dashedLine1.setOrigin(0.5, 0.5);
+        dashedLine1.setAltFillStyle(0x000000, 0);
+
+        const dashedLine2: Phaser.GameObjects.Grid = this.add.grid(this.cameras.main.width/2, 2/4*this.cameras.main.height, 3/5*this.cameras.main.width, this.buttonSize/6, this.buttonSize/5, this.buttonSize/6);
+        dashedLine2.setFillStyle(0x000000);
+        dashedLine2.setOrigin(0.5, 0.5);
+        dashedLine2.setAltFillStyle(0x000000, 0);
+
+        const dashedLine3: Phaser.GameObjects.Grid = this.add.grid(this.cameras.main.width/2, 3/4*this.cameras.main.height, 3/5*this.cameras.main.width, this.buttonSize/6, this.buttonSize/5, this.buttonSize/6);
+        dashedLine3.setFillStyle(0x000000);
+        dashedLine3.setOrigin(0.5, 0.5);
+        dashedLine3.setAltFillStyle(0x000000, 0);
+    }
+
+        /**
      * Function for initializing soundeffects
      */
     private initAudio() {

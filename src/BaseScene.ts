@@ -112,12 +112,19 @@ export class BaseScene extends Phaser.Scene {
 
     /**
      * Returns the correct scaling factor for the wanted image size in relation to the real image size.
-     * @param wantedImageSize
-     * @param realImageSizeWidth
-     * @param realImageSizeHeight
+     * @param wantedImageSize Image size you want to have for a dimension
+     * @param realImageSizeWidth The image width you want to scale
+     * @param realImageSizeHeight The image height you want to scale
+     * @param scaleToHeight Boolean for scaling height or width of image to the wanted size. Default to false.
      */
-    protected imageScalingFactor(wantedImageSize: number, realImageSizeWidth: number, realImageSizeHeight: number): number {
-        return Math.min(wantedImageSize / realImageSizeWidth, wantedImageSize / realImageSizeHeight);
+    protected imageScalingFactor(wantedImageSize: number, realImageSizeWidth: number, realImageSizeHeight: number, scaleToHeight: boolean = false): number {
+        let ret: number;
+        if (scaleToHeight) {
+            ret = Math.max(wantedImageSize / realImageSizeWidth, wantedImageSize / realImageSizeHeight);
+        } else {
+            ret = Math.min(wantedImageSize / realImageSizeWidth, wantedImageSize / realImageSizeHeight);
+        }
+        return ret;
     }
 
 

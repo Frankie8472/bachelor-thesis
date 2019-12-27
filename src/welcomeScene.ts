@@ -15,6 +15,7 @@ export class WelcomeScene extends BaseScene {
         // Load UI
         this.load.image('background', 'assets/ui/background1.png');
         this.load.image('title', 'assets/ui/title.png');
+        this.load.image('finger', 'assets/ui/finger.png');
 
         this.load.audio('welcome', 'assets/ui_audio/welcome.mp3');
     }
@@ -46,12 +47,29 @@ export class WelcomeScene extends BaseScene {
         // Add title
         const title: Phaser.GameObjects.Sprite = this.add.sprite(this.cameras.main.width / 2, this.cameras.main.height / 2, 'title');
         const titleScale: number = this.imageScalingFactor(4/6*this.cameras.main.width, title.width, title.height);
+        title.setOrigin(0.5, 0.5);
         title.setScale(titleScale, titleScale);
         title.setInteractive({ cursor: 'pointer' });
 
         const titleTween: Phaser.Tweens.Tween = this.tweens.add({
             targets: title,
             alpha: 0.7,
+            ease: 'Linear',
+            repeat: 1000,
+            yoyo: true,
+            duration: 1000
+        });
+
+        // Add finger
+        const finger: Phaser.GameObjects.Sprite = this.add.sprite(this.cameras.main.width / 2, 3/4*this.cameras.main.height, 'finger');
+        const fingerScale: number = this.imageScalingFactor(1/6*this.cameras.main.height, finger.width, finger.height, true);
+        finger.setOrigin(0.5, 0.5);
+        finger.setScale(fingerScale, fingerScale);
+        finger.setInteractive({ cursor: 'pointer' });
+
+        const fingerTween: Phaser.Tweens.Tween = this.tweens.add({
+            targets: finger,
+            alpha: 0.1,
             ease: 'Linear',
             repeat: 1000,
             yoyo: true,
