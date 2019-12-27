@@ -126,7 +126,7 @@ export class GameScene extends BaseScene {
         this.timedataStepsize = 0.0001;
 
         if (this.level > 1) {
-            this.timedataStepsize = 0.00005;
+            this.timedataStepsize = 0.000001
         }
 
         this.cellsX = 4;
