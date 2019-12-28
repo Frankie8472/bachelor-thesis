@@ -1,5 +1,6 @@
 import 'phaser';
 import {BaseScene} from './BaseScene';
+import {LevelMenuScene} from './levelMenuScene';
 
 export class PropertySortingScene extends BaseScene {
 
@@ -7,6 +8,11 @@ export class PropertySortingScene extends BaseScene {
      * Object database with all image names, image paths and image properties
      */
     private jsonObject: any;
+
+    /**
+     * Current difficulty level
+     */
+    private level: number;
 
     /**
      * Array index number +1 of category to sort
@@ -127,8 +133,16 @@ export class PropertySortingScene extends BaseScene {
 
         // Initialize data from previous scene
         this.jsonObject = this.cache.json.get('objects');
-        this.infinite = data.infinite;
-        this.setCat = data.setCat;
+        this.level = data.level;
+
+        // Set level parameter
+        this.infinite = false;
+        this.setCat = this.level;
+
+        if (this.setCat > 4) {
+            this.infinite = true;
+            this.setCat -= 4;
+        }
 
         // Initialize fields
         this.arrayStack = this.add.container(0, 0);
@@ -138,17 +152,17 @@ export class PropertySortingScene extends BaseScene {
         this.arrayDropped = this.add.group();
         this.arrayDropZone = this.add.group();
 
-        let numberOfProperties = 0;
-        for (let property of this.jsonObject['categories'][this.setCat - 1].validElements) {
-            numberOfProperties++;
-        }
-
         this.correctCount = 0;
         this.wrongCount = 0;
         this.numberOfDummies = 0;
 
         this.selectedElements = [];
         this.selectedElementsName = [];
+
+        let numberOfProperties = 0;
+        for (let property of this.jsonObject['categories'][this.setCat - 1]['validElements']) {
+            numberOfProperties++;
+        }
 
         // Randomization of amount of properties to sort
         this.propertyCount = Phaser.Math.RND.between(3, numberOfProperties);
@@ -568,7 +582,7 @@ export class PropertySortingScene extends BaseScene {
         if ((this.wrongCount >= this.wrongBar.getData('gameMax') - Phaser.Math.EPSILON) || (this.correctCount >= this.correctBar.getData('gameMax') - Phaser.Math.EPSILON)) {
             this.transitionOut('ScoreScene', {
                 'score': this.correctCount / this.correctBar.getData('gameMax') - this.wrongCount / this.wrongBar.getData('gameMax'),
-                'previousScene': this.getKey()
+                'previousScene': this.getKey() + String(this.level)
             });
         }
     }

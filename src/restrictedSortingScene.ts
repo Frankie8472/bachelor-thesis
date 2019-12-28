@@ -281,7 +281,7 @@ export class RestrictedSortingScene extends BaseScene {
 
                     // If all elements are sorted, end game with score
                     if (this.displayedObjects.getLength() <= 0) {
-                        this.transitionOut('ScoreScene', {'score': 1, 'previousScene': this.getKey()});
+                        this.transitionOut('ScoreScene', {'score': 1, 'previousScene': this.getKey() + String(this.level)});
                     }
 
 

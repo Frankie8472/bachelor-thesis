@@ -37,6 +37,7 @@ export class LevelMenuScene extends BaseScene {
         this.setTitle();
         this.setVisualLink();
         this.setLevelButtons();
+        this.setStars();
         this.initInput();
         this.initAudio();
     }
@@ -46,7 +47,7 @@ export class LevelMenuScene extends BaseScene {
     }
 
     /**
-     * Function for initializing background graphics
+     * Method for initializing background graphics
      */
     private setBackground() {
         const background: Phaser.GameObjects.Sprite = this.add.sprite(0, 0, 'background1');
@@ -55,7 +56,7 @@ export class LevelMenuScene extends BaseScene {
     }
 
     /**
-     * Function for initializing the level buttons and their onclick action
+     * Method for initializing the level buttons and their onclick action
      */
     private setLevelButtons() {
         const catButton: Phaser.GameObjects.Sprite = this.add.sprite(20, this.cameras.main.height - 20, 'catButton');
@@ -92,7 +93,7 @@ export class LevelMenuScene extends BaseScene {
         const scaleCatButton: number = this.imageScalingFactor(this.buttonSize / 1.5, catButton.width, catButton.height);
         catButton.setScale(scaleCatButton, scaleCatButton);
         catButton.setName('catButton');
-        catButton.setInteractive({ cursor: 'pointer' });
+        catButton.setInteractive({cursor: 'pointer'});
 
         this.levelButtons.getChildren().forEach(function(gameObject) {
             if (gameObject instanceof Phaser.GameObjects.Sprite) {
@@ -104,7 +105,7 @@ export class LevelMenuScene extends BaseScene {
 
                 gameObject.setData('clicked', false);
 
-                gameObject.setInteractive({ cursor: 'pointer' });
+                gameObject.setInteractive({cursor: 'pointer'});
             }
         }, this);
 
@@ -112,7 +113,7 @@ export class LevelMenuScene extends BaseScene {
     }
 
     /**
-     * Function for initializing all input
+     * Method for initializing all input
      */
     private initInput(): void {
         this.input.on('pointerdown', function(pointer, currentlyOver) {
@@ -140,79 +141,95 @@ export class LevelMenuScene extends BaseScene {
     }
 
     /**
-     * Function for assigning each button an event function
+     * Method for assigning each button an event function
      * @param gameObject GameObject on which you want the function on
      */
     private buttonFunction(gameObject: Phaser.GameObjects.Sprite): void {
+        let name: string = this.buttonToSceneMap(gameObject.name);
+        let level: number = Number(name[name.length-1]);
+
         switch (gameObject.name) {
             case 'catButton': {
-                this.transitionOut('SortingScene');
+                this.transitionOut(name);
                 break;
             }
             case 'levelButton11': {
-                this.transitionOut('PropertySortingScene', {'setCat': 1, 'infinite': false});
+                name = name.substring(0, name.length-1);
+                this.transitionOut(name, {'level': level});
                 break;
             }
 
             case 'levelButton12': {
-                this.transitionOut('PropertySortingScene', {'setCat': 2, 'infinite': false});
-
+                name = name.substring(0, name.length-1);
+                this.transitionOut(name, {'level': level});
                 break;
             }
 
             case 'levelButton13': {
-                this.transitionOut('PropertySortingScene', {'setCat': 3, 'infinite': false});
+                name = name.substring(0, name.length-1);
+                this.transitionOut(name, {'level': level});
                 break;
             }
 
             case 'levelButton14': {
-                this.transitionOut('PropertySortingScene', {'setCat': 4, 'infinite': false});
+                name = name.substring(0, name.length-1);
+                this.transitionOut(name, {'level': level});
                 break;
             }
 
             case 'levelButton21': {
-                this.transitionOut('PropertySortingScene', {'setCat': 1, 'infinite': true});
+                name = name.substring(0, name.length-1);
+                this.transitionOut(name, {'level': level});
                 break;
             }
 
             case 'levelButton22': {
-                this.transitionOut('PropertySortingScene', {'setCat': 2, 'infinite': true});
+                name = name.substring(0, name.length-1);
+                this.transitionOut(name, {'level': level});
                 break;
             }
 
             case 'levelButton23': {
-                this.transitionOut('PropertySortingScene', {'setCat': 3, 'infinite': true});
+                name = name.substring(0, name.length-1);
+                this.transitionOut(name, {'level': level});
                 break;
             }
 
             case 'levelButton24': {
-                this.transitionOut('PropertySortingScene', {'setCat': 4, 'infinite': true});
+                name = name.substring(0, name.length-1);
+                this.transitionOut(name, {'level': level});
                 break;
             }
 
             case 'levelButton31': {
-                this.transitionOut('RestrictedSortingScene', {'level': 1});
+                name = name.substring(0, name.length-1);
+                this.transitionOut(name, {'level': level});
                 break;
             }
 
             case 'levelButton32': {
-                this.transitionOut('RestrictedSortingScene', {'level': 2});
+                name = name.substring(0, name.length-1);
+                this.transitionOut(name, {'level': level});
                 break;
             }
 
             case 'levelButton33': {
-                this.transitionOut('GameScene', {'level': 1});
+                name = name.substring(0, name.length-1);
+                this.transitionOut(name, {'level': level});
                 break;
             }
 
             case 'levelButton34': {
-                this.transitionOut('GameScene', {'level': 2});
+                name = name.substring(0, name.length-1);
+                this.transitionOut(name, {'level': level});
                 break;
             }
 
             case 'title': {
-                this.transitionOut('WelcomeScene');
+                this.transitionOut(name);
+                break;
             }
+
             default: {
                 break;
             }
@@ -220,13 +237,13 @@ export class LevelMenuScene extends BaseScene {
     }
 
     /**
-     * Function for initializing title and animation
+     * Method for initializing title and animation
      */
     private setTitle() {
         // Add title
-        const y: number = (this.cameras.main.height/4 - this.buttonSize/2)/2;
+        const y: number = (this.cameras.main.height / 4 - this.buttonSize / 2) / 2;
         const title: Phaser.GameObjects.Sprite = this.add.sprite(this.cameras.main.width / 2, y, 'title');
-        const titleScale: number = this.imageScalingFactor(y*1.3, title.width, title.height, true);
+        const titleScale: number = this.imageScalingFactor(y * 1.3, title.width, title.height, true);
         title.setOrigin(0.5, 0.5);
         title.setScale(titleScale, titleScale);
         title.setName('title');
@@ -234,30 +251,137 @@ export class LevelMenuScene extends BaseScene {
     }
 
     /**
-     * Function for initializing the dashed line under the level buttons
+     * Method for initializing the dashed line under the level buttons
      */
     private setVisualLink() {
         // Add lines
-        const dashedLine1: Phaser.GameObjects.Grid = this.add.grid(this.cameras.main.width/2, 1/4*this.cameras.main.height, 3/5*this.cameras.main.width, this.buttonSize/6, this.buttonSize/10, this.buttonSize/6);
+        const dashedLine1: Phaser.GameObjects.Grid = this.add.grid(this.cameras.main.width / 2, 1 / 4 * this.cameras.main.height, 3 / 5 * this.cameras.main.width, this.buttonSize / 6, this.buttonSize / 10, this.buttonSize / 6);
         dashedLine1.setFillStyle(0x000000);
         dashedLine1.setOrigin(0.5, 0.5);
         dashedLine1.setAltFillStyle(0x000000, 0);
 
-        const dashedLine2: Phaser.GameObjects.Grid = this.add.grid(this.cameras.main.width/2, 2/4*this.cameras.main.height, 3/5*this.cameras.main.width, this.buttonSize/6, this.buttonSize/10, this.buttonSize/6);
+        const dashedLine2: Phaser.GameObjects.Grid = this.add.grid(this.cameras.main.width / 2, 2 / 4 * this.cameras.main.height, 3 / 5 * this.cameras.main.width, this.buttonSize / 6, this.buttonSize / 10, this.buttonSize / 6);
         dashedLine2.setFillStyle(0x000000);
         dashedLine2.setOrigin(0.5, 0.5);
         dashedLine2.setAltFillStyle(0x000000, 0);
 
-        const dashedLine3: Phaser.GameObjects.Grid = this.add.grid(this.cameras.main.width/2, 3/4*this.cameras.main.height, 3/5*this.cameras.main.width, this.buttonSize/6, this.buttonSize/10, this.buttonSize/6);
+        const dashedLine3: Phaser.GameObjects.Grid = this.add.grid(this.cameras.main.width / 2, 3 / 4 * this.cameras.main.height, 3 / 5 * this.cameras.main.width, this.buttonSize / 6, this.buttonSize / 10, this.buttonSize / 6);
         dashedLine3.setFillStyle(0x000000);
         dashedLine3.setOrigin(0.5, 0.5);
         dashedLine3.setAltFillStyle(0x000000, 0);
     }
 
-        /**
-     * Function for initializing soundeffects
+    /**
+     * Method for initializing sound effects
      */
     private initAudio() {
         this.sound.add('loading').play('', {loop: true});
+    }
+
+    /**
+     * Method for retrieving scene the respective button leads to with level at the end of the string
+     * @param buttonName Name of the button
+     */
+    private buttonToSceneMap(buttonName: string): string {
+        let ret: string = "";
+
+        switch (buttonName) {
+            case 'catButton': {
+                ret = 'SortingScene';
+                break;
+            }
+            case 'levelButton11': {
+                ret = 'PropertySortingScene1';
+                break;
+            }
+
+            case 'levelButton12': {
+                ret = 'PropertySortingScene2';
+
+                break;
+            }
+
+            case 'levelButton13': {
+                ret = 'PropertySortingScene3';
+                break;
+            }
+
+            case 'levelButton14': {
+                ret = 'PropertySortingScene4';
+                break;
+            }
+
+            case 'levelButton21': {
+                ret = 'PropertySortingScene5';
+                break;
+            }
+
+            case 'levelButton22': {
+                ret = 'PropertySortingScene6';
+                break;
+            }
+
+            case 'levelButton23': {
+                ret = 'PropertySortingScene7';
+                break;
+            }
+
+            case 'levelButton24': {
+                ret = 'PropertySortingScene8';
+                break;
+            }
+
+            case 'levelButton31': {
+                ret = 'RestrictedSortingScene1';
+                break;
+            }
+
+            case 'levelButton32': {
+                ret = 'RestrictedSortingScene2';
+                break;
+            }
+
+            case 'levelButton33': {
+                ret = 'GameScene1';
+                break;
+            }
+
+            case 'levelButton34': {
+                ret = 'GameScene2';
+                break;
+            }
+
+            case 'title': {
+                ret = 'WelcomeScene';
+                break;
+            }
+
+            default: {
+                break;
+            }
+        }
+        return ret;
+    }
+
+    /**
+     * Method for initializing or resetting the (previous/default) score
+     */
+    private setStars(reset: boolean = false) {
+        this.levelButtons.getChildren().forEach(function(gameObject) {
+            if (gameObject instanceof Phaser.GameObjects.Sprite && gameObject.name != "catButton") {
+                let score: string = 'star_0';
+                if(window.localStorage.getItem('phaser_score_' + this.buttonToSceneMap(gameObject.name))){
+                    if (reset) {
+                        window.localStorage.setItem('phaser_score_' + this.buttonToSceneMap(gameObject.name), score);
+                    } else {
+                        score = window.localStorage.getItem('phaser_score_' + this.buttonToSceneMap(gameObject.name));
+                    }
+                }
+                const star: Phaser.GameObjects.Sprite = this.add.sprite(gameObject.getBottomCenter().x, gameObject.getBottomCenter().y, score);
+                const scale: number = this.imageScalingFactor((gameObject.getTopRight().x - gameObject.getTopLeft().x)/2, star.width, star.height);
+                star.setScale(scale, scale);
+                star.setOrigin(0.5, 0.5);
+            }
+        }, this);
     }
 }

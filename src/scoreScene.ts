@@ -8,7 +8,7 @@ export class ScoreScene extends BaseScene {
     private score: number;
 
     /**
-     * Name of the previous scene
+     * Name and level of the previous scene
      */
     private previousScene: string;
 
@@ -64,21 +64,24 @@ export class ScoreScene extends BaseScene {
         replayButton.setInteractive({ cursor: 'pointer' });
         replayButton.on('pointerdown', function() {
             replayButton.on('pointerup', function() {
-                this.transitionOut(this.previousScene);
+                this.transitionOut(this.previousScene.substring(0, this.previousScene.length-1), {level: Number(this.previousScene[this.previousScene.length-1])});
             }, this);
         }, this);
 
-        let sprite: Phaser.GameObjects.Sprite;
+        let star: string;
 
         if (this.score < 0.2) {
-            sprite = this.add.sprite(this.cameras.main.width / 2, this.cameras.main.height / 2, 'star_0');
+            star = 'star_0';
         } else if (this.score < 0.6) {
-            sprite = this.add.sprite(this.cameras.main.width / 2, this.cameras.main.height / 2, 'star_1');
+            star = 'star_1';
         } else if (this.score + Phaser.Math.EPSILON < 1) {
-            sprite = this.add.sprite(this.cameras.main.width / 2, this.cameras.main.height / 2, 'star_2');
+            star = 'star_2';
         } else {
-            sprite = this.add.sprite(this.cameras.main.width / 2, this.cameras.main.height / 2, 'star_3');
+            star = 'star_3';
         }
+        this.saveScore(star);
+
+        let sprite: Phaser.GameObjects.Sprite = this.add.sprite(this.cameras.main.width / 2, this.cameras.main.height / 2, star);
 
         sprite.setOrigin(0.5, 0.5);
         const starScale: number = this.imageScalingFactor(this.cameras.main.width*3/5, sprite.height, sprite.width);
@@ -127,5 +130,12 @@ export class ScoreScene extends BaseScene {
      */
     private initAudio() {
         this.sound.add('sparkle').play('', {loop: false});
+    }
+
+    /**
+     * Method for saving the score global
+     */
+    private saveScore(score: string) {
+        window.localStorage.setItem('phaser_score_' + this.previousScene, score);
     }
 }
