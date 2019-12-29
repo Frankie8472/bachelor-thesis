@@ -61,18 +61,18 @@ export class LevelMenuScene extends BaseScene {
     private setLevelButtons() {
         const catButton: Phaser.GameObjects.Sprite = this.add.sprite(20, this.cameras.main.height - 20, 'catButton');
         const eraseButton: Phaser.GameObjects.Sprite = this.add.sprite(this.cameras.main.width - 20, this.cameras.main.height - 20, 'erase');
-        const levelButton11: Phaser.GameObjects.Sprite = this.add.sprite(this.cameras.main.width / 5 * 1, this.cameras.main.height / 4 * 1, 'levelButton11');
-        const levelButton12: Phaser.GameObjects.Sprite = this.add.sprite(this.cameras.main.width / 5 * 2, this.cameras.main.height / 4 * 1, 'levelButton12');
-        const levelButton13: Phaser.GameObjects.Sprite = this.add.sprite(this.cameras.main.width / 5 * 3, this.cameras.main.height / 4 * 1, 'levelButton13');
-        const levelButton14: Phaser.GameObjects.Sprite = this.add.sprite(this.cameras.main.width / 5 * 4, this.cameras.main.height / 4 * 1, 'levelButton14');
-        const levelButton21: Phaser.GameObjects.Sprite = this.add.sprite(this.cameras.main.width / 5 * 1, this.cameras.main.height / 4 * 2, 'levelButton21');
-        const levelButton22: Phaser.GameObjects.Sprite = this.add.sprite(this.cameras.main.width / 5 * 2, this.cameras.main.height / 4 * 2, 'levelButton22');
-        const levelButton23: Phaser.GameObjects.Sprite = this.add.sprite(this.cameras.main.width / 5 * 3, this.cameras.main.height / 4 * 2, 'levelButton23');
-        const levelButton24: Phaser.GameObjects.Sprite = this.add.sprite(this.cameras.main.width / 5 * 4, this.cameras.main.height / 4 * 2, 'levelButton24');
-        const levelButton31: Phaser.GameObjects.Sprite = this.add.sprite(this.cameras.main.width / 5 * 1, this.cameras.main.height / 4 * 3, 'levelButton31');
-        const levelButton32: Phaser.GameObjects.Sprite = this.add.sprite(this.cameras.main.width / 5 * 2, this.cameras.main.height / 4 * 3, 'levelButton32');
-        const levelButton33: Phaser.GameObjects.Sprite = this.add.sprite(this.cameras.main.width / 5 * 3, this.cameras.main.height / 4 * 3, 'levelButton33');
-        const levelButton34: Phaser.GameObjects.Sprite = this.add.sprite(this.cameras.main.width / 5 * 4, this.cameras.main.height / 4 * 3, 'levelButton34');
+        const levelButton11: Phaser.GameObjects.Sprite = this.add.sprite(1 / 5 * this.cameras.main.width, 1 / 4 * this.cameras.main.height, 'levelButton11');
+        const levelButton12: Phaser.GameObjects.Sprite = this.add.sprite(2 / 5 * this.cameras.main.width, 1 / 4 * this.cameras.main.height, 'levelButton12');
+        const levelButton13: Phaser.GameObjects.Sprite = this.add.sprite(3 / 5 * this.cameras.main.width, 1 / 4 * this.cameras.main.height, 'levelButton13');
+        const levelButton14: Phaser.GameObjects.Sprite = this.add.sprite(4 / 5 * this.cameras.main.width, 1 / 4 * this.cameras.main.height, 'levelButton14');
+        const levelButton21: Phaser.GameObjects.Sprite = this.add.sprite(4 / 5 * this.cameras.main.width, 2 / 4 * this.cameras.main.height, 'levelButton21');
+        const levelButton22: Phaser.GameObjects.Sprite = this.add.sprite(3 / 5 * this.cameras.main.width, 2 / 4 * this.cameras.main.height, 'levelButton22');
+        const levelButton23: Phaser.GameObjects.Sprite = this.add.sprite(2 / 5 * this.cameras.main.width, 2 / 4 * this.cameras.main.height, 'levelButton23');
+        const levelButton24: Phaser.GameObjects.Sprite = this.add.sprite(1 / 5 * this.cameras.main.width, 2 / 4 * this.cameras.main.height, 'levelButton24');
+        const levelButton31: Phaser.GameObjects.Sprite = this.add.sprite(1 / 5 * this.cameras.main.width, 3 / 4 * this.cameras.main.height, 'levelButton31');
+        const levelButton32: Phaser.GameObjects.Sprite = this.add.sprite(2 / 5 * this.cameras.main.width, 3 / 4 * this.cameras.main.height, 'levelButton32');
+        const levelButton33: Phaser.GameObjects.Sprite = this.add.sprite(3 / 5 * this.cameras.main.width, 3 / 4 * this.cameras.main.height, 'levelButton33');
+        const levelButton34: Phaser.GameObjects.Sprite = this.add.sprite(4 / 5 * this.cameras.main.width, 3 / 4 * this.cameras.main.height, 'levelButton34');
 
         this.levelButtons.addMultiple([
             levelButton11,
@@ -282,6 +282,42 @@ export class LevelMenuScene extends BaseScene {
         dashedLine3.setFillStyle(0x000000);
         dashedLine3.setOrigin(0.5, 0.5);
         dashedLine3.setAltFillStyle(0x000000, 0);
+
+        // Connecting half circles
+        const circle12 = this.add.graphics();
+        circle12.lineStyle(this.buttonSize / 6, 0x000000, 1);
+        circle12.beginPath();
+        circle12.arc(4 / 5 * this.cameras.main.width + this.cameras.main.height / 12, 1 / 4 * this.cameras.main.height + this.cameras.main.height / 8, this.cameras.main.height / 8, - Math.PI/2, Math.PI/2, false);
+        circle12.strokePath();
+
+        const circle23 = this.add.graphics();
+        circle23.lineStyle(this.buttonSize / 6, 0x000000, 1);
+        circle23.beginPath();
+        circle23.arc(1 / 5 * this.cameras.main.width - this.cameras.main.height / 12, 2 / 4 * this.cameras.main.height + this.cameras.main.height / 8, this.cameras.main.height / 8, - Math.PI/2, Math.PI/2, true);
+        circle23.strokePath();
+
+        // Triangle for indicating starting point
+        const triSize: number = this.buttonSize/3;
+        const startX: number = 1 / 5 * this.cameras.main.width - this.cameras.main.height / 8 + triSize - 10;
+        const startY: number = 1 / 4 * this.cameras.main.height + triSize;
+        const startTriangle1: Phaser.GameObjects.Triangle = this.add.triangle(startX, startY, 0, 0,- triSize, - triSize, - triSize, triSize, 0x000000, 1);
+        const startTriangle2: Phaser.GameObjects.Triangle = this.add.triangle(startX - 1/2*triSize, startY, 0, 0,- triSize, - triSize, - triSize, triSize, 0x000000, 1);
+        const startTriangle3: Phaser.GameObjects.Triangle = this.add.triangle(startX - 2/2*triSize, startY, 0, 0,- triSize, - triSize, - triSize, triSize, 0x000000, 1);
+
+        // Orange Square indicating the final level
+        const size: number = this.buttonSize*1.2;
+        const bossField: Phaser.GameObjects.Graphics = this.add.graphics();
+        bossField.fillStyle(0xfa7500, 0.3);
+        bossField.fillRoundedRect(4 / 5 * this.cameras.main.width - size/2, 3 / 4 * this.cameras.main.height - size/2, size, size, this.buttonSize/20);
+
+        const bossTween: Phaser.Tweens.Tween = this.tweens.add({
+            targets: bossField,
+            alpha: 0.1,
+            ease: 'Linear',
+            repeat: 1000,
+            yoyo: true,
+            duration: 1000
+        });
     }
 
     /**

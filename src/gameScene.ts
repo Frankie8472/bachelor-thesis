@@ -216,7 +216,7 @@ export class GameScene extends BaseScene {
             this.checked = true;
 
             // Endgame
-            this.transitionOut('ScoreScene', {'score': this.points / this.gamefluid.getData('gameMax'), 'previousScene': this.getKey()});
+            this.transitionOut('ScoreScene', {'score': this.points / this.gamefluid.getData('gameMax'), 'previousScene': this.getKey() + String(this.level)});
         } else {
             timedata -= this.timedataStepsize;
             this.timefluid.setData('timeY', timedata);
@@ -497,7 +497,7 @@ export class GameScene extends BaseScene {
             this.gamefluid.setScale(this.gamefluid.getData('gameX'), this.points);
 
             // End game
-            this.transitionOut('ScoreScene', {'score': 1, 'previousScene': this.getKey()});
+            this.transitionOut('ScoreScene', {'score': 1, 'previousScene': this.getKey() + String(this.level)});
 
         }
 

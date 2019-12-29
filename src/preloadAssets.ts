@@ -144,7 +144,7 @@ export class PreloadAssets extends BaseScene {
         this.load.on('progress', function (value) {
             progress.clear();
             progress.fillStyle(0xffffff, 1);
-            progress.fillRect(0, 2/3*this.cameras.main.height, this.cameras.main.width * value, 1/10*this.cameras.main.height);
+            progress.fillRect(20, 4/5*this.cameras.main.height, (this.cameras.main.width - 40) * value, 1/10*this.cameras.main.height);
         }, this);
     }
 
