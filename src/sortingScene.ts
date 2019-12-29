@@ -304,11 +304,11 @@ export class SortingScene extends BaseScene {
      * Method for adding the exit button
      */
     private exitButton() {
-        const exitButton: Phaser.GameObjects.Sprite = this.add.sprite(10, this.cameras.main.height - 10, 'exitbutton');
+        const exitButton: Phaser.GameObjects.Sprite = this.add.sprite(10, this.cameras.main.height - 10, 'return');
         exitButton.setOrigin(0,1);
         exitButton.setInteractive({ cursor: 'pointer' });
 
-        const scale: number = this.imageScalingFactor(this.buttonSize, exitButton.width, exitButton.height);
+        const scale: number = this.imageScalingFactor(this.buttonSize*1.5, exitButton.width, exitButton.height);
         exitButton.setScale(scale, scale);
 
         exitButton.on('pointerdown', function() {
