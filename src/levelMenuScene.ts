@@ -60,6 +60,7 @@ export class LevelMenuScene extends BaseScene {
      */
     private setLevelButtons() {
         const catButton: Phaser.GameObjects.Sprite = this.add.sprite(20, this.cameras.main.height - 20, 'catButton');
+        const eraseButton: Phaser.GameObjects.Sprite = this.add.sprite(this.cameras.main.width - 20, this.cameras.main.height - 20, 'erase');
         const levelButton11: Phaser.GameObjects.Sprite = this.add.sprite(this.cameras.main.width / 5 * 1, this.cameras.main.height / 4 * 1, 'levelButton11');
         const levelButton12: Phaser.GameObjects.Sprite = this.add.sprite(this.cameras.main.width / 5 * 2, this.cameras.main.height / 4 * 1, 'levelButton12');
         const levelButton13: Phaser.GameObjects.Sprite = this.add.sprite(this.cameras.main.width / 5 * 3, this.cameras.main.height / 4 * 1, 'levelButton13');
@@ -89,11 +90,16 @@ export class LevelMenuScene extends BaseScene {
         ]);
 
         catButton.setOrigin(0, 1);
+        eraseButton.setOrigin(1, 1);
 
         const scaleCatButton: number = this.imageScalingFactor(this.buttonSize / 1.5, catButton.width, catButton.height);
         catButton.setScale(scaleCatButton, scaleCatButton);
         catButton.setName('catButton');
         catButton.setInteractive({cursor: 'pointer'});
+
+        eraseButton.setScale(scaleCatButton, scaleCatButton);
+        eraseButton.setName('eraseButton');
+        eraseButton.setInteractive({cursor: 'pointer'});
 
         this.levelButtons.getChildren().forEach(function(gameObject) {
             if (gameObject instanceof Phaser.GameObjects.Sprite) {
@@ -110,6 +116,7 @@ export class LevelMenuScene extends BaseScene {
         }, this);
 
         this.levelButtons.add(catButton);
+        this.levelButtons.add(eraseButton);
     }
 
     /**
@@ -153,6 +160,12 @@ export class LevelMenuScene extends BaseScene {
                 this.transitionOut(name);
                 break;
             }
+
+            case 'eraseButton': {
+                this.setStars(true);
+                break;
+            }
+
             case 'levelButton11': {
                 name = name.substring(0, name.length-1);
                 this.transitionOut(name, {'level': level});
@@ -368,7 +381,7 @@ export class LevelMenuScene extends BaseScene {
      */
     private setStars(reset: boolean = false) {
         this.levelButtons.getChildren().forEach(function(gameObject) {
-            if (gameObject instanceof Phaser.GameObjects.Sprite && gameObject.name != "catButton") {
+            if (gameObject instanceof Phaser.GameObjects.Sprite && gameObject.name != "catButton" && gameObject.name != 'eraseButton') {
                 let score: string = 'star_0';
                 if(window.localStorage.getItem('phaser_score_' + this.buttonToSceneMap(gameObject.name))){
                     if (reset) {

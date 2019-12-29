@@ -12,11 +12,16 @@ export class PreloadAssets extends BaseScene {
     }
 
     preload(): void {
-        this.load.json('objects', 'assets/geometrical_objects/geometrical_objects.json');
-        this.load.image('cogwheel', 'assets/ui/cogwheel.png');
+        this.load.setPath('assets/geometrical_objects/');
+        this.load.json('objects', 'geometrical_objects.json');
+
+        this.load.setPath('assets/ui/');
+        this.load.image('cogwheel', 'cogwheel.png');
+        this.load.image('background1', 'background1.png');
     }
 
     create(): void {
+        this.setBackground();
         this.preLoadImages();
         this.preLoadAudio();
         this.initLoadingGraphics();
@@ -48,7 +53,7 @@ export class PreloadAssets extends BaseScene {
 
         // Load UI images
         this.load.setPath('assets/ui/');
-        this.load.image('background1', 'background1.png');
+        //this.load.image('background1', 'background1.png');
         this.load.image('background2', 'background2.png');
         this.load.image('background3', 'background3.png');
         this.load.image('background4', 'background4.png');
@@ -61,6 +66,8 @@ export class PreloadAssets extends BaseScene {
         this.load.image('help', 'help.png');
         this.load.image('exitbutton', 'exit_button.png');
         this.load.image('replay', 'reload_button.png');
+        this.load.image('erase', 'erase_button.png');
+        this.load.image('return', 'return_button.png');
 
         this.load.image('star_0', 'star_0.png');
         this.load.image('star_1', 'star_1.png');
@@ -150,5 +157,15 @@ export class PreloadAssets extends BaseScene {
         }, this);
 
         this.load.start();
+    }
+
+    /**
+     * Method for initializing the background
+     */
+    private setBackground() {
+        let background = this.add.sprite(0, 0, 'background1');
+        background.setOrigin(0, 0);
+        background.setDisplaySize(this.cameras.main.width, this.cameras.main.height);
+        background.setAlpha(0.3);
     }
 }
