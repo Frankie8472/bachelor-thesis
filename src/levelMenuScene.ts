@@ -97,7 +97,8 @@ export class LevelMenuScene extends BaseScene {
         catButton.setName('catButton');
         catButton.setInteractive({cursor: 'pointer'});
 
-        eraseButton.setScale(scaleCatButton, scaleCatButton);
+        const scaleEraseButton: number = this.imageScalingFactor(this.buttonSize / 1.5, eraseButton.width, eraseButton.height);
+        eraseButton.setScale(scaleEraseButton, scaleEraseButton);
         eraseButton.setName('eraseButton');
         eraseButton.setInteractive({cursor: 'pointer'});
 
@@ -267,21 +268,26 @@ export class LevelMenuScene extends BaseScene {
      * Method for initializing the dashed line under the level buttons
      */
     private setVisualLink() {
+        const alpha: number = 0.5;
+
         // Add lines
         const dashedLine1: Phaser.GameObjects.Grid = this.add.grid(this.cameras.main.width / 2, 1 / 4 * this.cameras.main.height, 3 / 5 * this.cameras.main.width, this.buttonSize / 6, this.buttonSize / 10, this.buttonSize / 6);
         dashedLine1.setFillStyle(0x000000);
         dashedLine1.setOrigin(0.5, 0.5);
         dashedLine1.setAltFillStyle(0x000000, 0);
+        dashedLine1.setAlpha(alpha);
 
         const dashedLine2: Phaser.GameObjects.Grid = this.add.grid(this.cameras.main.width / 2, 2 / 4 * this.cameras.main.height, 3 / 5 * this.cameras.main.width, this.buttonSize / 6, this.buttonSize / 10, this.buttonSize / 6);
         dashedLine2.setFillStyle(0x000000);
         dashedLine2.setOrigin(0.5, 0.5);
         dashedLine2.setAltFillStyle(0x000000, 0);
+        dashedLine2.setAlpha(alpha);
 
         const dashedLine3: Phaser.GameObjects.Grid = this.add.grid(this.cameras.main.width / 2, 3 / 4 * this.cameras.main.height, 3 / 5 * this.cameras.main.width, this.buttonSize / 6, this.buttonSize / 10, this.buttonSize / 6);
         dashedLine3.setFillStyle(0x000000);
         dashedLine3.setOrigin(0.5, 0.5);
         dashedLine3.setAltFillStyle(0x000000, 0);
+        dashedLine3.setAlpha(alpha);
 
         // Connecting half circles
         const circle12 = this.add.graphics();
@@ -289,12 +295,15 @@ export class LevelMenuScene extends BaseScene {
         circle12.beginPath();
         circle12.arc(4 / 5 * this.cameras.main.width + this.cameras.main.height / 12, 1 / 4 * this.cameras.main.height + this.cameras.main.height / 8, this.cameras.main.height / 8, - Math.PI/2, Math.PI/2, false);
         circle12.strokePath();
+        circle12.setAlpha(alpha);
 
         const circle23 = this.add.graphics();
         circle23.lineStyle(this.buttonSize / 6, 0x000000, 1);
         circle23.beginPath();
         circle23.arc(1 / 5 * this.cameras.main.width - this.cameras.main.height / 12, 2 / 4 * this.cameras.main.height + this.cameras.main.height / 8, this.cameras.main.height / 8, - Math.PI/2, Math.PI/2, true);
         circle23.strokePath();
+        circle23.setAlpha(alpha);
+
 
         // Triangle for indicating starting point
         const triSize: number = this.buttonSize/3;
@@ -303,6 +312,10 @@ export class LevelMenuScene extends BaseScene {
         const startTriangle1: Phaser.GameObjects.Triangle = this.add.triangle(startX, startY, 0, 0,- triSize, - triSize, - triSize, triSize, 0x000000, 1);
         const startTriangle2: Phaser.GameObjects.Triangle = this.add.triangle(startX - 1/2*triSize, startY, 0, 0,- triSize, - triSize, - triSize, triSize, 0x000000, 1);
         const startTriangle3: Phaser.GameObjects.Triangle = this.add.triangle(startX - 2/2*triSize, startY, 0, 0,- triSize, - triSize, - triSize, triSize, 0x000000, 1);
+
+        startTriangle1.setAlpha(alpha);
+        startTriangle2.setAlpha(alpha);
+        startTriangle3.setAlpha(alpha);
 
         // Orange Square indicating the final level
         const size: number = this.buttonSize*1.2;
