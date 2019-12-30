@@ -326,7 +326,7 @@ export class SortingScene extends BaseScene {
     private orderObjects(categoryName: string, validElements: string[]): void {
         this.arrayStack.each(function(gameObject) {
             if (gameObject instanceof Phaser.GameObjects.Sprite) {
-                let coords: number[] = this.returnQuad(validElements.indexOf(gameObject.getData(categoryName)), validElements.length, this.objectDisplaySize);
+                let coords: number[] = this.returnQuad(validElements.indexOf(gameObject.getData(categoryName)), validElements.length);
                 gameObject.setPosition(coords[0], coords[1]);
             }
         }, this);
@@ -337,5 +337,91 @@ export class SortingScene extends BaseScene {
      */
     private initAudio() {
         this.sound.add('loading').play('', {loop: true});
+    }
+
+    /**
+     * Returns random coordinates in the requested quadrant of total quadrants.
+     * Starting by 0, from left to right then from top to bottom.
+     * IMPORTANT: Sprite origin has to be (0.5, 0.5)!
+     * @param quadrant Number of the quadrant
+     * @param quadrantType Number of quadrants
+     */
+    private returnQuad(quadrant: number, quadrantType: number): number[] {
+        let ret: number[] = null;
+
+        if (quadrant >= quadrantType) {
+            console.log('ERROR: quadrant >= quadrantType');
+            return ret;
+        }
+
+        const spriteSizeHalf: number = this.objectDisplaySize / 2 + 20;
+
+        const leftOffsite: number = 100;
+        const rightOffsite: number = 0;
+        const topOffsite: number = 0;
+        const bottomOffsite: number = 100;
+
+        // Has entries dependant of
+        const horizontal: number[] = [];
+
+        // Has numberOfLines + 1 entries
+        const vertical: number[] = [];
+
+        horizontal.push(leftOffsite);
+
+        vertical.push(topOffsite);
+
+        switch (quadrantType) {
+            case 3: {
+                horizontal.push(leftOffsite + (this.cameras.main.width - leftOffsite - rightOffsite) / 3);
+                horizontal.push(leftOffsite + (this.cameras.main.width - leftOffsite - rightOffsite) * 2 / 3);
+                break;
+            }
+            case 4: {
+                horizontal.push(leftOffsite + (this.cameras.main.width - leftOffsite - rightOffsite) / 2);
+                vertical.push(topOffsite + (this.cameras.main.height - topOffsite - bottomOffsite) / 2);
+                break;
+            }
+            case 6: {
+                horizontal.push(leftOffsite + (this.cameras.main.width - leftOffsite - rightOffsite) / 3);
+                horizontal.push(leftOffsite + (this.cameras.main.width - leftOffsite - rightOffsite) * 2 / 3);
+                vertical.push(topOffsite + (this.cameras.main.height - topOffsite - bottomOffsite) / 2);
+                break;
+            }
+            default: {
+                break;
+            }
+        }
+
+        horizontal.push(this.cameras.main.width - rightOffsite);
+        vertical.push(this.cameras.main.height - bottomOffsite);
+
+        switch (quadrantType) {
+            case 3: {
+                ret = [Phaser.Math.RND.between(horizontal[quadrant] + spriteSizeHalf, horizontal[quadrant + 1] - spriteSizeHalf), Phaser.Math.RND.between(vertical[0] + spriteSizeHalf + this.cameras.main.height / 8, vertical[1] - spriteSizeHalf - this.cameras.main.height / 8)];
+                break;
+            }
+            case 4: {
+                if (quadrant < 2) {
+                    ret = [Phaser.Math.RND.between(horizontal[quadrant] + spriteSizeHalf, horizontal[quadrant + 1] - spriteSizeHalf), Phaser.Math.RND.between(vertical[0] + spriteSizeHalf, vertical[1] - spriteSizeHalf)];
+                } else {
+                    ret = [Phaser.Math.RND.between(horizontal[quadrant % 2] + spriteSizeHalf, horizontal[(quadrant % 2) + 1] - spriteSizeHalf), Phaser.Math.RND.between(vertical[1] + spriteSizeHalf, vertical[2] - spriteSizeHalf)];
+
+                }
+                break;
+            }
+            case 6: {
+                if (quadrant < 3) {
+                    ret = [Phaser.Math.RND.between(horizontal[quadrant] + spriteSizeHalf, horizontal[quadrant + 1] - spriteSizeHalf), Phaser.Math.RND.between(vertical[0] + spriteSizeHalf, vertical[1] - spriteSizeHalf)];
+                } else {
+                    ret = [Phaser.Math.RND.between(horizontal[quadrant % 3] + spriteSizeHalf, horizontal[(quadrant % 3) + 1] - spriteSizeHalf), Phaser.Math.RND.between(vertical[1] + spriteSizeHalf, vertical[2] - spriteSizeHalf)];
+                }
+                break;
+            }
+            default: {
+                break;
+            }
+        }
+        return ret;
     }
 }
