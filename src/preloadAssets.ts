@@ -34,7 +34,7 @@ export class PreloadAssets extends BaseScene {
     private preLoadImages() {
         // Load category and object images
         const jsonObject: any = this.cache.json.get('objects');
-
+        /*
         for (let category of jsonObject['categories']) {
             this.load.setPath('assets/geometrical_objects/categories/');
             this.load.image(category['name'], category['url']);
@@ -50,7 +50,7 @@ export class PreloadAssets extends BaseScene {
         for (let image of jsonObject['images']) {
             this.load.image(image['name'], image['name']);
         }
-
+        */
         // Load UI images
         this.load.setPath('assets/ui/');
         //this.load.image('background1', 'background1.png');
