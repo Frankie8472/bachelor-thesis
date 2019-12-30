@@ -33,6 +33,7 @@ export class WelcomeScene extends BaseScene {
         let background = this.add.sprite(0, 0, 'background1');
         background.setOrigin(0, 0);
         background.setDisplaySize(this.cameras.main.width, this.cameras.main.height);
+        background.setInteractive({ cursor: 'pointer' });
     }
 
     /**

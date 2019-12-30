@@ -50,6 +50,7 @@ export class ScoreScene extends BaseScene {
         const background: Phaser.GameObjects.Sprite = this.add.sprite(0, 0, 'background5');
         background.setOrigin(0, 0);
         background.setDisplaySize(this.cameras.main.width, this.cameras.main.height);
+        background.setInteractive({ cursor: 'pointer' });
     }
 
     /**
@@ -87,6 +88,7 @@ export class ScoreScene extends BaseScene {
         const starScale: number = this.imageScalingFactor(this.cameras.main.width*3/5, sprite.height, sprite.width);
         sprite.setScale(starScale, starScale);
         sprite.setData('scale', starScale);
+        sprite.setInteractive({ cursor: 'pointer' });
 
         const starTween: Phaser.Tweens.Tween = this.tweens.add({
             targets: sprite,
