@@ -123,7 +123,7 @@ export class GameScene extends BaseScene {
 
         this.maxPoints = 10;
 
-        this.timedataStepsize = 0.0003;
+        this.timedataStepsize = 0.0001;
 
         if (this.level > 1) {
             this.timedataStepsize = 0.00001;
