@@ -129,6 +129,8 @@ export class IntroScene extends BaseScene {
         const intro: Phaser.GameObjects.Sprite = this.add.sprite(this.cameras.main.width / 2, this.cameras.main.height / 2, data[0]);
         intro.setOrigin(0.5, 0.5);
 
+
+
         const scale: number = this.imageScalingFactor(this.cameras.main.width * 4 / 5, intro.width, intro.height);
         intro.setScale(scale, scale);
 
@@ -228,12 +230,12 @@ export class IntroScene extends BaseScene {
             }
 
             case 'GameScene1': {
-                ret = ['intro_set_easy', {start: 0, end: 150, first: 226}];
+                ret = ['intro_set_easy', {start: 0, end: 150, first: 226, frames: [...Array(150).keys()].concat(Array(10).fill(150))}];
                 break;
             }
 
             case 'GameScene2': {
-                ret = ['intro_set_hard', {start: 0, end: 150, first: 69}];
+                ret = ['intro_set_hard', {start: 0, end: 150, first: 69, frames: [...Array(69).keys()].concat(Array(10).fill(69))}];
                 break;
             }
 
