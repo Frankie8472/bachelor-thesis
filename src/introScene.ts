@@ -122,6 +122,8 @@ export class IntroScene extends BaseScene {
 
         this.anims.create(introConfig);
 
+        console.log(data[0]);
+
         const intro: Phaser.GameObjects.Sprite = this.add.sprite(this.cameras.main.width / 2, this.cameras.main.height / 2, data[0]);
         intro.setOrigin(0.5, 0.5);
 
@@ -238,7 +240,6 @@ export class IntroScene extends BaseScene {
                 break;
             }
         }
-        console.log(ret[0]);
         return ret;
     }
 }
