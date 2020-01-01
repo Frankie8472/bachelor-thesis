@@ -108,7 +108,7 @@ export class PreloadAssets extends BaseScene {
         this.load.image('levelButton34', 'level34_button.png');
 
         this.load.setPath('assets/introduction/');
-        this.load.image('intro_sorting', 'intro_sorting.gif');
+        this.load.spritesheet('intro_sorting', 'intro_sorting.png', {frameWidth: 480, frameHeight: 270, endFrame: 150});
 
     }
 

@@ -31,6 +31,15 @@ export class IntroScene extends BaseScene {
         background.setFillStyle(0x000000);
         background.setAlpha(0.01);
 
+        const config = {
+            key: 'animateGif',
+            frames: this.anims.generateFrameNumbers('intro_sorting', { start: 0, end: 150, first: 150 }),
+            frameRate: 20,
+            repeat: -1
+        };
+
+        this.anims.create(config);
+
         const intro: Phaser.GameObjects.Sprite = this.add.sprite(this.cameras.main.width/2, this.cameras.main.height/2, 'intro_sorting');
         intro.setOrigin(0.5, 0.5);
 
@@ -53,6 +62,8 @@ export class IntroScene extends BaseScene {
             ease: 'linear',
             duration: 500
         });
+
+        intro.play('animateGif');
     }
 
     private initInput(intro: Phaser.GameObjects.Sprite, bg: Phaser.GameObjects.Rectangle): void {
