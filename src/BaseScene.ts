@@ -93,6 +93,7 @@ export class BaseScene extends Phaser.Scene {
             scale: 0,
             ease: 'linear',
             duration: 700,
+            onUpdate: () => this.sound.setDetune(this.sound.detune - 1),
             onComplete: () => this.sceneChange(scene, data)
         });
     }
