@@ -25,7 +25,7 @@ export class RestrictedSortingScene extends BaseScene {
     private objZoneMap: Phaser.GameObjects.Sprite[];
 
     /**
-     * Array of preselcted objects so that not all objects must be loaded
+     * Array of preselected objects so that not all objects must be loaded
      */
     private preselectedObjects: any[];
 
@@ -355,7 +355,7 @@ export class RestrictedSortingScene extends BaseScene {
      * Method for initializing sound effects
      */
     private initAudio(): void {
-        this.sound.add('loading').play('', {loop: true});
+        this.sound.add('exploration').play('', {loop: true});
     }
 
     /**

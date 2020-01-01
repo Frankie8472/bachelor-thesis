@@ -128,10 +128,14 @@ export class ScoreScene extends BaseScene {
     }
 
     /**
-     * Method for initializing soundeffects
+     * Method for initializing sound effects
      */
     private initAudio(): void {
-        this.sound.add('sparkle').play('', {loop: false});
+        if (this.score + Phaser.Math.EPSILON < 1) {
+            this.sound.add('lose').play();
+        } else {
+            this.sound.add('win').play();
+        }
     }
 
     /**

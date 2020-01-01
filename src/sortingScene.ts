@@ -313,6 +313,7 @@ export class SortingScene extends BaseScene {
 
         exitButton.on('pointerdown', function() {
             exitButton.on('pointerup', function() {
+                this.sound.add('back').play();
                 this.transitionOut("LevelMenuScene");
             }, this);
         }, this);
@@ -333,10 +334,10 @@ export class SortingScene extends BaseScene {
     }
 
     /**
-     * Method for initializing soundeffects
+     * Method for initializing sound effects
      */
     private initAudio(): void {
-        this.sound.add('loading').play('', {loop: true});
+        this.sound.add('space').play('', {loop: true});
     }
 
     /**

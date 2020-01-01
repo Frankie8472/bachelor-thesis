@@ -674,9 +674,9 @@ export class GameScene extends BaseScene {
     }
 
     /**
-     * Function for initializing soundeffects
+     * Function for initializing sound effects
      */
     private initAudio(): void {
-        this.sound.add('loading').play('', {loop: true});
+        this.sound.add('fun').play('', {loop: true});
     }
 }

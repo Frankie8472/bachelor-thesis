@@ -594,7 +594,7 @@ export class PropertySortingScene extends BaseScene {
         if (this.infinite){
             this.sound.add('battle').play('', {loop: true});
         } else {
-            this.sound.add('loading').play('', {loop: true});
+            this.sound.add('space').play('', {loop: true});
         }
     }
 
