@@ -1,5 +1,6 @@
 import 'phaser';
 import {BaseScene} from './baseScene';
+import AnimationManager = Phaser.Animations.AnimationManager;
 
 export class IntroScene extends BaseScene {
 
@@ -32,7 +33,6 @@ export class IntroScene extends BaseScene {
         this.game.scene.sendToBack(this.getKey());
         this.game.scene.moveUp(this.getKey());
 
-        console.log(this.pausedScene);
         if (this.getIntroData() == null) {
             this.scene.resume(this.pausedScene);
             this.scene.stop(this.getKey());
@@ -120,9 +120,11 @@ export class IntroScene extends BaseScene {
             repeat: -1
         };
 
-        this.anims.create(introConfig);
+        if(this.anims.exists(introConfig.key)) {
+            this.anims.remove(introConfig.key)
+        }
 
-        console.log(data[0]);
+        this.anims.create(introConfig);
 
         const intro: Phaser.GameObjects.Sprite = this.add.sprite(this.cameras.main.width / 2, this.cameras.main.height / 2, data[0]);
         intro.setOrigin(0.5, 0.5);

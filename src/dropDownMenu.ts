@@ -190,6 +190,10 @@ export class DropDownMenu extends BaseScene {
 
             case 'exitButton': {
                 this.menuAction();
+
+                console.log(this.game.scene.getScenes(true));
+                console.log(this.game.scene.getScenes(false));
+
                 this.game.scene.getScenes(true).forEach(function(scene){
                     // @ts-ignore
                     if (!(scene.key === this.getKey())) {
