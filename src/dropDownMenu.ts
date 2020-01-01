@@ -78,7 +78,7 @@ export class DropDownMenu extends BaseScene {
     /**
      * Method for initializing the menu buttons, background and action
      */
-    private setMenu() {
+    private setMenu(): void {
         let scale: number;
 
         // Menubackground
@@ -321,7 +321,7 @@ export class DropDownMenu extends BaseScene {
     /**
      * Method for setting the pixeled overlay and the hourglass
      */
-    private setPixelScreen() {
+    private setPixelScreen(): void {
         const pixelScreen: Phaser.GameObjects.Grid = this.add.grid(0, 0, this.cameras.main.width, this.cameras.main.height, this.cameras.main.width/100, this.cameras.main.width/100);
         pixelScreen.setOrigin(0, 0);
         pixelScreen.setFillStyle(0x777777);

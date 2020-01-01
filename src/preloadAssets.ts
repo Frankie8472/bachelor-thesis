@@ -31,7 +31,7 @@ export class PreloadAssets extends BaseScene {
     /**
      * Method for preloading all asset images
      */
-    private preLoadImages() {
+    private preLoadImages(): void {
         // Load category and object images
         const jsonObject: any = this.cache.json.get('objects');
 
@@ -112,7 +112,7 @@ export class PreloadAssets extends BaseScene {
     /**
      * Method for preloading all audiofiles
      */
-    private preLoadAudio() {
+    private preLoadAudio(): void {
         this.load.setPath('assets/ui_audio/');
         this.load.audio('back', 'back.mp3');
         this.load.audio('battle', 'battle.mp3');
@@ -131,7 +131,7 @@ export class PreloadAssets extends BaseScene {
     /**
      * Method for initializing the loading graphics/animation
      */
-    private initLoadingGraphics() {
+    private initLoadingGraphics(): void {
         // Loading graphics
         const cogwheel: Phaser.GameObjects.Sprite = this.add.sprite(1/2*this.cameras.main.width, 1/3*this.cameras.main.height, 'cogwheel');
         cogwheel.setOrigin(0.5, 0.5);
@@ -159,7 +159,7 @@ export class PreloadAssets extends BaseScene {
     /**
      * Method for initializing the loading and action on completion
      */
-    private start() {
+    private start(): void {
         this.load.on('complete', function(){
             this.sceneChange('DropDownMenu');
         }, this);
@@ -170,7 +170,7 @@ export class PreloadAssets extends BaseScene {
     /**
      * Method for initializing the background
      */
-    private setBackground() {
+    private setBackground(): void {
         let background = this.add.sprite(0, 0, 'background1');
         background.setOrigin(0, 0);
         background.setDisplaySize(this.cameras.main.width, this.cameras.main.height);

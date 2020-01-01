@@ -218,7 +218,7 @@ export class PropertySortingScene extends BaseScene {
     /**
      * Method for initializing the background
      */
-    private setBackground() {
+    private setBackground(): void {
         let background: Phaser.GameObjects.Sprite;
         if (this.infinite) {
             background = this.add.sprite(0, 0, 'background3');
@@ -264,7 +264,7 @@ export class PropertySortingScene extends BaseScene {
     /**
      * Method which initializes all input actions
      */
-    private initInput() {
+    private initInput(): void {
 
         // On dragstart
         this.input.on('dragstart', function(pointer, gameObject) {
@@ -590,7 +590,7 @@ export class PropertySortingScene extends BaseScene {
     /**
      * Method for initializing sound effects
      */
-    private initAudio() {
+    private initAudio(): void {
         if (this.infinite){
             this.sound.add('battle').play('', {loop: true});
         } else {
@@ -601,7 +601,7 @@ export class PropertySortingScene extends BaseScene {
     /**
      * Method for preselecting objects
      */
-    private preselectObjects() {
+    private preselectObjects(): void {
         // Preselect properties
         for (let property of this.jsonObject['categories'][this.setCat - 1].validElements) {
             this.selectedElements.push(property);

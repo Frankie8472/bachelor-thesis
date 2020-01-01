@@ -76,7 +76,7 @@ export class RestrictedSortingScene extends BaseScene {
     /**
      * Method which initializes the background graphics
      */
-    private setBackground() {
+    private setBackground(): void {
         const background: Phaser.GameObjects.Sprite = this.add.sprite(0, 0, 'background4');
         background.setOrigin(0, 0);
         background.setDisplaySize(this.cameras.main.width, this.cameras.main.height);
@@ -87,7 +87,7 @@ export class RestrictedSortingScene extends BaseScene {
     /**
      * Method which initializes the dropZones and their graphics
      */
-    private setDropZones() {
+    private setDropZones(): void {
         const crate1: Phaser.GameObjects.Sprite = this.add.sprite(this.cameras.main.width * (1 / 6), this.cameras.main.height * (3 / 4), 'crate');
         const crate2: Phaser.GameObjects.Sprite = this.add.sprite(this.cameras.main.width * (3 / 6), this.cameras.main.height * (3 / 4), 'crate');
         const crate3: Phaser.GameObjects.Sprite = this.add.sprite(this.cameras.main.width * (5 / 6), this.cameras.main.height * (3 / 4), 'crate');
@@ -302,7 +302,7 @@ export class RestrictedSortingScene extends BaseScene {
     /**
      * Method which initializes all the displayed object to sort
      */
-    private setObjects() {
+    private setObjects(): void {
         for (let image of this.preselectedObjects) {
             const x: number = Phaser.Math.RND.between(100 + this.objectSize / 2, this.cameras.main.width - this.objectSize / 2);
             const y: number = Phaser.Math.RND.between(this.objectSize / 2, this.cameras.main.height / 2 - this.objectSize / 2);
@@ -354,14 +354,14 @@ export class RestrictedSortingScene extends BaseScene {
     /**
      * Method for initializing sound effects
      */
-    private initAudio() {
+    private initAudio(): void {
         this.sound.add('loading').play('', {loop: true});
     }
 
     /**
      * Method for preselecting the used objects
      */
-    private preselectObjects() {
+    private preselectObjects(): void {
         // Load accordingly to level
         if (this.level === 1) {
 

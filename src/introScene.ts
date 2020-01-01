@@ -56,7 +56,7 @@ export class IntroScene extends BaseScene {
         });
     }
 
-    private initInput(intro: Phaser.GameObjects.Sprite, bg: Phaser.GameObjects.Rectangle) {
+    private initInput(intro: Phaser.GameObjects.Sprite, bg: Phaser.GameObjects.Rectangle): void {
         this.input.on('pointerdown', function(){
             this.input.on('pointerup', function(){
                 this.resume = true;

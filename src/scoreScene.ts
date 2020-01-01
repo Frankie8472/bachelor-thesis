@@ -46,7 +46,7 @@ export class ScoreScene extends BaseScene {
     /**
      * Method for initializing the background
      */
-    private setBackground() {
+    private setBackground(): void {
         const background: Phaser.GameObjects.Sprite = this.add.sprite(0, 0, 'background5');
         background.setOrigin(0, 0);
         background.setDisplaySize(this.cameras.main.width, this.cameras.main.height);
@@ -56,7 +56,7 @@ export class ScoreScene extends BaseScene {
     /**
      * Method for initializing replaybutton and reward graphics
      */
-    private initUI() {
+    private initUI(): void {
         // Add replay button
         const replayButton: Phaser.GameObjects.Sprite = this.add.sprite(this.cameras.main.width - 100 + 34, this.cameras.main.height - 100 + 34, 'replay');
         replayButton.setOrigin(0.5, 0.5);
@@ -119,7 +119,7 @@ export class ScoreScene extends BaseScene {
     /**
      * Method which initializes all global input actions
      */
-    private initInput() {
+    private initInput(): void {
         this.input.on('pointerdown', function() {
             this.input.on('pointerup', function() {
                 this.transitionOut('LevelMenuScene');
@@ -130,14 +130,14 @@ export class ScoreScene extends BaseScene {
     /**
      * Method for initializing soundeffects
      */
-    private initAudio() {
+    private initAudio(): void {
         this.sound.add('sparkle').play('', {loop: false});
     }
 
     /**
      * Method for saving the score global
      */
-    private saveScore(score: string) {
+    private saveScore(score: string): void {
         window.localStorage.setItem('phaser_score_' + this.previousScene, score);
     }
 }

@@ -147,42 +147,6 @@ export class GameScene extends BaseScene {
     }
 
     preload(): void {
-
-        // Preselect objects and preload images
-        const selectedProperties: any[] = [];
-        // Choose three random properties of each category
-        for (let cat of this.jsonObject['categories']) {
-            const selectedProperty: any[] = Phaser.Math.RND.shuffle(cat['validElements']).slice(0, 3);
-            selectedProperty.forEach((object, index, array) => array[index] = object.name);
-            selectedProperties.push(selectedProperty);
-        }
-
-        // Choose all image
-        for (let image of this.jsonObject['images']) {
-            if (
-                selectedProperties[0].indexOf(image.cat1) > -1 &&
-                selectedProperties[1].indexOf(image.cat2) > -1 &&
-                selectedProperties[2].indexOf(image.cat3) > -1
-            ) {
-                // If level one, fix the last category
-                if (this.level === 1) {
-                    if (image.cat4 === 'full') {
-                        this.gameSet.push(image);
-                    }
-                } else {
-                    this.gameSet.push(image);
-                }
-            }
-        }
-
-        // Preload category images
-        this.categorySet = [...this.jsonObject['categories']]; // Full copy the array instead of referencing
-
-        // If level one, ignore the last category
-        if (this.level === 1) {
-            this.categorySet.pop();
-        }
-
     }
 
     create(): void {
@@ -190,6 +154,7 @@ export class GameScene extends BaseScene {
         this.game.scene.sendToBack(this.getKey());
         this.transitionIn();
 
+        this.preselectObjects();
         this.setBackground();
         this.setHelperMenu();
         this.loadObjects();
@@ -225,9 +190,49 @@ export class GameScene extends BaseScene {
     }
 
     /**
+     * Method for preselecting objects
+     */
+    private preselectObjects(): void {
+        // Preselect objects and preload images
+        const selectedProperties: any[] = [];
+        // Choose three random properties of each category
+        for (let cat of this.jsonObject['categories']) {
+            const selectedProperty: any[] = Phaser.Math.RND.shuffle(cat['validElements']).slice(0, 3);
+            selectedProperty.forEach((object, index, array) => array[index] = object.name);
+            selectedProperties.push(selectedProperty);
+        }
+
+        // Choose all image
+        for (let image of this.jsonObject['images']) {
+            if (
+                selectedProperties[0].indexOf(image['cat1']) > -1 &&
+                selectedProperties[1].indexOf(image['cat2']) > -1 &&
+                selectedProperties[2].indexOf(image['cat3']) > -1
+            ) {
+                // If level one, fix the last category
+                if (this.level === 1) {
+                    if (image['cat4'] === 'full') {
+                        this.gameSet.push(image);
+                    }
+                } else {
+                    this.gameSet.push(image);
+                }
+            }
+        }
+
+        // Preload category images
+        this.categorySet = [...this.jsonObject['categories']]; // Full copy the array instead of referencing
+
+        // If level one, ignore the last category
+        if (this.level === 1) {
+            this.categorySet.pop();
+        }
+    }
+
+    /**
      * Function for initializing the background
      */
-    private setBackground() {
+    private setBackground(): void {
         const background = this.add.sprite(0, 0, 'background5');
         background.setOrigin(0, 0);
         background.setDisplaySize(this.cameras.main.width, this.cameras.main.height);
@@ -663,7 +668,7 @@ export class GameScene extends BaseScene {
     /**
      * Function for calling the introduction and pause this scene
      */
-    private introduction() {
+    private introduction(): void {
         this.scene.pause();
         this.game.scene.start("IntroScene", {"pausedScene": this.getKey()});
     }
@@ -671,7 +676,7 @@ export class GameScene extends BaseScene {
     /**
      * Function for initializing soundeffects
      */
-    private initAudio() {
+    private initAudio(): void {
         this.sound.add('loading').play('', {loop: true});
     }
 }

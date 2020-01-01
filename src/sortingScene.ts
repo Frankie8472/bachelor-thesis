@@ -130,7 +130,7 @@ export class SortingScene extends BaseScene {
     /**
      * Method for initializing the background
      */
-    private setBackground() {
+    private setBackground(): void {
         const background: Phaser.GameObjects.Sprite = this.add.sprite(0, 0, 'background4');
         background.setOrigin(0, 0);
         background.setDisplaySize(this.cameras.main.width, this.cameras.main.height);
@@ -303,7 +303,7 @@ export class SortingScene extends BaseScene {
     /**
      * Method for adding the exit button
      */
-    private exitButton() {
+    private exitButton(): void {
         const exitButton: Phaser.GameObjects.Sprite = this.add.sprite(10, this.cameras.main.height - 10, 'return');
         exitButton.setOrigin(0,1);
         exitButton.setInteractive({ cursor: 'pointer' });
@@ -335,7 +335,7 @@ export class SortingScene extends BaseScene {
     /**
      * Method for initializing soundeffects
      */
-    private initAudio() {
+    private initAudio(): void {
         this.sound.add('loading').play('', {loop: true});
     }
 

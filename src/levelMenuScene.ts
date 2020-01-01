@@ -49,7 +49,7 @@ export class LevelMenuScene extends BaseScene {
     /**
      * Method for initializing background graphics
      */
-    private setBackground() {
+    private setBackground(): void {
         const background: Phaser.GameObjects.Sprite = this.add.sprite(0, 0, 'background1');
         background.setOrigin(0, 0);
         background.setDisplaySize(this.cameras.main.width, this.cameras.main.height);
@@ -58,7 +58,7 @@ export class LevelMenuScene extends BaseScene {
     /**
      * Method for initializing the level buttons and their onclick action
      */
-    private setLevelButtons() {
+    private setLevelButtons(): void {
         const catButton: Phaser.GameObjects.Sprite = this.add.sprite(20, this.cameras.main.height - 20, 'catButton');
         const eraseButton: Phaser.GameObjects.Sprite = this.add.sprite(this.cameras.main.width - 20, this.cameras.main.height - 20, 'erase');
         const levelButton11: Phaser.GameObjects.Sprite = this.add.sprite(1 / 5 * this.cameras.main.width, 1 / 4 * this.cameras.main.height, 'levelButton11');
@@ -253,7 +253,7 @@ export class LevelMenuScene extends BaseScene {
     /**
      * Method for initializing title and animation
      */
-    private setTitle() {
+    private setTitle(): void {
         // Add title
         const y: number = (this.cameras.main.height / 4 - this.buttonSize / 2) / 2;
         const title: Phaser.GameObjects.Sprite = this.add.sprite(this.cameras.main.width / 2, y, 'title');
@@ -267,7 +267,7 @@ export class LevelMenuScene extends BaseScene {
     /**
      * Method for initializing the dashed line under the level buttons
      */
-    private setVisualLink() {
+    private setVisualLink(): void {
         const alpha: number = 0.5;
 
         // Add lines
@@ -336,7 +336,7 @@ export class LevelMenuScene extends BaseScene {
     /**
      * Method for initializing sound effects
      */
-    private initAudio() {
+    private initAudio(): void {
         this.sound.add('loading').play('', {loop: true});
     }
 
@@ -428,7 +428,7 @@ export class LevelMenuScene extends BaseScene {
     /**
      * Method for initializing or resetting the (previous/default) score
      */
-    private setStars(reset: boolean = false) {
+    private setStars(reset: boolean = false): void {
         this.levelButtons.getChildren().forEach(function(gameObject) {
             if (gameObject instanceof Phaser.GameObjects.Sprite && gameObject.name != "catButton" && gameObject.name != 'eraseButton') {
                 let score: string = 'star_0';
