@@ -1,5 +1,5 @@
 import 'phaser';
-import {BaseScene} from './BaseScene';
+import {BaseScene} from './baseScene';
 
 export class PreloadAssets extends BaseScene {
 

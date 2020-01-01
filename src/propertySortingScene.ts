@@ -1,5 +1,5 @@
 import 'phaser';
-import {BaseScene} from './BaseScene';
+import {BaseScene} from './baseScene';
 import {LevelMenuScene} from './levelMenuScene';
 
 export class PropertySortingScene extends BaseScene {

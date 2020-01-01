@@ -1,10 +1,10 @@
 import 'phaser';
-import {BaseScene} from './BaseScene';
+import {BaseScene} from './baseScene';
 
 export class IntroScene extends BaseScene {
 
     /**
-     * NAme of the paused scene the intro is currently playing for
+     * Name of the paused scene the intro is currently playing for
      */
     private pausedScene: string;
 
@@ -159,12 +159,18 @@ export class IntroScene extends BaseScene {
 
         switch (this.getKey() + this.getLevel().toString()) {
             case 'PropertySortingScene1': {
+                ret = ['intro_sorting', {start: 0, end: 150, first: 150}];
+                break;
             }
 
             case 'PropertySortingScene2': {
+                ret = ['intro_sorting', {start: 0, end: 150, first: 150}];
+                break;
             }
 
             case 'PropertySortingScene3': {
+                ret = ['intro_sorting', {start: 0, end: 150, first: 150}];
+                break;
             }
 
             case 'PropertySortingScene4': {
@@ -173,12 +179,18 @@ export class IntroScene extends BaseScene {
             }
 
             case 'PropertySortingScene5': {
+                ret = ['intro_falling', {start: 0, end: 68, first: 68}];
+                break;
             }
 
             case 'PropertySortingScene6': {
+                ret = ['intro_falling', {start: 0, end: 68, first: 68}];
+                break;
             }
 
             case 'PropertySortingScene7': {
+                ret = ['intro_falling', {start: 0, end: 68, first: 68}];
+                break;
             }
 
             case 'PropertySortingScene8': {
@@ -187,6 +199,8 @@ export class IntroScene extends BaseScene {
             }
 
             case 'RestrictedSortingScene1': {
+                ret = ['intro_restricted', {start: 0, end: 201, first: 201}];
+                break;
             }
 
             case 'RestrictedSortingScene2': {

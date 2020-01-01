@@ -133,7 +133,7 @@ export class BaseScene extends Phaser.Scene {
      */
     protected introduction(): void {
         this.scene.pause();
-        this.game.scene.start("IntroScene", {"pausedScene": this.getKey(), "level": this.getLevel()});
+        this.game.scene.start("IntroScene", {'pausedScene': this.getKey(), 'level': this.getLevel()});
     }
 
     /**
