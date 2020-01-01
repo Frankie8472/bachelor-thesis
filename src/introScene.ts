@@ -228,12 +228,12 @@ export class IntroScene extends BaseScene {
             }
 
             case 'GameScene1': {
-                ret = ['intro_set_easy', {start: 0, end: 150, first: 225}];
+                ret = ['intro_set_easy', {start: 0, end: 150, first: 226}];
                 break;
             }
 
             case 'GameScene2': {
-                ret = ['intro_set_hard', {start: 0, end: 150, first: 68}];
+                ret = ['intro_set_hard', {start: 0, end: 150, first: 69}];
                 break;
             }
 
