@@ -32,6 +32,7 @@ export class IntroScene extends BaseScene {
         this.game.scene.sendToBack(this.getKey());
         this.game.scene.moveUp(this.getKey());
 
+        console.log(this.pausedScene);
         if (this.getIntroData() == null) {
             this.scene.resume(this.pausedScene);
             this.scene.stop(this.getKey());
@@ -237,6 +238,7 @@ export class IntroScene extends BaseScene {
                 break;
             }
         }
+        console.log(ret[0]);
         return ret;
     }
 }
