@@ -108,7 +108,7 @@ export class PreloadAssets extends BaseScene {
         this.load.image('levelButton34', 'level34_button.png');
 
         this.load.setPath('assets/geometrical_objects/introduction/');
-        this.load.image('intro_sorting', 'into_sorting.gif');
+        this.load.image('intro_sorting', 'intro_sorting.gif');
 
     }
 
