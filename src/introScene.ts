@@ -42,10 +42,10 @@ export class IntroScene extends BaseScene {
         const background: Phaser.GameObjects.Rectangle = this.setBackground();
         const intro: Phaser.GameObjects.Sprite = this.setIntro();
 
-        const finger: Phaser.GameObjects.Sprite = this.add.sprite(intro.getBottomCenter().x, intro.getBottomCenter().y, 'finger');
+        const finger: Phaser.GameObjects.Sprite = this.add.sprite(this.cameras.main.width/2, this.cameras.main.height-10, 'finger');
         const scale: number = this.imageScalingFactor(this.cameras.main.height/10, finger.width, finger.height);
         finger.setScale(scale, scale);
-        finger.setOrigin(0.5, 0);
+        finger.setOrigin(0.5, 1);
 
         this.setAnimation(intro, background, finger);
     }
@@ -55,7 +55,7 @@ export class IntroScene extends BaseScene {
      * @param intro
      * @param background
      */
-    private initInput(intro: Phaser.GameObjects.Sprite, background: Phaser.GameObjects.Rectangle): void {
+    private initInput(intro: Phaser.GameObjects.Sprite, background: Phaser.GameObjects.Rectangle, finger: Phaser.GameObjects.Sprite): void {
         this.input.on('pointerdown', function () {
             this.input.on('pointerup', function () {
                 this.resume = true;
@@ -70,12 +70,20 @@ export class IntroScene extends BaseScene {
                     }.bind(this)
                 });
 
-                const bgTweenOut: Phaser.Tweens.Tween = this.tweens.add({
+                const backgroundTweenOut: Phaser.Tweens.Tween = this.tweens.add({
                     targets: background,
                     alpha: 0.01,
                     ease: 'linear',
                     duration: 200
                 });
+
+                const fingerTweenOut: Phaser.Tweens.Tween = this.tweens.add({
+                    targets: finger,
+                    alpha: 0.01,
+                    ease: 'linear',
+                    duration: 200
+                });
+
             }, this);
         }, this);
     }
@@ -129,7 +137,7 @@ export class IntroScene extends BaseScene {
             y: this.cameras.main.height / 2,
             ease: 'linear',
             duration: 500,
-            onComplete: () => this.initInput(intro, background)
+            onComplete: () => this.initInput(intro, background, finger)
         });
 
         const backgroundTweenIn: Phaser.Tweens.Tween = this.tweens.add({
