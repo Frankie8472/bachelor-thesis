@@ -157,7 +157,7 @@ export class IntroScene extends BaseScene {
     private getIntroData(): [string, Phaser.Types.Animations.GenerateFrameNumbers] {
         let ret: [string, Phaser.Types.Animations.GenerateFrameNumbers];
 
-        switch (this.getKey() + this.getLevel().toString()) {
+        switch (this.pausedScene + String(this.getLevel())) {
             case 'PropertySortingScene1': {
                 ret = ['intro_sorting', {start: 0, end: 150, first: 150}];
                 break;
