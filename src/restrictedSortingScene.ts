@@ -61,8 +61,6 @@ export class RestrictedSortingScene extends BaseScene {
         this.setObjects();
         this.initInput();
         this.initAudio();
-
-        this.introduction();
     }
 
     update(time: number): void {

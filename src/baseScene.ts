@@ -90,7 +90,8 @@ export class BaseScene extends Phaser.Scene {
             scale: 10 * 0.5 * Math.sqrt(Math.pow(this.cameras.main.width, 2) + Math.pow(this.cameras.main.height, 2)),
             ease: 'linear',
             duration: 700,
-            onStart: () => this.sound.volume = 0
+            onStart: () => this.sound.volume = 0,
+            onComplete: () => this.introduction()
         });
 
         tween.on('update', () => this.sound.volume += 1/tween.duration);

@@ -158,8 +158,6 @@ export class GameScene extends BaseScene {
         this.setTimeProgressbar();
         this.setGameProgressbar();
         this.initAudio();
-
-        this.introduction();
     }
 
     update(time: number): void {

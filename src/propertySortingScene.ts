@@ -188,8 +188,6 @@ export class PropertySortingScene extends BaseScene {
         this.initInput();
         this.initFirstDrop();
         this.initAudio();
-
-        this.introduction();
     }
 
     update(time: number): void {
