@@ -23,6 +23,7 @@ export class PreloadAssets extends BaseScene {
     create(): void {
         this.setBackground();
         this.preLoadImages();
+        this.preLoadIntroFiles();
         this.preLoadAudio();
         this.initLoadingGraphics();
         this.start();
@@ -106,14 +107,22 @@ export class PreloadAssets extends BaseScene {
         this.load.image('levelButton32', 'level32_button.png');
         this.load.image('levelButton33', 'level33_button.png');
         this.load.image('levelButton34', 'level34_button.png');
-
-        this.load.setPath('assets/introduction/');
-        this.load.spritesheet('intro_sorting', 'intro_sorting.png', {frameWidth: 480, frameHeight: 270, endFrame: 150});
-
     }
 
     /**
-     * Method for preloading all audiofiles
+     * Method for preloading all introduction files
+     */
+    private preLoadIntroFiles(): void {
+        this.load.setPath('assets/introduction/');
+        this.load.spritesheet('intro_sorting', 'intro_sorting.png', {frameWidth: 480, frameHeight: 270, endFrame: 150});
+        this.load.spritesheet('intro_falling', 'intro_falling.png', {frameWidth: 480, frameHeight: 270, endFrame: 68});
+        this.load.spritesheet('intro_restricted', 'intro_restricted.png', {frameWidth: 480, frameHeight: 270, endFrame: 201});
+        this.load.spritesheet('intro_set_easy', 'intro_set_easy.png', {frameWidth: 480, frameHeight: 270, endFrame: 225});
+        this.load.spritesheet('intro_set_hard', 'intro_set_hard.png', {frameWidth: 480, frameHeight: 270, endFrame: 68});
+    }
+
+    /**
+     * Method for preloading all audio files
      */
     private preLoadAudio(): void {
         this.load.setPath('assets/ui_audio/');

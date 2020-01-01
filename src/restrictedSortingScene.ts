@@ -9,11 +9,6 @@ export class RestrictedSortingScene extends BaseScene {
     private jsonObject: any;
 
     /**
-     * Difficulty level
-     */
-    private level: number;
-
-    /**
      * Global average display size of interactive objects
      */
     private objectSize: number;
@@ -53,7 +48,6 @@ export class RestrictedSortingScene extends BaseScene {
     }
 
     preload(): void {
-
     }
 
     create(): void {
@@ -67,6 +61,8 @@ export class RestrictedSortingScene extends BaseScene {
         this.setObjects();
         this.initInput();
         this.initAudio();
+
+        this.introduction();
     }
 
     update(time: number): void {
@@ -190,7 +186,7 @@ export class RestrictedSortingScene extends BaseScene {
      */
     private initInput(): void {
         // On start dragging
-        this.input.on('dragstart', function(pointer, gameObject) {
+        this.input.on('dragstart', function (pointer, gameObject) {
             if (gameObject instanceof Phaser.GameObjects.Sprite) {
                 // Bring gameObject to top
                 this.children.bringToTop(gameObject);
@@ -205,7 +201,7 @@ export class RestrictedSortingScene extends BaseScene {
         }, this);
 
         // On stop dragging
-        this.input.on('dragend', function(pointer, gameObject, dropped) {
+        this.input.on('dragend', function (pointer, gameObject, dropped) {
             // If not dropped set default visual effects
             if (!dropped && gameObject instanceof Phaser.GameObjects.Sprite) {
                 gameObject.clearTint();
@@ -246,14 +242,14 @@ export class RestrictedSortingScene extends BaseScene {
         }, this);
 
         // While dragging update coordinates
-        this.input.on('drag', function(pointer, gameObject, dragX, dragY) {
+        this.input.on('drag', function (pointer, gameObject, dragX, dragY) {
             if (gameObject instanceof Phaser.GameObjects.Sprite) {
                 gameObject.setPosition(dragX, dragY);
             }
         }, this);
 
         // On drop
-        this.input.on('drop', function(pointer, gameObject, dropZone) {
+        this.input.on('drop', function (pointer, gameObject, dropZone) {
             if (gameObject instanceof Phaser.GameObjects.Sprite && dropZone instanceof Phaser.GameObjects.Zone) {
                 let scale: number = gameObject.getData('scale');
                 let coords: number[] = [gameObject.input.dragStartX, gameObject.input.dragStartY];
@@ -281,7 +277,10 @@ export class RestrictedSortingScene extends BaseScene {
 
                     // If all elements are sorted, end game with score
                     if (this.displayedObjects.getLength() <= 0) {
-                        this.transitionOut('ScoreScene', {'score': 1, 'previousScene': this.getKey() + String(this.level)});
+                        this.transitionOut('ScoreScene', {
+                            'score': 1,
+                            'previousScene': this.getKey() + String(this.level)
+                        });
                     }
 
 
@@ -343,7 +342,7 @@ export class RestrictedSortingScene extends BaseScene {
         mergeArray.forEach((element, index, array) => array[index] = element.name);
 
         // Intersect valid elements of all elements already in dropzone plus current gameObject
-        [...this.objZoneMap.filter((element, index) => this.zoneObjMap[index].name === dropZone.name), gameObject].forEach(function(element) {
+        [...this.objZoneMap.filter((element, index) => this.zoneObjMap[index].name === dropZone.name), gameObject].forEach(function (element) {
             mergeArray = mergeArray.filter((x) => element.getData('properties').includes(x));
         });
 
@@ -399,7 +398,7 @@ export class RestrictedSortingScene extends BaseScene {
                 }
 
                 // Remove the selected images from the images array to avoid duplicates
-                this.preselectedObjects.forEach(function(element) {
+                this.preselectedObjects.forEach(function (element) {
                     if (images.indexOf(element, 0) > -1) {
                         images.splice(images.indexOf(element, 0), 1);
                     }
@@ -442,7 +441,7 @@ export class RestrictedSortingScene extends BaseScene {
                 }
 
                 // Remove the selected images from the images array to avoid duplicates
-                this.preselectedObjects.forEach(function(element) {
+                this.preselectedObjects.forEach(function (element) {
                     if (images.indexOf(element, 0) > -1) {
                         images.splice(images.indexOf(element, 0), 1);
                     }

@@ -5,6 +5,11 @@ export class BaseScene extends Phaser.Scene {
     protected key: string;
 
     /**
+     * Level of the scene
+     */
+    protected level: number;
+
+    /**
      * Transition graphic
      */
     private transition: Phaser.GameObjects.GameObject[];
@@ -15,14 +20,22 @@ export class BaseScene extends Phaser.Scene {
         });
 
         this.key = key;
+        this.level = 0;
         this.generateNewSeed();
     }
 
     /**
      * Method for returning the key of this scene
      */
-    public getKey(): string{
+    public getKey(): string {
         return this.key;
+    }
+
+    /**
+     * Method for returning the key of this scene
+     */
+    public getLevel(): number {
+        return this.level;
     }
 
     /**
@@ -113,6 +126,14 @@ export class BaseScene extends Phaser.Scene {
         this.sound.stopAll();
         this.game.scene.start(scene, data);
         this.game.scene.stop(this.key);
+    }
+
+    /**
+     * Helper method for playing the introduction and pause the current scene
+     */
+    protected introduction(): void {
+        this.scene.pause();
+        this.game.scene.start("IntroScene", {"pausedScene": this.getKey(), "level": this.getLevel()});
     }
 
     /**

@@ -9,11 +9,6 @@ export class GameScene extends BaseScene {
     private jsonObject: any;
 
     /**
-     * Game level
-     */
-    private level: number;
-
-    /**
      * Lock for not messing up animations by clicking repeatedly without waiting for the animation to finish
      */
     private lock: boolean;
@@ -162,8 +157,9 @@ export class GameScene extends BaseScene {
         this.setEqualityCheck();
         this.setTimeProgressbar();
         this.setGameProgressbar();
-        this.introduction();
         this.initAudio();
+
+        this.introduction();
     }
 
     update(time: number): void {
@@ -181,7 +177,10 @@ export class GameScene extends BaseScene {
             this.checked = true;
 
             // Endgame
-            this.transitionOut('ScoreScene', {'score': this.points / this.gamefluid.getData('gameMax'), 'previousScene': this.getKey() + String(this.level)});
+            this.transitionOut('ScoreScene', {
+                'score': this.points / this.gamefluid.getData('gameMax'),
+                'previousScene': this.getKey() + String(this.level)
+            });
         } else {
             timedata -= this.timedataStepsize;
             this.timefluid.setData('timeY', timedata);
@@ -289,7 +288,7 @@ export class GameScene extends BaseScene {
 
         const scale: number = this.imageScalingFactor(this.buttonSize, menuButton.width, menuButton.height);
         menuButton.setScale(scale, scale);
-        menuButton.setInteractive({ cursor: 'pointer' });
+        menuButton.setInteractive({cursor: 'pointer'});
 
         menuButton.on('pointerup', () => this.menuAction(menuButton, menuBackground));
     }
@@ -321,9 +320,9 @@ export class GameScene extends BaseScene {
             const diag: number = Math.sqrt(Math.pow(sprite.height, 2) + Math.pow(sprite.width, 2));
             const scale: number = this.imageScalingFactor(Math.min(this.cellWidth, this.cellHeight), diag, diag);
             sprite.setScale(scale, scale);
-            sprite.setInteractive({ cursor: 'pointer' });
+            sprite.setInteractive({cursor: 'pointer'});
 
-            sprite.on('pointerdown', function() {
+            sprite.on('pointerdown', function () {
 
                 // If not already selected and there aren't already three selected
                 if (!this.arrayMarked.contains(sprite) && this.arrayMarked.getLength() < 3) {
@@ -409,14 +408,14 @@ export class GameScene extends BaseScene {
                         !(sprite2.getData(categoryIndicator.name) === sprite3.getData(categoryIndicator.name)) &&
                         !(sprite1.getData(categoryIndicator.name) === sprite3.getData(categoryIndicator.name))
                     ) {
-                        if(inGame){
+                        if (inGame) {
                             categoryIndicator.setTintFill(0x00dd00);
                         }
                     } else {
                         if (replaceObjects) {
                             replaceObjects = false;
                         }
-                        if (inGame){
+                        if (inGame) {
                             // Mark category as red
                             categoryIndicator.setTintFill(0xdd0000);
                         }
@@ -485,8 +484,8 @@ export class GameScene extends BaseScene {
 
         // Add time but not more than max
         let timedata: number = this.timefluid.getData('timeY');
-        timedata += this.timedataStepsize*5000;
-        if (timedata > this.timefluid.getData('timeYMax')){
+        timedata += this.timedataStepsize * 5000;
+        if (timedata > this.timefluid.getData('timeYMax')) {
             timedata = this.timefluid.getData('timeYMax');
         }
 
@@ -619,7 +618,7 @@ export class GameScene extends BaseScene {
         const progressbarY: number = this.cameras.main.height - 10;
         const progressbar: Phaser.GameObjects.Sprite = this.add.sprite(0, progressbarY, 'progressbar');
         const multiplierX: number = 0.4;
-        const multiplierY: number = this.imageScalingFactor(this.cameras.main.height*0.5, progressbar.height, progressbar.height);//0.3;
+        const multiplierY: number = this.imageScalingFactor(this.cameras.main.height * 0.5, progressbar.height, progressbar.height);//0.3;
         progressbar.setOrigin(0, 1);
         progressbar.setScale(multiplierX, multiplierY);
 
@@ -647,7 +646,7 @@ export class GameScene extends BaseScene {
         const progressbarY: number = this.cameras.main.height - 10;
         const progressbar: Phaser.GameObjects.Sprite = this.add.sprite(10, progressbarY, 'progressbar');
         const multiplierX: number = 0.4;
-        const multiplierY: number = this.imageScalingFactor(this.cameras.main.height*0.5, progressbar.height, progressbar.height);//0.3;
+        const multiplierY: number = this.imageScalingFactor(this.cameras.main.height * 0.5, progressbar.height, progressbar.height);//0.3;
         progressbar.setOrigin(0, 1);
         progressbar.setScale(multiplierX, multiplierY);
 
@@ -663,14 +662,6 @@ export class GameScene extends BaseScene {
         this.timefluid.setData('timeYMax', (progressbar.height * multiplierY - 6) / this.timefluid.height);
         this.timefluid.setScale(this.timefluid.getData('timeX'), this.timefluid.getData('timeY'));
         this.timefluid.setAlpha(0.7);
-    }
-
-    /**
-     * Function for calling the introduction and pause this scene
-     */
-    private introduction(): void {
-        this.scene.pause();
-        this.game.scene.start("IntroScene", {"pausedScene": this.getKey()});
     }
 
     /**
