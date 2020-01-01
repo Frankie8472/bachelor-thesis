@@ -118,8 +118,8 @@ export class PreloadAssets extends BaseScene {
         this.load.spritesheet('intro_sorting', 'intro_sorting.png', {frameWidth: 480, frameHeight: 270, endFrame: 150});
         this.load.spritesheet('intro_falling', 'intro_falling.png', {frameWidth: 480, frameHeight: 270, endFrame: 68});
         this.load.spritesheet('intro_restricted', 'intro_restricted.png', {frameWidth: 480, frameHeight: 270, endFrame: 201});
-        this.load.spritesheet('intro_set_easy', 'intro_set_easy.png', {frameWidth: 480, frameHeight: 270, endFrame: 226});
-        this.load.spritesheet('intro_set_hard', 'intro_set_hard.png', {frameWidth: 480, frameHeight: 270, endFrame: 69});
+        this.load.spritesheet('intro_set_easy', 'intro_set_easy.png', {frameWidth: 480, frameHeight: 270, endFrame: 225});
+        this.load.spritesheet('intro_set_hard', 'intro_set_hard.png', {frameWidth: 480, frameHeight: 270, endFrame: 68});
     }
 
     /**
