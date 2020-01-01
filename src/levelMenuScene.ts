@@ -156,6 +156,8 @@ export class LevelMenuScene extends BaseScene {
         let name: string = this.buttonToSceneMap(gameObject.name);
         let level: number = Number(name[name.length-1]);
 
+        this.sound.add('select').play();
+
         switch (gameObject.name) {
             case 'catButton': {
                 this.transitionOut(name);

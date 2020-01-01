@@ -267,6 +267,8 @@ export class DropDownMenu extends BaseScene {
 
         } else {
             // Pause current scene
+            this.sound.add('pause').play();
+
             // @ts-ignore
             const key_paused_scene: string = this.game.scene.getScenes(true)[0].key;
             this.game.scene.pause(key_paused_scene);
