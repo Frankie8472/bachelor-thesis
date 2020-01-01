@@ -114,10 +114,20 @@ export class PreloadAssets extends BaseScene {
      */
     private preLoadAudio() {
         this.load.setPath('assets/ui_audio/');
-        this.load.audio('welcome', 'welcome.mp3');
-        this.load.audio('loading', 'loading.mp3');
+        this.load.audio('back', 'back.mp3');
         this.load.audio('battle', 'battle.mp3');
-        this.load.audio('sparkle', 'sparkle_loop.mp3');
+        this.load.audio('fun', 'fun.mp3');
+        this.load.audio('loading', 'loading.mp3');
+        this.load.audio('lose', 'lose.mp3');
+        this.load.audio('lose2', 'lose2.mp3');
+        this.load.audio('select', 'select.mp3');
+        this.load.audio('space', 'space.mp3');
+        this.load.audio('space_exploration', 'space_exploration.mp3');
+        this.load.audio('sparkle', 'sparkle.mp3');
+        this.load.audio('welcome', 'welcome.mp3');
+        this.load.audio('win1', 'win1.mp3');
+        this.load.audio('win2', 'win2.mp3');
+        this.load.audio('win3', 'win3.mp3');
     }
 
     /**
