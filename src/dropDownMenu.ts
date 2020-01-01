@@ -96,7 +96,7 @@ export class DropDownMenu extends BaseScene {
         scale = this.imageScalingFactor(this.buttonSize, this.exitButton.width, this.exitButton.height);
         this.exitButton.setScale(scale, scale);
 
-        this.exitButton.setInteractive({ cursor: 'pointer' });
+        this.exitButton.setInteractive({cursor: 'pointer'});
 
         // Fullscreen Button
         this.fullscreenButton = this.add.sprite(-64, 10 + 32 + (10 + 64), 'fullscreenbuttonblack', 0);
@@ -108,11 +108,11 @@ export class DropDownMenu extends BaseScene {
         this.fullscreenButton.setName("fullscreenButton");
         this.fullscreenButton.setData('clicked', false);
 
-        this.fullscreenButton.setInteractive({ cursor: 'pointer' });
+        this.fullscreenButton.setInteractive({cursor: 'pointer'});
 
         // Enable key F for enabling/disabling fullscreen
         const FKey: Phaser.Input.Keyboard.Key = this.input.keyboard.addKey('F');
-        FKey.on('down', function() {
+        FKey.on('down', function () {
             this.scale.toggleFullscreen();
             if (this.scale.isFullscreen) {
                 this.fullscreenButton.setFrame(0);
@@ -132,7 +132,7 @@ export class DropDownMenu extends BaseScene {
         this.menuButton.setName("menuButton");
         this.menuButton.setData('clicked', false);
 
-        this.menuButton.setInteractive({ cursor: 'pointer' });
+        this.menuButton.setInteractive({cursor: 'pointer'});
 
         // StartGame
         this.game.scene.start('WelcomeScene');
@@ -142,14 +142,14 @@ export class DropDownMenu extends BaseScene {
      * Method for initializing all input
      */
     private initInput(): void {
-        this.input.on('pointerdown', function(pointer, currentlyOver) {
+        this.input.on('pointerdown', function (pointer, currentlyOver) {
             const gameObject: any = currentlyOver[0];
             if (gameObject instanceof Phaser.GameObjects.Sprite) {
                 gameObject.setData('clicked', true);
             }
         }, this);
 
-        this.input.on('pointerup', function(pointer, currentlyOver) {
+        this.input.on('pointerup', function (pointer, currentlyOver) {
             const gameObject: any = currentlyOver[0];
             if (gameObject instanceof Phaser.GameObjects.Sprite && gameObject.getData('clicked')) {
                 this.buttonFunction(gameObject);
@@ -191,15 +191,12 @@ export class DropDownMenu extends BaseScene {
             case 'exitButton': {
                 this.menuAction();
 
-                console.log(this.game.scene.getScenes(true));
-                console.log(this.game.scene.getScenes(false));
-
-                this.game.scene.getScenes(true).forEach(function(scene){
+                this.game.scene.getScenes(false).forEach(function (scene) {
                     // @ts-ignore
-                    if (!(scene.key === this.getKey())) {
+                    const sceneKey: string = scene.key;
+                    if (!(sceneKey === this.getKey()) && (this.game.scene.isActive(sceneKey) || this.game.scene.isPaused(sceneKey))) {
                         scene.sound.stopAll();
-                        // @ts-ignore
-                        this.game.scene.stop(scene.key);
+                        this.game.scene.stop(sceneKey);
                     }
                 }, this);
 
@@ -313,11 +310,11 @@ export class DropDownMenu extends BaseScene {
             this.pauseBackground.setVisible(true);
 
             const pixelScreenTween: Phaser.Tweens.Tween = this.tweens.add({
-               targets: this.pauseBackground.getAll(),
-               alpha: 0.9,
-               ease: 'linear',
-               duration: 700,
-               delay: 0
+                targets: this.pauseBackground.getAll(),
+                alpha: 0.9,
+                ease: 'linear',
+                duration: 700,
+                delay: 0
             });
 
             this.menuDown = true;
@@ -328,7 +325,7 @@ export class DropDownMenu extends BaseScene {
      * Method for setting the pixeled overlay and the hourglass
      */
     private setPixelScreen(): void {
-        const pixelScreen: Phaser.GameObjects.Grid = this.add.grid(0, 0, this.cameras.main.width, this.cameras.main.height, this.cameras.main.width/100, this.cameras.main.width/100);
+        const pixelScreen: Phaser.GameObjects.Grid = this.add.grid(0, 0, this.cameras.main.width, this.cameras.main.height, this.cameras.main.width / 100, this.cameras.main.width / 100);
         pixelScreen.setOrigin(0, 0);
         pixelScreen.setFillStyle(0x777777);
         pixelScreen.setAltFillStyle(0x555555);
@@ -336,10 +333,10 @@ export class DropDownMenu extends BaseScene {
         pixelScreen.setAlpha(0);
         this.pauseBackground.add(pixelScreen);
 
-        const hourglass: Phaser.GameObjects.Sprite = this.add.sprite(this.cameras.main.width/2, this.cameras.main.height/2, 'hourglass');
+        const hourglass: Phaser.GameObjects.Sprite = this.add.sprite(this.cameras.main.width / 2, this.cameras.main.height / 2, 'hourglass');
         hourglass.setOrigin(0.5, 0.5);
 
-        const clockScale: number = this.imageScalingFactor(3/5*this.cameras.main.height, hourglass.width, hourglass.height);
+        const clockScale: number = this.imageScalingFactor(3 / 5 * this.cameras.main.height, hourglass.width, hourglass.height);
         hourglass.setScale(clockScale, clockScale);
         hourglass.setAlpha(0);
 
