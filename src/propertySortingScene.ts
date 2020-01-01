@@ -216,6 +216,26 @@ export class PropertySortingScene extends BaseScene {
     }
 
     /**
+     * Method for initializing the introduction
+     */
+    private initIntroduction():void {
+        const bg: Phaser.GameObjects.Rectangle = this.add.rectangle(0,0, this.cameras.main.width, this.cameras.main.height, 0x000000, 0.7);
+        const intro: Phaser.GameObjects.Image = this.add.image(this.cameras.main.width/2, this.cameras.main.height/2, 'intro_sorting');
+        intro.setOrigin(0.5, 0.5);
+
+        const scale: number = this.imageScalingFactor(Math.min(intro.width, this.cameras.main.width), intro.width, intro.height);
+        intro.setScale(scale, scale);
+    }
+
+    /**
+     * Function for calling the introduction and pause this scene
+     */
+    private introduction(): void {
+        this.scene.pause();
+        this.game.scene.start("IntroScene", {"pausedScene": this.getKey()});
+    }
+
+    /**
      * Method for initializing the background
      */
     private setBackground(): void {

@@ -17,8 +17,7 @@ export class IntroScene extends BaseScene {
     }
 
     preload(): void {
-        // Load UI
-        this.load.image('intro', 'assets/ui/gameintro.png');
+
     }
 
     create(): void {
@@ -32,7 +31,7 @@ export class IntroScene extends BaseScene {
         background.setFillStyle(0x000000);
         background.setAlpha(0.01);
 
-        const intro: Phaser.GameObjects.Sprite = this.add.sprite(this.cameras.main.width/2, this.cameras.main.height/2, 'intro')
+        const intro: Phaser.GameObjects.Sprite = this.add.sprite(this.cameras.main.width/2, this.cameras.main.height/2, 'intro_sorting');
         intro.setOrigin(0.5, 0.5);
 
         const scale: number = this.imageScalingFactor(this.cameras.main.width*3/5, intro.width, intro.height);
