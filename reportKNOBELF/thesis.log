@@ -1,0 +1,1046 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6730 64-bit) (preloaded format=pdflatex 2018.8.3)  16 AUG 2018 15:57
+entering extended mode
+**./thesis.tex
+(thesis.tex
+LaTeX2e <2018-04-01> patch level 5
+
+("C:\Users\Jacqueline\AppData\Local\Programs\MiKTeX 2.9\tex\latex\koma-script\s
+crbook.cls"
+Document Class: scrbook 2018/03/30 v3.25 KOMA-Script document class (book)
+
+("C:\Users\Jacqueline\AppData\Local\Programs\MiKTeX 2.9\tex\latex\koma-script\s
+crkbase.sty"
+Package: scrkbase 2018/03/30 v3.25 KOMA-Script package (KOMA-Script-dependent b
+asics and keyval usage)
+
+("C:\Users\Jacqueline\AppData\Local\Programs\MiKTeX 2.9\tex\latex\koma-script\s
+crbase.sty"
+Package: scrbase 2018/03/30 v3.25 KOMA-Script package (KOMA-Script-independent 
+basics and keyval usage)
+
+("C:\Users\Jacqueline\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics\keyv
+al.sty"
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks14
+)
+("C:\Users\Jacqueline\AppData\Local\Programs\MiKTeX 2.9\tex\latex\koma-script\s
+crlfile.sty"
+Package: scrlfile 2018/03/30 v3.25 KOMA-Script package (loading files)
+)))
+("C:\Users\Jacqueline\AppData\Local\Programs\MiKTeX 2.9\tex\latex\koma-script\t
+ocbasic.sty"
+Package: tocbasic 2018/03/30 v3.25 KOMA-Script package (handling toc-files)
+\scr@dte@tocline@numberwidth=\skip41
+\scr@dte@tocline@numbox=\box26
+)
+Package tocbasic Info: omitting babel extension for `toc'
+(tocbasic)             because of feature `nobabel' available
+(tocbasic)             for `toc' on input line 136.
+Package tocbasic Info: defining new hook before heading of `' on input line 166
+3.
+Package scrbook Info: You've used standard option `12pt'.
+(scrbook)             This is correct!
+(scrbook)             Internally I'm using `fontsize=12pt'.
+(scrbook)             If you'd like to set the option with \KOMAoptions,
+(scrbook)             you'd have to use `fontsize=12pt' there
+(scrbook)             instead of `12pt', too.
+
+
+Class scrbook Warning: You've used obsolete option `nochapterprefix'.
+(scrbook)              Usage of this option indicates an old document
+(scrbook)              and changes compatibility level using
+(scrbook)              `chapterprefix=false,version=first,
+(scrbook)              enabledeprecatedfontcommands' that may result
+(scrbook)              in further warnings.
+(scrbook)              If you don't want this, you should simply
+(scrbook)              replace option `nochapterprefix' by `chapterprefix=false
+'.
+
+Class scrbook Info: Switching compatibility level to `first'.
+
+Class scrbook Warning: deprecated option `enabledeprecatedfontcommands'.
+(scrbook)              Note, that this option was already depreacted when
+(scrbook)              it has been defined. Support for old font commands
+(scrbook)              has been removed from KOMA-Script more than one
+(scrbook)              decade ago. It is not recommended to use them any
+(scrbook)              longer. Therefore usage of this class option also
+(scrbook)              is not recommended.
+
+Class scrbook Info: File `scrsize12pt.clo' used to setup font sizes on input li
+ne 2331.
+
+("C:\Users\Jacqueline\AppData\Local\Programs\MiKTeX 2.9\tex\latex\koma-script\s
+crsize12pt.clo"
+File: scrsize12pt.clo 2018/03/30 v3.25 KOMA-Script font size class option (12pt
+)
+)
+("C:\Users\Jacqueline\AppData\Local\Programs\MiKTeX 2.9\tex\latex\koma-script\t
+ypearea.sty"
+Package: typearea 2018/03/30 v3.25 KOMA-Script package (type area)
+\ta@bcor=\skip42
+\ta@div=\count80
+Package typearea Info: You've used standard option `a4paper'.
+(typearea)             This is correct!
+(typearea)             Internally I'm using `paper=a4'.
+(typearea)             If you'd like to set the option with \KOMAoptions,
+(typearea)             you'd have to use `paper=a4' there
+(typearea)             instead of `a4paper', too.
+\ta@hblk=\skip43
+\ta@vblk=\skip44
+\ta@temp=\skip45
+\footheight=\skip46
+Package typearea Info: These are the values describing the layout:
+(typearea)             DIV  = 12
+(typearea)             BCOR = 0.0pt
+(typearea)             \paperwidth      = 597.50793pt
+(typearea)              \textwidth      = 448.13095pt
+(typearea)              DIV departure   = -6%
+(typearea)              \evensidemargin = 27.31467pt
+(typearea)              \oddsidemargin  = -22.47766pt
+(typearea)             \paperheight     = 845.04694pt
+(typearea)              \textheight     = 635.5pt
+(typearea)              \topmargin      = -41.72441pt
+(typearea)              \headheight     = 18.125pt
+(typearea)              \headsep        = 21.75pt
+(typearea)              \topskip        = 12.0pt
+(typearea)              \footskip       = 50.75pt
+(typearea)              \baselineskip   = 14.5pt
+(typearea)              on input line 1706.
+)
+\c@part=\count81
+\c@chapter=\count82
+\c@section=\count83
+\c@subsection=\count84
+\c@subsubsection=\count85
+\c@paragraph=\count86
+\c@subparagraph=\count87
+\scr@dte@part@maxnumwidth=\skip47
+\scr@dte@chapter@maxnumwidth=\skip48
+\scr@dte@section@maxnumwidth=\skip49
+\scr@dte@subsection@maxnumwidth=\skip50
+\scr@dte@subsubsection@maxnumwidth=\skip51
+\scr@dte@paragraph@maxnumwidth=\skip52
+\scr@dte@subparagraph@maxnumwidth=\skip53
+\abovecaptionskip=\skip54
+\belowcaptionskip=\skip55
+\c@pti@nb@sid@b@x=\box27
+\scr@dte@figure@maxnumwidth=\skip56
+Package tocbasic Info: omitting babel extension for `lof'
+(tocbasic)             because of feature `nobabel' available
+(tocbasic)             for `lof' on input line 6251.
+\c@figure=\count88
+\scr@dte@table@maxnumwidth=\skip57
+Package tocbasic Info: omitting babel extension for `lot'
+(tocbasic)             because of feature `nobabel' available
+(tocbasic)             for `lot' on input line 6272.
+\c@table=\count89
+Class scrbook Info: Using old \@makefntext due to compatibility level
+(scrbook)           less than 3.22 on input line 6432.
+Class scrbook Info: Redefining `\numberline' on input line 6445.
+\bibindent=\dimen102
+)
+("C:\Users\Jacqueline\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amsmath\amsma
+th.sty"
+Package: amsmath 2017/09/02 v2.17a AMS math features
+\@mathmargin=\skip58
+
+For additional information on amsmath, use the `?' option.
+
+("C:\Users\Jacqueline\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amsmath\amste
+xt.sty"
+Package: amstext 2000/06/29 v2.01 AMS text
+
+("C:\Users\Jacqueline\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amsmath\amsge
+n.sty"
+File: amsgen.sty 1999/11/30 v2.0 generic functions
+\@emptytoks=\toks15
+\ex@=\dimen103
+))
+("C:\Users\Jacqueline\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amsmath\amsbs
+y.sty"
+Package: amsbsy 1999/11/29 v1.2d Bold Symbols
+\pmbraise@=\dimen104
+)
+("C:\Users\Jacqueline\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amsmath\amsop
+n.sty"
+Package: amsopn 2016/03/08 v2.02 operator names
+)
+\inf@bad=\count90
+LaTeX Info: Redefining \frac on input line 213.
+\uproot@=\count91
+\leftroot@=\count92
+LaTeX Info: Redefining \overline on input line 375.
+\classnum@=\count93
+\DOTSCASE@=\count94
+LaTeX Info: Redefining \ldots on input line 472.
+LaTeX Info: Redefining \dots on input line 475.
+LaTeX Info: Redefining \cdots on input line 596.
+\Mathstrutbox@=\box28
+\strutbox@=\box29
+\big@size=\dimen105
+LaTeX Font Info:    Redeclaring font encoding OML on input line 712.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 713.
+\macc@depth=\count95
+\c@MaxMatrixCols=\count96
+\dotsspace@=\muskip10
+\c@parentequation=\count97
+\dspbrk@lvl=\count98
+\tag@help=\toks16
+\row@=\count99
+\column@=\count100
+\maxfields@=\count101
+\andhelp@=\toks17
+\eqnshift@=\dimen106
+\alignsep@=\dimen107
+\tagshift@=\dimen108
+\tagwidth@=\dimen109
+\totwidth@=\dimen110
+\lineht@=\dimen111
+\@envbody=\toks18
+\multlinegap=\skip59
+\multlinetaggap=\skip60
+\mathdisplay@stack=\toks19
+LaTeX Info: Redefining \[ on input line 2817.
+LaTeX Info: Redefining \] on input line 2818.
+)
+("C:\Users\Jacqueline\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amsfonts\amss
+ymb.sty"
+Package: amssymb 2013/01/14 v3.01 AMS font symbols
+
+("C:\Users\Jacqueline\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amsfonts\amsf
+onts.sty"
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+))
+("C:\Users\Jacqueline\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amscls\amsthm
+.sty"
+Package: amsthm 2017/10/31 v2.20.4
+\thm@style=\toks20
+\thm@bodyfont=\toks21
+\thm@headfont=\toks22
+\thm@notefont=\toks23
+\thm@headpunct=\toks24
+\thm@preskip=\skip61
+\thm@postskip=\skip62
+\thm@headsep=\skip63
+\dth@everypar=\toks25
+)
+("C:\Users\Jacqueline\AppData\Local\Programs\MiKTeX 2.9\tex\latex\subfigure\sub
+figure.sty"
+Package: subfigure 2002/07/30 v2.1.4 subfigure package
+\subfigtopskip=\skip64
+\subfigcapskip=\skip65
+\subfigcaptopadj=\dimen112
+\subfigbottomskip=\skip66
+\subfigcapmargin=\dimen113
+\subfiglabelskip=\skip67
+\c@subfigure=\count102
+\c@lofdepth=\count103
+\c@subtable=\count104
+\c@lotdepth=\count105
+
+****************************************
+* Local config file subfigure.cfg used *
+****************************************
+
+("C:\Users\Jacqueline\AppData\Local\Programs\MiKTeX 2.9\tex\latex\subfigure\sub
+figure.cfg")
+\subfig@top=\skip68
+\subfig@bottom=\skip69
+)
+("C:\Users\Jacqueline\AppData\Local\Programs\MiKTeX 2.9\tex\latex\tools\longtab
+le.sty"
+Package: longtable 2014/10/28 v4.11 Multi-page Table package (DPC)
+\LTleft=\skip70
+\LTright=\skip71
+\LTpre=\skip72
+\LTpost=\skip73
+\LTchunksize=\count106
+\LTcapwidth=\dimen114
+\LT@head=\box30
+\LT@firsthead=\box31
+\LT@foot=\box32
+\LT@lastfoot=\box33
+\LT@cols=\count107
+\LT@rows=\count108
+\c@LT@tables=\count109
+\c@LT@chunks=\count110
+\LT@p@ftn=\toks26
+)
+Class scrbook Info: longtable captions redefined on input line 6.
+
+("C:\Users\Jacqueline\AppData\Local\Programs\MiKTeX 2.9\tex\latex\caption\capti
+on.sty"
+Package: caption 2018/05/01 v3.3-147 Customizing captions (AR)
+
+("C:\Users\Jacqueline\AppData\Local\Programs\MiKTeX 2.9\tex\latex\caption\capti
+on3.sty"
+Package: caption3 2018/05/27 v1.8a caption3 kernel (AR)
+Package caption3 Info: TeX engine: e-TeX on input line 64.
+\captionmargin=\dimen115
+\captionmargin@=\dimen116
+\captionwidth=\dimen117
+\caption@tempdima=\dimen118
+\caption@indent=\dimen119
+\caption@parindent=\dimen120
+\caption@hangindent=\dimen121
+)
+Package caption Info: KOMA-Script document class.
+\c@ContinuedFloat=\count111
+Package caption Info: longtable package is loaded.
+
+("C:\Users\Jacqueline\AppData\Local\Programs\MiKTeX 2.9\tex\latex\caption\ltcap
+tion.sty"
+Package: ltcaption 2013/06/09 v1.4-94 longtable captions (AR)
+)
+Package caption Info: subfigure package is loaded.
+)
+("C:\Users\Jacqueline\AppData\Local\Programs\MiKTeX 2.9\tex\latex\booktabs\book
+tabs.sty"
+Package: booktabs 2005/04/14 v1.61803 publication quality tables
+\heavyrulewidth=\dimen122
+\lightrulewidth=\dimen123
+\cmidrulewidth=\dimen124
+\belowrulesep=\dimen125
+\belowbottomsep=\dimen126
+\aboverulesep=\dimen127
+\abovetopsep=\dimen128
+\cmidrulesep=\dimen129
+\cmidrulekern=\dimen130
+\defaultaddspace=\dimen131
+\@cmidla=\count112
+\@cmidlb=\count113
+\@aboverulesep=\dimen132
+\@belowrulesep=\dimen133
+\@thisruleclass=\count114
+\@lastruleclass=\count115
+\@thisrulewidth=\dimen134
+)
+("C:\Users\Jacqueline\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics\grap
+hicx.sty"
+Package: graphicx 2017/06/01 v1.1a Enhanced LaTeX Graphics (DPC,SPQR)
+
+("C:\Users\Jacqueline\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics\grap
+hics.sty"
+Package: graphics 2017/06/25 v1.2c Standard LaTeX Graphics (DPC,SPQR)
+
+("C:\Users\Jacqueline\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics\trig
+.sty"
+Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
+)
+("C:\Users\Jacqueline\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics-cfg\
+graphics.cfg"
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 99.
+
+("C:\Users\Jacqueline\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics-def\
+pdftex.def"
+File: pdftex.def 2018/01/08 v1.0l Graphics/color driver for pdftex
+))
+\Gin@req@height=\dimen135
+\Gin@req@width=\dimen136
+)
+("C:\Users\Jacqueline\AppData\Local\Programs\MiKTeX 2.9\tex\latex\pdfpages\pdfp
+ages.sty"
+Package: pdfpages 2017/10/31 v0.5l Insert pages of external PDF documents (AM)
+
+("C:\Users\Jacqueline\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\ifthen.s
+ty"
+Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
+)
+("C:\Users\Jacqueline\AppData\Local\Programs\MiKTeX 2.9\tex\latex\tools\calc.st
+y"
+Package: calc 2017/05/25 v4.3 Infix arithmetic (KKT,FJ)
+\calc@Acount=\count116
+\calc@Bcount=\count117
+\calc@Adimen=\dimen137
+\calc@Bdimen=\dimen138
+\calc@Askip=\skip74
+\calc@Bskip=\skip75
+LaTeX Info: Redefining \setlength on input line 80.
+LaTeX Info: Redefining \addtolength on input line 81.
+\calc@Ccount=\count118
+\calc@Cskip=\skip76
+)
+("C:\Users\Jacqueline\AppData\Local\Programs\MiKTeX 2.9\tex\latex\eso-pic\eso-p
+ic.sty"
+Package: eso-pic 2018/04/12 v2.0h eso-pic (RN)
+
+("C:\Users\Jacqueline\AppData\Local\Programs\MiKTeX 2.9\tex\generic\oberdiek\at
+begshi.sty"
+Package: atbegshi 2016/06/09 v1.18 At begin shipout hook (HO)
+
+("C:\Users\Jacqueline\AppData\Local\Programs\MiKTeX 2.9\tex\generic\oberdiek\in
+fwarerr.sty"
+Package: infwarerr 2016/05/16 v1.4 Providing info/warning/error messages (HO)
+)
+("C:\Users\Jacqueline\AppData\Local\Programs\MiKTeX 2.9\tex\generic\oberdiek\lt
+xcmds.sty"
+Package: ltxcmds 2016/05/16 v1.23 LaTeX kernel commands for general use (HO)
+)
+("C:\Users\Jacqueline\AppData\Local\Programs\MiKTeX 2.9\tex\generic\oberdiek\if
+pdf.sty"
+Package: ifpdf 2017/03/15 v3.2 Provides the ifpdf switch
+))
+("C:\Users\Jacqueline\AppData\Local\Programs\MiKTeX 2.9\tex\latex\xcolor\xcolor
+.sty"
+Package: xcolor 2016/05/11 v2.12 LaTeX color extensions (UK)
+
+("C:\Users\Jacqueline\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics-cfg\
+color.cfg"
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package xcolor Info: Driver file: pdftex.def on input line 225.
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1348.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1352.
+Package xcolor Info: Model `RGB' extended on input line 1364.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1366.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1367.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1368.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1369.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1370.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1371.
+))
+\AM@pagewidth=\dimen139
+\AM@pageheight=\dimen140
+
+("C:\Users\Jacqueline\AppData\Local\Programs\MiKTeX 2.9\tex\latex\pdfpages\pppd
+ftex.def"
+File: pppdftex.def 2017/10/31 v0.5l Pdfpages driver for pdfTeX (AM)
+)
+\AM@pagebox=\box34
+\AM@global@opts=\toks27
+\AM@toc@title=\toks28
+\c@AM@survey=\count119
+\AM@templatesizebox=\box35
+)
+("C:\Users\Jacqueline\AppData\Local\Programs\MiKTeX 2.9\tex\latex\oberdiek\epst
+opdf.sty"
+Package: epstopdf 2016/05/15 v2.6 Conversion with epstopdf on the fly (HO)
+
+("C:\Users\Jacqueline\AppData\Local\Programs\MiKTeX 2.9\tex\latex\oberdiek\epst
+opdf-base.sty"
+Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
+
+("C:\Users\Jacqueline\AppData\Local\Programs\MiKTeX 2.9\tex\latex\oberdiek\grfe
+xt.sty"
+Package: grfext 2016/05/16 v1.2 Manage graphics extensions (HO)
+
+("C:\Users\Jacqueline\AppData\Local\Programs\MiKTeX 2.9\tex\generic\oberdiek\kv
+definekeys.sty"
+Package: kvdefinekeys 2016/05/16 v1.4 Define keys (HO)
+))
+("C:\Users\Jacqueline\AppData\Local\Programs\MiKTeX 2.9\tex\latex\oberdiek\kvop
+tions.sty"
+Package: kvoptions 2016/05/16 v3.12 Key value format for package options (HO)
+
+("C:\Users\Jacqueline\AppData\Local\Programs\MiKTeX 2.9\tex\generic\oberdiek\kv
+setkeys.sty"
+Package: kvsetkeys 2016/05/16 v1.17 Key value parser (HO)
+
+("C:\Users\Jacqueline\AppData\Local\Programs\MiKTeX 2.9\tex\generic\oberdiek\et
+excmds.sty"
+Package: etexcmds 2016/05/16 v1.6 Avoid name clashes with e-TeX commands (HO)
+
+("C:\Users\Jacqueline\AppData\Local\Programs\MiKTeX 2.9\tex\generic\oberdiek\if
+luatex.sty"
+Package: ifluatex 2016/05/16 v1.4 Provides the ifluatex switch (HO)
+Package ifluatex Info: LuaTeX not detected.
+)
+Package etexcmds Info: Could not find \expanded.
+(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
+(etexcmds)             that some package has redefined \expanded.
+(etexcmds)             In the latter case, load this package earlier.
+)))
+("C:\Users\Jacqueline\AppData\Local\Programs\MiKTeX 2.9\tex\generic\oberdiek\pd
+ftexcmds.sty"
+Package: pdftexcmds 2018/01/30 v0.27 Utility functions of pdfTeX for LuaTeX (HO
+)
+Package pdftexcmds Info: LuaTeX not detected.
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+)
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
+38.
+Package grfext Info: Graphics extension search list:
+(grfext)             [.pdf,.png,.jpg,.mps,.jpeg,.jbig2,.jb2,.PDF,.PNG,.JPG,.JPE
+G,.JBIG2,.JB2,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 456.
+))
+("C:\Users\Jacqueline\AppData\Local\Programs\MiKTeX 2.9\tex\latex\listings\list
+ings.sty"
+\lst@mode=\count120
+\lst@gtempboxa=\box36
+\lst@token=\toks29
+\lst@length=\count121
+\lst@currlwidth=\dimen141
+\lst@column=\count122
+\lst@pos=\count123
+\lst@lostspace=\dimen142
+\lst@width=\dimen143
+\lst@newlines=\count124
+\lst@lineno=\count125
+\lst@maxwidth=\dimen144
+
+("C:\Users\Jacqueline\AppData\Local\Programs\MiKTeX 2.9\tex\latex\listings\lstm
+isc.sty"
+File: lstmisc.sty 2015/06/04 1.6 (Carsten Heinz)
+\c@lstnumber=\count126
+\lst@skipnumbers=\count127
+\lst@framebox=\box37
+)
+("C:\Users\Jacqueline\AppData\Local\Programs\MiKTeX 2.9\tex\latex\listings\list
+ings.cfg"
+File: listings.cfg 2015/06/04 1.6 listings configuration
+))
+Package: listings 2015/06/04 1.6 (Carsten Heinz)
+
+("C:\Users\Jacqueline\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics\rota
+ting.sty"
+Package: rotating 2016/08/11 v2.16d rotated objects in LaTeX
+\c@r@tfl@t=\count128
+\rotFPtop=\skip77
+\rotFPbot=\skip78
+\rot@float@box=\box38
+\rot@mess@toks=\toks30
+)
+("C:\Users\Jacqueline\AppData\Local\Programs\MiKTeX 2.9\tex\latex\koma-script\s
+crpage2.sty"
+Package: scrpage2 2018/03/30 v3.25 KOMA-Script package (page head and foot)
+
+
+Package scrpage2 Warning: usage of obsolete package!
+(scrpage2)                Package `scrpage2' is obsolete.
+(scrpage2)                You should not longer use package `scrpage2'.
+(scrpage2)                You should replace usage of package `scrpage2'
+(scrpage2)                by `scrlayer-scrpage' on input line 52.
+
+
+Package scrpage2 Warning: deprecated passing option `headinclude' to scrpage2.
+(scrpage2)                If you are using package typearea or
+(scrpage2)                a KOMA-Script class since version 3.00
+(scrpage2)                you may use `\KOMAoptions{headinclude}' and
+(scrpage2)                remove passing `headinclude' to scrpage2.
+
+LaTeX Info: Redefining \pagemark on input line 180.
+)
+("C:\Users\Jacqueline\AppData\Local\Programs\MiKTeX 2.9\tex\latex\psnfss\times.
+sty"
+Package: times 2005/04/12 PSNFSS-v9.2a (SPQR) 
+)
+("C:\Users\Jacqueline\AppData\Local\Programs\MiKTeX 2.9\tex\latex\psnfss\helvet
+.sty"
+Package: helvet 2005/04/12 PSNFSS-v9.2a (WaS) 
+)
+("C:\Users\Jacqueline\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\fontenc.
+sty"
+Package: fontenc 2017/04/05 v2.0i Standard LaTeX package
+
+("C:\Users\Jacqueline\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\t1enc.de
+f"
+File: t1enc.def 2017/04/05 v2.0i Standard LaTeX file
+LaTeX Font Info:    Redeclaring font encoding T1 on input line 48.
+))
+("C:\Users\Jacqueline\AppData\Local\Programs\MiKTeX 2.9\tex\latex\hyperref\hype
+rref.sty"
+Package: hyperref 2018/02/06 v6.86b Hypertext links for LaTeX
+
+("C:\Users\Jacqueline\AppData\Local\Programs\MiKTeX 2.9\tex\generic\oberdiek\ho
+bsub-hyperref.sty"
+Package: hobsub-hyperref 2016/05/16 v1.14 Bundle oberdiek, subset hyperref (HO)
+
+
+("C:\Users\Jacqueline\AppData\Local\Programs\MiKTeX 2.9\tex\generic\oberdiek\ho
+bsub-generic.sty"
+Package: hobsub-generic 2016/05/16 v1.14 Bundle oberdiek, subset generic (HO)
+Package: hobsub 2016/05/16 v1.14 Construct package bundles (HO)
+Package hobsub Info: Skipping package `infwarerr' (already loaded).
+Package hobsub Info: Skipping package `ltxcmds' (already loaded).
+Package hobsub Info: Skipping package `ifluatex' (already loaded).
+Package: ifvtex 2016/05/16 v1.6 Detect VTeX and its facilities (HO)
+Package ifvtex Info: VTeX not detected.
+Package: intcalc 2016/05/16 v1.2 Expandable calculations with integers (HO)
+Package hobsub Info: Skipping package `ifpdf' (already loaded).
+Package hobsub Info: Skipping package `etexcmds' (already loaded).
+Package hobsub Info: Skipping package `kvsetkeys' (already loaded).
+Package hobsub Info: Skipping package `kvdefinekeys' (already loaded).
+Package hobsub Info: Skipping package `pdftexcmds' (already loaded).
+Package: pdfescape 2016/05/16 v1.14 Implements pdfTeX's escape features (HO)
+Package: bigintcalc 2016/05/16 v1.4 Expandable calculations on big integers (HO
+)
+Package: bitset 2016/05/16 v1.2 Handle bit-vector datatype (HO)
+Package: uniquecounter 2016/05/16 v1.3 Provide unlimited unique counter (HO)
+)
+Package hobsub Info: Skipping package `hobsub' (already loaded).
+Package: letltxmacro 2016/05/16 v1.5 Let assignment for LaTeX macros (HO)
+Package: hopatch 2016/05/16 v1.3 Wrapper for package hooks (HO)
+Package: xcolor-patch 2016/05/16 xcolor patch
+Package: atveryend 2016/05/16 v1.9 Hooks at the very end of document (HO)
+Package atveryend Info: \enddocument detected (standard20110627).
+Package hobsub Info: Skipping package `atbegshi' (already loaded).
+Package: refcount 2016/05/16 v3.5 Data extraction from label references (HO)
+Package: hycolor 2016/05/16 v1.8 Color options for hyperref/bookmark (HO)
+)
+("C:\Users\Jacqueline\AppData\Local\Programs\MiKTeX 2.9\tex\generic\ifxetex\ifx
+etex.sty"
+Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
+)
+("C:\Users\Jacqueline\AppData\Local\Programs\MiKTeX 2.9\tex\latex\oberdiek\auxh
+ook.sty"
+Package: auxhook 2016/05/16 v1.4 Hooks for auxiliary files (HO)
+)
+\@linkdim=\dimen145
+\Hy@linkcounter=\count129
+\Hy@pagecounter=\count130
+
+("C:\Users\Jacqueline\AppData\Local\Programs\MiKTeX 2.9\tex\latex\hyperref\pd1e
+nc.def"
+File: pd1enc.def 2018/02/06 v6.86b Hyperref: PDFDocEncoding definition (HO)
+Now handling font encoding PD1 ...
+... no UTF-8 mapping file for font encoding PD1
+)
+\Hy@SavedSpaceFactor=\count131
+
+("C:\Users\Jacqueline\AppData\Local\Programs\MiKTeX 2.9\tex\latex\00miktex\hype
+rref.cfg"
+File: hyperref.cfg 2002/06/06 v1.2 hyperref configuration of TeXLive
+)
+
+Package hyperref Warning: Option `a4paper' is no longer used.
+
+Package hyperref Info: Option `bookmarks' set `true' on input line 4383.
+Package hyperref Info: Option `bookmarksopen' set `true' on input line 4383.
+Package hyperref Info: Option `bookmarksnumbered' set `true' on input line 4383
+.
+Package hyperref Info: Option `colorlinks' set `true' on input line 4383.
+Package hyperref Info: Option `breaklinks' set `true' on input line 4383.
+Package hyperref Info: Option `pageanchor' set `true' on input line 4383.
+Package hyperref Info: Option `plainpages' set `false' on input line 4383.
+Package hyperref Info: Option `pdfpagelabels' set `true' on input line 4383.
+Package hyperref Info: Hyper figures OFF on input line 4509.
+Package hyperref Info: Link nesting OFF on input line 4514.
+Package hyperref Info: Hyper index ON on input line 4517.
+Package hyperref Info: Plain pages OFF on input line 4524.
+Package hyperref Info: Backreferencing OFF on input line 4529.
+Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
+Package hyperref Info: Bookmarks ON on input line 4762.
+\c@Hy@tempcnt=\count132
+("C:\Users\Jacqueline\AppData\Local\Programs\MiKTeX 2.9\tex\latex\url\url.sty"
+\Urlmuskip=\muskip11
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+)
+LaTeX Info: Redefining \url on input line 5115.
+\XeTeXLinkMargin=\dimen146
+\Fld@menulength=\count133
+\Field@Width=\dimen147
+\Fld@charsize=\dimen148
+Package hyperref Info: Hyper figures OFF on input line 6369.
+Package hyperref Info: Link nesting OFF on input line 6374.
+Package hyperref Info: Hyper index ON on input line 6377.
+Package hyperref Info: backreferencing OFF on input line 6384.
+Package hyperref Info: Link coloring ON on input line 6387.
+Package hyperref Info: Link coloring with OCG OFF on input line 6394.
+Package hyperref Info: PDF/A mode OFF on input line 6399.
+LaTeX Info: Redefining \ref on input line 6439.
+LaTeX Info: Redefining \pageref on input line 6443.
+\Hy@abspage=\count134
+\c@Item=\count135
+\c@Hfootnote=\count136
+)
+Package hyperref Info: Driver: hpdftex.
+
+("C:\Users\Jacqueline\AppData\Local\Programs\MiKTeX 2.9\tex\latex\hyperref\hpdf
+tex.def"
+File: hpdftex.def 2018/02/06 v6.86b Hyperref driver for pdfTeX
+\Fld@listcount=\count137
+\c@bookmark@seq@number=\count138
+
+("C:\Users\Jacqueline\AppData\Local\Programs\MiKTeX 2.9\tex\latex\oberdiek\reru
+nfilecheck.sty"
+Package: rerunfilecheck 2016/05/16 v1.8 Rerun checks for auxiliary files (HO)
+Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
+82.
+)
+\Hy@SectionHShift=\skip79
+) (chapters/preamble.tex) (chapters/bibpre.tex
+\bibhang=\skip80
+) (thesis.aux)
+\openout1 = `thesis.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 94.
+LaTeX Font Info:    ... okay on input line 94.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 94.
+LaTeX Font Info:    ... okay on input line 94.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 94.
+LaTeX Font Info:    ... okay on input line 94.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 94.
+LaTeX Font Info:    ... okay on input line 94.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 94.
+LaTeX Font Info:    ... okay on input line 94.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 94.
+LaTeX Font Info:    ... okay on input line 94.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 94.
+LaTeX Font Info:    ... okay on input line 94.
+LaTeX Font Info:    Try loading font information for T1+ptm on input line 94.
+
+("C:\Users\Jacqueline\AppData\Local\Programs\MiKTeX 2.9\tex\latex\psnfss\t1ptm.
+fd"
+File: t1ptm.fd 2001/06/04 font definitions for T1/ptm.
+)
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: hyperref package is loaded.
+Package caption Info: listings package is loaded.
+Package caption Info: rotating package is loaded.
+Package caption Info: End \AtBeginDocument code.
+
+("C:\Users\Jacqueline\AppData\Local\Programs\MiKTeX 2.9\tex\context\base\supp-p
+df.mkii"
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count139
+\scratchdimen=\dimen149
+\scratchbox=\box39
+\nofMPsegments=\count140
+\nofMParguments=\count141
+\everyMPshowfont=\toks31
+\MPscratchCnt=\count142
+\MPscratchDim=\dimen150
+\MPnumerator=\count143
+\makeMPintoPDFobject=\count144
+\everyMPtoPDFconversion=\toks32
+)
+\AtBeginShipoutBox=\box40
+
+("C:\Users\Jacqueline\AppData\Local\Programs\MiKTeX 2.9\tex\latex\oberdiek\pdfl
+scape.sty"
+Package: pdflscape 2016/05/14 v0.11 Display of landscape pages in PDF (HO)
+
+("C:\Users\Jacqueline\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics\lsca
+pe.sty"
+Package: lscape 2000/10/22 v3.01 Landscape Pages (DPC)
+)
+Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
+)
+\c@lstlisting=\count145
+Package hyperref Info: Link coloring ON on input line 94.
+
+("C:\Users\Jacqueline\AppData\Local\Programs\MiKTeX 2.9\tex\latex\hyperref\name
+ref.sty"
+Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
+
+("C:\Users\Jacqueline\AppData\Local\Programs\MiKTeX 2.9\tex\generic\oberdiek\ge
+ttitlestring.sty"
+Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
+)
+\c@section@level=\count146
+)
+LaTeX Info: Redefining \ref on input line 94.
+LaTeX Info: Redefining \pageref on input line 94.
+LaTeX Info: Redefining \nameref on input line 94.
+ (thesis.out) (thesis.out)
+\@outlinefile=\write3
+\openout3 = `thesis.out'.
+
+ (chapters/studchapter.tex)
+LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <24.88> not available
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 131.
+LaTeX Font Info:    Try loading font information for T1+phv on input line 131.
+
+("C:\Users\Jacqueline\AppData\Local\Programs\MiKTeX 2.9\tex\latex\psnfss\t1phv.
+fd"
+File: t1phv.fd 2001/06/04 scalable font definitions for T1/phv.
+)
+LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <24.88> not available
+(Font)              Font shape `T1/phv/b/n' tried instead on input line 131.
+<figures/teaser.png, id=49, 496.85625pt x 416.30531pt>
+File: figures/teaser.png Graphic file (type png)
+<use figures/teaser.png>
+Package pdftex.def Info: figures/teaser.png  used on input line 132.
+(pdftex.def)             Requested size: 364.24236pt x 305.19621pt.
+LaTeX Font Info:    Font shape `T1/phv/m/it' in size <14.4> not available
+(Font)              Font shape `T1/phv/m/sl' tried instead on input line 143.
+Package epstopdf Info: Source file: <figures/eth_logo_kurz_pos.eps>
+(epstopdf)                    date: 2014-02-25 13:58:28
+(epstopdf)                    size: 402954 bytes
+(epstopdf)             Output file: <figures/eth_logo_kurz_pos-eps-converted-to
+.pdf>
+(epstopdf)                    date: 2014-02-25 13:58:28
+(epstopdf)                    size: 13480 bytes
+(epstopdf)             Command: <epstopdf --outfile=figures/eth_logo_kurz_pos-e
+ps-converted-to.pdf figures/eth_logo_kurz_pos.eps>
+(epstopdf)             \includegraphics on input line 149.
+Package epstopdf Info: Output file is already uptodate.
+<figures/eth_logo_kurz_pos-eps-converted-to.pdf, id=52, 141.52875pt x 23.08624p
+t>
+File: figures/eth_logo_kurz_pos-eps-converted-to.pdf Graphic file (type pdf)
+<use figures/eth_logo_kurz_pos-eps-converted-to.pdf>
+Package pdftex.def Info: figures/eth_logo_kurz_pos-eps-converted-to.pdf  used o
+n input line 149.
+(pdftex.def)             Requested size: 139.54376pt x 22.76228pt.
+ [1
+
+
+{C:/Users/Jacqueline/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map} <./figu
+res/teaser.png> <./figures/eth_logo_kurz_pos-eps-converted-to.pdf>]
+[2
+
+] (chapters/abstract.tex
+LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <12> not available
+(Font)              Font shape `T1/phv/b/n' tried instead on input line 3.
+) (chapters/acknowledgment.tex [1
+
+] [2
+
+]) [3] [4
+
+]
+(thesis.toc
+LaTeX Font Info:    Try loading font information for U+msa on input line 2.
+
+("C:\Users\Jacqueline\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amsfonts\umsa
+.fd"
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Try loading font information for U+msb on input line 2.
+
+("C:\Users\Jacqueline\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amsfonts\umsb
+.fd"
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+))
+\tf@toc=\write4
+\openout4 = `thesis.toc'.
+
+ [5
+
+
+] [6
+
+] (chapters/ch01-introduction.tex
+chapter 1.
+
+Class scrbook Warning: \float@addtolists detected!
+(scrbook)              Implementation of \float@addtolist became
+(scrbook)              deprecated in KOMA-Script v3.01 2008/11/14 and
+(scrbook)              has been replaced by several more flexible
+(scrbook)              features of package `tocbasic`.
+(scrbook)              Since Version 3.12 support for deprecated
+(scrbook)              \float@addtolist interface has been
+(scrbook)              restricted to only some of the KOMA-Script
+(scrbook)              features and been removed from others.
+(scrbook)              Loading of package `scrhack' may help to
+(scrbook)              avoid this warning, if you are using a
+(scrbook)              a package that still implements the
+(scrbook)              deprecated \float@addtolist interface .
+
+LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <17.28> not available
+(Font)              Font shape `T1/phv/b/n' tried instead on input line 11.
+) (chapters/ch02-relatedwork.tex
+LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <100> not available
+(Font)              Font shape `T1/phv/b/n' tried instead on input line 6.
+
+Overfull \hbox (2.28004pt too wide) has occurred while \output is active
+[]|[] []
+ []
+
+
+Overfull \vbox (459.06232pt too high) has occurred while \output is active []
+
+pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has 
+been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.6 \chapter
+            {Related Work} [1
+
+]pdfTeX warning (ext4): destination with the same identifier (name{page.2}) has
+ been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.6 \chapter
+            {Related Work} [2
+
+]pdfTeX warning (ext4): destination with the same identifier (name{chapter.1}) 
+has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.6 \chapter{Related Work}
+                          
+chapter 1.
+pdfTeX warning (ext4): destination with the same identifier (name{section.1.1})
+ has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.11 \section{Section}
+                      ) (chapters/ch03-design.tex
+Overfull \hbox (2.28004pt too wide) has occurred while \output is active
+[]|[] []
+ []
+
+
+Overfull \vbox (459.06232pt too high) has occurred while \output is active []
+
+
+[3] [4
+
+]
+chapter 2.
+) (chapters/ch04-implementation.tex
+Overfull \hbox (2.28004pt too wide) has occurred while \output is active
+[]|[] []
+ []
+
+
+Overfull \vbox (459.06232pt too high) has occurred while \output is active []
+
+
+[5] [6
+
+]
+chapter 3.
+) (chapters/ch05-evaluation.tex
+Overfull \hbox (2.28004pt too wide) has occurred while \output is active
+[]|[] []
+ []
+
+
+Overfull \vbox (459.06232pt too high) has occurred while \output is active []
+
+
+[7] [8
+
+]
+chapter 4.
+) (chapters/ch06-conclusion.tex
+Overfull \hbox (2.28004pt too wide) has occurred while \output is active
+[]|[] []
+ []
+
+
+Overfull \vbox (459.06232pt too high) has occurred while \output is active []
+
+
+[9] [10
+
+]
+chapter 5.
+)
+Overfull \hbox (2.28004pt too wide) has occurred while \output is active
+[]|[] []
+ []
+
+
+Overfull \vbox (431.27501pt too high) has occurred while \output is active []
+
+
+[11] [12
+
+
+
+] (thesis.bbl
+
+LaTeX Warning: Empty `thebibliography' environment or \BreakBibliography
+               before end of `thebibliography' environment on input line 3.
+
+)
+
+pdfTeX warning: pdflatex (file ./pdf/originality.pdf): PDF inclusion: found PDF
+ version <1.6>, but at most version <1.5> allowed
+<pdf/originality.pdf, id=161, 597.55246pt x 845.07718pt>
+File: pdf/originality.pdf Graphic file (type pdf)
+<use pdf/originality.pdf>
+Package pdftex.def Info: pdf/originality.pdf  used on input line 211.
+(pdftex.def)             Requested size: 597.551pt x 845.07512pt.
+
+
+pdfTeX warning: pdflatex (file ./pdf/originality.pdf): PDF inclusion: found PDF
+ version <1.6>, but at most version <1.5> allowed
+File: pdf/originality.pdf Graphic file (type pdf)
+<use pdf/originality.pdf>
+Package pdftex.def Info: pdf/originality.pdf  used on input line 211.
+(pdftex.def)             Requested size: 597.551pt x 845.07512pt.
+
+
+pdfTeX warning: pdflatex (file ./pdf/originality.pdf): PDF inclusion: found PDF
+ version <1.6>, but at most version <1.5> allowed
+
+
+pdfTeX warning: pdflatex (file ./pdf/originality.pdf): PDF inclusion: found PDF
+ version <1.6>, but at most version <1.5> allowed
+<pdf/originality.pdf, id=164, page=1, 597.55246pt x 845.07718pt>
+File: pdf/originality.pdf Graphic file (type pdf)
+<use pdf/originality.pdf, page 1>
+Package pdftex.def Info: pdf/originality.pdf , page1 used on input line 211.
+(pdftex.def)             Requested size: 597.551pt x 845.07512pt.
+File: pdf/originality.pdf Graphic file (type pdf)
+<use pdf/originality.pdf, page 1>
+Package pdftex.def Info: pdf/originality.pdf , page1 used on input line 211.
+(pdftex.def)             Requested size: 597.551pt x 845.07512pt.
+
+Class scrbook Warning: deprecated old font command `\sl' used.
+(scrbook)              You should note, that since 1994 LaTeX2e provides a
+(scrbook)              new font selection scheme called NFSS2 with several
+(scrbook)              new, combinable font commands. New KOMA-Script classes
+(scrbook)              defined the old font commands like `\sl' only for
+(scrbook)              compatibility with LaTeX 2.09 document styles of
+(scrbook)              Script 2.0. These commands are deprecated and
+(scrbook)              undocumented at least since 2003. Since 2013,
+(scrbook)              KOMA-Script classes warned about soon removement of
+(scrbook)              these deprecated commands. Now, after two decades of
+(scrbook)              LaTeX2e, NFSS2, and KOMA-Script these commands will
+(scrbook)              not work any longer. If loading a package results in
+(scrbook)              this message you should contact the author of that
+(scrbook)              package and ask him to replace the depracted font
+(scrbook)              command `\sl', e.g., by `\normalfont \slshape '.
+(scrbook)              Otherwise you should reconfigure or replace the
+(scrbook)              package. If you have used the old font command
+(scrbook)              `\sl' yourself you should replace it, e.g., by
+(scrbook)              `\normalfont \slshape ' on input line 211.
+
+[13]
+File: pdf/originality.pdf Graphic file (type pdf)
+<use pdf/originality.pdf, page 1>
+Package pdftex.def Info: pdf/originality.pdf , page1 used on input line 211.
+(pdftex.def)             Requested size: 597.551pt x 845.07512pt.
+File: pdf/originality.pdf Graphic file (type pdf)
+<use pdf/originality.pdf, page 1>
+Package pdftex.def Info: pdf/originality.pdf , page1 used on input line 211.
+(pdftex.def)             Requested size: 597.551pt x 845.07512pt.
+File: pdf/originality.pdf Graphic file (type pdf)
+<use pdf/originality.pdf, page 1>
+Package pdftex.def Info: pdf/originality.pdf , page1 used on input line 211.
+(pdftex.def)             Requested size: 597.551pt x 845.07512pt.
+ [14 <./pdf/originality.pdf>]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 213.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 213.
+ (thesis.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 213.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 213.
+Package rerunfilecheck Info: File `thesis.out' has not changed.
+(rerunfilecheck)             Checksum: A953B353CFE8EB9FA23F7E2AB6A192EB;622.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 213.
+ ) 
+Here is how much of TeX's memory you used:
+ 12725 strings out of 492973
+ 204948 string characters out of 3124478
+ 400372 words of memory out of 3000000
+ 16320 multiletter control sequences out of 15000+200000
+ 44529 words of font info for 57 fonts, out of 3000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 54i,28n,66p,9087b,476s stack positions out of 5000i,500n,10000p,200000b,50000s
+{C:/Users/Jacqueline/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/base/8
+r.enc}<C:/Users/Jacqueline/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/he
+lvetic/uhvb8a.pfb><C:/Users/Jacqueline/AppData/Local/Programs/MiKTeX 2.9/fonts/
+type1/urw/helvetic/uhvr8a.pfb><C:/Users/Jacqueline/AppData/Local/Programs/MiKTe
+X 2.9/fonts/type1/urw/helvetic/uhvro8a.pfb><C:/Users/Jacqueline/AppData/Local/P
+rograms/MiKTeX 2.9/fonts/type1/urw/times/utmr8a.pfb><C:/Users/Jacqueline/AppDat
+a/Local/Programs/MiKTeX 2.9/fonts/type1/urw/times/utmr8a.pfb>
+Output written on thesis.pdf (22 pages, 236761 bytes).
+PDF statistics:
+ 227 PDF objects out of 1000 (max. 8388607)
+ 35 named destinations out of 1000 (max. 500000)
+ 139 words of extra memory for PDF output out of 10000 (max. 10000000)
+
