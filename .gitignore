@@ -49,3 +49,5 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+/assets/geometrical_objects/images/old/
+/assets/ui/source/
