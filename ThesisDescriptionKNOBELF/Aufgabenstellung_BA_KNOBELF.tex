@@ -1,0 +1,279 @@
+\documentclass[a4paper,oneside,11pt,final]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage[latin1]{inputenc}
+\usepackage[english]{babel,varioref}
+
+\usepackage[newcommands]{ragged2e}
+\usepackage{lmodern}
+\usepackage{textcomp,latexsym,url}
+\usepackage{array,booktabs}
+\usepackage[final]{microtype}
+\usepackage{graphicx}
+%\usepackage{mathtools}
+\usepackage{enumerate}
+%\usepackage{amsmath} \usepackage{amsfonts} \usepackage{amssymb}
+\usepackage{lastpage}
+\usepackage{csquotes}
+\usepackage{xcolor}
+
+\usepackage[% colorlinks,% linkcolor=blue!75!black,% citecolor=blue!75!black,%
+ pdfauthor={Chair of Information Technology and Education at ETH Zurich},%
+ pdftitle={Bachelor Thesis}]{hyperref}
+\usepackage[nameinlink]{cleveref}
+
+
+\usepackage[left=3cm,top=3cm,right=3cm]{geometry} 
+
+\newcommand{\ethz}{ETH Zurich}
+\newcommand{\ABZ}{Center for Informatics Education of ETH Zurich (ABZ)}
+\newcommand{\ITE}{Chair of Information Technology and Education}
+\newcommand{\student}{Franz Knobel}
+\newcommand{\professor}{Prof. Dr. Juraj Hromkovi\v{c}}
+\newcommand{\cosupervisor}{Dr. Elizabeta Cavar}
+\newcommand{\cosupervisorfunction}{TBD}
+\newcommand{\xlogo}{\emph{XLogoOnline}}
+
+\pagestyle{empty}
+
+%Header, Footer:
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{}
+\chead{}
+\rhead{}
+\lfoot{\ITE}
+\cfoot{}
+\rfoot{Page \thepage/\pageref{LastPage}}
+\renewcommand{\headrulewidth}{0.0pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+\hyphenation{PrimaLogo}
+
+\begin{document}
+
+\noindent\includegraphics[height=20mm]{ETHlogo_13} %\hfill \includegraphics[height=15mm]{Deplogo_13} 
+
+%\noindent\includegraphics[height=30mm]{eth_logo_kurz_pos} %\hfill
+%\includegraphics[height=15mm]{Deplogo_13} 
+
+%\begin{tabular}{p{0.6\textwidth} p{0.4\textwidth}} \vspace{0pt}
+% \includegraphics[width=0.4\textwidth]{eth_logo_kurz_pos} & \vspace{0pt}
+% \includegraphics[width=0.3\textwidth]{Deplogo_13} \end{tabular}
+
+\vspace{2cm}
+\begin{center}
+	{\huge\bfseries Bachelor Thesis} \\
+	Course Unit: 252-0500-00\\
+	10 ECTS credits\\
+	\huge Project Description
+	\vspace{3mm}
+\end{center}
+\vspace{1cm}
+
+\section*{Topic} 
+Gotscha! Meet an interactive learning environment with focus on object
+identification and classification. It supports the teacher by challenging pupils
+on their respective level. Concentrate on the mass whilst foster on an
+individual level! 
+
+\section*{Student}
+\student{} (10-932-879), enrolled in the Computer Science Bachelor Programme at
+\ethz.
+
+\section*{Supervision \& Grading}
+Responsible Lecturer: \professor \\
+Supervisor: \cosupervisor
+
+\section*{Time-Frame}
+Assignment date: Wednesday, July 31, 2019\\
+Submission due: Friday, January 31, 2020
+
+\newpage
+
+\section*{Motivation}
+As the importance of computer science is rising, certain games that support the
+developement of abstract thinking, analytical skills and decision making, are
+becoming more and more interesting at an early age. Through identification and
+describing relationships between items, children develop a foundation to early
+math skills and basic concepts of computer science (e.g. combinatorics of finite
+affine and projective spaces, the theory of error-correcting codes, etc.)
+\cite{SET}. The pupils individual learning speed and lack of concentration, if
+not receiving the right amount of attention, is another challenge by itself.
+Without individual fostering, children are at high risk of losing interest.
+Through this thesis the teachers should receive a tool for their pupils. Focused
+on classification of objects with certain properties, the pupils get introduced
+to a computer-based learning environment. There they can individually train and
+improve themselves in this field. In the mean time the teachers can concentrate
+on the majority of their pupils and have the opportunity to work with pupils on
+an individual basis, without feeling the pressure of having to support everyone
+at once.
+
+\section*{Background}
+The key contribution of computer science to general school education is rooted
+in the concept of \textit{algorithmic thinking} \cite{HKKS17}. One way of
+introducing kindergarten and primary school pupils to algorithmic thinking and
+it's concepts consists in making them solve problems with and without computers.
+This can be achieved using age- and knowledge-appropriate learning materials.
+Several papers with corresponding online learning environments have been
+proposed \cite{STBLUM, SKAMP, TANGK, JWEBER}. This work is going to be added to
+the implementation of "INFORMATIK BIBER in KG und 1/2" by Jil Weber
+\cite{JWEBER}. The focus of this work will not solely lie on the translation of
+the existing teaching material to a computer-based learning environment, but
+also on introducing learning methods in a gamified environment which not only
+complements the teachers with their teachings but also assisting them. 
+
+\section*{Goals of the Thesis}
+The main objective of this thesis consists of planning, analyzing, implementing
+and testing a computer-based learning environment on the topic of
+classification. The student studies the already existing implementations of
+"INFORMATIK BIBER in KG und 1/2", analyses the capabilities of kindergarten kids
+and first graders, develops an interactive classification tool, implements it
+then on a platform compatible with the implementation of "INFORMATIK BIBER in KG
+und 1/2" and conducts an evaluation with test subjects. We expect the student to
+find a suitable implementation that integrates neatly into our existing system
+mentioned before. The outcome of this thesis is a well-documented, stable and
+reliable prototype, providing the functional elements to be used in schools.
+
+\newpage
+
+\section*{Tasks}
+As part of the Bachelor Thesis, the student is expected to perform the following
+main tasks and their subtasks:
+
+\begin{enumerate}
+	\item Concept
+	\begin{enumerate}
+		\item Analyze the teaching material concerning classification currently
+		available for kindergarten to 2nd grade. 
+		\item Familiarize yourself with web technology.
+		\item Study the relevant publications of the Chair of Information
+		Technology and Education in didactics of computer science.
+		\item Investigate related work on the topic of teaching children to
+		classify and identify properties and explore different designs. 
+		\item Explore how children react to existing learning-based games (Using
+		a pre-test)
+		\item Explore what requirements and demands arise when children are
+		confronted individually or in groups with your environment (see 3a and
+		3b). 
+	\end{enumerate}
+	
+	\item Design and implementation
+	\begin{enumerate}
+		\item Propose a suitable environment for your computer-based learning
+		platform. (e.g. AngularJS, a game-framework, python, etc.)
+		\item Implement and document a maintainable interactive evironment.
+		\item Add gamification elements (e.g. a reward system, different levels)
+		\item Integrate your work into Jil Weber's environment "INFORMATIK BIBER
+		in KG und 1/2" \cite{JWEBER}.
+		\item Test your final product in class (see 3c).
+	\end{enumerate}
+	
+	\item Evaluation
+	\begin{enumerate}
+		\item Conduct a preliminary study evaluating the success rate of primary
+		school children and kindergarten children in interacting with your
+		learning enviroment individually and in groups. 
+		\item Investigate how the reward system affects the social interaction
+		between pupils.
+		\item Final evaluation. Find out whether your application can fulfill
+		it's purpose.
+		
+	\end{enumerate}
+	
+	\item Deliverables
+	\begin{enumerate}
+		\item Elaborate on your work in a well-documented report.
+		\item Demonstrate the application.
+		\item Give a presentation of the thesis.
+	\end{enumerate}
+\end{enumerate}
+
+\newpage
+
+\section*{Deliverables}
+
+\noindent The student is expected to manage the project, comply with rigorous
+scientific standards, and to apply sound software engineering procedures in
+order to successfully design, develop and test the platform.
+
+\noindent We expect an extensive and detailed documentation of all steps of the
+project. The student provides both a high-level documentation (i.e., a
+description of the inner workings and communication protocol used in the
+extension) as well as a low-level documentation in the form of suitable comments
+in the source code.
+
+\section*{Grading Criteria}
+The Bachelor Thesis will be graded according to the \textit{Guidelines
+Bachelor's Thesis} \cite{IR}. Major emphasis will be placed on the quality of
+\textit{objectives and scope}, \textit{scientific approach}, \textit{design},
+\textit{implementation}, \textit{reflection}, \textit{autonomy},
+\textit{learning aptitude}, \textit{creativity}, \textit{documentation},
+\textit{presentation}, and \textit{time management}.
+
+\begin{thebibliography}{9} 
+
+\bibitem{HKKS17} Juraj Hromkovi{\v{c}}, Tobias Kohn, Dennis Komm, Giovanni
+Serafini: \textit{Algorithmic Thinking from the Start}, Bulletin of EATCS, Vol.
+1, Number 121, 2017. 
+
+\bibitem{IR} Department of Computer Science: \textit{Guidelines Bachelor's Thesis}, available at \url{https://www.inf.ethz.ch/studies/forms-and-documents.html}
+
+\bibitem{SET} Davis, Benjamin Lent, and Maclagan, Diane: \textit{The card game
+set}, the Mathematical Intelligencer, 25, No. 3, 2003, 33-40, available at
+\url{http://homepages.warwick.ac.uk/staff/D.Maclagan/papers/set.pdf} (last
+visit: July 31, 2019).
+
+\bibitem{STBLUM} Blum, Sonja Tabea: \textit{A platform independent,
+computer-based learning environment to a textbook for computer science}. Master
+Thesis, ETH Zurich, Department of Computer Science, 2018, available at
+\url{https://doi.org/10.3929/ethz-b-000312911} (last visit: July 31, 2019).
+
+\bibitem{EFFG} Alsawaier, Raed. (2017). \textit{The Effect of Gamification on
+Motivation and Engagement}. International Journal of Information and Learning
+Technology. 35. 00-00. 10.1108/IJILT-02-2017-0009. 
+
+\bibitem{GAMTOT} Elshiekh, R. and Butgerit, L. (2017) \textit{Using Gamification
+to Teach Students Programming Concepts}. Open Access Library Journal, 4: e3803.
+\url{https://doi.org/10.4236/oalib.1103803} (last visit: July 31, 2019)
+
+\bibitem{GAM} Healey, Deborah: \textit{Gamification}, available at
+\url{https://www.macmillaneducation.es/wp-content/uploads/2019/04/Gamification-White-Paper_Mar-2019.pdf}
+(last visit: July 31, 2019)
+
+\bibitem{GAMREB} Rabah, Jihan \& Cassidy, Robert \& Beauchemin, Robert. (2018).
+\textit{Gamification in education: Real benefits or edutainment?}.
+10.13140/RG.2.2.28673.56162.
+
+\bibitem{GEFF} Papp, T.A. (2018). \textit{Gamification Effects on Motivation and
+Learning: Application to Primary and College Students}.
+
+\bibitem{HTGAM} Morschheuser, Benedikt \& Werder, Karl \& Hamari, Juho \& Abe,
+Julian. (2017). \textit{How to Gamify? A Method For Designing Gamification}.
+10.24251/HICSS.2017.155. 
+
+\bibitem{CT} Wing, Jennette M. (2006) \textit{Computational Thinking}. Available
+at \url{https://www.cs.columbia.edu/~wing/publications/Wing06.pdf} (last visit:
+July 31, 2019)
+
+\bibitem{SKAMP} Kamp, Sarah Eleonora: \textit{A platform independent,
+computer-based learning environment}. Bachelor Thesis, ETH Zurich, Department of
+Computer Science, 2019
+
+\bibitem{TANGK} Tang, Kevin: \textit{Graphs, trees and discrete optimizations:
+Computer-based learning environment about combinatorial problems for secondary
+education}. Bachelor Thesis, ETH Zurich, Department of Computer Science, 2019
+
+\bibitem{JWEBER} Weber, Jil: \textit{Eine interaktive Lernplattform f\"ur
+algorithmisches Denken, f\"ur 4-8 j\"ahrige Kinder}. Master Thesis, ETH Zurich,
+Department of Computer Science, 2019
+
+\end{thebibliography}
+
+\vspace{1cm}
+\noindent Zurich, \today 
+
+\vspace{2.0cm}
+\noindent \student \hfill \cosupervisor \hfill \professor \hfill
+
+
+\end{document}
