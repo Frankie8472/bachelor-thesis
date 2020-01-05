@@ -89,11 +89,11 @@ export class BaseScene extends Phaser.Scene {
             targets: this.transition[0],
             scale: 10 * 0.5 * Math.sqrt(Math.pow(this.cameras.main.width, 2) + Math.pow(this.cameras.main.height, 2)),
             ease: 'linear',
-            duration: 700,
-            onStart: () => this.sound.volume = 0,
-            onComplete: () => this.introduction()
+            duration: 700
         });
 
+        tween.on('start', () => this.sound.volume = 0);
+        tween.on('complete', () => this.introduction());
         tween.on('update', () => this.sound.volume += 1/tween.duration);
     }
 
@@ -109,10 +109,10 @@ export class BaseScene extends Phaser.Scene {
             targets: this.transition[0],
             scale: 0,
             ease: 'linear',
-            duration: 700,
-            onComplete: () => this.sceneChange(scene, data)
+            duration: 700
         });
 
+        tween.on('complete', () => this.sceneChange(scene, data));
         tween.on('update', () => this.sound.volume -= 1/tween.duration);
     }
 

@@ -171,7 +171,7 @@ export class GameScene extends BaseScene {
 
         // Update timeprogressbar
         let timedata: number = this.timefluid.getData('timeY');
-        if (!this.checked && timedata <= 0) {
+        if (timedata <= 0) {
             this.checked = true;
 
             // Endgame
