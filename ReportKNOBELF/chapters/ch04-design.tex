@@ -1,0 +1,145 @@
+% !TEX root = ../thesis.tex
+
+\chapter{Design of the Learning Environment}
+\label{chap:design}
+
+In this section all implementation tools and approaches are explained.
+First our used framework will be explained, then how our different scenes and objects are generated and
+at last how these two are combined to our final solution.
+
+\section{Phaser 3}
+%https://labs.phaser.io/
+%https://phaser.io/
+%https://photonstorm.github.io/phaser3-docs/
+
+\subsection{Scenes}
+\subsection{Managers}
+\section{Object generation}
+Our objects can have up to four properties with at maximum one from each of the following categories:
+\begin{itemize}
+    \item Geometrical shape (square, triangle, circle, ellipse, rhombus, octagon)
+    \item Color (yellow, orange, red, purple, green, blue)
+    \item Holes or dots (one, two, three, four, five, six)
+    \item Filling (filled, striped, dotted)
+\end{itemize}
+
+We need all possible objects with one, three and four properties.
+
+With a python script [EXAMPLE] scalable vector graphic (SVG) files are generated [EXAMPLE].
+After that they are converted to portable network graphic (PNG) files with the GNU image manipulation program (GIMP),
+so that they can be imported into Phaser.
+
+\section{Concept of the Learning Environment}
+Through the boundary conditions and requirements of the learning environment,
+we split our environment into multiple parts or here called scenes.
+
+\subsection{Drop Down Menu}
+Throughout the whole experience, the user shoud be able to open a menu with a button.
+This button should always be visible.
+Once the menu is open, the user should be able to close the menu and return to the current scene,
+exit the current scene and return to the level menu and go into fullscreen and back.
+The current scene should be paused while the menu is open as it can be distracting for the user
+if suddenly something pops up and cover parts of the visible scene.
+
+\subection{Welcome Screen}
+The welcome screen is the starting point of the user experience.
+Through this screen the user will be greeted by showing the name of the game.
+Through a click he shall commence to the levle menu.
+
+\subsection{Level Menu}
+In the level menu, the user is able to choose between different levels and games.
+He can also access the object summary and track his progress/score.
+The progress of each individual level is shown on the respective buttons.
+
+\subsection{Object summary}
+The Object summary allows the user to get a feeling for all the different properties an object can have.
+For that reason the number of objects per category is restricted to five, as there are over 1000 different objects.
+Objects are draggable and sortable by each category with a click on a respective button.
+
+\subsection{Sorting with one category}
+Here the user has to sort the static objects with one category by the given category.
+As the user should be able to experience all categories, they are split into different levels.
+Each level represents a category.
+For motivation, the user can track his progress.
+The Progress is defined by objects sorted the right and the wrong way.
+
+\subsection{Sorting with one category under difficult conditions}
+Here the user has to sort falling objects with one category by the given category.
+As the user should be able to experience all categories, they are split into different level.
+Each level represents a category.
+For motivation, the user can track his progress.
+The progress is defined by objects missed, sorted the right and the wrong way.
+To make the task harder, dummy objects are added.
+Those objects look similar to the original ones but with a succinct characteristic.
+There are no negative points for missing such an object but negative points for sorting them in any way.
+
+\subsection{Sorting with restricted space}
+In this scene the user has to sort a given number of objects with all properties shown into boxes with limited space.
+E.g. Box 1 contains 4 objects that are blue, box 2 contains 6 objects that are yellow
+and box 3 contains 2 obejcts that are red. In total there are 12 objects.
+The objects are random generated, so that at least one category fits.
+
+\subsection{Object pairing - easy version}
+\subsection{Object pairing - normal version}
+\subsection{Score Screen}
+
+\section{Code structure of the learning environment}
+[IMAGE OF STATE DIAGRAM]
+
+Our learning environment consists of different scenes each one inheriting the base scene:
+\subsection{BaseScene}
+\subsection{PreloadAssets}
+\subsection{DropDownScene}
+\subsection{WelcomeScene}
+\subsection{LevelMenuSceneScene}
+\subsection{IntroScene}
+\subsection{SortingScene}
+\subsection{PropertySortingScene}
+\subsection{RestrictedSortingScene}
+\subsection{GameScene}
+\subsection{ScoreScene}
+
+
+\section{Final look of the learning environment}
+
+
+\section{Checklist}
+
+- overview of your solution. Give a good explanation of its rationale,
+concepts and mechanisms. If your solution relies on a
+theorem or some other undocumented concept, make sure
+that you explain them before you carry on to the detailed
+description.
+
+The main part of this section is the thorough descrip-
+tion of the solution and its functionality.
+The description should not contain arguments on correctness or design de-
+cision debates; simply, describe the mechanisms of your
+solution and avoid explanations of the 'why so' type.
+Dedicate a separate paragraph or two on the latter, if
+you deem necessary.
+
+Disassemble your solution to its functional components
+and explain them separately. For example, if you describe
+a distributed algorithm, explain the protocol-specific part
+(message format, etc.) separately from the semantics and
+decision-making part of the algorithm.
+It is both important and useful to provide figures
+demonstrating the functionality of your solution. Make
+the figures look similar to the system model figure, if ap-
+plicable, and exploit the similarities and differences to
+point out important aspects of your solution.
+
+Analysis can be of two types: qualitative and quantitative.
+The former means to show some properties (qualities)
+of your solution, while the latter means to show some
+performance aspects of your solution.
+Qualitative analysis is usually proof of correctness,
+however it could be proof that the solution possesses some
+desired property. For algorithms or protocols, a proof of
+correctness is always welcome.
+Quantitative analysis is mostly performance analysis.
+It is important to explain what performance metric you
+use and why you have selected the specific metric. Choos-
+ing a metric that has been widely used will make the
+comparison to other solutions easier.
