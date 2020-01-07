@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Arch Linux) (preloaded format=pdflatex 2019.11.14)  7 JAN 2020 14:05
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Arch Linux) (preloaded format=pdflatex 2019.11.14)  7 JAN 2020 15:57
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -956,8 +956,8 @@ Overfull \vbox (459.06232pt too high) has occurred while \output is active []
  [7
 
 ]
-./chapters/ch04-design.tex:44: Undefined control sequence.
-l.44 \subection
+./chapters/ch04-design.tex:51: Undefined control sequence.
+l.51 \subection
                {Welcome Screen}
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -965,12 +965,7 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
-[8]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [9]) (./chapters/ch05-evaluation.tex [10] [11] [12
-
-]
+[8] [9] [10]) (./chapters/ch05-evaluation.tex [11] [12]
 chapter 5.
 
 Underfull \vbox (badness 4048) has occurred while \output is active []
@@ -983,7 +978,9 @@ Overfull \hbox (2.28006pt too wide) has occurred while \output is active
 
 Overfull \vbox (459.06232pt too high) has occurred while \output is active []
 
- [13]) (./chapters/ch06-conclusion.tex [14]
+ [13
+
+]) (./chapters/ch06-conclusion.tex [14]
 chapter 6.
 )
 Overfull \hbox (2.28006pt too wide) has occurred while \output is active
@@ -1004,7 +1001,7 @@ No file thesis.bbl.
 
 
 pdfTeX warning: pdflatex (file /home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/pdf/originality.pdf): PDF inclusion: found PDF version <1.6>, but at most version <1.5> allowed
-<pdf/originality.pdf, id=185, 597.55246pt x 845.07718pt>
+<pdf/originality.pdf, id=187, 597.55246pt x 845.07718pt>
 File: pdf/originality.pdf Graphic file (type pdf)
 <use pdf/originality.pdf>
 Package pdftex.def Info: pdf/originality.pdf  used on input line 211.
@@ -1022,7 +1019,7 @@ pdfTeX warning: pdflatex (file /home/frankie/WebstormProjects/bachelor-thesis/Re
 
 
 pdfTeX warning: pdflatex (file /home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/pdf/originality.pdf): PDF inclusion: found PDF version <1.6>, but at most version <1.5> allowed
-<pdf/originality.pdf, id=188, page=1, 597.55246pt x 845.07718pt>
+<pdf/originality.pdf, id=190, page=1, 597.55246pt x 845.07718pt>
 File: pdf/originality.pdf Graphic file (type pdf)
 <use pdf/originality.pdf, page 1>
 Package pdftex.def Info: pdf/originality.pdf , page1 used on input line 211.
@@ -1066,18 +1063,18 @@ LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
  ) 
 Here is how much of TeX's memory you used:
- 24494 strings out of 492167
- 431838 string characters out of 6131557
- 633385 words of memory out of 5000000
- 28494 multiletter control sequences out of 15000+600000
+ 24498 strings out of 492167
+ 431878 string characters out of 6131557
+ 634385 words of memory out of 5000000
+ 28496 multiletter control sequences out of 15000+600000
  580511 words of font info for 72 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  56i,28n,86p,10126b,474s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texmf-dist/fonts/type1/urw/helvetic/uhvro8a.pfb></usr/share/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on /home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/thesis.pdf (25 pages, 949937 bytes).
+Output written on /home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/thesis.pdf (25 pages, 952683 bytes).
 PDF statistics:
- 431 PDF objects out of 1000 (max. 8388607)
- 379 compressed objects within 4 object streams
- 89 named destinations out of 1000 (max. 500000)
- 467 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 440 PDF objects out of 1000 (max. 8388607)
+ 388 compressed objects within 4 object streams
+ 91 named destinations out of 1000 (max. 500000)
+ 483 words of extra memory for PDF output out of 10000 (max. 10000000)
 

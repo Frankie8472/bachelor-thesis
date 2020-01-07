@@ -29,22 +29,29 @@ With a python script [EXAMPLE] scalable vector graphic (SVG) files are generated
 After that they are converted to portable network graphic (PNG) files with the GNU image manipulation program (GIMP),
 so that they can be imported into Phaser.
 
+\section{Introduction Animation Generation}
+To produce animated instruction for the task later on,
+the screen is recorded with OBS Studio while someone (here me) is playing the game.
+Parts of the final video are then taken for the respective scenes and converted into single pictures.
+These single pictures are saved in one picture (called spreadsheet [EXAMPLE]).
+The phaser framework animates those spreadsheets.
+
 \section{Concept of the Learning Environment}
 Through the boundary conditions and requirements of the learning environment,
 we split our environment into multiple parts or here called scenes.
 
 \subsection{Drop Down Menu}
-Throughout the whole experience, the user shoud be able to open a menu with a button.
-This button should always be visible.
-Once the menu is open, the user should be able to close the menu and return to the current scene,
+Throughout the whole experience, the user can open a menu with a button.
+This button is always visible.
+Once the menu is open, the user may close the menu and return to the current scene,
 exit the current scene and return to the level menu and go into fullscreen and back.
-The current scene should be paused while the menu is open as it can be distracting for the user
-if suddenly something pops up and cover parts of the visible scene.
+The current scene is paused while the menu is open as it can be distracting for the user,
+if suddenly something pops up and covers parts of the visible and running scene.
 
 \subection{Welcome Screen}
 The welcome screen is the starting point of the user experience.
 Through this screen the user will be greeted by showing the name of the game.
-Through a click he shall commence to the levle menu.
+Through a click he shall commence to the level menu.
 
 \subsection{Level Menu}
 In the level menu, the user is able to choose between different levels and games.
@@ -63,6 +70,9 @@ Each level represents a category.
 For motivation, the user can track his progress.
 The Progress is defined by objects sorted the right and the wrong way.
 
+The amount of objects to sort, as well as the amount of properties of the category
+is randomly selected each time you start the game.
+
 \subsection{Sorting with one category under difficult conditions}
 Here the user has to sort falling objects with one category by the given category.
 As the user should be able to experience all categories, they are split into different level.
@@ -73,15 +83,72 @@ To make the task harder, dummy objects are added.
 Those objects look similar to the original ones but with a succinct characteristic.
 There are no negative points for missing such an object but negative points for sorting them in any way.
 
+The amount of falling objects to sort, as well as the amount of properties of the category
+is randomly selected each time you start the game.
+
 \subsection{Sorting with restricted space}
 In this scene the user has to sort a given number of objects with all properties shown into boxes with limited space.
-E.g. Box 1 contains 4 objects that are blue, box 2 contains 6 objects that are yellow
-and box 3 contains 2 obejcts that are red. In total there are 12 objects.
-The objects are random generated, so that at least one category fits.
+The objects in one box must have at least one property incommon and
+can be put into the box and taken out an infinite amount of times.
+
+To make the game more difficult, this level is split into two.
+The first has boxes with the size 6, 4, 2 and the second boxes with the size 6, 5, 4.
+%E.g. For the category colors: In the end, box 1 contains 6 objects that are blue, box 2 contains 4 objects
+%that are yellow and box 3 contains 2 obejcts that are red. In total there are 12 objects.
+%The objects are random generated, so that at least one category fits.
+%The possibility of cross category matching is considered and will also count.
+%E.g. In the end, box 1 containt 6 objects that are blue, box 2 contains 4 objects that are squares
+%and box 3 containts 2 objects that have 3 dots/holes.
 
 \subsection{Object pairing - easy version}
+In this game, twelve objects with three categories are shown.
+the user has to select three objects which have to fulfil the following.
+For each category (color, shape and number of holes/dots) one of the following conditions has to hold:
+\begin{itemize}
+    \item They must be the same (blue, blue, blue)
+    \item They must be completely different (square, triangle, circle)
+\end{itemize}
+[EXAMPLE]
+
+If the player needs help, there is a helper bar which can be accessed by a button with a question mark on it.
+The helper bar shows which categories fulfil the conditions and which do not
+by coloring the category symbols on the bar in green or red.
+
+The game is time limited. The remaining time is shown by a bar.
+If you select three onjects which fulfil the conditions, more time will be added.
+After a set amount of correct selected objects, the game will end.
+
+If there are no three objects that fulfil the conditions, the playfield will be generated anew.
+
 \subsection{Object pairing - normal version}
+In this game, twelve objects with four categories are shown.
+the user has to select three objects which have to fulfil the following.
+For each category (color, filling, shape and number of holes/dots) one of the following conditions has to hold:
+\begin{itemize}
+    \item They must be the same (blue, blue, blue)
+    \item They must be completely different (square, triangle, circle)
+\end{itemize}
+[EXAMPLE]
+
+If the player needs help, there is a helper bar which can be accessed by a button with a question mark on it.
+The helper bar shows which categories fulfil the conditions and which do not
+by coloring the category symbols on the bar in green or red.
+
+The game is time limited. The remaining time is shown by a bar.
+If you select three onjects which fulfil the conditions, more time will be added.
+After a set amount of correct selected objects, the game will end.
+
+If there are no three objects that fulfil the conditions, the playfield will be generated anew.
+
 \subsection{Score Screen}
+After a task has been completed, there is going to be a score.
+This score is represented here with a displayed number of stars.
+The minimum of starts is zero and the maximum is three.
+If the player is unhappy with his results, he can replay the game by clicking on the replay button.
+
+\subsection{Introduction}
+Before each game starts, a sample animation of the task beforehand is being shown.
+The current scene is paused in the meantime, so that the user has enough time to find out what he has to do.
 
 \section{Code structure of the learning environment}
 [IMAGE OF STATE DIAGRAM]
