@@ -51,18 +51,18 @@ export class IntroScene extends BaseScene {
 
         const finger: Phaser.GameObjects.Sprite = this.add.sprite(this.cameras.main.width/2, this.cameras.main.height-10, 'finger');
         const scale: number = this.imageScalingFactor(this.cameras.main.height/10, finger.width, finger.height);
-        finger.setScale(scale, scale);
+        finger.setScale(scale);
         finger.setOrigin(0.5, 1);
 
         if (this.pausedScene === "GameScene"){
             intro.setX(3/4*this.cameras.main.width);
             const intro1scale: number = this.imageScalingFactor(this.cameras.main.width/2, intro.width, intro.height);
-            intro.setScale(intro1scale, intro1scale);
+            intro.setScale(intro1scale);
 
             const intro2: Phaser.GameObjects.Sprite = this.add.sprite(1/4*this.cameras.main.width, 0, 'intro_set');
             intro2.setOrigin(0.5, 0.5);
             const intro2scale: number = this.imageScalingFactor(this.cameras.main.width/2, intro2.width, intro2.height);
-            intro2.setScale(intro2scale, intro2scale);
+            intro2.setScale(intro2scale);
 
             this.setAnimation(intro, background, finger, intro2);
         } else {
@@ -154,7 +154,7 @@ export class IntroScene extends BaseScene {
         intro.setOrigin(0.5, 0.5);
 
         const scale: number = this.imageScalingFactor(this.cameras.main.width * 4 / 5, intro.width, intro.height);
-        intro.setScale(scale, scale);
+        intro.setScale(scale);
 
         intro.setY(0);
 

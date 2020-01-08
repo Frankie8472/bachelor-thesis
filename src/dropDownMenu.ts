@@ -94,7 +94,7 @@ export class DropDownMenu extends BaseScene {
         this.exitButton.setData('clicked', false);
 
         scale = this.imageScalingFactor(this.buttonSize, this.exitButton.width, this.exitButton.height);
-        this.exitButton.setScale(scale, scale);
+        this.exitButton.setScale(scale);
 
         this.exitButton.setInteractive({cursor: 'pointer'});
 
@@ -103,7 +103,7 @@ export class DropDownMenu extends BaseScene {
         this.fullscreenButton.setOrigin(0.5, 0.5);
 
         scale = this.imageScalingFactor(this.buttonSize, this.fullscreenButton.width, this.fullscreenButton.height);
-        this.fullscreenButton.setScale(scale, scale);
+        this.fullscreenButton.setScale(scale);
 
         this.fullscreenButton.setName("fullscreenButton");
         this.fullscreenButton.setData('clicked', false);
@@ -127,7 +127,7 @@ export class DropDownMenu extends BaseScene {
         this.menuButton.setOrigin(0.5, 0.5);
 
         scale = this.imageScalingFactor(this.buttonSize, this.menuButton.width, this.menuButton.height);
-        this.menuButton.setScale(scale, scale);
+        this.menuButton.setScale(scale);
 
         this.menuButton.setName("menuButton");
         this.menuButton.setData('clicked', false);
@@ -337,7 +337,7 @@ export class DropDownMenu extends BaseScene {
         hourglass.setOrigin(0.5, 0.5);
 
         const clockScale: number = this.imageScalingFactor(3 / 5 * this.cameras.main.height, hourglass.width, hourglass.height);
-        hourglass.setScale(clockScale, clockScale);
+        hourglass.setScale(clockScale);
         hourglass.setAlpha(0);
 
         this.pauseBackground.add(hourglass);

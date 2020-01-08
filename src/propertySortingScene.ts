@@ -242,7 +242,7 @@ export class PropertySortingScene extends BaseScene {
             crate.setOrigin(0.5, 0.5);
 
             const imageScalingFactor: number = this.imageScalingFactor(crateSize, crate.width, crate.height);
-            crate.setScale(imageScalingFactor, imageScalingFactor);
+            crate.setScale(imageScalingFactor);
 
             // Add zone around crate
             const zone: Phaser.GameObjects.Zone = this.add.zone(crate.x, crate.y, zoneWidth, crate.height * imageScalingFactor + this.objectDisplaySize);
@@ -270,7 +270,7 @@ export class PropertySortingScene extends BaseScene {
                 gameObject.setVelocityY(0);
                 gameObject.setAngularVelocity(0);
                 const zoomSpriteScale: number = gameObject.getData('scale') * 1.5;
-                gameObject.setScale(zoomSpriteScale, zoomSpriteScale);
+                gameObject.setScale(zoomSpriteScale);
                 this.arrayStack.bringToTop(gameObject);
             }
         }, this);
@@ -290,7 +290,7 @@ export class PropertySortingScene extends BaseScene {
                 }
 
                 let scale: number = gameObject.getData('scale');
-                gameObject.setScale(scale, scale);
+                gameObject.setScale(scale);
 
                 if (this.infinite) {
                     gameObject.setVelocityY(this.velocity);
@@ -350,7 +350,7 @@ export class PropertySortingScene extends BaseScene {
                 if (gameObject.getData('active')){
                     gameObject.clearTint();
                 }
-                gameObject.setScale(scale, scale);
+                gameObject.setScale(scale);
                 gameObject.setPosition(coords[0], coords[1]);
             }
         }, this);
@@ -385,7 +385,7 @@ export class PropertySortingScene extends BaseScene {
                 sprite.setVisible(true);
 
                 const spriteScale: number = this.imageScalingFactor(size, sprite.width, sprite.height);
-                sprite.setScale(spriteScale, spriteScale);
+                sprite.setScale(spriteScale);
 
                 sprite.setData('scale', spriteScale);
                 sprite.setData('spin', Phaser.Math.RND.between(10, 50));
@@ -429,7 +429,7 @@ export class PropertySortingScene extends BaseScene {
                 sprite.setVisible(true);
 
                 const spriteScale: number = this.imageScalingFactor(size, sprite.width, sprite.height);
-                sprite.setScale(spriteScale, spriteScale);
+                sprite.setScale(spriteScale);
 
                 sprite.setData('scale', spriteScale);
                 sprite.setData('spin', Phaser.Math.RND.between(10, 50));
@@ -483,7 +483,7 @@ export class PropertySortingScene extends BaseScene {
                                 sprite.setPosition(dropZone.x + dropZone.width * 0.15, dropZone.y - dropZone.height * 0.2);
 
                                 const imageScale: number = this.imageScalingFactor(Math.min(dropZone.width, dropZone.height) * this.droppedObjectScale, sprite.width, sprite.height);
-                                sprite.setScale(imageScale, imageScale);
+                                sprite.setScale(imageScale);
 
                                 this.arrayDropped.add(sprite);
                                 sprite.disableInteractive();
@@ -531,12 +531,12 @@ export class PropertySortingScene extends BaseScene {
         const plus: Phaser.GameObjects.Sprite = this.add.sprite(progressbarCorrectX, progressbarY - progressbarWrong.height * multiplierY - 10, 'plus');
         const plusMultiplier: number = progressbarWrong.width * multiplierX / plus.width;
         plus.setOrigin(0, 1);
-        plus.setScale(plusMultiplier, plusMultiplier);
+        plus.setScale(plusMultiplier);
 
         const minus: Phaser.GameObjects.Sprite = this.add.sprite(progressbarWrongX, progressbarY - progressbarWrong.height * multiplierY - 10, 'minus');
         const minusMultiplier: number = progressbarWrong.width * multiplierX / minus.width;
         minus.setOrigin(0, 1);
-        minus.setScale(minusMultiplier, minusMultiplier);
+        minus.setScale(minusMultiplier);
 
         this.correctBar = this.add.sprite(progressbarCorrectX + progressbarCorrect.width * multiplierX / 2 + 2, progressbarY - 6, 'progressbarGreen');
         this.correctBar.setOrigin(0.5, 1);

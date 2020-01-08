@@ -61,7 +61,7 @@ export class ScoreScene extends BaseScene {
         const replayButton: Phaser.GameObjects.Sprite = this.add.sprite(this.cameras.main.width - 100 + 34, this.cameras.main.height - 100 + 34, 'replay');
         replayButton.setOrigin(0.5, 0.5);
         const buttonScale: number = this.imageScalingFactor(this.buttonSize*1.5, replayButton.width, replayButton.height);
-        replayButton.setScale(buttonScale, buttonScale);
+        replayButton.setScale(buttonScale);
         replayButton.setInteractive({ cursor: 'pointer' });
         replayButton.on('pointerdown', function() {
             replayButton.on('pointerup', function() {
@@ -86,7 +86,7 @@ export class ScoreScene extends BaseScene {
 
         sprite.setOrigin(0.5, 0.5);
         const starScale: number = this.imageScalingFactor(this.cameras.main.width*3/5, sprite.height, sprite.width);
-        sprite.setScale(starScale, starScale);
+        sprite.setScale(starScale);
         sprite.setData('scale', starScale);
         sprite.setInteractive({ cursor: 'pointer' });
 
@@ -103,7 +103,7 @@ export class ScoreScene extends BaseScene {
         const finger: Phaser.GameObjects.Sprite = this.add.sprite(this.cameras.main.width / 2, 6/7*this.cameras.main.height, 'finger');
         const fingerScale: number = this.imageScalingFactor(1/6*this.cameras.main.height, finger.width, finger.height, true);
         finger.setOrigin(0.5, 0.5);
-        finger.setScale(fingerScale, fingerScale);
+        finger.setScale(fingerScale);
         finger.setInteractive({ cursor: 'pointer' });
 
         const fingerTween: Phaser.Tweens.Tween = this.tweens.add({

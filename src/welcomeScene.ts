@@ -44,7 +44,7 @@ export class WelcomeScene extends BaseScene {
         const title: Phaser.GameObjects.Sprite = this.add.sprite(this.cameras.main.width / 2, this.cameras.main.height / 2, 'title');
         const titleScale: number = this.imageScalingFactor(4/6*this.cameras.main.width, title.width, title.height);
         title.setOrigin(0.5, 0.5);
-        title.setScale(titleScale, titleScale);
+        title.setScale(titleScale);
         title.setInteractive({ cursor: 'pointer' });
 
         const titleTween: Phaser.Tweens.Tween = this.tweens.add({
@@ -60,7 +60,7 @@ export class WelcomeScene extends BaseScene {
         const finger: Phaser.GameObjects.Sprite = this.add.sprite(this.cameras.main.width / 2, 3/4*this.cameras.main.height, 'finger');
         const fingerScale: number = this.imageScalingFactor(1/6*this.cameras.main.height, finger.width, finger.height, true);
         finger.setOrigin(0.5, 0.5);
-        finger.setScale(fingerScale, fingerScale);
+        finger.setScale(fingerScale);
         finger.setInteractive({ cursor: 'pointer' });
 
         const fingerTween: Phaser.Tweens.Tween = this.tweens.add({

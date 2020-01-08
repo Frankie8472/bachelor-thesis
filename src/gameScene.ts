@@ -651,7 +651,7 @@ export class GameScene extends BaseScene {
         const hourglass: Phaser.GameObjects.Sprite = this.add.sprite(10, progressbarY - progressbar.height * multiplierY - 10, 'hourglass');
         const starmultiplier: number = progressbar.width * multiplierX / hourglass.width;
         hourglass.setOrigin(0, 1);
-        hourglass.setScale(starmultiplier, starmultiplier);
+        hourglass.setScale(starmultiplier);
 
         this.timefluid = this.add.sprite(10 + progressbar.width * multiplierX / 2 + 2, progressbarY - 6, 'timefluid');
         this.timefluid.setOrigin(0.5, 1);

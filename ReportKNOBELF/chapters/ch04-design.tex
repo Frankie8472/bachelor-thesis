@@ -92,7 +92,7 @@ The objects in one box must have at least one property incommon and
 can be put into the box and taken out an infinite amount of times.
 
 To make the game more difficult, this level is split into two.
-The first has boxes with the size 6, 4, 2 and the second boxes with the size 6, 5, 4.
+The first level has boxes with the size 6, 4, 2 and the second one boxes with the size 6, 5, 4.
 %E.g. For the category colors: In the end, box 1 contains 6 objects that are blue, box 2 contains 4 objects
 %that are yellow and box 3 contains 2 obejcts that are red. In total there are 12 objects.
 %The objects are random generated, so that at least one category fits.
@@ -110,7 +110,7 @@ For each category (color, shape and number of holes/dots) one of the following c
 \end{itemize}
 [EXAMPLE]
 
-If the player needs help, there is a helper bar which can be accessed by a button with a question mark on it.
+If the user needs help, there is a helper bar which can be accessed by a button with a question mark on it.
 The helper bar shows which categories fulfil the conditions and which do not
 by coloring the category symbols on the bar in green or red.
 
@@ -130,7 +130,7 @@ For each category (color, filling, shape and number of holes/dots) one of the fo
 \end{itemize}
 [EXAMPLE]
 
-If the player needs help, there is a helper bar which can be accessed by a button with a question mark on it.
+If the user needs help, there is a helper bar which can be accessed by a button with a question mark on it.
 The helper bar shows which categories fulfil the conditions and which do not
 by coloring the category symbols on the bar in green or red.
 
@@ -144,7 +144,7 @@ If there are no three objects that fulfil the conditions, the playfield will be 
 After a task has been completed, there is going to be a score.
 This score is represented here with a displayed number of stars.
 The minimum of starts is zero and the maximum is three.
-If the player is unhappy with his results, he can replay the game by clicking on the replay button.
+If the user is unhappy with his results, he can replay the game by clicking on the replay button.
 
 \subsection{Introduction}
 Before each game starts, a sample animation of the task beforehand is being shown.
@@ -155,6 +155,166 @@ The current scene is paused in the meantime, so that the user has enough time to
 
 Our learning environment consists of different scenes each one inheriting the base scene:
 \subsection{BaseScene}
+
+\begin{lstlisting}[style=TypeScript, caption=BaseScene.ts]
+    export class BaseScene extends Phaser.Scene {
+        /**
+         * Name of the scene
+         */
+        protected key: string;
+
+        /**
+         * Level of the scene
+         */
+        protected level: number;
+
+        /**
+         * Transition graphic
+         */
+        private transition: Phaser.GameObjects.GameObject[];
+
+        constructor(key: string) {
+            super({
+                key: key
+            });
+
+            this.key = key;
+            this.level = 0;
+            this.generateNewSeed();
+        }
+
+        /**
+         * Method for returning the key of this scene
+         */
+        public getKey(): string {
+            return this.key;
+        }
+
+        /**
+         * Method for returning the key of this scene
+         */
+        public getLevel(): number {
+            return this.level;
+        }
+
+        /**
+         * Method for generating a new seed so that pseudo randomness is guaranteed
+         */
+        private generateNewSeed(): void {
+            const rndStr: string = Phaser.Math.RND.realInRange(Math.pow(10, 2), Math.pow(10,10)).toString();
+            Phaser.Math.RND.sow([rndStr]);
+        }
+
+        /**
+         * Method for initializing the shape, position and properties of the graphical scene transition
+         */
+        private transitionInit(): void {
+            // Shape of the graphical transition
+            const circle: Phaser.GameObjects.Graphics = this.add.graphics();
+
+            // Shape of the screen
+            const rectangle: Phaser.GameObjects.Rectangle = this.add.rectangle(0, 0, this.cameras.main.width, this.cameras.main.height, 0x000000);
+
+            // Define circle as the mask
+            const mask: Phaser.Display.Masks.GeometryMask = circle.createGeometryMask();
+
+            circle.setPosition(this.cameras.main.width / 2, this.cameras.main.height / 2);
+            circle.fillCircle(0, 0, 0.1);
+            circle.setDepth(0);
+
+            mask.setInvertAlpha(true);
+
+            rectangle.setDepth(1);
+            rectangle.setOrigin(0, 0);
+            rectangle.setMask(mask);
+
+            circle.fillCircle(0, 0, 0.1);
+
+            this.transition = [circle, rectangle];
+        }
+
+        /**
+         * Opening transition. Normally used to visually introduce a new scene
+         */
+        protected transitionIn(): void {
+            // Generating a new seed, so that randomness is guaranteed in every repetition of a scene
+            this.generateNewSeed();
+
+            this.transitionInit();
+
+            this.children.bringToTop(this.transition[1]);
+
+            const tween: Phaser.Tweens.Tween = this.add.tween({
+                targets: this.transition[0],
+                scale: 10 * 0.5 * Math.sqrt(Math.pow(this.cameras.main.width, 2) + Math.pow(this.cameras.main.height, 2)),
+                ease: 'linear',
+                duration: 700
+            });
+
+            tween.on('start', () => this.sound.volume = 0);
+            tween.on('complete', () => this.introduction());
+            tween.on('update', () => this.sound.volume += 1/tween.duration);
+        }
+
+        /**
+         * Closing transition. Normally used to visually close or stop a scene.
+         * @param scene The scene you want to start next.
+         * @param data Additional data you want to give to the next scene.
+         */
+        protected transitionOut(scene: string, data?: any): void {
+            this.children.bringToTop(this.transition[1]);
+
+            const tween: Phaser.Tweens.Tween = this.add.tween({
+                targets: this.transition[0],
+                scale: 0,
+                ease: 'linear',
+                duration: 700
+            });
+
+            tween.on('complete', () => this.sceneChange(scene, data));
+            tween.on('update', () => this.sound.volume -= 1/tween.duration);
+        }
+
+        /**
+         * Helper method for starting a new scene and stopping the current one
+         * as the behaviour of the current scene when starting a new one is
+         * not clearly defined in the framework at this point of time.
+         * @param scene The scene you want to start next
+         * @param data Additional data you want to give to the next scene.
+         */
+        protected sceneChange(scene: string, data?: any): void {
+            this.sound.stopAll();
+            this.game.scene.start(scene, data);
+            this.game.scene.stop(this.key);
+        }
+
+        /**
+         * Helper method for playing the introduction and pause the current scene
+         */
+        protected introduction(): void {
+            this.scene.pause();
+            this.game.scene.start("IntroScene", {'pausedScene': this.getKey(), 'level': this.getLevel()});
+        }
+
+        /**
+         * Returns the correct scaling factor for the wanted image size in relation to the real image size.
+         * @param wantedImageSize Image size you want to have for a dimension
+         * @param realImageSizeWidth The image width you want to scale
+         * @param realImageSizeHeight The image height you want to scale
+         * @param scaleToHeight Boolean for scaling height or width of image to the wanted size. Default to false.
+         */
+        protected imageScalingFactor(wantedImageSize: number, realImageSizeWidth: number, realImageSizeHeight: number, scaleToHeight: boolean = false): number {
+            let ret: number;
+            if (scaleToHeight) {
+                ret = Math.max(wantedImageSize / realImageSizeWidth, wantedImageSize / realImageSizeHeight);
+            } else {
+                ret = Math.min(wantedImageSize / realImageSizeWidth, wantedImageSize / realImageSizeHeight);
+            }
+            return ret;
+        }
+    }
+\end{lstlisting}
+
 \subsection{PreloadAssets}
 \subsection{DropDownScene}
 \subsection{WelcomeScene}

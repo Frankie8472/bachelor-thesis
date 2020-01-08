@@ -91,9 +91,9 @@ export class RestrictedSortingScene extends BaseScene {
         crate3.setOrigin(0.5, 0.5);
 
         const scale: number = this.imageScalingFactor(Math.min(this.cameras.main.width / 3, this.cameras.main.height / 2) - 40, crate1.width, crate1.height);
-        crate1.setScale(scale, scale);
-        crate2.setScale(scale, scale);
-        crate3.setScale(scale, scale);
+        crate1.setScale(scale);
+        crate2.setScale(scale);
+        crate3.setScale(scale);
 
         for (let i: number = 0; i < 6; i++) {
             let heightPosition: number = 0;
@@ -194,7 +194,7 @@ export class RestrictedSortingScene extends BaseScene {
                 gameObject.setTint(0x999999);
 
                 const scale: number = gameObject.getData('scale') * 1.2;
-                gameObject.setScale(scale, scale);
+                gameObject.setScale(scale);
             }
         }, this);
 
@@ -205,7 +205,7 @@ export class RestrictedSortingScene extends BaseScene {
                 gameObject.clearTint();
 
                 const scale: number = gameObject.getData('scale');
-                gameObject.setScale(scale, scale);
+                gameObject.setScale(scale);
 
                 let x: number = gameObject.x;
                 let y: number = gameObject.y;
@@ -290,7 +290,7 @@ export class RestrictedSortingScene extends BaseScene {
 
                 // Set default visual effect and position
                 gameObject.clearTint();
-                gameObject.setScale(scale, scale);
+                gameObject.setScale(scale);
                 gameObject.setPosition(coords[0], coords[1]);
             }
         }, this);
@@ -309,7 +309,7 @@ export class RestrictedSortingScene extends BaseScene {
             const size: number = Phaser.Math.RND.between(this.objectSize, this.objectSize * 1.3);
             const scale: number = this.imageScalingFactor(size, sprite.width, sprite.height);
 
-            sprite.setScale(scale, scale);
+            sprite.setScale(scale);
             sprite.setOrigin(0.5, 0.5);
             sprite.setVisible(true);
 

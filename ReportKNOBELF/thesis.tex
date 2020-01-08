@@ -15,22 +15,87 @@
 }
 \usepackage{epstopdf}
 \usepackage{listings}
-\lstset{
-  basicstyle=\ttfamily\small,
-  columns=fullflexible,
-  frame=single,
-  frameround=tttt,
-  rulecolor=\color{gray},
-}
+\usepackage{color}
+\definecolor{lightgray}{rgb}{0.95, 0.95, 0.95}
+\definecolor{darkgray}{rgb}{0.4, 0.4, 0.4}
+\definecolor{editorGray}{rgb}{0.95, 0.95, 0.95}
+\definecolor{editorOcher}{rgb}{1, 0.5, 0} % #FF7F00 -> rgb(239, 169, 0)
+\definecolor{editorGreen}{rgb}{0, 0.5, 0} % #007C00 -> rgb(0, 124, 0)
+\definecolor{orange}{rgb}{1,0.45,0.13}
+\definecolor{olive}{rgb}{0.17,0.59,0.20}
+\definecolor{brown}{rgb}{0.69,0.31,0.31}
+\definecolor{purple}{rgb}{0.38,0.18,0.81}
+\definecolor{lightblue}{rgb}{0.1,0.57,0.7}
+\definecolor{lightred}{rgb}{1,0.4,0.5}
+
+%\lstset{
+%  basicstyle=\ttfamily\small,
+%  columns=fullflexible,
+%  frame=single,
+%  frameround=tttt,
+%  rulecolor=\color{gray},
+%}
 % http://www.bollchen.de/blog/2011/04/good-looking-line-breaks-with-the-listings-package/
-\lstset{
-  prebreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},
-  postbreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookrightarrow\space}},
-  breaklines=true,
-  breakatwhitespace=true,
-  numbers=left,
-  numberstyle=\scriptsize,
+%\lstset{
+%  prebreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},
+%  postbreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookrightarrow\space}},
+%  breaklines=true,
+%  breakatwhitespace=true,
+%  numbers=left,
+%  numberstyle=\scriptsize,
+%}
+
+\lstdefinelanguage{JavaScript}{
+	morekeywords={
+		break, case, catch, class, const, continue, debugger, default, delete, do, else, enum, export, extends,
+		false, finally, for, function, if, import, in, instanceof, new, null, return, super, switch, this, throw,
+		true, try, typeof, var, void, while, with, as, implements, interface, let, package, private, protected,
+		public, static, yield, any, boolean, constructor, declare, get, module, require, number, set, string,
+		symbol, type, from, of
+	},
+	morecomment=[s]{/*}{*/},
+	morecomment=[l]//,
+	morestring=[b]",
+	morestring=[b]'
 }
+
+\lstdefinestyle{TypeScript} {%
+	% General design
+	%  backgroundcolor=\color{editorGray},
+	basicstyle={\footnotesize\ttfamily},
+	frame=b,
+	% line-numbers
+	xleftmargin={0.75cm},
+	numbers=left,
+	stepnumber=1,
+	firstnumber=1,
+	numberfirstline=true,
+	% Code design
+	identifierstyle=\color{black},
+	keywordstyle=\color{blue}\bfseries,
+	ndkeywordstyle=\color{editorGreen}\bfseries,
+	stringstyle=\color{editorOcher}\ttfamily,
+	commentstyle=\color{brown}\ttfamily,
+	% Code
+	language=JavaScript,
+	alsodigit={},
+	tabsize=2,
+	showtabs=false,
+	showspaces=false,
+	showstringspaces=false,
+	extendedchars=true,
+	breaklines=true,
+	% German umlauts
+	literate=%
+	{Ö}{{\"O}}1
+	{Ä}{{\"A}}1
+	{Ü}{{\"U}}1
+	{ß}{{\ss}}1
+	{ü}{{\"u}}1
+	{ä}{{\"a}}1
+	{ö}{{\"o}}1
+}
+
 
 \epstopdfsetup{update} % only regenerate pdf files when eps file is newer
 

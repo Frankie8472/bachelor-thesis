@@ -176,7 +176,7 @@ export class SortingScene extends BaseScene {
             sprite.setData('validElements', validElements);
 
             const scale: number = this.imageScalingFactor(this.buttonSize, sprite.width, sprite.height);
-            sprite.setScale(scale, scale);
+            sprite.setScale(scale);
 
             sprite.setVisible(true);
 
@@ -219,7 +219,7 @@ export class SortingScene extends BaseScene {
             sprite.setVisible(true);
 
             const scale: number = Math.min(size / sprite.height, size / sprite.width);
-            sprite.setScale(scale, scale);
+            sprite.setScale(scale);
 
             sprite.setName(name);
 
@@ -255,7 +255,7 @@ export class SortingScene extends BaseScene {
                 gameObject.setTint(0x999999);
 
                 let scale: number = gameObject.getData('scale')*1.2;
-                gameObject.setScale(scale, scale);
+                gameObject.setScale(scale);
             }
         }, this);
 
@@ -266,7 +266,7 @@ export class SortingScene extends BaseScene {
                 gameObject.clearTint();
 
                 let scale: number = gameObject.getData('scale');
-                gameObject.setScale(scale, scale);
+                gameObject.setScale(scale);
 
                 let x: number = gameObject.x;
                 let y: number = gameObject.y;
@@ -309,7 +309,7 @@ export class SortingScene extends BaseScene {
         exitButton.setInteractive({ cursor: 'pointer' });
 
         const scale: number = this.imageScalingFactor(this.buttonSize*1.5, exitButton.width, exitButton.height);
-        exitButton.setScale(scale, scale);
+        exitButton.setScale(scale);
 
         exitButton.on('pointerdown', function() {
             exitButton.on('pointerup', function() {

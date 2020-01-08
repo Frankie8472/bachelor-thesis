@@ -149,7 +149,7 @@ export class PreloadAssets extends BaseScene {
         const cogwheel: Phaser.GameObjects.Sprite = this.add.sprite(1/2*this.cameras.main.width, 1/3*this.cameras.main.height, 'cogwheel');
         cogwheel.setOrigin(0.5, 0.5);
         const scale: number = this.imageScalingFactor(1/3*Math.min(this.cameras.main.height, this.cameras.main.width), cogwheel.width, cogwheel.height);
-        cogwheel.setScale(scale, scale);
+        cogwheel.setScale(scale);
 
         const cogTween: Phaser.Tweens.Tween = this.tweens.add({
             targets: cogwheel,

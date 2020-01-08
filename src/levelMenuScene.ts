@@ -93,12 +93,12 @@ export class LevelMenuScene extends BaseScene {
         eraseButton.setOrigin(1, 1);
 
         const scaleCatButton: number = this.imageScalingFactor(this.buttonSize / 1.5, catButton.width, catButton.height);
-        catButton.setScale(scaleCatButton, scaleCatButton);
+        catButton.setScale(scaleCatButton);
         catButton.setName('catButton');
         catButton.setInteractive({cursor: 'pointer'});
 
         const scaleEraseButton: number = this.imageScalingFactor(this.buttonSize / 1.5, eraseButton.width, eraseButton.height);
-        eraseButton.setScale(scaleEraseButton, scaleEraseButton);
+        eraseButton.setScale(scaleEraseButton);
         eraseButton.setName('eraseButton');
         eraseButton.setInteractive({cursor: 'pointer'});
 
@@ -108,7 +108,7 @@ export class LevelMenuScene extends BaseScene {
                 gameObject.setOrigin(0.5, 0.5);
 
                 const scale: number = this.imageScalingFactor(this.buttonSize, gameObject.width, gameObject.height);
-                gameObject.setScale(scale, scale);
+                gameObject.setScale(scale);
 
                 gameObject.setData('clicked', false);
 
@@ -261,7 +261,7 @@ export class LevelMenuScene extends BaseScene {
         const title: Phaser.GameObjects.Sprite = this.add.sprite(this.cameras.main.width / 2, y, 'title');
         const titleScale: number = this.imageScalingFactor(y * 1.3, title.width, title.height, true);
         title.setOrigin(0.5, 0.5);
-        title.setScale(titleScale, titleScale);
+        title.setScale(titleScale);
         title.setName('title');
         title.setInteractive({cursor: 'pointer'});
     }
@@ -443,7 +443,7 @@ export class LevelMenuScene extends BaseScene {
                 }
                 const star: Phaser.GameObjects.Sprite = this.add.sprite(gameObject.getBottomCenter().x, gameObject.getBottomCenter().y, score);
                 const scale: number = this.imageScalingFactor((gameObject.getTopRight().x - gameObject.getTopLeft().x)/2, star.width, star.height);
-                star.setScale(scale, scale);
+                star.setScale(scale);
                 star.setOrigin(0.5, 0.5);
             }
         }, this);
