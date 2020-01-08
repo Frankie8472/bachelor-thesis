@@ -4,11 +4,11 @@
   "references.bib" 1533806068 182 565ba0263c078a06cda13600ad9911de ""
   "thesis.aux" 0 -1 0 "pdflatex"
   (generated)
-  "thesis.bbl"
   "thesis.blg"
-["pdflatex"] 1578515898 "/home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/thesis.tex" "/home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/thesis.pdf" "thesis" 1578515898
+  "thesis.bbl"
+["pdflatex"] 1578518163 "/home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/thesis.tex" "/home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/thesis.pdf" "thesis" 1578518163
   "/dev/null" 1578486602 0 d41d8cd98f00b204e9800998ecf8427e ""
-  "/home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/thesis.aux" 1578515898 8 a94a2480d3289e625eea47cd1b285758 ""
+  "/home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/thesis.aux" 1578518163 8 a94a2480d3289e625eea47cd1b285758 ""
   "/home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/thesis.tex" 1578502572 7146 ca000aa2273b13cd57e5de3e7fc6dcd4 ""
   "/usr/share/texmf-dist/fonts/enc/dvips/base/8r.enc" 1572595918 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/share/texmf-dist/fonts/map/fontname/texfonts.map" 1572595918 3332 103109f5612ad95229751940c61aada0 ""
@@ -170,7 +170,7 @@
   "chapters/ch01-introduction.tex" 1578393896 4069 9f9f01b13bfd2e67a54723e45d5bbb5d ""
   "chapters/ch02-relatedwork.tex" 1578319354 2580 4efde0d4507125a81123e2c28b43280c ""
   "chapters/ch03-requirements.tex" 1578394151 2285 050de370c4d112b2a465cac51a04de1b ""
-  "chapters/ch04-design.tex" 1578515895 17204 8b82834ca600a6c264da137457fea218 ""
+  "chapters/ch04-design.tex" 1578518159 17778 7dbfad4565719d2469d05a3392a891b5 ""
   "chapters/ch05-evaluation.tex" 1578320021 2962 3fe110856ba07aa8c1697ad82dd422af ""
   "chapters/ch06-conclusion.tex" 1578394308 720 1ee6582272d5835a0f077070d5a8bf3c ""
   "chapters/preamble.tex" 1393336708 387 ac50525687df35de077f7517c251bd8d ""
@@ -183,10 +183,10 @@
   "thesis.out" 0 -1 0 "pdflatex"
   "thesis.tex" 1578502572 7146 ca000aa2273b13cd57e5de3e7fc6dcd4 ""
   (generated)
-  "/home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/thesis.pdf"
-  "thesis.toc"
-  "/home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/thesis.log"
   "thesis.pdf"
+  "/home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/thesis.pdf"
+  "thesis.log"
+  "/home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/thesis.log"
+  "thesis.toc"
   "thesis.aux"
   "thesis.out"
-  "thesis.log"

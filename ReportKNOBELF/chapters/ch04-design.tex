@@ -80,6 +80,10 @@ Parts of the final video are then taken for the respective scenes and converted 
 These single pictures are saved in one picture (called spreadsheet [EXAMPLE]).
 The phaser framework animates those spreadsheets.
 
+Is is important to note, that different devices have a different limit for the resolution of images.
+Tablets seem to have the lowest, namely 4096x4096 pixels.
+The spreadsheet images are scaled down for that reason.
+
 \section{Concept of the Learning Environment}
 Through the boundary conditions and requirements of the learning environment,
 we split our environment into multiple parts or here called scenes.
@@ -101,13 +105,14 @@ Through a click he shall commence to the level menu.
 In the level menu, the user is able to choose between different levels and games.
 He can also access the object summary and track his progress/score.
 The progress of each individual level is shown on the respective buttons.
+The progress can be resetted by the reset button.
 
-\subsection{Object summary}
+\subsection{Object Summary}
 The Object summary allows the user to get a feeling for all the different properties an object can have.
 For that reason the number of objects per category is restricted to five, as there are over 1000 different objects.
 Objects are draggable and sortable by each category with a click on a respective button.
 
-\subsection{Sorting with one category}
+\subsection{Sorting with one Category}
 Here the user has to sort the static objects with one category by the given category.
 As the user should be able to experience all categories, they are split into different levels.
 Each level represents a category.
@@ -132,17 +137,11 @@ is randomly selected each time you start the game.
 
 \subsection{Sorting with restricted space}
 In this scene the user has to sort a given number of objects with all properties shown into boxes with limited space.
-The objects in one box must have at least one property incommon and
+The objects in one box must have at least one property in common and
 can be put into the box and taken out an infinite amount of times.
 
 To make the game more difficult, this level is split into two.
 The first level has boxes with the size 6, 4, 2 and the second one boxes with the size 6, 5, 4.
-%E.g. For the category colors: In the end, box 1 contains 6 objects that are blue, box 2 contains 4 objects
-%that are yellow and box 3 contains 2 obejcts that are red. In total there are 12 objects.
-%The objects are random generated, so that at least one category fits.
-%The possibility of cross category matching is considered and will also count.
-%E.g. In the end, box 1 containt 6 objects that are blue, box 2 contains 4 objects that are squares
-%and box 3 containts 2 objects that have 3 dots/holes.
 
 \subsection{Object pairing - easy version}
 In this game, twelve objects with three categories are shown.
@@ -274,7 +273,6 @@ can be accessed by filename.["fieldname"] or filename.fieldname:
         ...
     }
     ...
-
 \end{lstlisting}
 
 The way the objects files are preloaded into the respective managers is shown below.
@@ -358,9 +356,25 @@ Important to note is, that the last started/activated scene is at position 0 in 
 The same trick is used for closing all current scenes when exiting (without the dropDownMenu Scene).
 
 \subsection{WelcomeScene}
+A blinking finger is added to the screen so that the user knows that he can advance by clicking on the screen.
+
 \subsection{LevelMenuSceneScene}
+Levels with the same difficulty are distinguished by numbers from one to four.
+Levels with another difficulty are distinguished by images of monsters with different level of spookiness.
+[INSERT IMAGES OF MONSTERS]
+
 \subsection{IntroScene}
+To pause the current scene and still play the introduction animation, a separate scene is necessary.
+Each time an intro has to be played, the intro scene is started anew.
+The current scene is pauses itself when the intro scene is started and the name/key/identifier
+of the paused scene is given to the intro scene.
+That way the intro scene can resume the paused scene and then stop itself.
+
+The respective intro material is selected via the name/key/identifier of the paused scene.
+
 \subsection{SortingScene}
+
+
 \subsection{PropertySortingScene}
 \subsection{RestrictedSortingScene}
 \subsection{GameScene}
