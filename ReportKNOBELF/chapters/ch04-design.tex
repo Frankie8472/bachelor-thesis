@@ -199,6 +199,8 @@ Our learning environment consists of different scenes each one inheriting the ba
 The following subsections won't contain the whole code as some parts are trivial to understand.
 Instead a summary of the scenes purpose and crucial parts are shown and explained.
 
+The full code can be accessed here [INSERT LINK].
+
 [IMAGE_OF_STATE_DIAGRAM]
 
 \subsection{BaseScene}
@@ -345,12 +347,15 @@ The lock is freed after the competion of an event/animation.
 While the menu is down/open, the current scene has to be paused.
 This is achieved by accessing the other scene by fetching the key of the only other active scene and pausing it.
 Important to note is, that the last started/activated scene is at position 0 in the array of all active scenes.
-\begin{lstlisting}[style=TypeScript, caption=Lock aquiring and freeing]
+\begin{lstlisting}[style=TypeScript, caption=Fetching current active scene]
     ...
-
+    const key_paused_scene: string = this.game.scene.getScenes(true)[0].key;
+    this.game.scene.pause(key_paused_scene);
+    this.key_paused_scene = key_paused_scene;
     ...
 \end{lstlisting}
 
+The same trick is used for closing all current scenes when exiting (without the dropDownMenu Scene).
 
 \subsection{WelcomeScene}
 \subsection{LevelMenuSceneScene}
