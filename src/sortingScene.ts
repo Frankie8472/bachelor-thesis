@@ -41,7 +41,7 @@ export class SortingScene extends BaseScene {
         super('SortingScene');
     }
 
-    init(data): void {
+    init(): void {
 
         // Initialize data from previous scene
         this.jsonObject = this.cache.json.get('objects');
@@ -55,7 +55,6 @@ export class SortingScene extends BaseScene {
     }
 
     preload(): void {
-
     }
 
     create(): void {
@@ -72,7 +71,7 @@ export class SortingScene extends BaseScene {
         this.initAudio();
     }
 
-    update(time: number, delta: number): void {
+    update(): void {
     }
 
     /**
