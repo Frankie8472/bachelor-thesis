@@ -7,14 +7,14 @@ In this section all implementation tools and approaches are explained.
 First our used framework will be explained, then how our different scenes and objects are generated and
 at last how these two are combined to our final solution.
 
-\section{Phaser 3}
+\section{Phaser 3}\label{sec:phaser-3}
 %https://labs.phaser.io/
 %https://phaser.io/
 %https://photonstorm.github.io/phaser3-docs/
 
-\subsection{Scenes}
-\subsection{Managers}
-\section{Object generation}
+\subsection{Scenes}\label{subsec:scenes}
+\subsection{Managers}\label{subsec:managers}
+\section{Object generation}\label{sec:object-generation}
 Our objects can have up to four properties with at maximum one from each of the following categories:
 \begin{itemize}
     \item Geometrical shape (square, triangle, circle, ellipse, rhombus, octagon)
@@ -29,7 +29,8 @@ With a python script [EXAMPLE] scalable vector graphic (SVG) files are generated
 After that they are converted to portable network graphic (PNG) files with the GNU image manipulation program (GIMP),
 so that they can be imported into Phaser.
 
-\section{Object storage}
+\section{Objects}\label{sec:objects}
+\subsection{Object Storage}\label{subsec:object-storage}
 Our objects are images with different properties.
 These properties cannot be saved in the images itself.
 for that reason the image path with the respective properties are stored in a easily accessible
@@ -73,7 +74,35 @@ for that reason the image path with the respective properties are stored in a ea
 
 For the correct way to access the fields please go to [INSERTCHAPTER].
 
-\section{Introduction Animation Generation}
+\subsection{Object Interaction}\label{subsec:object-interaction}
+Whenever possible, when the user interacts with an object, a generalization of the input code is used.
+Instead of giving each object an event task, the global event task is fetched and the object via the event parameters.
+This way the input interaction code is kept in one place.
+
+\begin{lstlisting}[style=TypeScript, caption=Input code]
+    ...
+    this.input.on('dragstart', function(pointer, gameObject) {
+        ...
+    }, this);
+
+    this.input.on('drag', function(pointer, gameObject, dragX, dragY) {
+        ...
+    }, this);
+
+    this.input.on('dragend', function(pointer, gameObject, dropped) {
+        ...
+        if (!dropped ...) {
+            ...
+        }
+    }, this);
+
+    this.input.on('drop', function(pointer, gameObject, dropZone) {
+        ...
+    }, this);
+    ...
+\end{lstlisting}
+
+\section{Introduction Animation Generation}\label{sec:introduction-animation-generation}
 To produce animated instruction for the task later on,
 the screen is recorded with OBS Studio while someone (here me) is playing the game.
 Parts of the final video are then taken for the respective scenes and converted into single pictures.
@@ -84,11 +113,11 @@ Is is important to note, that different devices have a different limit for the r
 Tablets seem to have the lowest, namely 4096x4096 pixels.
 The spreadsheet images are scaled down for that reason.
 
-\section{Concept of the Learning Environment}
+\section{Concept of the Learning Environment}\label{sec:concept-of-the-learning-environment}
 Through the boundary conditions and requirements of the learning environment,
 we split our environment into multiple parts or here called scenes.
 
-\subsection{Drop Down Menu}
+\subsection{Drop Down Menu}\label{subsec:drop-down-menu}
 Throughout the whole experience, the user can open a menu with a button.
 This button is always visible.
 Once the menu is open, the user may close the menu and return to the current scene,
@@ -96,23 +125,23 @@ exit the current scene and return to the level menu and go into fullscreen and b
 The current scene is paused while the menu is open as it can be distracting for the user,
 if suddenly something pops up and covers parts of the visible and running scene.
 
-\subsection{Welcome Screen}
+\subsection{Welcome Screen}\label{subsec:welcome-screen}
 The welcome screen is the starting point of the user experience.
 Through this screen the user will be greeted by showing the name of the game.
 Through a click he shall commence to the level menu.
 
-\subsection{Level Menu}
+\subsection{Level Menu}\label{subsec:level-menu}
 In the level menu, the user is able to choose between different levels and games.
 He can also access the object summary and track his progress/score.
 The progress of each individual level is shown on the respective buttons.
 The progress can be resetted by the reset button.
 
-\subsection{Object Summary}
+\subsection{Object Summary}\label{subsec:object-summary}
 The Object summary allows the user to get a feeling for all the different properties an object can have.
 For that reason the number of objects per category is restricted to five, as there are over 1000 different objects.
 Objects are draggable and sortable by each category with a click on a respective button.
 
-\subsection{Sorting with one Category}
+\subsection{Sorting with one Category}\label{subsec:sorting-with-one-category}
 Here the user has to sort the static objects with one category by the given category.
 As the user should be able to experience all categories, they are split into different levels.
 Each level represents a category.
@@ -122,7 +151,7 @@ The Progress is defined by objects sorted the right and the wrong way.
 The amount of objects to sort, as well as the amount of properties of the category
 is randomly selected each time you start the game.
 
-\subsection{Sorting with one category under difficult conditions}
+\subsection{Sorting with one category under difficult conditions}\label{subsec:sorting-with-one-category-under-difficult-conditions}
 Here the user has to sort falling objects with one category by the given category.
 As the user should be able to experience all categories, they are split into different level.
 Each level represents a category.
@@ -135,7 +164,7 @@ There are no negative points for missing such an object but negative points for 
 The amount of falling objects to sort, as well as the amount of properties of the category
 is randomly selected each time you start the game.
 
-\subsection{Sorting with restricted space}
+\subsection{Sorting with restricted space}\label{subsec:sorting-with-restricted-space}
 In this scene the user has to sort a given number of objects with all properties shown into boxes with limited space.
 The objects in one box must have at least one property in common and
 can be put into the box and taken out an infinite amount of times.
@@ -143,7 +172,7 @@ can be put into the box and taken out an infinite amount of times.
 To make the game more difficult, this level is split into two.
 The first level has boxes with the size 6, 4, 2 and the second one boxes with the size 6, 5, 4.
 
-\subsection{Object pairing - easy version}
+\subsection{Object pairing - easy version}\label{subsec:object-pairing---easy-version}
 In this game, twelve objects with three categories are shown.
 the user has to select three objects which have to fulfil the following.
 For each category (color, shape and number of holes/dots) one of the following conditions has to hold:
@@ -163,7 +192,7 @@ After a set amount of correct selected objects, the game will end.
 
 If there are no three objects that fulfil the conditions, the playfield will be generated anew.
 
-\subsection{Object pairing - normal version}
+\subsection{Object pairing - normal version}\label{subsec:object-pairing---normal-version}
 In this game, twelve objects with four categories are shown.
 the user has to select three objects which have to fulfil the following.
 For each category (color, filling, shape and number of holes/dots) one of the following conditions has to hold:
@@ -183,17 +212,17 @@ After a set amount of correct selected objects, the game will end.
 
 If there are no three objects that fulfil the conditions, the playfield will be generated anew.
 
-\subsection{Score Screen}
+\subsection{Score Screen}\label{subsec:score-screen}
 After a task has been completed, there is going to be a score.
 This score is represented here with a displayed number of stars.
 The minimum of starts is zero and the maximum is three.
 If the user is unhappy with his results, he can replay the game by clicking on the replay button.
 
-\subsection{Introduction}
+\subsection{Introduction}\label{subsec:introduction}
 Before each game starts, a sample animation of the task beforehand is being shown.
 The current scene is paused in the meantime, so that the user has enough time to find out what he has to do.
 
-\section{Code structure of the learning environment}
+\section{Code structure of the learning environment}\label{sec:code-structure-of-the-learning-environment}
 Our learning environment consists of different scenes each one inheriting the base scene.
 The following subsections won't contain the whole code as some parts are trivial to understand.
 Instead a summary of the scenes purpose and crucial parts are shown and explained.
@@ -202,7 +231,7 @@ The full code can be accessed here [INSERT LINK].
 
 [IMAGE_OF_STATE_DIAGRAM]
 
-\subsection{BaseScene}
+\subsection{BaseScene}\label{subsec:basescene}
 This scene contains methods and fields which are neccessary in multiple scenes
 (e.g. the scene transition, indentifier of the scene, ...).
 
@@ -242,7 +271,7 @@ mask according to the wanted animation (IN/OUT).
     }
 \end{lstlisting}
 
-\subsection{PreloadAssets}
+\subsection{PreloadAssets}\label{subsec:preloadassets}
 As mentioned before, every scene contains the method "preload()"
 where the files used late on can be loaded into the respective managers/cache.
 Now every asset loaded this way has a unique identifier and can be used in future scene
@@ -279,7 +308,7 @@ The way the objects files are preloaded into the respective managers is shown be
 
 \begin{lstlisting}[style=TypeScript, caption=preloadAsset.ts]
     ...
-    preload(): void {
+    private preload(): void {
         this.load.setPath('assets/geometrical_objects/');
         this.load.json('objects', 'geometrical_objects.json');
         ...
@@ -313,7 +342,7 @@ The way the objects files are preloaded into the respective managers is shown be
     ...
 \end{lstlisting}
 
-\subsection{DropDownMenu}
+\subsection{DropDownMenu}\label{subsec:dropdownmenu}
 In this scene the drop down menu is created.
 This scene is never stops and is always on top of other scenes.
 
@@ -355,15 +384,15 @@ Important to note is, that the last started/activated scene is at position 0 in 
 
 The same trick is used for closing all current scenes when exiting (without the dropDownMenu Scene).
 
-\subsection{WelcomeScene}
+\subsection{WelcomeScene}\label{subsec:welcomescene}
 A blinking finger is added to the screen so that the user knows that he can advance by clicking on the screen.
 
-\subsection{LevelMenuSceneScene}
+\subsection{LevelMenuSceneScene}\label{subsec:levelmenuscenescene}
 Levels with the same difficulty are distinguished by numbers from one to four.
 Levels with another difficulty are distinguished by images of monsters with different level of spookiness.
 [INSERT IMAGES OF MONSTERS]
 
-\subsection{IntroScene}
+\subsection{IntroScene}\label{subsec:introscene}
 To pause the current scene and still play the introduction animation, a separate scene is necessary.
 Each time an intro has to be played, the intro scene is started anew.
 The current scene is pauses itself when the intro scene is started and the name/key/identifier
@@ -372,19 +401,106 @@ That way the intro scene can resume the paused scene and then stop itself.
 
 The respective intro material is selected via the name/key/identifier of the paused scene.
 
-\subsection{SortingScene}
+\subsection{SortingScene}\label{subsec:sortingscene}
+To sort the displayed objects by their respective subcategory by clicking on one of the category buttons,
+random coordinates are needed dependant on the screensize and objectsize.
+\begin{lstlisting}[style=TypeScript, caption={returnQuad() (sortingScene.ts)}]
+    ...
+    private returnQuad(quadrant: number, quadrantType: number): number[] {
+        let ret: number[] = null;
+        ...
+        const leftOffsite: number = 100;
+        const rightOffsite: number = 0;
+        const topOffsite: number = 0;
+        const bottomOffsite: number = 100;
+
+        // Has entries dependant of
+        const horizontal: number[] = [];
+
+        // Has numberOfLines + 1 entries
+        const vertical: number[] = [];
+
+        horizontal.push(leftOffsite);
+
+        vertical.push(topOffsite);
+
+        switch (quadrantType) {
+            case 3: {
+                horizontal.push(leftOffsite + (this.cameras.main.width - leftOffsite - rightOffsite) / 3);
+                horizontal.push(leftOffsite + (this.cameras.main.width - leftOffsite - rightOffsite) * 2 / 3);
+                break;
+            }
+            case 4: {
+                horizontal.push(leftOffsite + (this.cameras.main.width - leftOffsite - rightOffsite) / 2);
+                vertical.push(topOffsite + (this.cameras.main.height - topOffsite - bottomOffsite) / 2);
+                break;
+            }
+            case 6: {
+                horizontal.push(leftOffsite + (this.cameras.main.width - leftOffsite - rightOffsite) / 3);
+                horizontal.push(leftOffsite + (this.cameras.main.width - leftOffsite - rightOffsite) * 2 / 3);
+                vertical.push(topOffsite + (this.cameras.main.height - topOffsite - bottomOffsite) / 2);
+                break;
+            }
+            default: {
+                break;
+            }
+        }
+
+        horizontal.push(this.cameras.main.width - rightOffsite);
+        vertical.push(this.cameras.main.height - bottomOffsite);
+
+        switch (quadrantType) {
+            case 3: {
+                ret = [Phaser.Math.RND.between(horizontal[quadrant] + spriteSizeHalf, horizontal[quadrant + 1] - spriteSizeHalf), Phaser.Math.RND.between(vertical[0] + spriteSizeHalf + this.cameras.main.height / 8, vertical[1] - spriteSizeHalf - this.cameras.main.height / 8)];
+                break;
+            }
+            case 4: {
+                if (quadrant < 2) {
+                    ret = [Phaser.Math.RND.between(horizontal[quadrant] + spriteSizeHalf, horizontal[quadrant + 1] - spriteSizeHalf), Phaser.Math.RND.between(vertical[0] + spriteSizeHalf, vertical[1] - spriteSizeHalf)];
+                } else {
+                    ret = [Phaser.Math.RND.between(horizontal[quadrant \% 2] + spriteSizeHalf, horizontal[(quadrant \% 2) + 1] - spriteSizeHalf), Phaser.Math.RND.between(vertical[1] + spriteSizeHalf, vertical[2] - spriteSizeHalf)];
+
+                }
+                break;
+            }
+            case 6: {
+                if (quadrant < 3) {
+                    ret = [Phaser.Math.RND.between(horizontal[quadrant] + spriteSizeHalf, horizontal[quadrant + 1] - spriteSizeHalf), Phaser.Math.RND.between(vertical[0] + spriteSizeHalf, vertical[1] - spriteSizeHalf)];
+                } else {
+                    ret = [Phaser.Math.RND.between(horizontal[quadrant \% 3] + spriteSizeHalf, horizontal[(quadrant \% 3) + 1] - spriteSizeHalf), Phaser.Math.RND.between(vertical[1] + spriteSizeHalf, vertical[2] - spriteSizeHalf)];
+                }
+                break;
+            }
+            default: {
+                break;
+            }
+        }
+        return ret;
+    }
+\end{lstlisting}
+
+\subsection{PropertySortingScene}\label{subsec:propertysortingscene}
+To specify the difficulty level, two fields are needed:
+\begin{lstlisting}[style=TypeScript, caption={Level fields (propertySortingScene.ts)}]
+    ...
+    private setCat: number;
+    ...
+    private infinite: boolean;
+    ...
+\end{lstlisting}
+
+In contrast to other scenes, object must have the type Phaser.Physics.Arcade.Sprite as only arcade sprites have the
+possibility of an acceleration in a direction.
+
+\subsection{RestrictedSortingScene}\label{subsec:restrictedsortingscene}
+\subsection{GameScene}\label{subsec:gamescene}
+\subsection{ScoreScene}\label{subsec:scorescene}
 
 
-\subsection{PropertySortingScene}
-\subsection{RestrictedSortingScene}
-\subsection{GameScene}
-\subsection{ScoreScene}
+\section{Final look of the learning environment}\label{sec:final-look-of-the-learning-environment}
 
 
-\section{Final look of the learning environment}
-
-
-\section{Checklist}
+\section{Checklist}\label{sec:checklist}
 
 - overview of your solution. Give a good explanation of its rationale,
 concepts and mechanisms. If your solution relies on a

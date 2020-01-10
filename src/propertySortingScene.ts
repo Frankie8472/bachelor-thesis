@@ -232,7 +232,7 @@ export class PropertySortingScene extends BaseScene {
     private setDropzones(): void {
         const leftBound: number = this.correctBar.getTopRight().x + 10;
         const stepSize: number = (this.cameras.main.width - leftBound) / (this.propertyCount);
-        const zoneWidth: number = (this.cameras.main.width - leftBound)/(this.selectedElements.length);
+        const zoneWidth: number = (this.cameras.main.width - leftBound) / (this.selectedElements.length);
         const crateSize: number = Math.min(this.objectDisplaySize * 2, zoneWidth);
         let iteration: number = 0.5;
 
@@ -264,7 +264,7 @@ export class PropertySortingScene extends BaseScene {
         // On dragstart
         this.input.on('dragstart', function(pointer, gameObject) {
             if (gameObject instanceof Phaser.Physics.Arcade.Sprite) {
-                if (gameObject.getData('active')){
+                if (gameObject.getData('active')) {
                     gameObject.setTint(0x999999);
                 }
                 gameObject.setVelocityY(0);
@@ -299,7 +299,7 @@ export class PropertySortingScene extends BaseScene {
 
                 let x: number = gameObject.x;
                 let y: number = gameObject.y;
-                let dist: number = Math.sqrt(Math.pow(gameObject.width*gameObject.getData('scale'), 2) + Math.pow(gameObject.height*gameObject.getData('scale'), 2))/2;
+                let dist: number = Math.sqrt(Math.pow(gameObject.width * gameObject.getData('scale'), 2) + Math.pow(gameObject.height * gameObject.getData('scale'), 2)) / 2;
 
                 if (x < 0) {
                     x = dist;
@@ -347,7 +347,7 @@ export class PropertySortingScene extends BaseScene {
                 }
 
                 this.updateProgressbar(point);
-                if (gameObject.getData('active')){
+                if (gameObject.getData('active')) {
                     gameObject.clearTint();
                 }
                 gameObject.setScale(scale);
@@ -367,7 +367,7 @@ export class PropertySortingScene extends BaseScene {
             // Create 10 of each property
             for (let i = 0; i < this.numberOfObjectsEach; i++) {
                 // RND size
-                const size: number = Phaser.Math.RND.between(this.objectDisplaySize, this.objectDisplaySize*1.3);
+                const size: number = Phaser.Math.RND.between(this.objectDisplaySize, this.objectDisplaySize * 1.3);
 
                 const sprite: Phaser.Physics.Arcade.Sprite = this.physics.add.sprite(Phaser.Math.RND.between(100 + this.objectDisplaySize / 2, this.cameras.main.width - this.objectDisplaySize / 1.5), Phaser.Math.RND.between(this.objectDisplaySize / 2, this.cameras.main.height - this.objectDisplaySize * 2 - this.objectDisplaySize / 2), this.selectedElementsName[this.selectedElements.indexOf(propImage)]);
                 sprite.setName(propImage.name);
@@ -391,7 +391,7 @@ export class PropertySortingScene extends BaseScene {
                 sprite.setData('spin', Phaser.Math.RND.between(10, 50));
                 sprite.setData('active', true);
 
-                sprite.setInteractive({ cursor: 'pointer' });
+                sprite.setInteractive({cursor: 'pointer'});
 
                 this.arrayStatic.add(sprite);
                 this.arrayStack.add(sprite);
@@ -402,7 +402,7 @@ export class PropertySortingScene extends BaseScene {
             let rndDummy: number = 0;
 
             if (this.infinite) {
-                rndDummy = Phaser.Math.RND.between(0, this.numberOfObjectsEach/2)
+                rndDummy = Phaser.Math.RND.between(0, this.numberOfObjectsEach / 2);
             }
 
             this.numberOfDummies += rndDummy;
@@ -435,7 +435,7 @@ export class PropertySortingScene extends BaseScene {
                 sprite.setData('spin', Phaser.Math.RND.between(10, 50));
                 sprite.setData('active', false);
 
-                sprite.setInteractive({ cursor: 'pointer' });
+                sprite.setInteractive({cursor: 'pointer'});
 
                 this.arrayStatic.add(sprite);
                 this.arrayStack.add(sprite);
@@ -454,7 +454,7 @@ export class PropertySortingScene extends BaseScene {
 
         this.physics.add.collider(this.arrayStack.getAll(), floor, function(gameObject1) {
             if (gameObject1 instanceof Phaser.Physics.Arcade.Sprite) {
-                if (gameObject1.getData('active')){
+                if (gameObject1.getData('active')) {
                     this.updateProgressbar(-1);
                 }
                 gameObject1.setVelocityY(0);
@@ -513,7 +513,7 @@ export class PropertySortingScene extends BaseScene {
         const progressbarY: number = this.cameras.main.height - 10;
         const progressbarCorrect: Phaser.GameObjects.Sprite = this.add.sprite(0, progressbarY, 'progressbar');
         const multiplierX: number = 0.4;
-        const multiplierY: number = this.imageScalingFactor(this.cameras.main.height*0.5, progressbarCorrect.height, progressbarCorrect.height);//0.3;
+        const multiplierY: number = this.imageScalingFactor(this.cameras.main.height * 0.5, progressbarCorrect.height, progressbarCorrect.height);//0.3;
 
         progressbarCorrect.setOrigin(0, 1);
         progressbarCorrect.setScale(multiplierX, multiplierY);
@@ -586,7 +586,7 @@ export class PropertySortingScene extends BaseScene {
      * Method for initializing sound effects
      */
     private initAudio(): void {
-        if (this.infinite){
+        if (this.infinite) {
             this.sound.add('battle').play('', {loop: true});
         } else {
             this.sound.add('space').play('', {loop: true});
