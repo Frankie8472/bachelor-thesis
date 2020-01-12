@@ -434,13 +434,18 @@ export class LevelMenuScene extends BaseScene {
         this.levelButtons.getChildren().forEach(function(gameObject) {
             if (gameObject instanceof Phaser.GameObjects.Sprite && gameObject.name != "catButton" && gameObject.name != 'eraseButton') {
                 let score: string = 'star_0';
-                if(window.localStorage.getItem('phaser_score_' + this.buttonToSceneMap(gameObject.name))){
-                    if (reset) {
-                        window.localStorage.setItem('phaser_score_' + this.buttonToSceneMap(gameObject.name), score);
-                    } else {
-                        score = window.localStorage.getItem('phaser_score_' + this.buttonToSceneMap(gameObject.name));
+                if (typeof(Storage) !== "undefined") {
+                    if(window.localStorage.getItem('phaser_score_' + this.buttonToSceneMap(gameObject.name))){
+                        if (reset) {
+                            window.localStorage.setItem('phaser_score_' + this.buttonToSceneMap(gameObject.name), score);
+                        } else {
+                            score = window.localStorage.getItem('phaser_score_' + this.buttonToSceneMap(gameObject.name));
+                        }
                     }
+                } else {
+                    console.log("Sorry! No Web Storage support...");
                 }
+
                 const star: Phaser.GameObjects.Sprite = this.add.sprite(gameObject.getBottomCenter().x, gameObject.getBottomCenter().y, score);
                 const scale: number = this.imageScalingFactor((gameObject.getTopRight().x - gameObject.getTopLeft().x)/2, star.width, star.height);
                 star.setScale(scale);

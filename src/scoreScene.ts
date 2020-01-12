@@ -142,6 +142,10 @@ export class ScoreScene extends BaseScene {
      * Method for saving the score global
      */
     private saveScore(score: string): void {
-        window.localStorage.setItem('phaser_score_' + this.previousScene, score);
+        if (typeof(Storage) !== "undefined") {
+            window.localStorage.setItem('phaser_score_' + this.previousScene, score);
+        } else {
+            console.log("Sorry! No Web Storage support...");
+        }
     }
 }
