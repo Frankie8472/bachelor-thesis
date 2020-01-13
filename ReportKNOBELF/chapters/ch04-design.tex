@@ -7,30 +7,283 @@ In this section all implementation tools and approaches are explained.
 First our used framework will be explained, then how our different scenes and objects are generated and
 at last how these two are combined to our final solution.
 
-\section{Phaser 3}
+\section{Phaser 3}\label{sec:phaser-3}
 %https://labs.phaser.io/
 %https://phaser.io/
 %https://photonstorm.github.io/phaser3-docs/
 
-\subsection{Scenes}
-\subsection{Managers}
-\section{Object generation}
+Phaser is an open source HTML5 game framework created by Photon Storm.
+It is is a JavaScript/TypeScript library designed to run on all major desktop browsers and
+a lot of focus was given to performance inside of mobile web browsers.
+If the device is capable then it uses WebGL for rendering, but otherwise it seamlessly reverts to Canvas.
+
+\subsection{Base Configuration}\label{subsec:base-configuration}
+In Phaser 3, games need a configuration file and a starting point.
+
+For example:
+\begin{lstlisting}[style=TypeScript, caption={Game Setup File}]
+    import 'phaser';
+    import GameConfig = Phaser.Types.Core.GameConfig;
+    import RenderConfig = Phaser.Types.Core.RenderConfig;
+    import {Scene1} from './scene1';
+    import {Scene2} from './scene2';
+
+    // Defining the renderer
+    const renderConfig: RenderConfig = {
+        antialias: true,
+        pixelArt: false
+    };
+
+    // Enforcing widescreen
+    let width: number = window.screen.width;
+    let height: number = window.screen.height;
+
+    if (window.screen.width <= window.screen.height) {
+        width = window.screen.height;
+        height = window.screen.width;
+    }
+
+    // Game Configuration
+    const config: GameConfig = {
+        title: 'TITLE',
+        parent: 'game',
+        type: Phaser.AUTO,
+        scene: [
+            scene1, scene2
+        ],
+        physics: {
+            default: 'arcade',
+            arcade: {
+                debug: false
+            }
+        },
+
+        // Master background color
+        backgroundColor: '#000000',
+
+        render: renderConfig,
+
+        scale: {
+            parent: 'phaser-example',
+            mode: Phaser.Scale.FIT,
+            autoCenter: Phaser.Scale.CENTER_BOTH,
+            width: width,
+            height: height
+        }
+    };
+
+    export class GameName extends Phaser.Game {
+        constructor(config: GameConfig) {
+            super(config);
+        }
+    }
+
+    // Event handler for starting the game
+    window.onload = () => {
+        const game = new GameName(config);
+    };
+\end{lstlisting}
+
+\subsection{Scenes}\label{subsec:scenes}
+Games in Phaser 3 are structured around scene objects.
+A scene is a collection of game objects and related logic which should be kept together.
+The objects will be drawn when the scene is rendered and its update method will get called on every tick of your game loop.
+
+Where this gets special is that Phaser 3 doesn't place any constraints on how many scenes need to be running.
+This means you can have 0, 1, or as many as you need going at once.
+You can communicate between them and each scene has a z-index so you can have a
+UI scene, rendered above the play scene, which is always rendered above the background scene.
+
+A scene has usually 5 functions.
+
+\begin{itemize}
+    \item Function \textbf{constructor}: Run 1 time.
+    \item Function \textbf{init}: Run 1 time. Initialization of fields and passed on data by other scenes.
+    \item Function \textbf{preload}: Run 1 time. Loads up all the assets inside the scene like images and audio.
+    \item Function \textbf{create}: Run 1 time. Position and display the assets that are already preloaded, animations, physics, etc.
+    \item Function \textbf{update}: Run 1 time per frame, takes care of everything related to the game logic.
+\end{itemize}
+
+\subsubsection{Lifecycle}
+A simplified model is that a scene moves between four states: \textit{Create, Update Loop, Paused, and Stopped}.
+Most transitions are initiated by a function call and emit a signal that can be listened for
+should you need to take action at specific points in the process.
+
+The scene state transitions and fired events are summarized in the following state diagram.
+Functions which initiate a transition are in light yellow and signals emitted are light orange.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/lifecycle}
+    \caption{Scene Lifecycle}
+    \label{fig:lifecycle}
+\end{figure}
+
+One interesting behavior is that once a scene has been shut down it is not garbage collected but,
+can be resumed via the method start().
+When this happens the three creation functions get called once more.
+This means any state tracked in the scene class will be retained between a stopped state and the next create state.
+As a result special care must be taken to set a known initial value on everything requiring one.
+
+\subsection{Managers}\label{subsec:managers}
+In Phaser 3 managers are a global system.
+Animations, scenes, images loaded/created within it are globally available to all game objects.
+They share the base data while managing their own timelines.
+This allows you to define a single object once and apply it to as many game objects as you require and
+call a game object in an completely other scene.
+Examples for used managers in this work are:
+
+\begin{itemize}
+    \item \textbf{Scene Manager} (scene.scenes). Contains all scenes of the game once created.
+    \item \textbf{Texture Manager} (scene.textures). Contains all textures once loaded.
+    \item \textbf{Audio Manager} (scene.sound). Containts all audio files once loaded.
+    \item \textbf{Data Manager} (scene.data). Shared data manager. An event is triggered when an event is stored/changed.
+    \item \textbf{Cache Manager} (scene.cache). Containts all special files once loaded.
+    \item \textbf{Animation Manager} (scene.anims). Contains all animations once created.
+    \item \textbf{Tween Manager} (scene.tweens). Contains all tween objects once created.
+    A Tween is able to manipulate the properties of one or more objects to any given value, based
+    on a duration and type of ease.
+\end{itemize}
+
+A special texture we are going to use instead of normal images are sprites.
+A sprite game object is used for the display of both static and animated images in your game.
+Sprites can have input events and physics bodies.
+The main difference between a sprite and an image game object is that you cannot animate images.
+
+\section{Object Generation}\label{sec:object-generation}
 Our objects can have up to four properties with at maximum one from each of the following categories:
 \begin{itemize}
-    \item Geometrical shape (square, triangle, circle, ellipse, rhombus, octagon)
-    \item Color (yellow, orange, red, purple, green, blue)
-    \item Holes or dots (one, two, three, four, five, six)
-    \item Filling (filled, striped, dotted)
+    \item \textbf{Geometrical shape} (square, triangle, circle, ellipse, rhombus, octagon)
+    \item \textbf{Color} (yellow, orange, red, purple, green, blue)
+    \item \textbf{Holes} or dots (one, two, three, four, five, six)
+    \item \textbf{Filling} (filled, striped, dotted)
 \end{itemize}
 
 We need all possible objects with one, three and four properties.
 
-With a python script [EXAMPLE] scalable vector graphic (SVG) files are generated [EXAMPLE].
+With a python script [\ref{lst:svggen}] scalable vector graphic (SVG) files are generated [\ref{lst:svgimagefile}].
 After that they are converted to portable network graphic (PNG) files with the GNU image manipulation program (GIMP),
 so that they can be imported into Phaser.
 
-\section{Objects}
-\subsection{Object Storage}
+\begin{lstlisting}[style=TypeScript, caption={SVG Generation}, label={lst:svggen}]
+    ...
+    imageString = imgStr(colordefault, colordark, square, circle, triangle, ellipse, octagon, rhombus, filling, one,
+                         two, three, four, five, six)
+
+    filename = colordefault + shape + number + fillingname
+
+    with open("images/svg/" + filename + ".svg", "w+") as file:
+        file.write(imageString)
+        file.close()
+    ...
+\end{lstlisting}
+
+\begin{lstlisting}[style=TypeScript, caption={SVG Image File}, label={lst:svgimagefile}]
+    <?xml version="1.0" standalone="yes"?>
+
+    <svg height="1000" width="1000" viewbox="0 0 1000 1000" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+            <pattern id="stripe" patternUnits="userSpaceOnUse" width="20%" height="20%">
+                <path stroke="aqua" stroke-linecap="butt" stroke-width="50" d="M -20 -20 l1000 1000"/>
+                <path stroke="aqua" stroke-linecap="butt" stroke-width="50" d="M -20 180 l1000 1000"/>
+                <path stroke="aqua" stroke-linecap="butt" stroke-width="50" d="M -20 -220 l1000 1000"/>
+
+            </pattern>
+            <pattern id="dotted" enable-background="true" patternUnits="userSpaceOnUse" width="15%" height="15%">
+                <circle cx="30" cy="30" r="25" fill="aqua" />
+                <circle cx="105" cy="105" r="25" fill="aqua" />
+            </pattern>
+            <style>
+            .button {
+
+            stroke-width:5;
+            stroke:black;
+
+            }
+        </style>
+        </defs>
+
+     <g id="circle" display="none">
+         <circle cx="500" cy="500" r="300" class="button" fill="blue"/>
+         <circle cx="500" cy="500" r="300" class="button" fill="none"/>
+         <circle cx="500" cy="500" r="250" class="button" fill="none"/>
+     </g>
+
+     <g id="square" display="inherit">
+      <rect x="250" y="250" rx="20" ry="20" width="500" height="500" class="button" fill="blue"/>
+      <rect x="250" y="250" rx="20" ry="20" width="500" height="500" class="button" fill="none"/>
+      <rect x="300" y="300" rx="20" ry="20" width="400" height="400" class="button" fill="none"/>
+     </g>
+
+     <g id="triangle" display="none">
+      <polygon points="500,50 113.4,700 886.6,700" stroke-linejoin="round" class="button" fill="blue" />
+      <polygon points="500,50 113.4,700 886.6,700" stroke-linejoin="round" class="button" fill="none" />
+      <polygon points="500,150 200,650 800,650" stroke-linejoin="round" class="button" fill="none"/>
+     </g>
+
+     <g id="ellipse" display="none">
+      <ellipse cx="500" cy="500" rx="400" ry="250" class="button" fill="blue" />
+      <ellipse cx="500" cy="500" rx="400" ry="250" class="button" fill="none" />
+      <ellipse cx="500" cy="500" rx="350" ry="200" class="button" fill="none" />
+     </g>
+     <g id="octagon" display="none">
+      <polygon points="400,250 600,250 750,400 750,600 600,750 400,750 250,600 250,400" stroke-linejoin="round" class="button" fill="blue" />
+      <polygon points="400,250 600,250 750,400 750,600 600,750 400,750 250,600 250,400" stroke-linejoin="round" class="button" fill="none" />
+      <polygon points="400,300 600,300 700,400 700,600 600,700 400,700 300,600 300,400" stroke-linejoin="round" class="button" fill="none"/>
+     </g>
+
+     <g id="rhombus" display="none">
+      <polygon points="350,250 150,750 650,750 850,250" stroke-linejoin="round" class="button" fill="blue" />
+      <polygon points="350,250 150,750 650,750 850,250" stroke-linejoin="round" class="button" fill="none" />
+      <polygon points="390,300 230,700 620,700 770,300" stroke-linejoin="round" class="button" fill="none"/>
+     </g>
+
+
+     <g id="one" display="none">
+      <circle cx="500" cy="500" r="40" stroke="black" fill="black"/>
+     </g>
+
+     <g id="two" display="none">
+      <circle cx="570" cy="500" r="40" stroke="black" fill="black"/>
+      <circle cx="430" cy="500" r="40" stroke="black" fill="black"/>
+     </g>
+
+    <g id="three" display="none">
+      <circle cx="570" cy="560" r="40" stroke="black" fill="black"/>
+      <circle cx="430" cy="560" r="40" stroke="black" fill="black"/>
+      <circle cx="500" cy="440" r="40" stroke="black" fill="black"/>
+     </g>
+
+    <g id="four" display="none">
+      <circle cx="570" cy="430" r="40" stroke="black" fill="black"/>
+      <circle cx="430" cy="430" r="40" stroke="black" fill="black"/>
+      <circle cx="570" cy="570" r="40" stroke="black" fill="black"/>
+      <circle cx="430" cy="570" r="40" stroke="black" fill="black"/>
+    </g>
+    <g id="five" display="none">
+      <circle cx="570" cy="430" r="40" stroke="black" fill="black"/>
+      <circle cx="430" cy="430" r="40" stroke="black" fill="black"/>
+      <circle cx="570" cy="570" r="40" stroke="black" fill="black"/>
+      <circle cx="430" cy="570" r="40" stroke="black" fill="black"/>
+      <circle cx="500" cy="500" r="40" stroke="black" fill="black"/>
+    </g>
+
+    <g id="six" display="none">
+      <circle cx="570" cy="400" r="40" stroke="black" fill="black"/>
+      <circle cx="430" cy="400" r="40" stroke="black" fill="black"/>
+      <circle cx="570" cy="600" r="40" stroke="black" fill="black"/>
+      <circle cx="430" cy="600" r="40" stroke="black" fill="black"/>
+      <circle cx="430" cy="500" r="40" stroke="black" fill="black"/>
+      <circle cx="570" cy="500" r="40" stroke="black" fill="black"/>
+    </g>
+
+    Sorry, your browser does not support inline SVG.
+    </svg>
+
+\end{lstlisting}
+
+\section{Objects}\label{sec:objects}
+\subsection{Object Storage}\label{subsec:object-storage}
 Our objects are images with different properties.
 These properties cannot be saved in the images itself.
 for that reason the image path with the respective properties are stored in a easily accessible
@@ -72,15 +325,13 @@ for that reason the image path with the respective properties are stored in a ea
 }
 \end{lstlisting}
 
-For the correct way to access the fields please go to [INSERTCHAPTER].
-
-\subsection{Object display}
+\subsection{Object Display}\label{subsec:object-display}
 Displaying just the image of an object without tweaking it a little can seem boring for the user.
 So to add more diversity, every time an object is displayed in the game,
 the object gets a random rotation angle, size and position.
 Of course within certain predefined boundaries.
 
-\subsection{Object Interaction}
+\subsection{Object Interaction}\label{subsec:object-interaction}
 Whenever possible, when the user interacts with an object, a generalization of the input code is used.
 Instead of giving each object an event task, the global event task is fetched and the object via the event parameters.
 This way the input interaction code is kept in one place.
@@ -108,26 +359,63 @@ This way the input interaction code is kept in one place.
     ...
 \end{lstlisting}
 
-\section{Score Storage}
-The achieved score is saved in the
+\section{Score Storage}\label{sec:scorestorage}
+The achieved score is saved in the local storage of the browser.
+The local storage remains unchanged until it is cleared in the browser settings.
+Thus the saved score is not lost on the same device until purposely deleted.
+Before accessing the local storage it is checked if there even is a storage.
 
+\begin{lstlisting}[style=TypeScript, caption={Storage access (scoreScene.ts)}]
+    ...
+    private saveScore(score: string): void {
+        if (typeof(Storage) !== "undefined") {
+            window.localStorage.setItem('phaser_score_' + this.previousScene, score);
+        } else {
+            console.log("Sorry! No Web Storage support...");
+        }
+    }
+    ...
+\end{lstlisting}
 
-\section{Introduction Animation Generation}
+\begin{lstlisting}[style=TypeScript, caption={Storage access (levelMenuScene.ts)}]
+    ...
+    if (typeof(Storage) !== "undefined") {
+        if(window.localStorage.getItem('phaser_score_' + this.buttonToSceneMap(gameObject.name))){
+            if (reset) {
+                window.localStorage.setItem('phaser_score_' + this.buttonToSceneMap(gameObject.name), score);
+            } else {
+                score = window.localStorage.getItem('phaser_score_' + this.buttonToSceneMap(gameObject.name));
+            }
+        }
+    } else {
+        console.log("Sorry! No Web Storage support...");
+    }
+    ...
+\end{lstlisting}
+
+\section{Introduction Animation Generation}\label{sec:introduction-animation-generation}
 To produce animated instruction for the task later on,
 the screen is recorded with OBS Studio while someone (here me) is playing the game.
 Parts of the final video are then taken for the respective scenes and converted into single pictures.
-These single pictures are saved in one picture (called spreadsheet [EXAMPLE]).
+These single pictures are saved in one picture (called spreadsheet [\ref{fig:spreadsheet}]).
 The phaser framework animates those spreadsheets.
 
 Is is important to note, that different devices have a different limit for the resolution of images.
 Tablets seem to have the lowest, namely 4096x4096 pixels.
 The spreadsheet images are scaled down for that reason.
 
-\section{Concept of the Learning Environment}
-Through the boundary conditions and requirements of the learning environment,
-we split our environment into multiple parts or here called scenes.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{figures/spreadsheet}
+    \caption{Example: Spreadsheet}
+    \label{fig:spreadsheet}
+\end{figure}
 
-\subsection{Drop Down Menu}
+\section{Concept of the Learning Environment}\label{sec:concept-of-the-learning-environment}
+Through the boundary conditions and requirements of the learning environment,
+we split our environment into multiple parts/scenes.
+
+\subsection{Drop Down Menu}\label{subsec:drop-down-menu}
 Throughout the whole experience, the user can open a menu with a button.
 This button is always visible.
 Once the menu is open, the user may close the menu and return to the current scene,
@@ -135,23 +423,23 @@ exit the current scene and return to the level menu and go into fullscreen and b
 The current scene is paused while the menu is open as it can be distracting for the user,
 if suddenly something pops up and covers parts of the visible and running scene.
 
-\subsection{Welcome Screen}
+\subsection{Welcome Screen}\label{subsec:welcome-screen}
 The welcome screen is the starting point of the user experience.
 Through this screen the user will be greeted by showing the name of the game.
 Through a click he shall commence to the level menu.
 
-\subsection{Level Menu}
+\subsection{Level Menu}\label{subsec:level-menu}
 In the level menu, the user is able to choose between different levels and games.
 He can also access the object summary and track his progress/score.
 The progress of each individual level is shown on the respective buttons.
 The progress can be resetted by the reset button.
 
-\subsection{Object Summary}
+\subsection{Object Summary}\label{subsec:object-summary}
 The Object summary allows the user to get a feeling for all the different properties an object can have.
 For that reason the number of objects per category is restricted to five, as there are over 1000 different objects.
 Objects are draggable and sortable by each category with a click on a respective button.
 
-\subsection{Sorting with one Category}
+\subsection{Sorting with one Category}\label{subsec:sorting-with-one-category}
 Here the user has to sort the static objects with one category by the given category.
 As the user should be able to experience all categories, they are split into different levels.
 Each level represents a category.
@@ -161,7 +449,7 @@ The Progress is defined by objects sorted the right and the wrong way.
 The amount of objects to sort, as well as the amount of properties of the category
 is randomly selected each time you start the game.
 
-\subsection{Sorting with one category under difficult conditions}
+\subsection{Sorting with one category under difficult conditions}\label{subsec:sorting-with-one-category-under-difficult-conditions}
 Here the user has to sort falling objects with one category by the given category.
 As the user should be able to experience all categories, they are split into different level.
 Each level represents a category.
@@ -174,7 +462,7 @@ There are no negative points for missing such an object but negative points for 
 For more diversity, the amount of falling objects to sort, as well as the amount of properties of the category
 is randomly selected each time you start the game.
 
-\subsection{Sorting with restricted space}
+\subsection{Sorting with restricted space}\label{subsec:sorting-with-restricted-space}
 In this scene the user has to sort a given number of objects with all properties shown into boxes with limited space.
 The objects in one box must have at least one property in common and
 can be put into the box and taken out an infinite amount of times.
@@ -182,7 +470,7 @@ can be put into the box and taken out an infinite amount of times.
 To make the game more difficult, this level is split into two.
 The first level has boxes with the size 6, 4, 2 and the second one boxes with the size 6, 5, 4.
 
-\subsection{Object pairing - easy version}
+\subsection{Object pairing - easy version}\label{subsec:object-pairing---easy-version}
 In this game, twelve objects with three categories are shown.
 the user has to select three objects which have to fulfil the following.
 For each category (color, shape and number of holes/dots) one of the following conditions has to hold:
@@ -202,7 +490,7 @@ After a set amount of correct selected objects, the game will end.
 
 If there are no three objects that fulfil the conditions, the playfield will be generated anew.
 
-\subsection{Object pairing - normal version}
+\subsection{Object pairing - normal version}\label{subsec:object-pairing---normal-version}
 In this game, twelve objects with four categories are shown.
 the user has to select three objects which have to fulfil the following.
 For each category (color, filling, shape and number of holes/dots) one of the following conditions has to hold:
@@ -223,39 +511,42 @@ After a set amount of correct selected objects, the game will end.
 
 If there are no three objects that fulfil the conditions, the playfield will be generated anew.
 
-\subsection{Score Screen}
+\subsection{Score Screen}\label{subsec:score-screen}
 After a task has been completed, there is going to be a score.
 This score is represented here with a displayed number of stars.
 The minimum of starts is zero and the maximum is three.
 If the user is unhappy with his results, he can replay the game by clicking on the replay button.
 
-\subsection{Introduction}
+\subsection{Introduction}\label{subsec:introduction}
 Before each game starts, a sample animation of the task beforehand is being shown.
 The current scene is paused in the meantime, so that the user has enough time to find out what he has to do.
 
-\section{Code structure of the learning environment}
+\section{Code structure of the learning environment}\label{sec:code-structure-of-the-learning-environment}
 Our learning environment consists of different scenes each one inheriting the base scene.
 The following subsections won't contain the whole code as some parts are trivial to understand.
 Instead a summary of the scenes purpose and crucial parts are shown and explained.
 
-The full code can be accessed here [INSERT LINK].
+The full code can be accessed in the appendix.
 
-[IMAGE\_OF\_STATE\_DIAGRAM]
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{figures/statediagram}
+    \caption{Scene Statediagram}
+    \label{fig:statediagram}
+\end{figure}
 
-\subsection{BaseScene}
-This scene contains methods and fields which are neccessary in multiple scenes
-(e.g. the scene transition, indentifier of the scene, ...).
+\subsection{BaseScene}\label{subsec:basescene}
+This scene contains methods and fields which are necessary in multiple scenes
+(e.g. the scene transition, identifier of the scene, ...).
 
-The transition is a mask in the form of a circle layed over a black rectangle.
+The transition is a mask in the form of a circle laid over a black rectangle.
 Masks have to be applied to every object they have to mask.
 So a simple solution was to lay a black rectangle over the whole scene and mask it.
 The animated transition is created by increasing or decreasing the radius of the circle
 mask according to the wanted animation (IN/OUT).
 
 \begin{lstlisting}[style=TypeScript, caption={BaseScene.ts}]
-    /**
-     * Method for initializing the shape, position and properties of the graphical scene transition
-     */
+    ...
     private transitionInit(): void {
         // Shape of the graphical transition
         const circle: Phaser.GameObjects.Graphics = this.add.graphics();
@@ -282,9 +573,9 @@ mask according to the wanted animation (IN/OUT).
     }
 \end{lstlisting}
 
-\subsection{PreloadAssets}
-As mentioned before, every scene contains the method "preload()"
-where the files used late on can be loaded into the respective managers/cache.
+\subsection{PreloadAssets}\label{subsec:preloadassets}
+In the method "preload()" the files used later on can be loaded into the respective managers/cache.
+If files are loaded in a method outside of the preload method, the loader has to be started manually (in the code).
 Now every asset loaded this way has a unique identifier and can be used in future scene
 as long as it is not removed explicitly.
 The asset can as such be loaded into the managers/cache in every scene,
@@ -325,10 +616,6 @@ The way the objects files are preloaded into the respective managers is shown be
         ...
     }
     ...
-
-    /**
-     * Method for preloading all asset images
-     */
     private preLoadImages(): void {
         // Load category and object images
         const jsonObject: any = this.cache.json.get('objects');
@@ -353,9 +640,9 @@ The way the objects files are preloaded into the respective managers is shown be
     ...
 \end{lstlisting}
 
-\subsection{DropDownMenu}
+\subsection{DropDownMenu}\label{subsec:dropdownmenu}
 In this scene the drop down menu is created.
-This scene is never stops and is always on top of other scenes.
+This scene is never stopped and is always on top of other scenes.
 
 The following code in every other scene ensures this:
 \begin{lstlisting}[style=TypeScript, caption={Send current scene to back}]
@@ -369,7 +656,7 @@ The following code in every other scene ensures this:
 
 As the drop down animation takes time, it was necessary to create a boolean field as a lock.
 This ensures that the closing and opening animation won't interfere with each other.
-The lock is freed after the competion of an event/animation.
+The lock is freed after the completion of an event/animation.
 
 \begin{lstlisting}[style=TypeScript, caption={Lock aquiring and freeing}]
     ...
@@ -395,15 +682,35 @@ Important to note is, that the last started/activated scene is at position 0 in 
 
 The same trick is used for closing all current scenes when exiting (without the dropDownMenu Scene).
 
-\subsection{WelcomeScene}
+\subsection{WelcomeScene}\label{subsec:welcomescene}
 A blinking finger is added to the screen so that the user knows that he can advance by clicking on the screen.
 
-\subsection{LevelMenuSceneScene}
+\subsection{LevelMenuSceneScene}\label{subsec:levelmenuscenescene}
 Levels with the same difficulty are distinguished by numbers from one to four.
 Levels with another difficulty are distinguished by images of monsters with different level of spookiness.
-[INSERT\_IMAGES\_OF\_MONSTERS]
 
-\subsection{IntroScene}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.2\textwidth]{figures/easylevelicon}
+    \caption{Easy Level Icon}
+    \label{fig:easylevelicon}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.2\textwidth]{figures/mediumlevelicon}
+    \caption{Medium Level Icon}
+    \label{fig:mediumlevelicon}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.2\textwidth]{figures/hardlevelicon}
+    \caption{Hard Level Icon}
+    \label{fig:hardlevelicon}
+\end{figure}
+
+\subsection{IntroScene}\label{subsec:introscene}
 To pause the current scene and still play the introduction animation, a separate scene is necessary.
 Each time an intro has to be played, the intro scene is started anew.
 The current scene is pauses itself when the intro scene is started and the name/key/identifier
@@ -412,9 +719,9 @@ That way the intro scene can resume the paused scene and then stop itself.
 
 The respective intro material is selected via the name/key/identifier of the paused scene.
 
-\subsection{SortingScene}
+\subsection{SortingScene}\label{subsec:sortingscene}
 To sort the displayed objects by their respective subcategory by clicking on one of the category buttons,
-random coordinates are needed dependant on the screensize and objectsize.
+random coordinates are needed dependant on the screen size and object size.
 \begin{lstlisting}[style=TypeScript, caption={returnQuad() (sortingScene.ts)}]
     ...
     private returnQuad(quadrant: number, quadrantType: number): number[] {
@@ -490,7 +797,7 @@ random coordinates are needed dependant on the screensize and objectsize.
     }
 \end{lstlisting}
 
-\subsection{PropertySortingScene}
+\subsection{PropertySortingScene}\label{subsec:propertysortingscene}
 To specify the difficulty level, two fields are needed:
 \begin{lstlisting}[style=TypeScript, caption={Level fields (propertySortingScene.ts)}]
     ...
@@ -500,22 +807,22 @@ To specify the difficulty level, two fields are needed:
     ...
 \end{lstlisting}
 
-In contrast to other scenes, object must have the type Phaser.Physics.Arcade.Sprite as only arcade sprites have the
+In contrast to other scenes, objects must have the type Phaser.Physics.Arcade.Sprite as only arcade sprites have the
 possibility of an acceleration in a direction.
 
 As additional visual feature objects get a random spin velocity and the time a object spawns gets shorter over time.
 
-\subsection{RestrictedSortingScene}
-To check if objects in the same box have some property incommon,
+\subsection{RestrictedSortingScene}\label{subsec:restrictedsortingscene}
+To check if objects in the same box have some property in common,
 the four properties of a object are taken as a list of strings and intersected with the other list of strings from other
 objects in the same box.
-If finally there is no empty list, the objects have some property incommon and thus this is a valid solution for one box.
+If finally there is no empty list, the objects have some property in common and thus this is a valid solution for one box.
 Which one does not matter to us in this case.
 In this way, it is possible that there are multiple solutions which were not intended but also correct.
 
 \begin{lstlisting}[style=TypeScript, caption={equalityCheck (restrictedSortingScene.ts)}]
     ...
-    private equalityCheck(gameObject: Phaser.GameObjects.Sprite, dropZone: Phaser.GameObjects.Zone): boolean {
+        private equalityCheck(gameObject: Phaser.GameObjects.Sprite, dropZone: Phaser.GameObjects.Zone): boolean {
         ...
         let mergeArray: any[] = [];
         ...
@@ -533,10 +840,10 @@ In this way, it is possible that there are multiple solutions which were not int
     ...
 \end{lstlisting}
 
-\subsection{GameScene}
-timehandling: time added if correct
+\subsection{GameScene}\label{subsec:gamescene}
+In the game scene three marked objects are checked for equality
+if the checker was not already run for those three objects.
 
-checking on update
 \begin{lstlisting}[style=TypeScript, caption={update (gameScene.ts)}]
     update(time: number): void {
         ...
@@ -557,7 +864,9 @@ checking on update
     }
 \end{lstlisting}
 
-points counting with epsilon
+As 'gameMax' is calculated with a quotient there is a rounding error in the floating point arithmetic.
+To even this error we add or subtract epsilon, the maximum relative error of the rounding procedure.
+
 \begin{lstlisting}[style=TypeScript, caption={updateProgressbar (gameScene.ts)}]
     ...
     if (this.points >= this.gamefluid.getData('gameMax') - Phaser.Math.EPSILON) {
@@ -565,7 +874,9 @@ points counting with epsilon
     }
 \end{lstlisting}
 
-algorithm for checking with option of coloring the helpers menu
+To mark the helpers menu icons the checkEquality method is modified
+with a boolean to mark the icons while executing the check.
+
 \begin{lstlisting}[style=TypeScript, caption={checkEquality (gameScene.ts)}]
     ...
     private checkEquality(sprite1: Phaser.GameObjects.GameObject, sprite2: Phaser.GameObjects.GameObject, sprite3: Phaser.GameObjects.GameObject, inGame: boolean): boolean {
@@ -616,7 +927,9 @@ algorithm for checking with option of coloring the helpers menu
     }
 \end{lstlisting}
 
-time added if correct
+To add another small gamification element in the form of a mini reward to the game, every time the user finds a matching
+pair, some additional is added to the timer. So the user is even more motivated find pairs even faster.
+
 \begin{lstlisting}[style=TypeScript, caption={updateProgressbar (gameScene.ts)}]
     ...
     let timedata: number = this.timefluid.getData('timeY');
@@ -627,7 +940,9 @@ time added if correct
     ...
 \end{lstlisting}
 
-replace all if not a valid solution
+As frustrating as it is to find no matching pair,
+it is ensured that there is at least one possible pair every time a new object is added.
+
 \begin{lstlisting}[style=TypeScript, caption={INSERT (gameScene.ts)}]
     ...
     private rebuildDisplayedObjects(): void {
@@ -646,49 +961,170 @@ replace all if not a valid solution
     ...
 \end{lstlisting}
 
-\subsection{ScoreScene}
+\subsection{ScoreScene}\label{subsec:scorescene}
+The most important and special part in the score scene is the way the score is saved,
+as explained in this \hyperref[ref:scorestorage]{section}.
 
+\section{Final Look of the Learning Environment}\label{sec:final-look-of-the-learning-environment}
+This section contains the final look of the learning environment.
 
-\section{Final look of the learning environment}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{figures/loadingscreen}
+    \caption{Loading Screen}
+    \label{fig:loadingscreen}
+\end{figure}
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{figures/welcomescreen}
+    \caption{Title Screen}
+    \label{fig:titlescreen}
+\end{figure}
 
-\section{Checklist}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{figures/levelmenu}
+    \caption{Level Menu}
+    \label{fig:levelmenu}
+\end{figure}
 
-- overview of your solution. Give a good explanation of its rationale,
-concepts and mechanisms. If your solution relies on a
-theorem or some other undocumented concept, make sure
-that you explain them before you carry on to the detailed
-description.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{figures/levelmenustars}
+    \caption{Level Menu showing Stars}
+    \label{fig:levelmenustars}
+\end{figure}
 
-The main part of this section is the thorough descrip-
-tion of the solution and its functionality.
-The description should not contain arguments on correctness or design de-
-cision debates; simply, describe the mechanisms of your
-solution and avoid explanations of the 'why so' type.
-Dedicate a separate paragraph or two on the latter, if
-you deem necessary.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{figures/sortingscene1}
+    \caption{Sorting Scene Category Mixture}
+    \label{fig:sortingscene1}
+\end{figure}
 
-Disassemble your solution to its functional components
-and explain them separately. For example, if you describe
-a distributed algorithm, explain the protocol-specific part
-(message format, etc.) separately from the semantics and
-decision-making part of the algorithm.
-It is both important and useful to provide figures
-demonstrating the functionality of your solution. Make
-the figures look similar to the system model figure, if ap-
-plicable, and exploit the similarities and differences to
-point out important aspects of your solution.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{figures/sortingscene2}
+    \caption{Sorting Scene Category 1}
+    \label{fig:sortingscene2}
+\end{figure}
 
-Analysis can be of two types: qualitative and quantitative.
-The former means to show some properties (qualities)
-of your solution, while the latter means to show some
-performance aspects of your solution.
-Qualitative analysis is usually proof of correctness,
-however it could be proof that the solution possesses some
-desired property. For algorithms or protocols, a proof of
-correctness is always welcome.
-Quantitative analysis is mostly performance analysis.
-It is important to explain what performance metric you
-use and why you have selected the specific metric. Choos-
-ing a metric that has been widely used will make the
-comparison to other solutions easier.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{figures/sortingscene3}
+    \caption{Sorting Scene Category 2}
+    \label{fig:sortingscene3}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{figures/sortingscene4}
+    \caption{Sorting Scene Category 3}
+    \label{fig:sortingscene4}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{figures/sortingscene5}
+    \caption{Sorting Scene Category 4}
+    \label{fig:sortingscene5}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{figures/introduction}
+    \caption{Introduction Screen to Sorting Scene}
+    \label{fig:introduction}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{figures/property1}
+    \caption{Property Sorting Category 1}
+    \label{fig:property1}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{figures/property2}
+    \caption{Property Sorting Category 2}
+    \label{fig:property2}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{figures/property3}
+    \caption{Property Sorting Category 3}
+    \label{fig:property3}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{figures/property4}
+    \caption{Property Sorting Category 4}
+    \label{fig:property4}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{figures/falling}
+    \caption{Falling Property Sorting Category 1, 2-4 will be omitted}
+    \label{fig:falling}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{figures/restricted1}
+    \caption{Restricted Sorting Easy}
+    \label{fig:restricted1}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{figures/restricted2}
+    \caption{Restricted Sorting 2 Hard}
+    \label{fig:restricted2}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{figures/introgame}
+    \caption{Introduction to Object Pairing Easy}
+    \label{fig:introgame}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{figures/gameasy}
+    \caption{Object Pairing Easy}
+    \label{fig:gameeasy}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{figures/gameeasyhelp}
+    \caption{Object Pairing Easy Helper Bar}
+    \label{fig:gameeasyhelp}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{figures/gamehard}
+    \caption{Object Pairing Hard}
+    \label{fig:gamehard}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{figures/gamehardhelp}
+    \caption{Object Pairing Hard Helper Bar}
+    \label{fig:gamehardhelp}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{figures/scorescreen}
+    \caption{Score Screen}
+    \label{fig:scorescreen}
+\end{figure}

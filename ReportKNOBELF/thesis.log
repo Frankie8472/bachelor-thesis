@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Arch Linux) (preloaded format=pdflatex 2019.11.14)  12 JAN 2020 17:08
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Arch Linux) (preloaded format=pdflatex 2019.11.14)  13 JAN 2020 17:22
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -534,6 +534,13 @@ File: pppdftex.def 2019/09/21 v0.5n Pdfpages driver for pdfTeX (AM)
 \AM@toc@title=\toks28
 \c@AM@survey=\count279
 \AM@templatesizebox=\box55
+) (/usr/share/texmf-dist/tex/latex/float/float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count280
+\float@exts=\toks29
+\float@box=\box56
+\@float@everytoks=\toks30
+\@floatcapt=\box57
 ) (/usr/share/texmf-dist/tex/latex/oberdiek/epstopdf.sty
 Package: epstopdf 2016/05/15 v2.6 Conversion with epstopdf on the fly (HO)
  (/usr/share/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
@@ -565,34 +572,34 @@ Package grfext Info: Graphics extension search list:
  (/usr/share/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 ))) (/usr/share/texmf-dist/tex/latex/listings/listings.sty
-\lst@mode=\count280
-\lst@gtempboxa=\box56
-\lst@token=\toks29
-\lst@length=\count281
+\lst@mode=\count281
+\lst@gtempboxa=\box58
+\lst@token=\toks31
+\lst@length=\count282
 \lst@currlwidth=\dimen173
-\lst@column=\count282
-\lst@pos=\count283
+\lst@column=\count283
+\lst@pos=\count284
 \lst@lostspace=\dimen174
 \lst@width=\dimen175
-\lst@newlines=\count284
-\lst@lineno=\count285
+\lst@newlines=\count285
+\lst@lineno=\count286
 \lst@maxwidth=\dimen176
  (/usr/share/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2019/09/10 1.8c (Carsten Heinz)
-\c@lstnumber=\count286
-\lst@skipnumbers=\count287
-\lst@framebox=\box57
+\c@lstnumber=\count287
+\lst@skipnumbers=\count288
+\lst@framebox=\box59
 ) (/usr/share/texmf-dist/tex/latex/listings/listings.cfg
 File: listings.cfg 2019/09/10 1.8c listings configuration
 ))
 Package: listings 2019/09/10 1.8c (Carsten Heinz)
  (/usr/share/texmf-dist/tex/latex/graphics/rotating.sty
 Package: rotating 2016/08/11 v2.16d rotated objects in LaTeX
-\c@r@tfl@t=\count288
+\c@r@tfl@t=\count289
 \rotFPtop=\skip83
 \rotFPbot=\skip84
-\rot@float@box=\box58
-\rot@mess@toks=\toks30
+\rot@float@box=\box60
+\rot@mess@toks=\toks32
 ) (/usr/share/texmf-dist/tex/latex/koma-script/scrpage2.sty
 Package: scrpage2 2019/10/12 v3.27 KOMA-Script package (page head and foot)
 
@@ -657,14 +664,14 @@ Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 Package: auxhook 2016/05/16 v1.4 Hooks for auxiliary files (HO)
 )
 \@linkdim=\dimen177
-\Hy@linkcounter=\count289
-\Hy@pagecounter=\count290
+\Hy@linkcounter=\count290
+\Hy@pagecounter=\count291
  (/usr/share/texmf-dist/tex/latex/hyperref/pd1enc.def
 File: pd1enc.def 2019/09/28 v7.00a Hyperref: PDFDocEncoding definition (HO)
 Now handling font encoding PD1 ...
 ... no UTF-8 mapping file for font encoding PD1
 )
-\Hy@SavedSpaceFactor=\count291
+\Hy@SavedSpaceFactor=\count292
  (/usr/share/texmf-dist/tex/latex/latexconfig/hyperref.cfg
 File: hyperref.cfg 2002/06/06 v1.2 hyperref configuration of TeXLive
 )
@@ -686,14 +693,14 @@ Package hyperref Info: Plain pages OFF on input line 4555.
 Package hyperref Info: Backreferencing OFF on input line 4560.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
 Package hyperref Info: Bookmarks ON on input line 4793.
-\c@Hy@tempcnt=\count292
+\c@Hy@tempcnt=\count293
 (/usr/share/texmf-dist/tex/latex/url/url.sty
 \Urlmuskip=\muskip17
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
 LaTeX Info: Redefining \url on input line 5152.
 \XeTeXLinkMargin=\dimen178
-\Fld@menulength=\count293
+\Fld@menulength=\count294
 \Field@Width=\dimen179
 \Fld@charsize=\dimen180
 Package hyperref Info: Hyper figures OFF on input line 6423.
@@ -705,15 +712,15 @@ Package hyperref Info: Link coloring with OCG OFF on input line 6448.
 Package hyperref Info: PDF/A mode OFF on input line 6453.
 LaTeX Info: Redefining \ref on input line 6493.
 LaTeX Info: Redefining \pageref on input line 6497.
-\Hy@abspage=\count294
-\c@Item=\count295
-\c@Hfootnote=\count296
+\Hy@abspage=\count295
+\c@Item=\count296
+\c@Hfootnote=\count297
 )
 Package hyperref Info: Driver: hpdftex.
  (/usr/share/texmf-dist/tex/latex/hyperref/hpdftex.def
 File: hpdftex.def 2019/09/28 v7.00a Hyperref driver for pdfTeX
-\Fld@listcount=\count297
-\c@bookmark@seq@number=\count298
+\Fld@listcount=\count298
+\c@bookmark@seq@number=\count299
  (/usr/share/texmf-dist/tex/latex/oberdiek/rerunfilecheck.sty
 Package: rerunfilecheck 2016/05/16 v1.8 Rerun checks for auxiliary files (HO)
 Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 282.
@@ -724,47 +731,48 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 28
 ) (/home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/thesis.aux)
 \openout1 = `thesis.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 159.
-LaTeX Font Info:    ... okay on input line 159.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 159.
-LaTeX Font Info:    ... okay on input line 159.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 159.
-LaTeX Font Info:    ... okay on input line 159.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 159.
-LaTeX Font Info:    ... okay on input line 159.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 159.
-LaTeX Font Info:    ... okay on input line 159.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 159.
-LaTeX Font Info:    ... okay on input line 159.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 159.
-LaTeX Font Info:    ... okay on input line 159.
-LaTeX Font Info:    Trying to load font information for T1+ptm on input line 159.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 160.
+LaTeX Font Info:    ... okay on input line 160.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 160.
+LaTeX Font Info:    ... okay on input line 160.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 160.
+LaTeX Font Info:    ... okay on input line 160.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 160.
+LaTeX Font Info:    ... okay on input line 160.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 160.
+LaTeX Font Info:    ... okay on input line 160.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 160.
+LaTeX Font Info:    ... okay on input line 160.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 160.
+LaTeX Font Info:    ... okay on input line 160.
+LaTeX Font Info:    Trying to load font information for T1+ptm on input line 160.
  (/usr/share/texmf-dist/tex/latex/psnfss/t1ptm.fd
 File: t1ptm.fd 2001/06/04 font definitions for T1/ptm.
 )
-Package scrbase Info: activating english \contentsname on input line 159.
-Package scrbase Info: activating english \listfigurename on input line 159.
-Package scrbase Info: activating english \listtablename on input line 159.
+Package scrbase Info: activating english \contentsname on input line 160.
+Package scrbase Info: activating english \listfigurename on input line 160.
+Package scrbase Info: activating english \listtablename on input line 160.
 Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: float package is loaded.
 Package caption Info: hyperref package is loaded.
 Package caption Info: listings package is loaded.
 Package caption Info: rotating package is loaded.
 Package caption Info: End \AtBeginDocument code.
  (/usr/share/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count299
+\scratchcounter=\count300
 \scratchdimen=\dimen181
-\scratchbox=\box59
-\nofMPsegments=\count300
-\nofMParguments=\count301
-\everyMPshowfont=\toks31
-\MPscratchCnt=\count302
+\scratchbox=\box61
+\nofMPsegments=\count301
+\nofMParguments=\count302
+\everyMPshowfont=\toks33
+\MPscratchCnt=\count303
 \MPscratchDim=\dimen182
-\MPnumerator=\count303
-\makeMPintoPDFobject=\count304
-\everyMPtoPDFconversion=\toks32
+\MPnumerator=\count304
+\makeMPintoPDFobject=\count305
+\everyMPtoPDFconversion=\toks34
 )
-\AtBeginShipoutBox=\box60
+\AtBeginShipoutBox=\box62
  (/usr/share/texmf-dist/tex/latex/oberdiek/pdflscape.sty
 Package: pdflscape 2016/05/14 v0.11 Display of landscape pages in PDF (HO)
  (/usr/share/texmf-dist/tex/latex/graphics/lscape.sty
@@ -772,18 +780,18 @@ Package: lscape 2000/10/22 v3.01 Landscape Pages (DPC)
 )
 Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
 )
-\c@lstlisting=\count305
-Package hyperref Info: Link coloring ON on input line 159.
+\c@lstlisting=\count306
+Package hyperref Info: Link coloring ON on input line 160.
  (/usr/share/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2019/09/16 v2.46 Cross-referencing by name of section
  (/usr/share/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
-\c@section@level=\count306
+\c@section@level=\count307
 )
-LaTeX Info: Redefining \ref on input line 159.
-LaTeX Info: Redefining \pageref on input line 159.
-LaTeX Info: Redefining \nameref on input line 159.
+LaTeX Info: Redefining \ref on input line 160.
+LaTeX Info: Redefining \pageref on input line 160.
+LaTeX Info: Redefining \nameref on input line 160.
  (/home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/thesis.out) (/home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/thesis.out)
 \@outlinefile=\write3
 \openout3 = `thesis.out'.
@@ -795,30 +803,30 @@ Class scrbook Info: loading recommended package `bookmark'.
 (scrbook)           `bookmarkpackage=false' before \begin{document} and
 (scrbook)           you can avoid this message adding:
 (scrbook)             \usepackage{bookmark}
-(scrbook)           before \begin{document} on input line 159.
+(scrbook)           before \begin{document} on input line 160.
  (/usr/share/texmf-dist/tex/latex/oberdiek/bookmark.sty
 Package: bookmark 2019/06/04 v1.27 PDF bookmarks (HO)
  (/usr/share/texmf-dist/tex/latex/oberdiek/bkm-pdftex.def
 File: bkm-pdftex.def 2019/06/04 v1.27 bookmark driver for pdfTeX (HO)
 Package auxhook Info: \AddLineBeginMainAux comes a little late,
 (auxhook)             because the main .aux file is already opened on input line 164.
-\BKM@id=\count307
+\BKM@id=\count308
 )) (./chapters/studchapter.tex)
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <24.88> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 196.
-LaTeX Font Info:    Trying to load font information for T1+phv on input line 196.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 197.
+LaTeX Font Info:    Trying to load font information for T1+phv on input line 197.
  (/usr/share/texmf-dist/tex/latex/psnfss/t1phv.fd
 File: t1phv.fd 2001/06/04 scalable font definitions for T1/phv.
 )
 LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <24.88> not available
-(Font)              Font shape `T1/phv/b/n' tried instead on input line 196.
+(Font)              Font shape `T1/phv/b/n' tried instead on input line 197.
 <figures/title.png, id=4, 1927.2pt x 1084.05pt>
 File: figures/title.png Graphic file (type png)
 <use figures/title.png>
-Package pdftex.def Info: figures/title.png  used on input line 197.
+Package pdftex.def Info: figures/title.png  used on input line 198.
 (pdftex.def)             Requested size: 364.24236pt x 204.87991pt.
 LaTeX Font Info:    Font shape `T1/phv/m/it' in size <14.4> not available
-(Font)              Font shape `T1/phv/m/sl' tried instead on input line 208.
+(Font)              Font shape `T1/phv/m/sl' tried instead on input line 209.
 Package epstopdf Info: Source file: <figures/eth_logo_kurz_pos.eps>
 (epstopdf)                    date: 2014-02-25 14:58:28
 (epstopdf)                    size: 402954 bytes
@@ -826,12 +834,12 @@ Package epstopdf Info: Source file: <figures/eth_logo_kurz_pos.eps>
 (epstopdf)                    date: 2014-02-25 14:58:28
 (epstopdf)                    size: 13480 bytes
 (epstopdf)             Command: <repstopdf --outfile=figures/eth_logo_kurz_pos-eps-converted-to.pdf figures/eth_logo_kurz_pos.eps>
-(epstopdf)             \includegraphics on input line 214.
+(epstopdf)             \includegraphics on input line 215.
 Package epstopdf Info: Output file is already uptodate.
 <figures/eth_logo_kurz_pos-eps-converted-to.pdf, id=7, 141.52875pt x 23.08624pt>
 File: figures/eth_logo_kurz_pos-eps-converted-to.pdf Graphic file (type pdf)
 <use figures/eth_logo_kurz_pos-eps-converted-to.pdf>
-Package pdftex.def Info: figures/eth_logo_kurz_pos-eps-converted-to.pdf  used on input line 214.
+Package pdftex.def Info: figures/eth_logo_kurz_pos-eps-converted-to.pdf  used on input line 215.
 (pdftex.def)             Requested size: 139.54376pt x 22.76228pt.
  [1
 
@@ -862,7 +870,19 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 \tf@toc=\write4
 \openout4 = `thesis.toc'.
 
- [6] (./chapters/ch01-introduction.tex
+ [6] (./chapters/ch01-introduction.texpdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.7 \chapter
+            {Introduction} [1
+
+]pdfTeX warning (ext4): destination with the same identifier (name{page.2}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.7 \chapter
+            {Introduction} [2
+
+]
 chapter 1.
 
 Class scrbook Warning: \float@addtolists detected!
@@ -880,12 +900,12 @@ Class scrbook Warning: \float@addtolists detected!
 (scrbook)              deprecated \float@addtolist interface .
 
 LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <17.28> not available
-(Font)              Font shape `T1/phv/b/n' tried instead on input line 9.
+(Font)              Font shape `T1/phv/b/n' tried instead on input line 10.
 
 Underfull \vbox (badness 1127) has occurred while \output is active []
 
 LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <100> not available
-(Font)              Font shape `T1/phv/b/n' tried instead on input line 58.
+(Font)              Font shape `T1/phv/b/n' tried instead on input line 59.
 
 Overfull \hbox (2.28006pt too wide) has occurred while \output is active
 []|[] []
@@ -894,31 +914,8 @@ Overfull \hbox (2.28006pt too wide) has occurred while \output is active
 
 Overfull \vbox (459.06232pt too high) has occurred while \output is active []
 
-pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.58 
-      [1
-
-
-]) (./chapters/ch02-relatedwork.texpdfTeX warning (ext4): destination with the same identifier (name{page.2}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.6 \chapter
-            {Related Work} [2]
+ [3]) (./chapters/ch02-relatedwork.tex [4]
 chapter 2.
-
-Overfull \hbox (2.28006pt too wide) has occurred while \output is active
-[]|[] []
- []
-
-
-Overfull \vbox (459.06232pt too high) has occurred while \output is active []
-
- [3
-
-]) (./chapters/ch03-requirements.tex [4]
-chapter 3.
 
 Overfull \hbox (2.28006pt too wide) has occurred while \output is active
 []|[] []
@@ -929,16 +926,11 @@ Overfull \vbox (459.06232pt too high) has occurred while \output is active []
 
  [5
 
-]) (./chapters/ch04-design.tex [6]
-chapter 4.
-LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <14.4> not available
-(Font)              Font shape `T1/phv/b/n' tried instead on input line 15.
-LaTeX Font Info:    Trying to load font information for OMS+ptm on input line 20.
-(/usr/share/texmf-dist/tex/latex/psnfss/omsptm.fd
-File: omsptm.fd 
-)
-LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 20.
+]) (./chapters/ch03-requirements.tex [6]
+chapter 3.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
 
 Overfull \hbox (2.28006pt too wide) has occurred while \output is active
 []|[] []
@@ -949,29 +941,18 @@ Overfull \vbox (459.06232pt too high) has occurred while \output is active []
 
  [7
 
-]
+]) (./chapters/ch04-design.tex [8]
+chapter 4.
+LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <14.4> not available
+(Font)              Font shape `T1/phv/b/n' tried instead on input line 20.
 LaTeX Font Info:    Font shape `T1/ptm/bx/sl' in size <10.95> not available
-(Font)              Font shape `T1/ptm/b/sl' tried instead on input line 39.
-LaTeX Font Info:    Trying to load font information for T1+pcr on input line 39.
- (/usr/share/texmf-dist/tex/latex/psnfss/t1pcr.fd
+(Font)              Font shape `T1/ptm/b/sl' tried instead on input line 24.
+LaTeX Font Info:    Trying to load font information for T1+pcr on input line 24.
+(/usr/share/texmf-dist/tex/latex/psnfss/t1pcr.fd
 File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
 )
-Underfull \vbox (badness 1527) has occurred while \output is active []
-
- [8]
 LaTeX Font Info:    Font shape `T1/pcr/bx/n' in size <10> not available
-(Font)              Font shape `T1/pcr/b/n' tried instead on input line 90.
- [9] [10] [11] [12] [13] [14] [15] [16]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [17] [18] [19] [20]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [21]) (./chapters/ch05-evaluation.tex [22]
-chapter 5.
-
-Underfull \vbox (badness 4048) has occurred while \output is active []
-
+(Font)              Font shape `T1/pcr/b/n' tried instead on input line 25.
 
 Overfull \hbox (2.28006pt too wide) has occurred while \output is active
 []|[] []
@@ -980,9 +961,248 @@ Overfull \hbox (2.28006pt too wide) has occurred while \output is active
 
 Overfull \vbox (459.06232pt too high) has occurred while \output is active []
 
- [23
+ [9
 
-]) (./chapters/ch06-conclusion.tex [24]
+]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [10]
+LaTeX Font Info:    Trying to load font information for OMS+ptm on input line 100.
+ (/usr/share/texmf-dist/tex/latex/psnfss/omsptm.fd
+File: omsptm.fd 
+)
+LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <12> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 100.
+LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <12> not available
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 100.
+<figures/lifecycle.png, id=293, 584.1825pt x 354.57469pt>
+File: figures/lifecycle.png Graphic file (type png)
+<use figures/lifecycle.png>
+Package pdftex.def Info: figures/lifecycle.png  used on input line 117.
+(pdftex.def)             Requested size: 364.24236pt x 221.08923pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [11] [12 </home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/figures/lifecycle.png>] [13]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [14] [15] [16] [17]
+<figures/spreadsheet.png, id=513, 1456.9632pt x 409.7709pt>
+File: figures/spreadsheet.png Graphic file (type png)
+<use figures/spreadsheet.png>
+Package pdftex.def Info: figures/spreadsheet.png  used on input line 409.
+(pdftex.def)             Requested size: 455.30121pt x 128.05309pt.
+
+Underfull \vbox (badness 1122) has occurred while \output is active []
+
+ [18 </home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/figures/spreadsheet.png
+
+pdfTeX warning: pdflatex (file /home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/figures/spreadsheet.png): large interlaced PNG might cause out of memory (use non-interlaced PNG to fix this)
+>] [19] [20]
+<figures/statediagram.png, id=540, 1646.15pt x 200.75pt>
+File: figures/statediagram.png Graphic file (type png)
+<use figures/statediagram.png>
+Package pdftex.def Info: figures/statediagram.png  used on input line 533.
+(pdftex.def)             Requested size: 455.30121pt x 55.52345pt.
+ [21 </home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/figures/statediagram.png>] [22] [23]
+<figures/easylevelicon.png, id=627, 903.375pt x 602.25pt>
+File: figures/easylevelicon.png Graphic file (type png)
+<use figures/easylevelicon.png>
+Package pdftex.def Info: figures/easylevelicon.png  used on input line 694.
+(pdftex.def)             Requested size: 91.05884pt x 60.69719pt.
+ [24]
+<figures/mediumlevelicon.png, id=654, 1204.5pt x 1204.5pt>
+File: figures/mediumlevelicon.png Graphic file (type png)
+<use figures/mediumlevelicon.png>
+Package pdftex.def Info: figures/mediumlevelicon.png  used on input line 701.
+(pdftex.def)             Requested size: 91.05884pt x 91.05038pt.
+<figures/hardlevelicon.png, id=655, 1652.1725pt x 2409.0pt>
+File: figures/hardlevelicon.png Graphic file (type png)
+<use figures/hardlevelicon.png>
+Package pdftex.def Info: figures/hardlevelicon.png  used on input line 708.
+(pdftex.def)             Requested size: 91.05884pt x 132.77109pt.
+ [25 </home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/figures/easylevelicon.png> </home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/figures/mediumlevelicon.png> </home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/figures/hardlevelicon.png>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [26] [27] [28] [29] [30]
+
+LaTeX Warning: Hyper reference `ref:scorestorage' on page 31 undefined on input line 966.
+
+<figures/loadingscreen.png, id=865, 1927.2pt x 1084.05pt>
+File: figures/loadingscreen.png Graphic file (type png)
+<use figures/loadingscreen.png>
+Package pdftex.def Info: figures/loadingscreen.png  used on input line 973.
+(pdftex.def)             Requested size: 455.30121pt x 256.09163pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [31]
+<figures/welcomescreen.png, id=886, 1927.2pt x 1084.05pt>
+File: figures/welcomescreen.png Graphic file (type png)
+<use figures/welcomescreen.png>
+Package pdftex.def Info: figures/welcomescreen.png  used on input line 980.
+(pdftex.def)             Requested size: 455.30121pt x 256.09163pt.
+<figures/levelmenu.png, id=887, 1927.2pt x 1084.05pt>
+File: figures/levelmenu.png Graphic file (type png)
+<use figures/levelmenu.png>
+Package pdftex.def Info: figures/levelmenu.png  used on input line 987.
+(pdftex.def)             Requested size: 455.30121pt x 256.09163pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [32 </home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/figures/loadingscreen.png> </home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/figures/welcomescreen.png>]
+<figures/levelmenustars.png, id=896, 1927.2pt x 1084.05pt>
+File: figures/levelmenustars.png Graphic file (type png)
+<use figures/levelmenustars.png>
+Package pdftex.def Info: figures/levelmenustars.png  used on input line 994.
+(pdftex.def)             Requested size: 455.30121pt x 256.09163pt.
+<figures/sortingscene1.png, id=897, 1927.2pt x 1084.05pt>
+File: figures/sortingscene1.png Graphic file (type png)
+<use figures/sortingscene1.png>
+Package pdftex.def Info: figures/sortingscene1.png  used on input line 1001.
+(pdftex.def)             Requested size: 455.30121pt x 256.09163pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [33 </home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/figures/levelmenu.png> </home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/figures/levelmenustars.png>]
+<figures/sortingscene2.png, id=907, 1927.2pt x 1084.05pt>
+File: figures/sortingscene2.png Graphic file (type png)
+<use figures/sortingscene2.png>
+Package pdftex.def Info: figures/sortingscene2.png  used on input line 1008.
+(pdftex.def)             Requested size: 455.30121pt x 256.09163pt.
+<figures/sortingscene3.png, id=908, 1927.2pt x 1084.05pt>
+File: figures/sortingscene3.png Graphic file (type png)
+<use figures/sortingscene3.png>
+Package pdftex.def Info: figures/sortingscene3.png  used on input line 1015.
+(pdftex.def)             Requested size: 455.30121pt x 256.09163pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [34 </home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/figures/sortingscene1.png> </home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/figures/sortingscene2.png>]
+<figures/sortingscene4.png, id=917, 1927.2pt x 1084.05pt>
+File: figures/sortingscene4.png Graphic file (type png)
+<use figures/sortingscene4.png>
+Package pdftex.def Info: figures/sortingscene4.png  used on input line 1022.
+(pdftex.def)             Requested size: 455.30121pt x 256.09163pt.
+<figures/sortingscene5.png, id=918, 1927.2pt x 1084.05pt>
+File: figures/sortingscene5.png Graphic file (type png)
+<use figures/sortingscene5.png>
+Package pdftex.def Info: figures/sortingscene5.png  used on input line 1029.
+(pdftex.def)             Requested size: 455.30121pt x 256.09163pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [35 </home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/figures/sortingscene3.png> </home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/figures/sortingscene4.png>]
+<figures/introduction.png, id=928, 1927.2pt x 1084.05pt>
+File: figures/introduction.png Graphic file (type png)
+<use figures/introduction.png>
+Package pdftex.def Info: figures/introduction.png  used on input line 1036.
+(pdftex.def)             Requested size: 455.30121pt x 256.09163pt.
+<figures/property1.png, id=929, 1927.2pt x 1084.05pt>
+File: figures/property1.png Graphic file (type png)
+<use figures/property1.png>
+Package pdftex.def Info: figures/property1.png  used on input line 1043.
+(pdftex.def)             Requested size: 455.30121pt x 256.09163pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [36 </home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/figures/sortingscene5.png> </home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/figures/introduction.png>]
+<figures/property2.png, id=938, 1927.2pt x 1084.05pt>
+File: figures/property2.png Graphic file (type png)
+<use figures/property2.png>
+Package pdftex.def Info: figures/property2.png  used on input line 1050.
+(pdftex.def)             Requested size: 455.30121pt x 256.09163pt.
+<figures/property3.png, id=939, 1927.2pt x 1084.05pt>
+File: figures/property3.png Graphic file (type png)
+<use figures/property3.png>
+Package pdftex.def Info: figures/property3.png  used on input line 1057.
+(pdftex.def)             Requested size: 455.30121pt x 256.09163pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [37 </home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/figures/property1.png> </home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/figures/property2.png>]
+<figures/property4.png, id=948, 1927.2pt x 1084.05pt>
+File: figures/property4.png Graphic file (type png)
+<use figures/property4.png>
+Package pdftex.def Info: figures/property4.png  used on input line 1064.
+(pdftex.def)             Requested size: 455.30121pt x 256.09163pt.
+<figures/falling.png, id=949, 1927.2pt x 1084.05pt>
+File: figures/falling.png Graphic file (type png)
+<use figures/falling.png>
+Package pdftex.def Info: figures/falling.png  used on input line 1071.
+(pdftex.def)             Requested size: 455.30121pt x 256.09163pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [38 </home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/figures/property3.png> </home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/figures/property4.png>]
+<figures/restricted1.png, id=958, 1927.2pt x 1084.05pt>
+File: figures/restricted1.png Graphic file (type png)
+<use figures/restricted1.png>
+Package pdftex.def Info: figures/restricted1.png  used on input line 1078.
+(pdftex.def)             Requested size: 455.30121pt x 256.09163pt.
+<figures/restricted2.png, id=959, 1927.2pt x 1084.05pt>
+File: figures/restricted2.png Graphic file (type png)
+<use figures/restricted2.png>
+Package pdftex.def Info: figures/restricted2.png  used on input line 1085.
+(pdftex.def)             Requested size: 455.30121pt x 256.09163pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [39 </home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/figures/falling.png> </home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/figures/restricted1.png>]
+<figures/introgame.png, id=968, 1927.2pt x 1084.05pt>
+File: figures/introgame.png Graphic file (type png)
+<use figures/introgame.png>
+Package pdftex.def Info: figures/introgame.png  used on input line 1092.
+(pdftex.def)             Requested size: 455.30121pt x 256.09163pt.
+<figures/gameasy.png, id=969, 1927.2pt x 1084.05pt>
+File: figures/gameasy.png Graphic file (type png)
+<use figures/gameasy.png>
+Package pdftex.def Info: figures/gameasy.png  used on input line 1099.
+(pdftex.def)             Requested size: 455.30121pt x 256.09163pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [40 </home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/figures/restricted2.png> </home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/figures/introgame.png>]
+<figures/gameeasyhelp.png, id=978, 1927.2pt x 1084.05pt>
+File: figures/gameeasyhelp.png Graphic file (type png)
+<use figures/gameeasyhelp.png>
+Package pdftex.def Info: figures/gameeasyhelp.png  used on input line 1106.
+(pdftex.def)             Requested size: 455.30121pt x 256.09163pt.
+<figures/gamehard.png, id=979, 1927.2pt x 1084.05pt>
+File: figures/gamehard.png Graphic file (type png)
+<use figures/gamehard.png>
+Package pdftex.def Info: figures/gamehard.png  used on input line 1113.
+(pdftex.def)             Requested size: 455.30121pt x 256.09163pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [41 </home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/figures/gameasy.png> </home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/figures/gameeasyhelp.png>]
+<figures/gamehardhelp.png, id=989, 1927.2pt x 1084.05pt>
+File: figures/gamehardhelp.png Graphic file (type png)
+<use figures/gamehardhelp.png>
+Package pdftex.def Info: figures/gamehardhelp.png  used on input line 1120.
+(pdftex.def)             Requested size: 455.30121pt x 256.09163pt.
+<figures/scorescreen.png, id=990, 1927.2pt x 1084.05pt>
+File: figures/scorescreen.png Graphic file (type png)
+<use figures/scorescreen.png>
+Package pdftex.def Info: figures/scorescreen.png  used on input line 1127.
+(pdftex.def)             Requested size: 455.30121pt x 256.09163pt.
+) (./chapters/ch05-evaluation.tex
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [42 </home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/figures/gamehard.png> </home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/figures/gamehardhelp.png>] [43 </home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/figures/scorescreen.png>] [44
+
+]
+chapter 5.
+
+Overfull \hbox (2.28006pt too wide) has occurred while \output is active
+[]|[] []
+ []
+
+
+Overfull \vbox (459.06232pt too high) has occurred while \output is active []
+
+ [45]) (./chapters/ch06-conclusion.tex [46]
 chapter 6.
 )
 Overfull \hbox (2.28006pt too wide) has occurred while \output is active
@@ -992,9 +1212,9 @@ Overfull \hbox (2.28006pt too wide) has occurred while \output is active
 
 Overfull \vbox (431.27501pt too high) has occurred while \output is active []
 
- [25
+ [47
 
-] [26
+] [48
 
 
 
@@ -1006,17 +1226,17 @@ LaTeX Warning: Empty `thebibliography' environment or \BreakBibliography
 )
 
 pdfTeX warning: pdflatex (file /home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/pdf/originality.pdf): PDF inclusion: found PDF version <1.6>, but at most version <1.5> allowed
-<pdf/originality.pdf, id=648, 597.55246pt x 845.07718pt>
+<pdf/originality.pdf, id=1026, 597.55246pt x 845.07718pt>
 File: pdf/originality.pdf Graphic file (type pdf)
 <use pdf/originality.pdf>
-Package pdftex.def Info: pdf/originality.pdf  used on input line 276.
+Package pdftex.def Info: pdf/originality.pdf  used on input line 277.
 (pdftex.def)             Requested size: 597.551pt x 845.07512pt.
 
 
 pdfTeX warning: pdflatex (file /home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/pdf/originality.pdf): PDF inclusion: found PDF version <1.6>, but at most version <1.5> allowed
 File: pdf/originality.pdf Graphic file (type pdf)
 <use pdf/originality.pdf>
-Package pdftex.def Info: pdf/originality.pdf  used on input line 276.
+Package pdftex.def Info: pdf/originality.pdf  used on input line 277.
 (pdftex.def)             Requested size: 597.551pt x 845.07512pt.
 
 
@@ -1024,14 +1244,14 @@ pdfTeX warning: pdflatex (file /home/frankie/WebstormProjects/bachelor-thesis/Re
 
 
 pdfTeX warning: pdflatex (file /home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/pdf/originality.pdf): PDF inclusion: found PDF version <1.6>, but at most version <1.5> allowed
-<pdf/originality.pdf, id=651, page=1, 597.55246pt x 845.07718pt>
+<pdf/originality.pdf, id=1029, page=1, 597.55246pt x 845.07718pt>
 File: pdf/originality.pdf Graphic file (type pdf)
 <use pdf/originality.pdf, page 1>
-Package pdftex.def Info: pdf/originality.pdf , page1 used on input line 276.
+Package pdftex.def Info: pdf/originality.pdf , page1 used on input line 277.
 (pdftex.def)             Requested size: 597.551pt x 845.07512pt.
 File: pdf/originality.pdf Graphic file (type pdf)
 <use pdf/originality.pdf, page 1>
-Package pdftex.def Info: pdf/originality.pdf , page1 used on input line 276.
+Package pdftex.def Info: pdf/originality.pdf , page1 used on input line 277.
 (pdftex.def)             Requested size: 597.551pt x 845.07512pt.
 
 Class scrbook Warning: deprecated old font command `\sl' used.
@@ -1052,43 +1272,47 @@ Class scrbook Warning: deprecated old font command `\sl' used.
 (scrbook)              Otherwise you should reconfigure or replace the
 (scrbook)              package. If you have used the old font command
 (scrbook)              `\sl' yourself you should replace it, e.g., by
-(scrbook)              `\normalfont \slshape ' on input line 276.
+(scrbook)              `\normalfont \slshape ' on input line 277.
 
-[27]
+[49]
 File: pdf/originality.pdf Graphic file (type pdf)
 <use pdf/originality.pdf, page 1>
-Package pdftex.def Info: pdf/originality.pdf , page1 used on input line 276.
+Package pdftex.def Info: pdf/originality.pdf , page1 used on input line 277.
 (pdftex.def)             Requested size: 597.551pt x 845.07512pt.
 File: pdf/originality.pdf Graphic file (type pdf)
 <use pdf/originality.pdf, page 1>
-Package pdftex.def Info: pdf/originality.pdf , page1 used on input line 276.
+Package pdftex.def Info: pdf/originality.pdf , page1 used on input line 277.
 (pdftex.def)             Requested size: 597.551pt x 845.07512pt.
 File: pdf/originality.pdf Graphic file (type pdf)
 <use pdf/originality.pdf, page 1>
-Package pdftex.def Info: pdf/originality.pdf , page1 used on input line 276.
+Package pdftex.def Info: pdf/originality.pdf , page1 used on input line 277.
 (pdftex.def)             Requested size: 597.551pt x 845.07512pt.
- [28 </home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/pdf/originality.pdf>]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 278.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 278.
+ [50 </home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/pdf/originality.pdf>]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 279.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 279.
  (/home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/thesis.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 278.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 278.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 279.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 279.
 Package rerunfilecheck Info: File `thesis.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
+
+
+LaTeX Warning: There were undefined references.
+
  ) 
 Here is how much of TeX's memory you used:
- 25402 strings out of 492167
- 443444 string characters out of 6131557
- 771682 words of memory out of 5000000
- 29018 multiletter control sequences out of 15000+600000
- 590071 words of font info for 82 fonts, out of 8000000 for 9000
+ 26110 strings out of 492167
+ 456826 string characters out of 6131557
+ 878989 words of memory out of 5000000
+ 29449 multiletter control sequences out of 15000+600000
+ 592874 words of font info for 84 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 56i,28n,86p,10126b,1918s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/urw/courier/ucrb8a.pfb></usr/share/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texmf-dist/fonts/type1/urw/helvetic/uhvro8a.pfb></usr/share/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on /home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/thesis.pdf (36 pages, 1018986 bytes).
+ 56i,29n,86p,10126b,2101s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/urw/courier/ucrb8a.pfb></usr/share/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texmf-dist/fonts/type1/urw/helvetic/uhvro8a.pfb></usr/share/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on /home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/thesis.pdf (58 pages, 36404541 bytes).
 PDF statistics:
- 1003 PDF objects out of 1200 (max. 8388607)
- 932 compressed objects within 10 object streams
- 454 named destinations out of 1000 (max. 500000)
- 531 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1435 PDF objects out of 1440 (max. 8388607)
+ 1280 compressed objects within 13 object streams
+ 697 named destinations out of 1000 (max. 500000)
+ 676 words of extra memory for PDF output out of 10000 (max. 10000000)
 
