@@ -17,15 +17,15 @@
 \contentsline {subsection}{\numberline {4.1.2}Scenes}{11}{subsection.4.1.2}% 
 \contentsline {subsubsection}{\nonumberline Lifecycle}{11}{section*.13}% 
 \contentsline {subsection}{\numberline {4.1.3}Managers}{12}{subsection.4.1.3}% 
-\contentsline {section}{\numberline {4.2}Object Generation}{13}{section.4.2}% 
-\contentsline {section}{\numberline {4.3}Objects}{16}{section.4.3}% 
-\contentsline {subsection}{\numberline {4.3.1}Object Storage}{16}{subsection.4.3.1}% 
+\contentsline {section}{\numberline {4.2}Object Generation}{12}{section.4.2}% 
+\contentsline {section}{\numberline {4.3}Objects}{15}{section.4.3}% 
+\contentsline {subsection}{\numberline {4.3.1}Object Storage}{15}{subsection.4.3.1}% 
 \contentsline {subsection}{\numberline {4.3.2}Object Display}{16}{subsection.4.3.2}% 
-\contentsline {subsection}{\numberline {4.3.3}Object Interaction}{17}{subsection.4.3.3}% 
+\contentsline {subsection}{\numberline {4.3.3}Object Interaction}{16}{subsection.4.3.3}% 
 \contentsline {section}{\numberline {4.4}Score Storage}{17}{section.4.4}% 
 \contentsline {section}{\numberline {4.5}Introduction Animation Generation}{18}{section.4.5}% 
 \contentsline {section}{\numberline {4.6}Concept of the Learning Environment}{18}{section.4.6}% 
-\contentsline {subsection}{\numberline {4.6.1}Drop Down Menu}{19}{subsection.4.6.1}% 
+\contentsline {subsection}{\numberline {4.6.1}Drop Down Menu}{18}{subsection.4.6.1}% 
 \contentsline {subsection}{\numberline {4.6.2}Welcome Screen}{19}{subsection.4.6.2}% 
 \contentsline {subsection}{\numberline {4.6.3}Level Menu}{19}{subsection.4.6.3}% 
 \contentsline {subsection}{\numberline {4.6.4}Object Summary}{19}{subsection.4.6.4}% 
@@ -33,22 +33,23 @@
 \contentsline {subsection}{\numberline {4.6.6}Sorting with one category under difficult conditions}{19}{subsection.4.6.6}% 
 \contentsline {subsection}{\numberline {4.6.7}Sorting with restricted space}{20}{subsection.4.6.7}% 
 \contentsline {subsection}{\numberline {4.6.8}Object pairing - easy version}{20}{subsection.4.6.8}% 
-\contentsline {subsection}{\numberline {4.6.9}Object pairing - normal version}{20}{subsection.4.6.9}% 
-\contentsline {subsection}{\numberline {4.6.10}Score Screen}{21}{subsection.4.6.10}% 
-\contentsline {subsection}{\numberline {4.6.11}Introduction}{21}{subsection.4.6.11}% 
-\contentsline {section}{\numberline {4.7}Code structure of the learning environment}{21}{section.4.7}% 
-\contentsline {subsection}{\numberline {4.7.1}BaseScene}{21}{subsection.4.7.1}% 
-\contentsline {subsection}{\numberline {4.7.2}PreloadAssets}{22}{subsection.4.7.2}% 
-\contentsline {subsection}{\numberline {4.7.3}DropDownMenu}{23}{subsection.4.7.3}% 
-\contentsline {subsection}{\numberline {4.7.4}WelcomeScene}{24}{subsection.4.7.4}% 
-\contentsline {subsection}{\numberline {4.7.5}LevelMenuSceneScene}{24}{subsection.4.7.5}% 
-\contentsline {subsection}{\numberline {4.7.6}IntroScene}{25}{subsection.4.7.6}% 
-\contentsline {subsection}{\numberline {4.7.7}SortingScene}{25}{subsection.4.7.7}% 
-\contentsline {subsection}{\numberline {4.7.8}PropertySortingScene}{27}{subsection.4.7.8}% 
-\contentsline {subsection}{\numberline {4.7.9}RestrictedSortingScene}{28}{subsection.4.7.9}% 
-\contentsline {subsection}{\numberline {4.7.10}GameScene}{28}{subsection.4.7.10}% 
-\contentsline {subsection}{\numberline {4.7.11}ScoreScene}{31}{subsection.4.7.11}% 
-\contentsline {section}{\numberline {4.8}Final Look of the Learning Environment}{31}{section.4.8}% 
+\contentsline {subsection}{\numberline {4.6.9}Object pairing - normal version}{21}{subsection.4.6.9}% 
+\contentsline {subsection}{\numberline {4.6.10}Score Screen}{22}{subsection.4.6.10}% 
+\contentsline {subsection}{\numberline {4.6.11}Introduction}{22}{subsection.4.6.11}% 
+\contentsline {section}{\numberline {4.7}Code structure of the learning environment}{22}{section.4.7}% 
+\contentsline {subsection}{\numberline {4.7.1}BaseScene}{22}{subsection.4.7.1}% 
+\contentsline {subsection}{\numberline {4.7.2}PreloadAssets}{23}{subsection.4.7.2}% 
+\contentsline {subsubsection}{\nonumberline Image Game Objects}{24}{section*.19}% 
+\contentsline {subsection}{\numberline {4.7.3}DropDownMenu}{24}{subsection.4.7.3}% 
+\contentsline {subsection}{\numberline {4.7.4}WelcomeScene}{25}{subsection.4.7.4}% 
+\contentsline {subsection}{\numberline {4.7.5}LevelMenuSceneScene}{25}{subsection.4.7.5}% 
+\contentsline {subsection}{\numberline {4.7.6}IntroScene}{26}{subsection.4.7.6}% 
+\contentsline {subsection}{\numberline {4.7.7}SortingScene}{26}{subsection.4.7.7}% 
+\contentsline {subsection}{\numberline {4.7.8}PropertySortingScene}{28}{subsection.4.7.8}% 
+\contentsline {subsection}{\numberline {4.7.9}RestrictedSortingScene}{29}{subsection.4.7.9}% 
+\contentsline {subsection}{\numberline {4.7.10}GameScene}{29}{subsection.4.7.10}% 
+\contentsline {subsection}{\numberline {4.7.11}ScoreScene}{32}{subsection.4.7.11}% 
+\contentsline {section}{\numberline {4.8}Final Look of the Learning Environment}{32}{section.4.8}% 
 \contentsline {chapter}{\numberline {5}Evaluation}{45}{chapter.5}% 
 \contentsline {section}{\numberline {5.1}Debugging}{45}{section.5.1}% 
 \contentsline {subsection}{\numberline {5.1.1}Devices}{45}{subsection.5.1.1}% 
@@ -59,4 +60,4 @@
 \contentsline {chapter}{\numberline {6}Conclusion}{47}{chapter.6}% 
 \contentsline {section}{\numberline {6.1}Future Improvements}{47}{section.6.1}% 
 \contentsline {section}{\numberline {6.2}checklist}{47}{section.6.2}% 
-\contentsline {chapter}{Bibliography}{49}{section*.43}% 
+\contentsline {chapter}{Bibliography}{49}{section*.46}% 

@@ -5,17 +5,21 @@
 
 In this section all implementation tools and approaches are explained.
 First our used framework will be explained, then how our different scenes and objects are generated and
-at last how these two are combined to our final solution.
+at last how these two are combined to our final solution: Gotscha!
+Gotscha is a learning environment based on game based learning.
+The user goes through multiple levels to learn detecting and comparing properties of objects
+under simple and more difficult situations.
 
 \section{Phaser 3}\label{sec:phaser-3}
 %https://labs.phaser.io/
 %https://phaser.io/
 %https://photonstorm.github.io/phaser3-docs/
 
-Phaser is an open source HTML5 game framework created by Photon Storm.
-It is is a JavaScript/TypeScript library designed to run on all major desktop browsers and
-a lot of focus was given to performance inside of mobile web browsers.
-If the device is capable then it uses WebGL for rendering, but otherwise it seamlessly reverts to Canvas.
+Phaser [\ref{TODO}] is an open source HTML5 [\ref{TODO}] game framework created by Photon Storm [\ref{TODO}].
+It is a JavaScript/TypeScript [\ref{TODO}] library designed to run on all major desktop browsers.
+A lot of focus was given to the performance inside of mobile web browsers.
+Important for the renderer is that if the device is capable, it uses WebGL [\ref{TODO}], otherwise it seamlessly reverts to Canvas [\ref{TODO}].
+The current version is 3.17 and is used in this work. Version 4 is currently in development.
 
 \subsection{Base Configuration}\label{subsec:base-configuration}
 In Phaser 3, games need a configuration file and a starting point.
@@ -85,73 +89,71 @@ For example:
 \end{lstlisting}
 
 \subsection{Scenes}\label{subsec:scenes}
-Games in Phaser 3 are structured around scene objects.
-A scene is a collection of game objects and related logic which should be kept together.
-The objects will be drawn when the scene is rendered and its update method will get called on every tick of your game loop.
+Games in Phaser 3+ are structured around scene objects.
+A scene is a collection of game objects and related logic because these two should be kept together.
+The objects will be drawn when the scene is rendered.
 
-Where this gets special is that Phaser 3 doesn't place any constraints on how many scenes need to be running.
-This means you can have 0, 1, or as many as you need going at once.
-You can communicate between them and each scene has a z-index so you can have a
-UI scene, rendered above the play scene, which is always rendered above the background scene.
-
-A scene has usually 5 functions.
-
-\begin{itemize}
-    \item Function \textbf{constructor}: Run 1 time.
-    \item Function \textbf{init}: Run 1 time. Initialization of fields and passed on data by other scenes.
-    \item Function \textbf{preload}: Run 1 time. Loads up all the assets inside the scene like images and audio.
-    \item Function \textbf{create}: Run 1 time. Position and display the assets that are already preloaded, animations, physics, etc.
-    \item Function \textbf{update}: Run 1 time per frame, takes care of everything related to the game logic.
-\end{itemize}
+Where this gets special is that Phaser doesn't place any constraints on how many scenes need to be running.
+This means you can have 0, 1, or as many as you need running at once.
+You can communicate between them and each scene has a depth (z-index).
+With the z-index a UI scene, rendered above the play scene, which is always rendered above the background scene, is possible.
 
 \subsubsection{Lifecycle}
-A simplified model is that a scene moves between four states: \textit{Create, Update Loop, Paused, and Stopped}.
-Most transitions are initiated by a function call and emit a signal that can be listened for
-should you need to take action at specific points in the process.
+A simplified model has a scene that moves between four states: \textit{Create, Update Loop, Paused, and Stopped}.
+Transitions are initiated by a function call and emit a signal that can be listened for.
+This way, you can take action at specific point in the process.
 
 The scene state transitions and fired events are summarized in the following state diagram.
-Functions which initiate a transition are in light yellow and signals emitted are light orange.
+Functions which initiate a transition are in yellow and signals emitted are orange.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{figures/lifecycle}
-    \caption{Scene Lifecycle}
+    \caption{Scene Lifecycle [\ref{TODO}]}
     \label{fig:lifecycle}
 \end{figure}
 
-One interesting behavior is that once a scene has been shut down it is not garbage collected but,
-can be resumed via the method start().
+An interesting behavior is that once a scene has been shut down it is not garbage collected.
+The scene can always be resumed by the start() method.
 When this happens the three creation functions get called once more.
 This means any state tracked in the scene class will be retained between a stopped state and the next create state.
-As a result special care must be taken to set a known initial value on everything requiring one.
+Thus special care must be taken to set a known initial value on everything requiring one.
+Especially when loading/creating objects outside the preloader (animations, tweens, audiofiles, etc.).
+
+Scenes here have 5 functions:
+
+\begin{itemize}
+    \item \textbf{constructor()}: Run 1 time.
+    \item \textbf{init()}: Run 1 time. Initialization of fields and passed on data by other scenes.
+    \item \textbf{preload()}: Run 1 time. Loads up all the assets inside the scene like images and audio.
+    \item \textbf{create()}: Run 1 time. Position and display the assets that are already preloaded, animations, physics, etc.
+    \item \textbf{update()}: Run 1 time per frame, takes care of everything related to the game logic.
+\end{itemize}
 
 \subsection{Managers}\label{subsec:managers}
 In Phaser 3 managers are a global system.
 Animations, scenes, images loaded/created within it are globally available to all game objects.
 They share the base data while managing their own timelines.
-This allows you to define a single object once and apply it to as many game objects as you require and
-call a game object in an completely other scene.
+This allows the definition of a single object once and its application to as many game objects as required.
+So a game object can be called in an completely other and unrelated scene.
 Examples for used managers in this work are:
 
 \begin{itemize}
     \item \textbf{Scene Manager} (scene.scenes). Contains all scenes of the game once created.
     \item \textbf{Texture Manager} (scene.textures). Contains all textures once loaded.
-    \item \textbf{Audio Manager} (scene.sound). Containts all audio files once loaded.
-    \item \textbf{Data Manager} (scene.data). Shared data manager. An event is triggered when an event is stored/changed.
-    \item \textbf{Cache Manager} (scene.cache). Containts all special files once loaded.
+    \item \textbf{Audio Manager} (scene.sound). Contains all audio files once loaded.
+    \item \textbf{Data Manager} (scene.data). Shared data manager.
+    An event (listenable) is triggered when an event is stored/changed.
+    \item \textbf{Cache Manager} (scene.cache). Contains all special files once loaded.
     \item \textbf{Animation Manager} (scene.anims). Contains all animations once created.
     \item \textbf{Tween Manager} (scene.tweens). Contains all tween objects once created.
     A Tween is able to manipulate the properties of one or more objects to any given value, based
     on a duration and type of ease.
 \end{itemize}
 
-A special texture we are going to use instead of normal images are sprites.
-A sprite game object is used for the display of both static and animated images in your game.
-Sprites can have input events and physics bodies.
-The main difference between a sprite and an image game object is that you cannot animate images.
-
 \section{Object Generation}\label{sec:object-generation}
-Our objects can have up to four properties with at maximum one from each of the following categories:
+Our objects can have up to four properties with exactly one from each of the following categories:
+
 \begin{itemize}
     \item \textbf{Geometrical shape} (square, triangle, circle, ellipse, rhombus, octagon)
     \item \textbf{Color} (yellow, orange, red, purple, green, blue)
@@ -159,11 +161,16 @@ Our objects can have up to four properties with at maximum one from each of the 
     \item \textbf{Filling} (filled, striped, dotted)
 \end{itemize}
 
-We need all possible objects with one, three and four properties.
+All possible objects with one, three and four properties, are needed.
 
-With a python script [\ref{lst:svggen}] scalable vector graphic (SVG) files are generated [\ref{lst:svgimagefile}].
-After that they are converted to portable network graphic (PNG) files with the GNU image manipulation program (GIMP),
-so that they can be imported into Phaser.
+With a python script [\ref{lst:svggen}] scalable vector graphic (SVG) [\ref{TODO}] files are generated [\ref{lst:svgimagefile}].
+After that they are converted to portable network graphic (PNG)[\ref{TODO}] files with the GNU image manipulation program (GIMP) [\ref{TODO}].
+Additional image scaling and cropping is done for saving space and only displaying the actual image with as less empty space as possible around it.
+With the imagemagick command mogrify [\ref{lst:mogrify}] the last step is easily applicable to all 1000+ images.
+
+\begin{lstlisting}[style=TypeScript, caption={ImageMagick console command "mogrify"}, label={lst:mogrify}]
+    mogrify -resize 50% -trim -repage *.png
+\end{lstlisting}
 
 \begin{lstlisting}[style=TypeScript, caption={SVG Generation}, label={lst:svggen}]
     ...
@@ -326,15 +333,14 @@ for that reason the image path with the respective properties are stored in a ea
 \end{lstlisting}
 
 \subsection{Object Display}\label{subsec:object-display}
-Displaying just the image of an object without tweaking it a little can seem boring for the user.
-So to add more diversity, every time an object is displayed in the game,
-the object gets a random rotation angle, size and position.
+Displaying just the image of an object without tweaking it a little can seem boring for the user in long term.
+To add more diversity, objects gets a random rotation angle, size and position every time it is displayed/created.
 Of course within certain predefined boundaries.
 
 \subsection{Object Interaction}\label{subsec:object-interaction}
-Whenever possible, when the user interacts with an object, a generalization of the input code is used.
+Whenever possible a generalization of the input code is used with every user-object interaction.
 Instead of giving each object an event task, the global event task is fetched and the object via the event parameters.
-This way the input interaction code is kept in one place.
+This way the input interaction code is kept in one place and so less fragmented.
 
 \begin{lstlisting}[style=TypeScript, caption={Input code}]
     ...
@@ -395,13 +401,13 @@ Before accessing the local storage it is checked if there even is a storage.
 
 \section{Introduction Animation Generation}\label{sec:introduction-animation-generation}
 To produce animated instruction for the task later on,
-the screen is recorded with OBS Studio while someone (here me) is playing the game.
+the screen is recorded with the Open Broadcaster Software (OBS) Studio [\ref{TODO}] while someone is playing the game.
 Parts of the final video are then taken for the respective scenes and converted into single pictures.
 These single pictures are saved in one picture (called spreadsheet [\ref{fig:spreadsheet}]).
-The phaser framework animates those spreadsheets.
+The Phaser framework animates those spreadsheets.
 
 Is is important to note, that different devices have a different limit for the resolution of images.
-Tablets seem to have the lowest, namely 4096x4096 pixels.
+Tablets seem to have the lowest, namely 4096x4096 pixels [\ref{TODO}].
 The spreadsheet images are scaled down for that reason.
 
 \begin{figure}[H]
@@ -412,8 +418,7 @@ The spreadsheet images are scaled down for that reason.
 \end{figure}
 
 \section{Concept of the Learning Environment}\label{sec:concept-of-the-learning-environment}
-Through the boundary conditions and requirements of the learning environment,
-we split our environment into multiple parts/scenes.
+Through the given boundary conditions and requirements the environment is split into multiple parts/scenes.
 
 \subsection{Drop Down Menu}\label{subsec:drop-down-menu}
 Throughout the whole experience, the user can open a menu with a button.
@@ -425,13 +430,12 @@ if suddenly something pops up and covers parts of the visible and running scene.
 
 \subsection{Welcome Screen}\label{subsec:welcome-screen}
 The welcome screen is the starting point of the user experience.
-Through this screen the user will be greeted by showing the name of the game.
-Through a click he shall commence to the level menu.
+Through this screen the user is greeted by showing the name of the game.
+Through a click he may commence to the level menu.
 
 \subsection{Level Menu}\label{subsec:level-menu}
-In the level menu, the user is able to choose between different levels and games.
-He can also access the object summary and track his progress/score.
-The progress of each individual level is shown on the respective buttons.
+In the level menu, the user is able to choose between different levels and games and can access the object summary.
+Through the stars below each button the user can track his progress/score.
 The progress can be resetted by the reset button.
 
 \subsection{Object Summary}\label{subsec:object-summary}
@@ -478,14 +482,20 @@ For each category (color, shape and number of holes/dots) one of the following c
     \item They must be the same (blue, blue, blue)
     \item They must be completely different (square, triangle, circle)
 \end{itemize}
-[EXAMPLE]
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/setexample}
+    \caption{Example: Matching Set}
+    \label{fig:setexample1}
+\end{figure}
 
 If the user needs help, there is a helper bar which can be accessed by a button with a question mark on it.
 The helper bar shows which categories fulfil the conditions and which do not
 by coloring the category symbols on the bar in green or red.
 
 The game is time limited. The remaining time is shown by a bar.
-If you select three onjects which fulfil the conditions, more time will be added.
+If you select three objects which fulfil the conditions, more time will be added.
 After a set amount of correct selected objects, the game will end.
 
 If there are no three objects that fulfil the conditions, the playfield will be generated anew.
@@ -499,14 +509,19 @@ For each category (color, filling, shape and number of holes/dots) one of the fo
     \item They must be completely different (square, triangle, circle)
 \end{itemize}
 
-[EXAMPLE]
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/setexample}
+    \caption{Example: Matching Set}
+    \label{fig:setexample2}
+\end{figure}
 
 If the user needs help, there is a helper bar which can be accessed by a button with a question mark on it.
 The helper bar shows which categories fulfil the conditions and which do not
 by coloring the category symbols on the bar in green or red.
 
 The game is time limited. The remaining time is shown by a bar.
-If you select three onjects which fulfil the conditions, more time will be added.
+If you select three objects which fulfil the conditions, more time will be added.
 After a set amount of correct selected objects, the game will end.
 
 If there are no three objects that fulfil the conditions, the playfield will be generated anew.
@@ -639,6 +654,12 @@ The way the objects files are preloaded into the respective managers is shown be
     }
     ...
 \end{lstlisting}
+
+\subsubsection{Image Game Objects}
+Instead of representing an image as a normal image in game, sprites, a special texture, is used.
+A sprite game object can display both static and animated images in your game.
+They have input events, additional functions, fields and physics bodies.
+The main difference between a sprite and an image game object is that you cannot animate images.
 
 \subsection{DropDownMenu}\label{subsec:dropdownmenu}
 In this scene the drop down menu is created.

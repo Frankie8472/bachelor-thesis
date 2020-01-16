@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Arch Linux) (preloaded format=pdflatex 2019.11.14)  13 JAN 2020 17:22
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Arch Linux) (preloaded format=pdflatex 2020.1.15)  16 JAN 2020 16:12
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -943,16 +943,36 @@ Overfull \vbox (459.06232pt too high) has occurred while \output is active []
 
 ]) (./chapters/ch04-design.tex [8]
 chapter 4.
+LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <12> not available
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 18.
+
+LaTeX Warning: Reference `TODO' on page 9 undefined on input line 18.
+
+
+LaTeX Warning: Reference `TODO' on page 9 undefined on input line 18.
+
+
+LaTeX Warning: Reference `TODO' on page 9 undefined on input line 18.
+
+
+LaTeX Warning: Reference `TODO' on page 9 undefined on input line 19.
+
+
+LaTeX Warning: Reference `TODO' on page 9 undefined on input line 21.
+
+
+LaTeX Warning: Reference `TODO' on page 9 undefined on input line 21.
+
 LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <14.4> not available
-(Font)              Font shape `T1/phv/b/n' tried instead on input line 20.
+(Font)              Font shape `T1/phv/b/n' tried instead on input line 24.
 LaTeX Font Info:    Font shape `T1/ptm/bx/sl' in size <10.95> not available
-(Font)              Font shape `T1/ptm/b/sl' tried instead on input line 24.
-LaTeX Font Info:    Trying to load font information for T1+pcr on input line 24.
+(Font)              Font shape `T1/ptm/b/sl' tried instead on input line 28.
+LaTeX Font Info:    Trying to load font information for T1+pcr on input line 28.
 (/usr/share/texmf-dist/tex/latex/psnfss/t1pcr.fd
 File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
 )
 LaTeX Font Info:    Font shape `T1/pcr/bx/n' in size <10> not available
-(Font)              Font shape `T1/pcr/b/n' tried instead on input line 25.
+(Font)              Font shape `T1/pcr/b/n' tried instead on input line 29.
 
 Overfull \hbox (2.28006pt too wide) has occurred while \output is active
 []|[] []
@@ -967,232 +987,259 @@ Overfull \vbox (459.06232pt too high) has occurred while \output is active []
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [10]
-LaTeX Font Info:    Trying to load font information for OMS+ptm on input line 100.
+<figures/lifecycle.png, id=293, 584.1825pt x 354.57469pt>
+File: figures/lifecycle.png Graphic file (type png)
+<use figures/lifecycle.png>
+Package pdftex.def Info: figures/lifecycle.png  used on input line 111.
+(pdftex.def)             Requested size: 364.24236pt x 221.08923pt.
+LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <10.95> not available
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 112.
+
+
+LaTeX Warning: Reference `TODO' on page 11 undefined on input line 112.
+
+
+LaTeX Warning: Reference `TODO' on page 11 undefined on input line 112.
+
+[11 </home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/figures/lifecycle.png>]
+LaTeX Font Info:    Trying to load font information for OMS+ptm on input line 126.
  (/usr/share/texmf-dist/tex/latex/psnfss/omsptm.fd
 File: omsptm.fd 
 )
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 100.
-LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <12> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 100.
-<figures/lifecycle.png, id=293, 584.1825pt x 354.57469pt>
-File: figures/lifecycle.png Graphic file (type png)
-<use figures/lifecycle.png>
-Package pdftex.def Info: figures/lifecycle.png  used on input line 117.
-(pdftex.def)             Requested size: 364.24236pt x 221.08923pt.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 126.
+ [12]
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
+LaTeX Warning: Reference `TODO' on page 13 undefined on input line 166.
 
- [11] [12 </home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/figures/lifecycle.png>] [13]
+
+LaTeX Warning: Reference `TODO' on page 13 undefined on input line 167.
+
+
+LaTeX Warning: Reference `TODO' on page 13 undefined on input line 167.
+
+[13]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [14] [15] [16] [17]
-<figures/spreadsheet.png, id=513, 1456.9632pt x 409.7709pt>
+
+LaTeX Warning: Reference `TODO' on page 18 undefined on input line 404.
+
+
+LaTeX Warning: Reference `TODO' on page 18 undefined on input line 410.
+
+<figures/spreadsheet.png, id=521, 1456.9632pt x 409.7709pt>
 File: figures/spreadsheet.png Graphic file (type png)
 <use figures/spreadsheet.png>
-Package pdftex.def Info: figures/spreadsheet.png  used on input line 409.
+Package pdftex.def Info: figures/spreadsheet.png  used on input line 415.
 (pdftex.def)             Requested size: 455.30121pt x 128.05309pt.
-
-Underfull \vbox (badness 1122) has occurred while \output is active []
-
- [18 </home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/figures/spreadsheet.png
+[18 </home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/figures/spreadsheet.png
 
 pdfTeX warning: pdflatex (file /home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/figures/spreadsheet.png): large interlaced PNG might cause out of memory (use non-interlaced PNG to fix this)
->] [19] [20]
-<figures/statediagram.png, id=540, 1646.15pt x 200.75pt>
+>] [19]
+<figures/setexample.png, id=539, 1297.84875pt x 955.57pt>
+File: figures/setexample.png Graphic file (type png)
+<use figures/setexample.png>
+Package pdftex.def Info: figures/setexample.png  used on input line 488.
+(pdftex.def)             Requested size: 364.24236pt x 268.17017pt.
+ [20 </home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/figures/setexample.png>]
+File: figures/setexample.png Graphic file (type png)
+<use figures/setexample.png>
+Package pdftex.def Info: figures/setexample.png  used on input line 514.
+(pdftex.def)             Requested size: 364.24236pt x 268.17017pt.
+ [21]
+<figures/statediagram.png, id=551, 1646.15pt x 200.75pt>
 File: figures/statediagram.png Graphic file (type png)
 <use figures/statediagram.png>
-Package pdftex.def Info: figures/statediagram.png  used on input line 533.
+Package pdftex.def Info: figures/statediagram.png  used on input line 548.
 (pdftex.def)             Requested size: 455.30121pt x 55.52345pt.
- [21 </home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/figures/statediagram.png>] [22] [23]
-<figures/easylevelicon.png, id=627, 903.375pt x 602.25pt>
+ [22 </home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/figures/statediagram.png>] [23] [24]
+<figures/easylevelicon.png, id=640, 903.375pt x 602.25pt>
 File: figures/easylevelicon.png Graphic file (type png)
 <use figures/easylevelicon.png>
-Package pdftex.def Info: figures/easylevelicon.png  used on input line 694.
+Package pdftex.def Info: figures/easylevelicon.png  used on input line 715.
 (pdftex.def)             Requested size: 91.05884pt x 60.69719pt.
- [24]
-<figures/mediumlevelicon.png, id=654, 1204.5pt x 1204.5pt>
+ [25]
+<figures/mediumlevelicon.png, id=666, 1204.5pt x 1204.5pt>
 File: figures/mediumlevelicon.png Graphic file (type png)
 <use figures/mediumlevelicon.png>
-Package pdftex.def Info: figures/mediumlevelicon.png  used on input line 701.
+Package pdftex.def Info: figures/mediumlevelicon.png  used on input line 722.
 (pdftex.def)             Requested size: 91.05884pt x 91.05038pt.
-<figures/hardlevelicon.png, id=655, 1652.1725pt x 2409.0pt>
+<figures/hardlevelicon.png, id=667, 1652.1725pt x 2409.0pt>
 File: figures/hardlevelicon.png Graphic file (type png)
 <use figures/hardlevelicon.png>
-Package pdftex.def Info: figures/hardlevelicon.png  used on input line 708.
+Package pdftex.def Info: figures/hardlevelicon.png  used on input line 729.
 (pdftex.def)             Requested size: 91.05884pt x 132.77109pt.
- [25 </home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/figures/easylevelicon.png> </home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/figures/mediumlevelicon.png> </home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/figures/hardlevelicon.png>]
+ [26 </home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/figures/easylevelicon.png> </home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/figures/mediumlevelicon.png> </home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/figures/hardlevelicon.png>]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [26] [27] [28] [29] [30]
+ [27] [28] [29] [30] [31]
 
-LaTeX Warning: Hyper reference `ref:scorestorage' on page 31 undefined on input line 966.
+LaTeX Warning: Hyper reference `ref:scorestorage' on page 32 undefined on input line 987.
 
-<figures/loadingscreen.png, id=865, 1927.2pt x 1084.05pt>
+<figures/loadingscreen.png, id=877, 1927.2pt x 1084.05pt>
 File: figures/loadingscreen.png Graphic file (type png)
 <use figures/loadingscreen.png>
-Package pdftex.def Info: figures/loadingscreen.png  used on input line 973.
+Package pdftex.def Info: figures/loadingscreen.png  used on input line 994.
 (pdftex.def)             Requested size: 455.30121pt x 256.09163pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [31]
-<figures/welcomescreen.png, id=886, 1927.2pt x 1084.05pt>
+ [32]
+<figures/welcomescreen.png, id=898, 1927.2pt x 1084.05pt>
 File: figures/welcomescreen.png Graphic file (type png)
 <use figures/welcomescreen.png>
-Package pdftex.def Info: figures/welcomescreen.png  used on input line 980.
+Package pdftex.def Info: figures/welcomescreen.png  used on input line 1001.
 (pdftex.def)             Requested size: 455.30121pt x 256.09163pt.
-<figures/levelmenu.png, id=887, 1927.2pt x 1084.05pt>
+<figures/levelmenu.png, id=899, 1927.2pt x 1084.05pt>
 File: figures/levelmenu.png Graphic file (type png)
 <use figures/levelmenu.png>
-Package pdftex.def Info: figures/levelmenu.png  used on input line 987.
+Package pdftex.def Info: figures/levelmenu.png  used on input line 1008.
 (pdftex.def)             Requested size: 455.30121pt x 256.09163pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [32 </home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/figures/loadingscreen.png> </home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/figures/welcomescreen.png>]
-<figures/levelmenustars.png, id=896, 1927.2pt x 1084.05pt>
+ [33 </home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/figures/loadingscreen.png> </home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/figures/welcomescreen.png>]
+<figures/levelmenustars.png, id=909, 1927.2pt x 1084.05pt>
 File: figures/levelmenustars.png Graphic file (type png)
 <use figures/levelmenustars.png>
-Package pdftex.def Info: figures/levelmenustars.png  used on input line 994.
+Package pdftex.def Info: figures/levelmenustars.png  used on input line 1015.
 (pdftex.def)             Requested size: 455.30121pt x 256.09163pt.
-<figures/sortingscene1.png, id=897, 1927.2pt x 1084.05pt>
+<figures/sortingscene1.png, id=910, 1927.2pt x 1084.05pt>
 File: figures/sortingscene1.png Graphic file (type png)
 <use figures/sortingscene1.png>
-Package pdftex.def Info: figures/sortingscene1.png  used on input line 1001.
+Package pdftex.def Info: figures/sortingscene1.png  used on input line 1022.
 (pdftex.def)             Requested size: 455.30121pt x 256.09163pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [33 </home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/figures/levelmenu.png> </home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/figures/levelmenustars.png>]
-<figures/sortingscene2.png, id=907, 1927.2pt x 1084.05pt>
+ [34 </home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/figures/levelmenu.png> </home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/figures/levelmenustars.png>]
+<figures/sortingscene2.png, id=919, 1927.2pt x 1084.05pt>
 File: figures/sortingscene2.png Graphic file (type png)
 <use figures/sortingscene2.png>
-Package pdftex.def Info: figures/sortingscene2.png  used on input line 1008.
+Package pdftex.def Info: figures/sortingscene2.png  used on input line 1029.
 (pdftex.def)             Requested size: 455.30121pt x 256.09163pt.
-<figures/sortingscene3.png, id=908, 1927.2pt x 1084.05pt>
+<figures/sortingscene3.png, id=920, 1927.2pt x 1084.05pt>
 File: figures/sortingscene3.png Graphic file (type png)
 <use figures/sortingscene3.png>
-Package pdftex.def Info: figures/sortingscene3.png  used on input line 1015.
+Package pdftex.def Info: figures/sortingscene3.png  used on input line 1036.
 (pdftex.def)             Requested size: 455.30121pt x 256.09163pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [34 </home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/figures/sortingscene1.png> </home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/figures/sortingscene2.png>]
-<figures/sortingscene4.png, id=917, 1927.2pt x 1084.05pt>
+ [35 </home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/figures/sortingscene1.png> </home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/figures/sortingscene2.png>]
+<figures/sortingscene4.png, id=930, 1927.2pt x 1084.05pt>
 File: figures/sortingscene4.png Graphic file (type png)
 <use figures/sortingscene4.png>
-Package pdftex.def Info: figures/sortingscene4.png  used on input line 1022.
+Package pdftex.def Info: figures/sortingscene4.png  used on input line 1043.
 (pdftex.def)             Requested size: 455.30121pt x 256.09163pt.
-<figures/sortingscene5.png, id=918, 1927.2pt x 1084.05pt>
+<figures/sortingscene5.png, id=931, 1927.2pt x 1084.05pt>
 File: figures/sortingscene5.png Graphic file (type png)
 <use figures/sortingscene5.png>
-Package pdftex.def Info: figures/sortingscene5.png  used on input line 1029.
+Package pdftex.def Info: figures/sortingscene5.png  used on input line 1050.
 (pdftex.def)             Requested size: 455.30121pt x 256.09163pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [35 </home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/figures/sortingscene3.png> </home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/figures/sortingscene4.png>]
-<figures/introduction.png, id=928, 1927.2pt x 1084.05pt>
+ [36 </home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/figures/sortingscene3.png> </home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/figures/sortingscene4.png>]
+<figures/introduction.png, id=940, 1927.2pt x 1084.05pt>
 File: figures/introduction.png Graphic file (type png)
 <use figures/introduction.png>
-Package pdftex.def Info: figures/introduction.png  used on input line 1036.
+Package pdftex.def Info: figures/introduction.png  used on input line 1057.
 (pdftex.def)             Requested size: 455.30121pt x 256.09163pt.
-<figures/property1.png, id=929, 1927.2pt x 1084.05pt>
+<figures/property1.png, id=941, 1927.2pt x 1084.05pt>
 File: figures/property1.png Graphic file (type png)
 <use figures/property1.png>
-Package pdftex.def Info: figures/property1.png  used on input line 1043.
+Package pdftex.def Info: figures/property1.png  used on input line 1064.
 (pdftex.def)             Requested size: 455.30121pt x 256.09163pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [36 </home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/figures/sortingscene5.png> </home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/figures/introduction.png>]
-<figures/property2.png, id=938, 1927.2pt x 1084.05pt>
+ [37 </home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/figures/sortingscene5.png> </home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/figures/introduction.png>]
+<figures/property2.png, id=950, 1927.2pt x 1084.05pt>
 File: figures/property2.png Graphic file (type png)
 <use figures/property2.png>
-Package pdftex.def Info: figures/property2.png  used on input line 1050.
+Package pdftex.def Info: figures/property2.png  used on input line 1071.
 (pdftex.def)             Requested size: 455.30121pt x 256.09163pt.
-<figures/property3.png, id=939, 1927.2pt x 1084.05pt>
+<figures/property3.png, id=951, 1927.2pt x 1084.05pt>
 File: figures/property3.png Graphic file (type png)
 <use figures/property3.png>
-Package pdftex.def Info: figures/property3.png  used on input line 1057.
+Package pdftex.def Info: figures/property3.png  used on input line 1078.
 (pdftex.def)             Requested size: 455.30121pt x 256.09163pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [37 </home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/figures/property1.png> </home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/figures/property2.png>]
-<figures/property4.png, id=948, 1927.2pt x 1084.05pt>
+ [38 </home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/figures/property1.png> </home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/figures/property2.png>]
+<figures/property4.png, id=960, 1927.2pt x 1084.05pt>
 File: figures/property4.png Graphic file (type png)
 <use figures/property4.png>
-Package pdftex.def Info: figures/property4.png  used on input line 1064.
+Package pdftex.def Info: figures/property4.png  used on input line 1085.
 (pdftex.def)             Requested size: 455.30121pt x 256.09163pt.
-<figures/falling.png, id=949, 1927.2pt x 1084.05pt>
+<figures/falling.png, id=961, 1927.2pt x 1084.05pt>
 File: figures/falling.png Graphic file (type png)
 <use figures/falling.png>
-Package pdftex.def Info: figures/falling.png  used on input line 1071.
+Package pdftex.def Info: figures/falling.png  used on input line 1092.
 (pdftex.def)             Requested size: 455.30121pt x 256.09163pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [38 </home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/figures/property3.png> </home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/figures/property4.png>]
-<figures/restricted1.png, id=958, 1927.2pt x 1084.05pt>
+ [39 </home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/figures/property3.png> </home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/figures/property4.png>]
+<figures/restricted1.png, id=970, 1927.2pt x 1084.05pt>
 File: figures/restricted1.png Graphic file (type png)
 <use figures/restricted1.png>
-Package pdftex.def Info: figures/restricted1.png  used on input line 1078.
+Package pdftex.def Info: figures/restricted1.png  used on input line 1099.
 (pdftex.def)             Requested size: 455.30121pt x 256.09163pt.
-<figures/restricted2.png, id=959, 1927.2pt x 1084.05pt>
+<figures/restricted2.png, id=971, 1927.2pt x 1084.05pt>
 File: figures/restricted2.png Graphic file (type png)
 <use figures/restricted2.png>
-Package pdftex.def Info: figures/restricted2.png  used on input line 1085.
+Package pdftex.def Info: figures/restricted2.png  used on input line 1106.
 (pdftex.def)             Requested size: 455.30121pt x 256.09163pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [39 </home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/figures/falling.png> </home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/figures/restricted1.png>]
-<figures/introgame.png, id=968, 1927.2pt x 1084.05pt>
+ [40 </home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/figures/falling.png> </home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/figures/restricted1.png>]
+<figures/introgame.png, id=980, 1927.2pt x 1084.05pt>
 File: figures/introgame.png Graphic file (type png)
 <use figures/introgame.png>
-Package pdftex.def Info: figures/introgame.png  used on input line 1092.
+Package pdftex.def Info: figures/introgame.png  used on input line 1113.
 (pdftex.def)             Requested size: 455.30121pt x 256.09163pt.
-<figures/gameasy.png, id=969, 1927.2pt x 1084.05pt>
+<figures/gameasy.png, id=981, 1927.2pt x 1084.05pt>
 File: figures/gameasy.png Graphic file (type png)
 <use figures/gameasy.png>
-Package pdftex.def Info: figures/gameasy.png  used on input line 1099.
+Package pdftex.def Info: figures/gameasy.png  used on input line 1120.
 (pdftex.def)             Requested size: 455.30121pt x 256.09163pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [40 </home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/figures/restricted2.png> </home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/figures/introgame.png>]
-<figures/gameeasyhelp.png, id=978, 1927.2pt x 1084.05pt>
+ [41 </home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/figures/restricted2.png> </home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/figures/introgame.png>]
+<figures/gameeasyhelp.png, id=991, 1927.2pt x 1084.05pt>
 File: figures/gameeasyhelp.png Graphic file (type png)
 <use figures/gameeasyhelp.png>
-Package pdftex.def Info: figures/gameeasyhelp.png  used on input line 1106.
+Package pdftex.def Info: figures/gameeasyhelp.png  used on input line 1127.
 (pdftex.def)             Requested size: 455.30121pt x 256.09163pt.
-<figures/gamehard.png, id=979, 1927.2pt x 1084.05pt>
+<figures/gamehard.png, id=992, 1927.2pt x 1084.05pt>
 File: figures/gamehard.png Graphic file (type png)
 <use figures/gamehard.png>
-Package pdftex.def Info: figures/gamehard.png  used on input line 1113.
+Package pdftex.def Info: figures/gamehard.png  used on input line 1134.
 (pdftex.def)             Requested size: 455.30121pt x 256.09163pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [41 </home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/figures/gameasy.png> </home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/figures/gameeasyhelp.png>]
-<figures/gamehardhelp.png, id=989, 1927.2pt x 1084.05pt>
+ [42 </home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/figures/gameasy.png> </home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/figures/gameeasyhelp.png>]
+<figures/gamehardhelp.png, id=1001, 1927.2pt x 1084.05pt>
 File: figures/gamehardhelp.png Graphic file (type png)
 <use figures/gamehardhelp.png>
-Package pdftex.def Info: figures/gamehardhelp.png  used on input line 1120.
+Package pdftex.def Info: figures/gamehardhelp.png  used on input line 1141.
 (pdftex.def)             Requested size: 455.30121pt x 256.09163pt.
-<figures/scorescreen.png, id=990, 1927.2pt x 1084.05pt>
+<figures/scorescreen.png, id=1002, 1927.2pt x 1084.05pt>
 File: figures/scorescreen.png Graphic file (type png)
 <use figures/scorescreen.png>
-Package pdftex.def Info: figures/scorescreen.png  used on input line 1127.
+Package pdftex.def Info: figures/scorescreen.png  used on input line 1148.
 (pdftex.def)             Requested size: 455.30121pt x 256.09163pt.
 ) (./chapters/ch05-evaluation.tex
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [42 </home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/figures/gamehard.png> </home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/figures/gamehardhelp.png>] [43 </home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/figures/scorescreen.png>] [44
-
-]
+ [43 </home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/figures/gamehard.png> </home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/figures/gamehardhelp.png>] [44 </home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/figures/scorescreen.png>]
 chapter 5.
 
 Overfull \hbox (2.28006pt too wide) has occurred while \output is active
@@ -1202,7 +1249,9 @@ Overfull \hbox (2.28006pt too wide) has occurred while \output is active
 
 Overfull \vbox (459.06232pt too high) has occurred while \output is active []
 
- [45]) (./chapters/ch06-conclusion.tex [46]
+ [45
+
+]) (./chapters/ch06-conclusion.tex [46]
 chapter 6.
 )
 Overfull \hbox (2.28006pt too wide) has occurred while \output is active
@@ -1226,7 +1275,7 @@ LaTeX Warning: Empty `thebibliography' environment or \BreakBibliography
 )
 
 pdfTeX warning: pdflatex (file /home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/pdf/originality.pdf): PDF inclusion: found PDF version <1.6>, but at most version <1.5> allowed
-<pdf/originality.pdf, id=1026, 597.55246pt x 845.07718pt>
+<pdf/originality.pdf, id=1034, 597.55246pt x 845.07718pt>
 File: pdf/originality.pdf Graphic file (type pdf)
 <use pdf/originality.pdf>
 Package pdftex.def Info: pdf/originality.pdf  used on input line 277.
@@ -1244,7 +1293,7 @@ pdfTeX warning: pdflatex (file /home/frankie/WebstormProjects/bachelor-thesis/Re
 
 
 pdfTeX warning: pdflatex (file /home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/pdf/originality.pdf): PDF inclusion: found PDF version <1.6>, but at most version <1.5> allowed
-<pdf/originality.pdf, id=1029, page=1, 597.55246pt x 845.07718pt>
+<pdf/originality.pdf, id=1037, page=1, 597.55246pt x 845.07718pt>
 File: pdf/originality.pdf Graphic file (type pdf)
 <use pdf/originality.pdf, page 1>
 Package pdftex.def Info: pdf/originality.pdf , page1 used on input line 277.
@@ -1301,18 +1350,18 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 26110 strings out of 492167
- 456826 string characters out of 6131557
- 878989 words of memory out of 5000000
- 29449 multiletter control sequences out of 15000+600000
- 592874 words of font info for 84 fonts, out of 8000000 for 9000
+ 26135 strings out of 492167
+ 457248 string characters out of 6131558
+ 840989 words of memory out of 5000000
+ 29467 multiletter control sequences out of 15000+600000
+ 595677 words of font info for 86 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  56i,29n,86p,10126b,2101s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/urw/courier/ucrb8a.pfb></usr/share/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texmf-dist/fonts/type1/urw/helvetic/uhvro8a.pfb></usr/share/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on /home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/thesis.pdf (58 pages, 36404541 bytes).
+Output written on /home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/thesis.pdf (58 pages, 36656032 bytes).
 PDF statistics:
- 1435 PDF objects out of 1440 (max. 8388607)
- 1280 compressed objects within 13 object streams
- 697 named destinations out of 1000 (max. 500000)
- 676 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1443 PDF objects out of 1728 (max. 8388607)
+ 1286 compressed objects within 13 object streams
+ 702 named destinations out of 1000 (max. 500000)
+ 681 words of extra memory for PDF output out of 10000 (max. 10000000)
 
