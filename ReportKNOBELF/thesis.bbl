@@ -1,3 +1,64 @@
-\begin{thebibliography}{}
+\begin{thebibliography}{10}
+
+\bibitem{canvas}
+{Canvas API Documentation}.
+\newblock \url{https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API}.
+\newblock Accessed: 2019-01-17.
+
+\bibitem{gimp}
+{GIMP - GNU Image Manipulation Program}.
+\newblock \url{https://www.gimp.org/}.
+\newblock Accessed: 2019-01-17.
+
+\bibitem{html5}
+{HTML5}.
+\newblock \url{https://www.w3.org/TR/2017/REC-html51-20171003/}.
+\newblock Accessed: 2019-01-17.
+
+\bibitem{obs}
+{Open Broadcaster Software (OBS) Studio}.
+\newblock \url{https://obsproject.com/}.
+\newblock Accessed: 2019-01-17.
+
+\bibitem{phaserDocs}
+{Phaser 3 Documentation}.
+\newblock \url{https://photonstorm.github.io/phaser3-docs/}.
+\newblock Accessed: 2019-01-17.
+
+\bibitem{phaser}
+{Phaser 3 Framework}.
+\newblock \url{https://phaser.io/}.
+\newblock Accessed: 2019-01-17.
+
+\bibitem{phaserLabs}
+{Phaser 3 Labratories}.
+\newblock \url{https://labs.phaser.io/}.
+\newblock Accessed: 2019-01-17.
+
+\bibitem{phaser-guides-scenes}
+{Phaser 3 Series: Let's Talk About Scenes}.
+\newblock
+  \url{https://github.com/jdotrjs/phaser-guides/blob/master/Basics/Part3.md}.
+\newblock Accessed: 2019-01-17.
+
+\bibitem{svg-tutorial}
+{SVG Tutorial}.
+\newblock \url{https://www.w3schools.com/graphics/svg_intro.asp}.
+\newblock Accessed: 2019-01-17.
+
+\bibitem{typescript}
+{TypeScript Documentation}.
+\newblock \url{https://www.typescriptlang.org/docs/home.html}.
+\newblock Accessed: 2019-01-17.
+
+\bibitem{webglmaxtexturesize}
+{WebGL 2 Stats, MAX\_TEXTURE\_SIZE}.
+\newblock \url{https://webglstats.com/webgl2/parameter/MAX_TEXTURE_SIZE}.
+\newblock Accessed: 2019-01-17.
+
+\bibitem{webgl}
+{WebGL API Documentation}.
+\newblock \url{https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API}.
+\newblock Accessed: 2019-01-17.
 
 \end{thebibliography}

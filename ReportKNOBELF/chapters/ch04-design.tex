@@ -11,14 +11,11 @@ The user goes through multiple levels to learn detecting and comparing propertie
 under simple and more difficult situations.
 
 \section{Phaser 3}\label{sec:phaser-3}
-%https://labs.phaser.io/
-%https://phaser.io/
-%https://photonstorm.github.io/phaser3-docs/
 
-Phaser [\ref{TODO}] is an open source HTML5 [\ref{TODO}] game framework created by Photon Storm [\ref{TODO}].
-It is a JavaScript/TypeScript [\ref{TODO}] library designed to run on all major desktop browsers.
+Phaser \cite{phaser} is an open source HTML5 \cite{html5} game framework created by Photon Storm \cite{phaser}.
+It is a JavaScript/TypeScript \cite{typescript} library designed to run on all major desktop browsers.
 A lot of focus was given to the performance inside of mobile web browsers.
-Important for the renderer is that if the device is capable, it uses WebGL [\ref{TODO}], otherwise it seamlessly reverts to Canvas [\ref{TODO}].
+Important for the renderer is that if the device is capable, it uses WebGL \cite{webgl}, otherwise it seamlessly reverts to Canvas \cite{canvas}.
 The current version is 3.17 and is used in this work. Version 4 is currently in development.
 
 \subsection{Base Configuration}\label{subsec:base-configuration}
@@ -109,7 +106,7 @@ Functions which initiate a transition are in yellow and signals emitted are oran
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{figures/lifecycle}
-    \caption{Scene Lifecycle [\ref{TODO}]}
+    \caption{Scene Lifecycle \cite{phaser-guides-scenes}}
     \label{fig:lifecycle}
 \end{figure}
 
@@ -163,8 +160,8 @@ Our objects can have up to four properties with exactly one from each of the fol
 
 All possible objects with one, three and four properties, are needed.
 
-With a python script [\ref{lst:svggen}] scalable vector graphic (SVG) [\ref{TODO}] files are generated [\ref{lst:svgimagefile}].
-After that they are converted to portable network graphic (PNG)[\ref{TODO}] files with the GNU image manipulation program (GIMP) [\ref{TODO}].
+With a python script [\ref{lst:svggen}] scalable vector graphic (SVG) \cite{svg-tutorial} files are generated [\ref{lst:svgimagefile}].
+After that they are converted to portable network graphic (PNG) files with the GNU image manipulation program (GIMP) \cite{gimp}.
 Additional image scaling and cropping is done for saving space and only displaying the actual image with as less empty space as possible around it.
 With the imagemagick command mogrify [\ref{lst:mogrify}] the last step is easily applicable to all 1000+ images.
 
@@ -401,13 +398,13 @@ Before accessing the local storage it is checked if there even is a storage.
 
 \section{Introduction Animation Generation}\label{sec:introduction-animation-generation}
 To produce animated instruction for the task later on,
-the screen is recorded with the Open Broadcaster Software (OBS) Studio [\ref{TODO}] while someone is playing the game.
+the screen is recorded with the Open Broadcaster Software (OBS) Studio \cite{obs} while someone is playing the game.
 Parts of the final video are then taken for the respective scenes and converted into single pictures.
 These single pictures are saved in one picture (called spreadsheet [\ref{fig:spreadsheet}]).
 The Phaser framework animates those spreadsheets.
 
 Is is important to note, that different devices have a different limit for the resolution of images.
-Tablets seem to have the lowest, namely 4096x4096 pixels [\ref{TODO}].
+Tablets seem to have the lowest, namely 4096x4096 pixels \cite{webglmaxtexturesize}.
 The spreadsheet images are scaled down for that reason.
 
 \begin{figure}[H]
@@ -984,7 +981,7 @@ it is ensured that there is at least one possible pair every time a new object i
 
 \subsection{ScoreScene}\label{subsec:scorescene}
 The most important and special part in the score scene is the way the score is saved,
-as explained in this \hyperref[ref:scorestorage]{section}.
+as explained in this \hyperref[sec:scorestorage]{section}.
 
 \section{Final Look of the Learning Environment}\label{sec:final-look-of-the-learning-environment}
 This section contains the final look of the learning environment.

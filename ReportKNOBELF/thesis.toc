@@ -44,10 +44,10 @@
 \contentsline {subsection}{\numberline {4.7.4}WelcomeScene}{25}{subsection.4.7.4}% 
 \contentsline {subsection}{\numberline {4.7.5}LevelMenuSceneScene}{25}{subsection.4.7.5}% 
 \contentsline {subsection}{\numberline {4.7.6}IntroScene}{26}{subsection.4.7.6}% 
-\contentsline {subsection}{\numberline {4.7.7}SortingScene}{26}{subsection.4.7.7}% 
-\contentsline {subsection}{\numberline {4.7.8}PropertySortingScene}{28}{subsection.4.7.8}% 
+\contentsline {subsection}{\numberline {4.7.7}SortingScene}{27}{subsection.4.7.7}% 
+\contentsline {subsection}{\numberline {4.7.8}PropertySortingScene}{29}{subsection.4.7.8}% 
 \contentsline {subsection}{\numberline {4.7.9}RestrictedSortingScene}{29}{subsection.4.7.9}% 
-\contentsline {subsection}{\numberline {4.7.10}GameScene}{29}{subsection.4.7.10}% 
+\contentsline {subsection}{\numberline {4.7.10}GameScene}{30}{subsection.4.7.10}% 
 \contentsline {subsection}{\numberline {4.7.11}ScoreScene}{32}{subsection.4.7.11}% 
 \contentsline {section}{\numberline {4.8}Final Look of the Learning Environment}{32}{section.4.8}% 
 \contentsline {chapter}{\numberline {5}Evaluation}{45}{chapter.5}% 
