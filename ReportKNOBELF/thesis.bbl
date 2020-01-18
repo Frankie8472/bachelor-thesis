@@ -1,5 +1,10 @@
 \begin{thebibliography}{10}
 
+\bibitem{gitlab-thesis}
+{Bachelor Thesis - Gotscha!}
+\newblock \url{https://gitlab.ethz.ch/ethz-projects/bachelor-thesis.git}.
+\newblock Accessed:2019-01-24.
+
 \bibitem{canvas}
 {Canvas API Documentation}.
 \newblock \url{https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API}.
@@ -9,6 +14,11 @@
 {GIMP - GNU Image Manipulation Program}.
 \newblock \url{https://www.gimp.org/}.
 \newblock Accessed: 2019-01-17.
+
+\bibitem{gotscha}
+{Gotscha!}
+\newblock \url{https://n.ethz.ch/~knobelf}.
+\newblock Accessed:2019-01-24.
 
 \bibitem{html5}
 {HTML5}.

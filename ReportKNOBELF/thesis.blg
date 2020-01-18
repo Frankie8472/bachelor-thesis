@@ -14,47 +14,49 @@ Warning--to sort, need author or key in gimp
 Warning--to sort, need author or key in webstorage
 Warning--to sort, need author or key in obs
 Warning--to sort, need author or key in webglmaxtexturesize
+Warning--to sort, need author or key in gitlab-thesis
+Warning--to sort, need author or key in gotscha
 Warning--to sort, need author or key in phaserDocs
 Warning--to sort, need author or key in phaserLabs
-You've used 15 entries,
+You've used 17 entries,
             2118 wiz_defined-function locations,
-            553 strings with 5404 characters,
-and the built_in function-call counts, 2710 in all, are:
-= -- 271
-> -- 27
+            560 strings with 5575 characters,
+and the built_in function-call counts, 3046 in all, are:
+= -- 305
+> -- 29
 < -- 0
-+ -- 21
++ -- 23
 - -- 4
-* -- 98
-:= -- 344
-add.period$ -- 45
-call.type$ -- 15
-change.case$ -- 46
+* -- 108
+:= -- 382
+add.period$ -- 51
+call.type$ -- 17
+change.case$ -- 52
 chr.to.int$ -- 0
-cite$ -- 28
-duplicate$ -- 114
-empty$ -- 347
+cite$ -- 32
+duplicate$ -- 128
+empty$ -- 393
 format.name$ -- 4
-if$ -- 651
+if$ -- 735
 int.to.chr$ -- 0
-int.to.str$ -- 15
+int.to.str$ -- 17
 missing$ -- 3
-newline$ -- 78
+newline$ -- 88
 num.names$ -- 4
-pop$ -- 139
+pop$ -- 159
 preamble$ -- 1
-purify$ -- 32
+purify$ -- 36
 quote$ -- 0
-skip$ -- 77
+skip$ -- 87
 stack$ -- 0
-substring$ -- 96
-swap$ -- 15
+substring$ -- 106
+swap$ -- 17
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 58
-warning$ -- 13
+type$ -- 66
+warning$ -- 15
 while$ -- 6
-width$ -- 17
-write$ -- 141
-(There were 13 warnings)
+width$ -- 19
+write$ -- 159
+(There were 15 warnings)

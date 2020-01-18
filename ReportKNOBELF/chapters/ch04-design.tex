@@ -547,9 +547,9 @@ If the current scene is not paused in the meantime, the user may not take enough
 \section{Code structure of the learning environment}\label{sec:code-structure-of-the-learning-environment}
 Our learning environment consists of different scenes each one inheriting the base scene.
 The following subsections won't contain the whole code as some parts are trivial to understand.
-Instead a summary of the scene codes purpose and crucial parts are shown and explained.
+Instead a summary of crucial parts are shown and explained.
 
-The full code can be accessed in the appendix [\ref{ch:gotcha!---full-codegot}].
+The full code can be accessed in the appendix [\ref{ch:gotcha!---full-codegot}] or on gitlab\cite{gitlab-thesis}.
 
 \begin{figure}[H]
     \centering
@@ -557,6 +557,19 @@ The full code can be accessed in the appendix [\ref{ch:gotcha!---full-codegot}].
     \caption{Scene State Diagram}
     \label{fig:statediagram}
 \end{figure}
+\subsection{Playing the Game}\label{subsec:playing-the-game}
+The game can be played here\cite{gotscha}.
+
+\subsection{Running the Code}\label{subsec:running-the-code}
+To run the code clone the gitlab repository\cite{gitlab-thesis} and run the following commands in the terminal in the cloned folder.
+
+\begin{lstlisting}[style=TypeScript, caption={BaseScene.ts}]
+    npm run start
+\end{lstlisting}
+
+The game should now be playable on \textbf{"localhost:8080"} in a web browser of your choosing.
+
+Please note that the gameplay video is not included in the repository.
 
 \subsection{BaseScene}\label{subsec:basescene}
 This scene contains methods and fields which are necessary in multiple scenes
@@ -610,10 +623,10 @@ With a "preload" scene in the beginning all available assets are loaded,
 so that after the longer loading time the game can run fluently,
 without problems and most importantly without a connection to the internet.
 
-The attributes and path of objects in the imported json file [REFERENCE TO EXPLANATION TOP]
-can be accessed by filename.["fieldname"] or filename.fieldname:
+The attributes and path of objects in the imported json file [\ref{subsec:object-generation}]
+can be accessed by filename.["fieldname"] or filename.fieldname [\ref{lst:jsonfileaccess}][\ref{lst:jsonpreload}].
 
-\begin{lstlisting}[style=TypeScript, caption={Example json file access}]
+\begin{lstlisting}[style=TypeScript, caption={Example json file access}, label={lst:jsonfileaccess}]
     ...
     for (let category of loadedJsonObjectFile['categories']) {
         console.log("URL: " + category['url']);
@@ -631,7 +644,7 @@ can be accessed by filename.["fieldname"] or filename.fieldname:
 
 The way the objects files are preloaded into the respective managers is shown below.
 
-\begin{lstlisting}[style=TypeScript, caption={preloadAsset.ts}]
+\begin{lstlisting}[style=TypeScript, caption={preloadAsset.ts}, label={lst:jsonpreload}]
     ...
     private preload(): void {
         this.load.setPath('assets/geometrical_objects/');
@@ -671,10 +684,10 @@ The main difference between a sprite and an image game object is that you cannot
 
 \subsection{DropDownMenu}\label{subsec:dropdownmenu}
 In this scene the drop down menu is created.
-This scene is never stopped and is always on top of other scenes.
+The scene is never stopped and is always on top of other scenes.
 
-The following code in every other scene ensures this:
-\begin{lstlisting}[style=TypeScript, caption={Send current scene to back}]
+The following code [\ref{lst:sceneback}] in every other scene ensures this:
+\begin{lstlisting}[style=TypeScript, caption={Send current scene to back}, label={lst:sceneback}]
     ...
     create(): void {
         this.game.scene.sendToBack(this.getKey());

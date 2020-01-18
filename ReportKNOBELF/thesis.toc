@@ -38,18 +38,20 @@
 \contentsline {subsection}{\numberline {4.5.9}Score Screen}{21}{subsection.4.5.9}% 
 \contentsline {subsection}{\numberline {4.5.10}Introduction}{21}{subsection.4.5.10}% 
 \contentsline {section}{\numberline {4.6}Code structure of the learning environment}{21}{section.4.6}% 
-\contentsline {subsection}{\numberline {4.6.1}BaseScene}{22}{subsection.4.6.1}% 
-\contentsline {subsection}{\numberline {4.6.2}PreloadAssets}{23}{subsection.4.6.2}% 
+\contentsline {subsection}{\numberline {4.6.1}Playing the Game}{22}{subsection.4.6.1}% 
+\contentsline {subsection}{\numberline {4.6.2}Running the Code}{22}{subsection.4.6.2}% 
+\contentsline {subsection}{\numberline {4.6.3}BaseScene}{22}{subsection.4.6.3}% 
+\contentsline {subsection}{\numberline {4.6.4}PreloadAssets}{23}{subsection.4.6.4}% 
 \contentsline {subsubsection}{\nonumberline Image Game Objects}{24}{section*.21}% 
-\contentsline {subsection}{\numberline {4.6.3}DropDownMenu}{24}{subsection.4.6.3}% 
-\contentsline {subsection}{\numberline {4.6.4}WelcomeScene}{25}{subsection.4.6.4}% 
-\contentsline {subsection}{\numberline {4.6.5}LevelMenuSceneScene}{25}{subsection.4.6.5}% 
-\contentsline {subsection}{\numberline {4.6.6}IntroScene}{26}{subsection.4.6.6}% 
-\contentsline {subsection}{\numberline {4.6.7}SortingScene}{26}{subsection.4.6.7}% 
-\contentsline {subsection}{\numberline {4.6.8}PropertySortingScene}{28}{subsection.4.6.8}% 
-\contentsline {subsection}{\numberline {4.6.9}RestrictedSortingScene}{28}{subsection.4.6.9}% 
-\contentsline {subsection}{\numberline {4.6.10}GameScene}{29}{subsection.4.6.10}% 
-\contentsline {subsection}{\numberline {4.6.11}ScoreScene}{32}{subsection.4.6.11}% 
+\contentsline {subsection}{\numberline {4.6.5}DropDownMenu}{24}{subsection.4.6.5}% 
+\contentsline {subsection}{\numberline {4.6.6}WelcomeScene}{25}{subsection.4.6.6}% 
+\contentsline {subsection}{\numberline {4.6.7}LevelMenuSceneScene}{25}{subsection.4.6.7}% 
+\contentsline {subsection}{\numberline {4.6.8}IntroScene}{26}{subsection.4.6.8}% 
+\contentsline {subsection}{\numberline {4.6.9}SortingScene}{27}{subsection.4.6.9}% 
+\contentsline {subsection}{\numberline {4.6.10}PropertySortingScene}{29}{subsection.4.6.10}% 
+\contentsline {subsection}{\numberline {4.6.11}RestrictedSortingScene}{29}{subsection.4.6.11}% 
+\contentsline {subsection}{\numberline {4.6.12}GameScene}{30}{subsection.4.6.12}% 
+\contentsline {subsection}{\numberline {4.6.13}ScoreScene}{32}{subsection.4.6.13}% 
 \contentsline {section}{\numberline {4.7}Final Look of the Learning Environment}{32}{section.4.7}% 
 \contentsline {chapter}{\numberline {5}Evaluation}{45}{chapter.5}% 
 \contentsline {section}{\numberline {5.1}Debugging}{45}{section.5.1}% 
