@@ -1,0 +1,3899 @@
+% !TEX root = ../thesis.tex
+
+% set counter to n-1:
+% 2\setcounter{chapter}{0}
+
+\chapter{Gotcha! - Full Code}\label{ch:gotcha!---full-code}
+\section{baseScene.ts}\label{sec:basescene.ts}
+\begin{lstlisting}[style=TypeScript, caption={baseScene.ts}]
+export class BaseScene extends Phaser.Scene {
+    /**
+     * Name of the scene
+     */
+    protected key: string;
+
+    /**
+     * Level of the scene
+     */
+    protected level: number;
+
+    /**
+     * Transition graphic
+     */
+    private transition: Phaser.GameObjects.GameObject[];
+
+    constructor(key: string) {
+        super({
+            key: key
+        });
+
+        this.key = key;
+        this.level = 0;
+        this.generateNewSeed();
+    }
+
+    /**
+     * Method for returning the key of this scene
+     */
+    public getKey(): string {
+        return this.key;
+    }
+
+    /**
+     * Method for returning the key of this scene
+     */
+    public getLevel(): number {
+        return this.level;
+    }
+
+    /**
+     * Method for generating a new seed so that pseudo randomness is guaranteed
+     */
+    private generateNewSeed(): void {
+        const rndStr: string = Phaser.Math.RND.realInRange(Math.pow(10, 2), Math.pow(10,10)).toString();
+        Phaser.Math.RND.sow([rndStr]);
+    }
+
+    /**
+     * Method for initializing the shape, position and properties of the graphical scene transition
+     */
+    private transitionInit(): void {
+        // Shape of the graphical transition
+        const circle: Phaser.GameObjects.Graphics = this.add.graphics();
+
+        // Shape of the screen
+        const rectangle: Phaser.GameObjects.Rectangle = this.add.rectangle(0, 0, this.cameras.main.width, this.cameras.main.height, 0x000000);
+
+        // Define circle as the mask
+        const mask: Phaser.Display.Masks.GeometryMask = circle.createGeometryMask();
+
+        circle.setPosition(this.cameras.main.width / 2, this.cameras.main.height / 2);
+        circle.fillCircle(0, 0, 0.1);
+        circle.setDepth(0);
+
+        mask.setInvertAlpha(true);
+
+        rectangle.setDepth(1);
+        rectangle.setOrigin(0, 0);
+        rectangle.setMask(mask);
+
+        circle.fillCircle(0, 0, 0.1);
+
+        this.transition = [circle, rectangle];
+    }
+
+    /**
+     * Opening transition. Normally used to visually introduce a new scene
+     */
+    protected transitionIn(): void {
+        // Generating a new seed, so that randomness is guaranteed in every repetition of a scene
+        this.generateNewSeed();
+
+        this.transitionInit();
+
+        this.children.bringToTop(this.transition[1]);
+
+        const tween: Phaser.Tweens.Tween = this.add.tween({
+            targets: this.transition[0],
+            scale: 10 * 0.5 * Math.sqrt(Math.pow(this.cameras.main.width, 2) + Math.pow(this.cameras.main.height, 2)),
+            ease: 'linear',
+            duration: 700
+        });
+
+        tween.on('start', () => this.sound.volume = 0);
+        tween.on('complete', () => this.introduction());
+        tween.on('update', () => this.sound.volume += 1/tween.duration);
+    }
+
+    /**
+     * Closing transition. Normally used to visually close or stop a scene.
+     * @param scene The scene you want to start next.
+     * @param data Additional data you want to give to the next scene.
+     */
+    protected transitionOut(scene: string, data?: any): void {
+        this.children.bringToTop(this.transition[1]);
+
+        const tween: Phaser.Tweens.Tween = this.add.tween({
+            targets: this.transition[0],
+            scale: 0,
+            ease: 'linear',
+            duration: 700
+        });
+
+        tween.on('complete', () => this.sceneChange(scene, data));
+        tween.on('update', () => this.sound.volume -= 1/tween.duration);
+    }
+
+    /**
+     * Helper method for starting a new scene and stopping the current one
+     * as the behaviour of the current scene when starting a new one is
+     * not clearly defined in the framework at this point of time.
+     * @param scene The scene you want to start next
+     * @param data Additional data you want to give to the next scene.
+     */
+    protected sceneChange(scene: string, data?: any): void {
+        this.sound.stopAll();
+        this.game.scene.start(scene, data);
+        this.game.scene.stop(this.key);
+    }
+
+    /**
+     * Helper method for playing the introduction and pause the current scene
+     */
+    protected introduction(): void {
+        this.scene.pause();
+        this.game.scene.start("IntroScene", {'pausedScene': this.getKey(), 'level': this.getLevel()});
+    }
+
+    /**
+     * Returns the correct scaling factor for the wanted image size in relation to the real image size.
+     * @param wantedImageSize Image size you want to have for a dimension
+     * @param realImageSizeWidth The image width you want to scale
+     * @param realImageSizeHeight The image height you want to scale
+     * @param scaleToHeight Boolean for scaling height or width of image to the wanted size. Default to false.
+     */
+    protected imageScalingFactor(wantedImageSize: number, realImageSizeWidth: number, realImageSizeHeight: number, scaleToHeight: boolean = false): number {
+        let ret: number;
+        if (scaleToHeight) {
+            ret = Math.max(wantedImageSize / realImageSizeWidth, wantedImageSize / realImageSizeHeight);
+        } else {
+            ret = Math.min(wantedImageSize / realImageSizeWidth, wantedImageSize / realImageSizeHeight);
+        }
+        return ret;
+    }
+}
+\end{lstlisting}
+
+\section{preloadAsset.ts}\label{sec:preloadasset.ts}
+\begin{lstlisting}[style=TypeScript, caption={preloadAsset.ts}]
+import 'phaser';
+import {BaseScene} from './baseScene';
+
+export class PreloadAssets extends BaseScene {
+
+    constructor() {
+        super('PreloadAssets');
+    }
+
+    init(): void {
+
+    }
+
+    preload(): void {
+        this.load.setPath('assets/geometrical_objects/');
+        this.load.json('objects', 'geometrical_objects.json');
+
+        this.load.setPath('assets/ui/');
+        this.load.image('cogwheel', 'cogwheel.png');
+        this.load.image('background1', 'background1.png');
+    }
+
+    create(): void {
+        this.setBackground();
+        this.preLoadImages();
+        this.preLoadIntroFiles();
+        this.preLoadAudio();
+        this.initLoadingGraphics();
+        this.start();
+    }
+
+    /**
+     * Method for preloading all asset images
+     */
+    private preLoadImages(): void {
+        // Load category and object images
+        const jsonObject: any = this.cache.json.get('objects');
+
+        for (let category of jsonObject['categories']) {
+            this.load.setPath('assets/geometrical_objects/categories/');
+            this.load.image(category['name'], category['url']);
+
+            this.load.setPath('assets/geometrical_objects/images/');
+            for (let property of category['validElements']) {
+                for (let url of property['urls']) {
+                    this.load.image(url, url);
+                }
+            }
+        }
+
+        for (let image of jsonObject['images']) {
+            this.load.image(image['name'], image['name']);
+        }
+
+        // Load UI images
+        this.load.setPath('assets/ui/');
+        //this.load.image('background1', 'background1.png');
+        this.load.image('background2', 'background2.png');
+        this.load.image('background3', 'background3.png');
+        this.load.image('background4', 'background4.png');
+        this.load.image('background5', 'background5.png');
+
+        this.load.image('menubackground', 'menu_background.png');
+
+        this.load.spritesheet('fullscreenbuttonblack', 'fullscreen_button_black.png', {frameWidth: 64, frameHeight: 64});
+        this.load.image('menubutton', 'menu_button.png');
+        this.load.image('help', 'help.png');
+        this.load.image('exitbutton', 'exit_button.png');
+        this.load.image('replay', 'reload_button.png');
+        this.load.image('erase', 'erase_button.png');
+        this.load.image('return', 'return_button.png');
+
+        this.load.image('star_0', 'star_0.png');
+        this.load.image('star_1', 'star_1.png');
+        this.load.image('star_2', 'star_2.png');
+        this.load.image('star_3', 'star_3.png');
+
+        this.load.image('timefluid', 'timefluid.png');
+        this.load.image('gamefluid', 'gamefluid.png');
+        this.load.image('progressstar', 'star.png');
+        this.load.image('progressbar', 'progressbar.png');
+        this.load.image('progressbarGreen', 'progressbar_green.png');
+        this.load.image('progressbarRed', 'progressbar_red.png');
+        this.load.image('plus', 'plus.png');
+        this.load.image('minus', 'minus.png');
+
+
+        this.load.image('hourglass', 'hourglass.png');
+        this.load.image('finger', 'finger.png');
+
+
+        this.load.image('crate', 'crate_topview.png');
+        this.load.image('wooden_crate', 'wooden_crate.png');
+
+        this.load.image('title', 'title.png');
+
+        this.load.image('catButton', 'cat_button.png');
+        this.load.image('levelButton11', 'level11_button.png');
+        this.load.image('levelButton12', 'level12_button.png');
+        this.load.image('levelButton13', 'level13_button.png');
+        this.load.image('levelButton14', 'level14_button.png');
+        this.load.image('levelButton21', 'level21_button.png');
+        this.load.image('levelButton22', 'level22_button.png');
+        this.load.image('levelButton23', 'level23_button.png');
+        this.load.image('levelButton24', 'level24_button.png');
+        this.load.image('levelButton31', 'level31_button.png');
+        this.load.image('levelButton32', 'level32_button.png');
+        this.load.image('levelButton33', 'level33_button.png');
+        this.load.image('levelButton34', 'level34_button.png');
+    }
+
+    /**
+     * Method for preloading all introduction files
+     */
+    private preLoadIntroFiles(): void {
+        this.load.setPath('assets/introduction/');
+        this.load.image('intro_set', 'intro_set.png');
+        this.load.spritesheet('intro_sorting', 'intro_sorting.png', {frameWidth: 336, frameHeight: 189, endFrame: 150});
+        this.load.spritesheet('intro_falling', 'intro_falling.png', {frameWidth: 336, frameHeight: 189, endFrame: 68});
+        this.load.spritesheet('intro_restricted', 'intro_restricted.png', {frameWidth: 336, frameHeight: 189, endFrame: 201});
+        this.load.spritesheet('intro_set_easy', 'intro_set_easy.png', {frameWidth: 336, frameHeight: 189, endFrame: 225});
+        this.load.spritesheet('intro_set_hard', 'intro_set_hard.png', {frameWidth: 336, frameHeight: 189, endFrame: 68});
+    }
+
+    /**
+     * Method for preloading all audio files
+     */
+    private preLoadAudio(): void {
+        this.load.setPath('assets/ui_audio/');
+        this.load.audio('back', 'back.mp3');
+        this.load.audio('battle', 'battle.mp3');
+        this.load.audio('exploration', 'exploration.mp3');
+        this.load.audio('fun', 'fun.mp3');
+        this.load.audio('loading', 'loading.mp3');
+        this.load.audio('lose', 'lose.mp3');
+        this.load.audio('pause', 'pause.mp3');
+        this.load.audio('select', 'select.mp3');
+        this.load.audio('space', 'space.mp3');
+        this.load.audio('sparkle', 'sparkle.mp3');
+        this.load.audio('welcome', 'welcome.mp3');
+        this.load.audio('win', 'win.mp3');
+    }
+
+    /**
+     * Method for initializing the loading graphics/animation
+     */
+    private initLoadingGraphics(): void {
+        // Loading graphics
+        const cogwheel: Phaser.GameObjects.Sprite = this.add.sprite(1/2*this.cameras.main.width, 1/3*this.cameras.main.height, 'cogwheel');
+        cogwheel.setOrigin(0.5, 0.5);
+        const scale: number = this.imageScalingFactor(1/3*Math.min(this.cameras.main.height, this.cameras.main.width), cogwheel.width, cogwheel.height);
+        cogwheel.setScale(scale);
+
+        const cogTween: Phaser.Tweens.Tween = this.tweens.add({
+            targets: cogwheel,
+            angle: 360,
+            ease: 'Linear',
+            repeat: -1,
+            duration: 5000
+        });
+
+        // Progress bar
+        const progress = this.add.graphics();
+
+        this.load.on('progress', function (value) {
+            progress.clear();
+            progress.fillStyle(0xffffff, 1);
+            progress.fillRect(20, 4/5*this.cameras.main.height, (this.cameras.main.width - 40) * value, 1/10*this.cameras.main.height);
+        }, this);
+    }
+
+    /**
+     * Method for initializing the loading and action on completion
+     */
+    private start(): void {
+        this.load.on('complete', function(){
+            this.sceneChange('DropDownMenu');
+        }, this);
+
+        this.load.start();
+    }
+
+    /**
+     * Method for initializing the background
+     */
+    private setBackground(): void {
+        let background = this.add.sprite(0, 0, 'background1');
+        background.setOrigin(0, 0);
+        background.setDisplaySize(this.cameras.main.width, this.cameras.main.height);
+        background.setAlpha(0.3);
+    }
+}
+\end{lstlisting}
+
+\section{dropDownMenu.ts}\label{sec:dropdownmenu.ts}
+\begin{lstlisting}[style=TypeScript, caption={dropDownMenu.ts}]
+import 'phaser';
+import {BaseScene} from './baseScene';
+
+export class DropDownMenu extends BaseScene {
+
+    /**
+     * Name of the paused scene
+     */
+    private key_paused_scene: string;
+
+    /**
+     * Lock for not messing up animations by clicking repeatedly without waiting for the animation to finish
+     */
+    private lock: boolean;
+
+    /**
+     * State of the drop down menu
+     */
+    private menuDown: boolean;
+
+    /**
+     * Size of the menu buttons
+     */
+    private buttonSize: number;
+
+    /**
+     * Menu button
+     */
+    private menuButton: Phaser.GameObjects.Sprite;
+
+    /**
+     * Exit button
+     */
+    private exitButton: Phaser.GameObjects.Sprite;
+
+    /**
+     * Fullscreen switch
+     */
+    private fullscreenButton: Phaser.GameObjects.Sprite;
+
+    /**
+     * Menu background
+     */
+    private menuBackground: Phaser.GameObjects.Sprite;
+
+    /**
+     * Pause background
+     */
+    private pauseBackground: Phaser.GameObjects.Container;
+
+    constructor() {
+        super('DropDownMenu');
+    }
+
+    init(): void {
+        // Initialize fields
+        this.pauseBackground = this.add.container(0, 0);
+        this.key_paused_scene = null;
+        this.lock = false;
+        this.menuDown = false;
+        this.buttonSize = 64;
+    }
+
+    preload(): void {
+
+    }
+
+    create(): void {
+        this.setPixelScreen();
+        this.setMenu();
+        this.initInput();
+    }
+
+    update(time: number, delta: number): void {
+
+    }
+
+    /**
+     * Method for initializing the menu buttons, background and action
+     */
+    private setMenu(): void {
+        let scale: number;
+
+        // Menubackground
+        this.menuBackground = this.add.sprite(10 + 64 + 25, 100, 'menubackground');
+        this.menuBackground.setOrigin(1, 1);
+        this.menuBackground.setDisplaySize(200, 80 * 5);
+        this.menuBackground.setTint(0xeeeeee);
+
+        // ExitButton
+        this.exitButton = this.add.sprite(-64, 10 + 32 + 2 * (10 + 64), 'exitbutton');
+        this.exitButton.setOrigin(0.5, 0.5);
+        this.exitButton.setName("exitButton");
+        this.exitButton.setData('clicked', false);
+
+        scale = this.imageScalingFactor(this.buttonSize, this.exitButton.width, this.exitButton.height);
+        this.exitButton.setScale(scale);
+
+        this.exitButton.setInteractive({cursor: 'pointer'});
+
+        // Fullscreen Button
+        this.fullscreenButton = this.add.sprite(-64, 10 + 32 + (10 + 64), 'fullscreenbuttonblack', 0);
+        this.fullscreenButton.setOrigin(0.5, 0.5);
+
+        scale = this.imageScalingFactor(this.buttonSize, this.fullscreenButton.width, this.fullscreenButton.height);
+        this.fullscreenButton.setScale(scale);
+
+        this.fullscreenButton.setName("fullscreenButton");
+        this.fullscreenButton.setData('clicked', false);
+
+        this.fullscreenButton.setInteractive({cursor: 'pointer'});
+
+        // Enable key F for enabling/disabling fullscreen
+        const FKey: Phaser.Input.Keyboard.Key = this.input.keyboard.addKey('F');
+        FKey.on('down', function () {
+            this.scale.toggleFullscreen();
+            if (this.scale.isFullscreen) {
+                this.fullscreenButton.setFrame(0);
+            } else {
+                this.fullscreenButton.setFrame(1);
+            }
+
+        }, this);
+
+        // MenuButton
+        this.menuButton = this.add.sprite(32 + 10, 10 + 32, 'menubutton');
+        this.menuButton.setOrigin(0.5, 0.5);
+
+        scale = this.imageScalingFactor(this.buttonSize, this.menuButton.width, this.menuButton.height);
+        this.menuButton.setScale(scale);
+
+        this.menuButton.setName("menuButton");
+        this.menuButton.setData('clicked', false);
+
+        this.menuButton.setInteractive({cursor: 'pointer'});
+
+        // StartGame
+        this.game.scene.start('WelcomeScene');
+    }
+
+    /**
+     * Method for initializing all input
+     */
+    private initInput(): void {
+        this.input.on('pointerdown', function (pointer, currentlyOver) {
+            const gameObject: any = currentlyOver[0];
+            if (gameObject instanceof Phaser.GameObjects.Sprite) {
+                gameObject.setData('clicked', true);
+            }
+        }, this);
+
+        this.input.on('pointerup', function (pointer, currentlyOver) {
+            const gameObject: any = currentlyOver[0];
+            if (gameObject instanceof Phaser.GameObjects.Sprite && gameObject.getData('clicked')) {
+                this.buttonFunction(gameObject);
+            }
+
+            this.menuButton.setData("clicked", false);
+            this.exitButton.setData("clicked", false);
+            this.fullscreenButton.setData("clicked", false);
+
+        }, this);
+    }
+
+    /**
+     * Method for assigning each button an event function
+     * @param gameObject GameObject on which you want the function on
+     */
+    private buttonFunction(gameObject: Phaser.GameObjects.Sprite): void {
+        switch (gameObject.name) {
+            case 'menuButton': {
+                if (!this.lock) {
+                    // Acquire lock
+                    this.lock = true;
+                    this.menuAction();
+                }
+                break;
+            }
+
+            case 'fullscreenButton': {
+                this.scale.toggleFullscreen();
+
+                if (this.scale.isFullscreen) {
+                    gameObject.setFrame(0);
+                } else {
+                    gameObject.setFrame(1);
+                }
+                break;
+            }
+
+            case 'exitButton': {
+                this.menuAction();
+
+                this.game.scene.getScenes(false).forEach(function (scene) {
+                    // @ts-ignore
+                    const sceneKey: string = scene.key;
+                    if (!(sceneKey === this.getKey()) && (this.game.scene.isActive(sceneKey) || this.game.scene.isPaused(sceneKey))) {
+                        scene.sound.stopAll();
+                        this.game.scene.stop(sceneKey);
+                    }
+                }, this);
+
+                if (this.key_paused_scene === 'LevelMenuScene' || this.key_paused_scene === 'WelcomeScene') {
+                    this.game.scene.start('WelcomeScene');
+                } else {
+                    this.game.scene.start('LevelMenuScene');
+                }
+                break;
+            }
+
+            default: {
+                break;
+            }
+        }
+    }
+
+    /**
+     * Method which defines the graphical behaviour of the drop down menu
+     */
+    private menuAction(): void {
+
+        if (this.menuDown) {
+            // Animation
+            const menuButtonTween: Phaser.Tweens.Tween = this.tweens.add({
+                targets: this.menuButton,
+                angle: 0,
+                ease: 'Cubic',
+                duration: 700,
+                onComplete: () => this.lock = false
+            });
+
+            const menuBackgroundTween: Phaser.Tweens.Tween = this.tweens.add({
+                targets: this.menuBackground,
+                y: 100,
+                ease: 'Cubic',
+                duration: 500,
+                delay: 200
+            });
+
+            const fullscreenButtonTween: Phaser.Tweens.Tween = this.tweens.add({
+                targets: this.fullscreenButton,
+                x: -64,
+                ease: 'Cubic',
+                duration: 500,
+                delay: 100
+            });
+
+            const exitButtonTween: Phaser.Tweens.Tween = this.tweens.add({
+                targets: this.exitButton,
+                x: -64,
+                ease: 'Cubic',
+                duration: 500
+            });
+
+            const pixelScreenTween: Phaser.Tweens.Tween = this.tweens.add({
+                targets: this.pauseBackground.getAll(),
+                alpha: 0,
+                ease: 'linear',
+                duration: 700,
+                delay: 0,
+                onComplete: () => this.pauseBackground.setVisible(false)
+            });
+
+            this.menuDown = false;
+
+            // Resume current scene
+            this.game.scene.resume(this.key_paused_scene);
+
+        } else {
+            // Pause current scene
+            this.sound.add('pause').play();
+
+            // @ts-ignore
+            const key_paused_scene: string = this.game.scene.getScenes(true)[0].key;
+            this.game.scene.pause(key_paused_scene);
+            this.key_paused_scene = key_paused_scene;
+
+            // Animation
+            const menuButtonTween: Phaser.Tweens.Tween = this.tweens.add({
+                targets: this.menuButton,
+                angle: -90,
+                ease: 'Cubic',
+                duration: 700,
+                onComplete: () => this.lock = false,
+            });
+
+            const menuBackgroundTween: Phaser.Tweens.Tween = this.tweens.add({
+                targets: this.menuBackground,
+                y: 3 * (64 + 10) + 30,
+                ease: 'Cubic',
+                duration: 600
+            });
+
+            const fullscreenButtonTween: Phaser.Tweens.Tween = this.tweens.add({
+                targets: this.fullscreenButton,
+                x: 10 + 32,
+                ease: 'Cubic',
+                duration: 500,
+                delay: 100,
+            });
+
+            const exitButtonTween: Phaser.Tweens.Tween = this.tweens.add({
+                targets: this.exitButton,
+                x: 10 + 32,
+                ease: 'Cubic',
+                duration: 500,
+                delay: 200
+            });
+
+            this.pauseBackground.setVisible(true);
+
+            const pixelScreenTween: Phaser.Tweens.Tween = this.tweens.add({
+                targets: this.pauseBackground.getAll(),
+                alpha: 0.9,
+                ease: 'linear',
+                duration: 700,
+                delay: 0
+            });
+
+            this.menuDown = true;
+        }
+    }
+
+    /**
+     * Method for setting the pixeled overlay and the hourglass
+     */
+    private setPixelScreen(): void {
+        const pixelScreen: Phaser.GameObjects.Grid = this.add.grid(0, 0, this.cameras.main.width, this.cameras.main.height, this.cameras.main.width / 100, this.cameras.main.width / 100);
+        pixelScreen.setOrigin(0, 0);
+        pixelScreen.setFillStyle(0x777777);
+        pixelScreen.setAltFillStyle(0x555555);
+        pixelScreen.setOutlineStyle(0x555555);
+        pixelScreen.setAlpha(0);
+        this.pauseBackground.add(pixelScreen);
+
+        const hourglass: Phaser.GameObjects.Sprite = this.add.sprite(this.cameras.main.width / 2, this.cameras.main.height / 2, 'hourglass');
+        hourglass.setOrigin(0.5, 0.5);
+
+        const clockScale: number = this.imageScalingFactor(3 / 5 * this.cameras.main.height, hourglass.width, hourglass.height);
+        hourglass.setScale(clockScale);
+        hourglass.setAlpha(0);
+
+        this.pauseBackground.add(hourglass);
+
+        this.pauseBackground.setVisible(false);
+        this.children.sendToBack(this.pauseBackground);
+    }
+}
+\end{lstlisting}
+
+\section{introScene.ts}\label{sec:introscene.ts}
+\begin{lstlisting}[style=TypeScript, caption={introScene.ts}]
+import 'phaser';
+import {BaseScene} from './baseScene';
+import AnimationManager = Phaser.Animations.AnimationManager;
+
+export class IntroScene extends BaseScene {
+
+    /**
+     * Name of the paused scene the intro is currently playing for
+     */
+    private pausedScene: string;
+
+    /**
+     * Boolean, indicating if the paused scene should be resumed
+     */
+    private resume: boolean;
+
+    constructor() {
+        super('IntroScene');
+    }
+
+    init(data): void {
+        this.pausedScene = data.pausedScene;
+        this.level = data.level;
+        this.resume = false;
+    }
+
+    preload(): void {
+
+    }
+
+    create(): void {
+        // Bring MenuUI to the front and initialize transition
+        this.game.scene.sendToBack(this.getKey());
+        this.game.scene.moveUp(this.getKey());
+
+        if (this.getIntroData() == null) {
+            this.scene.resume(this.pausedScene);
+            this.scene.stop(this.getKey());
+        } else {
+            this.initIntro();
+        }
+
+    }
+
+    /**
+     * Method for initializing the introduction objects and animation
+     */
+    private initIntro(): void {
+        const background: Phaser.GameObjects.Rectangle = this.setBackground();
+        const intro: Phaser.GameObjects.Sprite = this.setIntro();
+
+        const finger: Phaser.GameObjects.Sprite = this.add.sprite(this.cameras.main.width/2, this.cameras.main.height-10, 'finger');
+        const scale: number = this.imageScalingFactor(this.cameras.main.height/10, finger.width, finger.height);
+        finger.setScale(scale);
+        finger.setOrigin(0.5, 1);
+
+        if (this.pausedScene === "GameScene"){
+            intro.setX(3/4*this.cameras.main.width);
+            const intro1scale: number = this.imageScalingFactor(this.cameras.main.width/2, intro.width, intro.height);
+            intro.setScale(intro1scale);
+
+            const intro2: Phaser.GameObjects.Sprite = this.add.sprite(1/4*this.cameras.main.width, 0, 'intro_set');
+            intro2.setOrigin(0.5, 0.5);
+            const intro2scale: number = this.imageScalingFactor(this.cameras.main.width/2, intro2.width, intro2.height);
+            intro2.setScale(intro2scale);
+
+            this.setAnimation(intro, background, finger, intro2);
+        } else {
+            this.setAnimation(intro, background, finger);
+        }
+    }
+
+    /**
+     * Method for the input setup
+     * @param intro Introduction image
+     * @param background Background image
+     * @param finger Finger image
+     * @param intro2 Introduction 2 image
+     */
+    private initInput(intro: Phaser.GameObjects.Sprite, background: Phaser.GameObjects.Rectangle, finger: Phaser.GameObjects.Sprite, intro2?: Phaser.GameObjects.Sprite): void {
+        this.input.on('pointerdown', function () {
+            this.input.on('pointerup', function () {
+                this.resume = true;
+                const introTweenOut: Phaser.Tweens.Tween = this.tweens.add({
+                    targets: intro,
+                    y: -300,
+                    ease: 'linear',
+                    duration: 200,
+                    onComplete: function () {
+                        this.scene.resume(this.pausedScene);
+                        this.scene.stop(this.getKey());
+                    }.bind(this)
+                });
+
+                if (this.pausedScene === "GameScene") {
+                    const intro2TweenIn: Phaser.Tweens.Tween = this.tweens.add({
+                        targets: intro2,
+                        y: -300,
+                        ease: 'linear',
+                        duration: 200
+                    });
+                }
+
+                const backgroundTweenOut: Phaser.Tweens.Tween = this.tweens.add({
+                    targets: background,
+                    alpha: 0.01,
+                    ease: 'linear',
+                    duration: 200
+                });
+
+                const fingerTweenOut: Phaser.Tweens.Tween = this.tweens.add({
+                    targets: finger,
+                    alpha: 0.01,
+                    ease: 'linear',
+                    duration: 200
+                });
+
+            }, this);
+        }, this);
+    }
+
+    /**
+     * Method for generating the background object
+     */
+    private setBackground(): Phaser.GameObjects.Rectangle {
+        const background: Phaser.GameObjects.Rectangle = this.add.rectangle(0, 0, this.cameras.main.width, this.cameras.main.height);
+        background.setOrigin(0, 0);
+        background.setFillStyle(0x000000);
+        background.setAlpha(0.01);
+
+        return background;
+    }
+
+    /**
+     * Method for generating the introduction object
+     */
+    private setIntro(): Phaser.GameObjects.Sprite {
+        const data: [string, Phaser.Types.Animations.GenerateFrameNumbers] = this.getIntroData();
+
+        const introConfig = {
+            key: 'animateGif',
+            frames: this.anims.generateFrameNumbers(data[0], data[1]),
+            frameRate: 20,
+            repeat: -1
+        };
+
+        if(this.anims.exists(introConfig.key)) {
+            this.anims.remove(introConfig.key)
+        }
+
+        this.anims.create(introConfig);
+
+        const intro: Phaser.GameObjects.Sprite = this.add.sprite(this.cameras.main.width / 2, this.cameras.main.height / 2, data[0]);
+        intro.setOrigin(0.5, 0.5);
+
+        const scale: number = this.imageScalingFactor(this.cameras.main.width * 4 / 5, intro.width, intro.height);
+        intro.setScale(scale);
+
+        intro.setY(0);
+
+        return intro;
+    }
+
+    /**
+     * Method for the animation setup
+     * @param intro The introduction gif/spritesheet
+     * @param background The background
+     * @param finger Finger image
+     * @param intro2 The 2nd introduction gif/spritesheet
+     */
+    private setAnimation(intro: Phaser.GameObjects.Sprite, background: Phaser.GameObjects.Rectangle, finger: Phaser.GameObjects.Sprite, intro2?: Phaser.GameObjects.Sprite) {
+        const introTweenIn: Phaser.Tweens.Tween = this.tweens.add({
+            targets: intro,
+            y: this.cameras.main.height / 2,
+            ease: 'linear',
+            duration: 500,
+            onComplete: function(){
+                if (this.pausedScene === "GameScene") {
+                    this.initInput(intro, background, finger, intro2)
+                } else {
+                    this.initInput(intro, background, finger)
+                }
+            }.bind(this)
+        });
+
+        if (this.pausedScene === "GameScene") {
+            const intro2TweenIn: Phaser.Tweens.Tween = this.tweens.add({
+                targets: intro2,
+                y: this.cameras.main.height / 2,
+                ease: 'linear',
+                duration: 500
+            });
+        }
+
+        const backgroundTweenIn: Phaser.Tweens.Tween = this.tweens.add({
+            targets: background,
+            alpha: 0.8,
+            ease: 'linear',
+            duration: 500
+        });
+
+        const fingerTween: Phaser.Tweens.Tween = this.tweens.add({
+            targets: finger,
+            alpha: 0.1,
+            ease: 'Linear',
+            repeat: 1000,
+            yoyo: true,
+            duration: 1000
+        });
+
+        intro.play('animateGif');
+    }
+
+    /**
+     * Method for retrieving the correct introduction for the current scene
+     */
+    private getIntroData(): [string, Phaser.Types.Animations.GenerateFrameNumbers] {
+        let ret: [string, Phaser.Types.Animations.GenerateFrameNumbers];
+
+        switch (this.pausedScene + String(this.getLevel())) {
+            case 'PropertySortingScene1': {
+                ret = ['intro_sorting', {start: 0, end: 150, first: 150}];
+                break;
+            }
+
+            case 'PropertySortingScene2': {
+                ret = ['intro_sorting', {start: 0, end: 150, first: 150}];
+                break;
+            }
+
+            case 'PropertySortingScene3': {
+                ret = ['intro_sorting', {start: 0, end: 150, first: 150}];
+                break;
+            }
+
+            case 'PropertySortingScene4': {
+                ret = ['intro_sorting', {start: 0, end: 150, first: 150}];
+                break;
+            }
+
+            case 'PropertySortingScene5': {
+                ret = ['intro_falling', {start: 0, end: 68, first: 68}];
+                break;
+            }
+
+            case 'PropertySortingScene6': {
+                ret = ['intro_falling', {start: 0, end: 68, first: 68}];
+                break;
+            }
+
+            case 'PropertySortingScene7': {
+                ret = ['intro_falling', {start: 0, end: 68, first: 68}];
+                break;
+            }
+
+            case 'PropertySortingScene8': {
+                ret = ['intro_falling', {start: 0, end: 68, first: 68}];
+                break;
+            }
+
+            case 'RestrictedSortingScene1': {
+                ret = ['intro_restricted', {start: 0, end: 201, first: 201}];
+                break;
+            }
+
+            case 'RestrictedSortingScene2': {
+                ret = ['intro_restricted', {start: 0, end: 201, first: 201}];
+                break;
+            }
+
+            case 'GameScene1': {
+                ret = ['intro_set_easy', {start: 0, end: 225, first: 225}];
+                break;
+            }
+
+            case 'GameScene2': {
+                ret = ['intro_set_hard', {start: 0, end: 68, first: 68}];
+                break;
+            }
+
+            default: {
+                ret = null;
+                break;
+            }
+        }
+        return ret;
+    }
+}
+\end{lstlisting}
+
+\section{welcomeScene.ts}\label{sec:welcomescene.ts}
+\begin{lstlisting}[style=TypeScript, caption={}]
+import 'phaser';
+import {BaseScene} from './baseScene';
+
+export class WelcomeScene extends BaseScene {
+
+    constructor() {
+        super('WelcomeScene');
+    }
+
+    init(): void {
+
+    }
+
+    preload(): void {
+
+    }
+
+    create(): void {
+        // Bring MenuUI to the front and initialize transition
+        this.game.scene.sendToBack(this.getKey());
+        this.transitionIn();
+
+        this.setBackground();
+        this.setTitle();
+        this.initInput();
+        this.initAudio();
+    }
+
+    /**
+     * Method for initializing the background
+     */
+    private setBackground(): void {
+        let background = this.add.sprite(0, 0, 'background1');
+        background.setOrigin(0, 0);
+        background.setDisplaySize(this.cameras.main.width, this.cameras.main.height);
+        background.setInteractive({ cursor: 'pointer' });
+    }
+
+    /**
+     * Method for initializing title and animation
+     */
+    private setTitle(): void {
+        // Add title
+        const title: Phaser.GameObjects.Sprite = this.add.sprite(this.cameras.main.width / 2, this.cameras.main.height / 2, 'title');
+        const titleScale: number = this.imageScalingFactor(4/6*this.cameras.main.width, title.width, title.height);
+        title.setOrigin(0.5, 0.5);
+        title.setScale(titleScale);
+        title.setInteractive({ cursor: 'pointer' });
+
+        const titleTween: Phaser.Tweens.Tween = this.tweens.add({
+            targets: title,
+            alpha: 0.7,
+            ease: 'Linear',
+            repeat: 1000,
+            yoyo: true,
+            duration: 1000
+        });
+
+        // Add finger
+        const finger: Phaser.GameObjects.Sprite = this.add.sprite(this.cameras.main.width / 2, 3/4*this.cameras.main.height, 'finger');
+        const fingerScale: number = this.imageScalingFactor(1/6*this.cameras.main.height, finger.width, finger.height, true);
+        finger.setOrigin(0.5, 0.5);
+        finger.setScale(fingerScale);
+        finger.setInteractive({ cursor: 'pointer' });
+
+        const fingerTween: Phaser.Tweens.Tween = this.tweens.add({
+            targets: finger,
+            alpha: 0.1,
+            ease: 'Linear',
+            repeat: 1000,
+            yoyo: true,
+            duration: 1000
+        });
+    }
+
+    /**
+     * Method for initializing event actions
+     */
+    private initInput(): void {
+        this.input.on('pointerdown', function(){
+            this.input.on('pointerup', () => this.transitionOut('LevelMenuScene'));
+        }, this);
+    }
+
+    /**
+     * Method for initializing sound effects
+     */
+    private initAudio(): void {
+        this.sound.add('welcome').play('', {loop: true});
+    }
+}
+\end{lstlisting}
+
+\section{levelMenuScene.ts}\label{sec:levelmenuscene.ts}
+\begin{lstlisting}[style=TypeScript, caption={levelMenuScene.ts}]
+import 'phaser';
+import {BaseScene} from './baseScene';
+
+export class LevelMenuScene extends BaseScene {
+    /**
+     * Group with all level buttons
+     */
+    private levelButtons: Phaser.GameObjects.Group;
+
+    /**
+     * Global size of all buttons
+     */
+    private buttonSize: number;
+
+    constructor() {
+        super('LevelMenuScene');
+    }
+
+    init(): void {
+        // Initialize fields
+        this.levelButtons = this.add.group();
+
+        // Define button size dependant on the screen dimensions and the number of buttons
+        this.buttonSize = Math.min(this.cameras.main.width / (4 + 2), this.cameras.main.height / (3 + 2));
+    }
+
+    preload(): void {
+
+    }
+
+    create(): void {
+        // Bring MenuUI to the front and initialize transition
+        this.game.scene.sendToBack(this.getKey());
+        this.transitionIn();
+
+        this.setBackground();
+        this.setTitle();
+        this.setVisualLink();
+        this.setLevelButtons();
+        this.setStars();
+        this.initInput();
+        this.initAudio();
+    }
+
+    update(time: number): void {
+
+    }
+
+    /**
+     * Method for initializing background graphics
+     */
+    private setBackground(): void {
+        const background: Phaser.GameObjects.Sprite = this.add.sprite(0, 0, 'background1');
+        background.setOrigin(0, 0);
+        background.setDisplaySize(this.cameras.main.width, this.cameras.main.height);
+    }
+
+    /**
+     * Method for initializing the level buttons and their onclick action
+     */
+    private setLevelButtons(): void {
+        const catButton: Phaser.GameObjects.Sprite = this.add.sprite(20, this.cameras.main.height - 20, 'catButton');
+        const eraseButton: Phaser.GameObjects.Sprite = this.add.sprite(this.cameras.main.width - 20, this.cameras.main.height - 20, 'erase');
+        const levelButton11: Phaser.GameObjects.Sprite = this.add.sprite(1 / 5 * this.cameras.main.width, 1 / 4 * this.cameras.main.height, 'levelButton11');
+        const levelButton12: Phaser.GameObjects.Sprite = this.add.sprite(2 / 5 * this.cameras.main.width, 1 / 4 * this.cameras.main.height, 'levelButton12');
+        const levelButton13: Phaser.GameObjects.Sprite = this.add.sprite(3 / 5 * this.cameras.main.width, 1 / 4 * this.cameras.main.height, 'levelButton13');
+        const levelButton14: Phaser.GameObjects.Sprite = this.add.sprite(4 / 5 * this.cameras.main.width, 1 / 4 * this.cameras.main.height, 'levelButton14');
+        const levelButton21: Phaser.GameObjects.Sprite = this.add.sprite(4 / 5 * this.cameras.main.width, 2 / 4 * this.cameras.main.height, 'levelButton21');
+        const levelButton22: Phaser.GameObjects.Sprite = this.add.sprite(3 / 5 * this.cameras.main.width, 2 / 4 * this.cameras.main.height, 'levelButton22');
+        const levelButton23: Phaser.GameObjects.Sprite = this.add.sprite(2 / 5 * this.cameras.main.width, 2 / 4 * this.cameras.main.height, 'levelButton23');
+        const levelButton24: Phaser.GameObjects.Sprite = this.add.sprite(1 / 5 * this.cameras.main.width, 2 / 4 * this.cameras.main.height, 'levelButton24');
+        const levelButton31: Phaser.GameObjects.Sprite = this.add.sprite(1 / 5 * this.cameras.main.width, 3 / 4 * this.cameras.main.height, 'levelButton31');
+        const levelButton32: Phaser.GameObjects.Sprite = this.add.sprite(2 / 5 * this.cameras.main.width, 3 / 4 * this.cameras.main.height, 'levelButton32');
+        const levelButton33: Phaser.GameObjects.Sprite = this.add.sprite(3 / 5 * this.cameras.main.width, 3 / 4 * this.cameras.main.height, 'levelButton33');
+        const levelButton34: Phaser.GameObjects.Sprite = this.add.sprite(4 / 5 * this.cameras.main.width, 3 / 4 * this.cameras.main.height, 'levelButton34');
+
+        this.levelButtons.addMultiple([
+            levelButton11,
+            levelButton12,
+            levelButton13,
+            levelButton14,
+            levelButton21,
+            levelButton22,
+            levelButton23,
+            levelButton24,
+            levelButton31,
+            levelButton32,
+            levelButton33,
+            levelButton34
+        ]);
+
+        catButton.setOrigin(0, 1);
+        eraseButton.setOrigin(1, 1);
+
+        const scaleCatButton: number = this.imageScalingFactor(this.buttonSize / 1.5, catButton.width, catButton.height);
+        catButton.setScale(scaleCatButton);
+        catButton.setName('catButton');
+        catButton.setInteractive({cursor: 'pointer'});
+
+        const scaleEraseButton: number = this.imageScalingFactor(this.buttonSize / 1.5, eraseButton.width, eraseButton.height);
+        eraseButton.setScale(scaleEraseButton);
+        eraseButton.setName('eraseButton');
+        eraseButton.setInteractive({cursor: 'pointer'});
+
+        this.levelButtons.getChildren().forEach(function(gameObject) {
+            if (gameObject instanceof Phaser.GameObjects.Sprite) {
+                gameObject.setName(gameObject.texture.key);
+                gameObject.setOrigin(0.5, 0.5);
+
+                const scale: number = this.imageScalingFactor(this.buttonSize, gameObject.width, gameObject.height);
+                gameObject.setScale(scale);
+
+                gameObject.setData('clicked', false);
+
+                gameObject.setInteractive({cursor: 'pointer'});
+            }
+        }, this);
+
+        this.levelButtons.add(catButton);
+        this.levelButtons.add(eraseButton);
+    }
+
+    /**
+     * Method for initializing all input
+     */
+    private initInput(): void {
+        this.input.on('pointerdown', function(pointer, currentlyOver) {
+            const gameObject: any = currentlyOver[0];
+            if (gameObject instanceof Phaser.GameObjects.Sprite) {
+                gameObject.setTint(0xcccccc);
+                gameObject.setData('clicked', true);
+            }
+        }, this);
+
+        this.input.on('pointerup', function(pointer, currentlyOver) {
+            const gameObject: any = currentlyOver[0];
+
+            if (gameObject instanceof Phaser.GameObjects.Sprite && gameObject.getData('clicked')) {
+                this.buttonFunction(gameObject);
+            }
+
+            this.levelButtons.getChildren().forEach(function(gameObject) {
+                if (gameObject instanceof Phaser.GameObjects.Sprite) {
+                    gameObject.clearTint();
+                    gameObject.setData('clicked', false);
+                }
+            }, this);
+        }, this);
+    }
+
+    /**
+     * Method for assigning each button an event function
+     * @param gameObject GameObject on which you want the function on
+     */
+    private buttonFunction(gameObject: Phaser.GameObjects.Sprite): void {
+        let name: string = this.buttonToSceneMap(gameObject.name);
+        let level: number = Number(name[name.length-1]);
+
+        this.sound.add('select').play();
+
+        switch (gameObject.name) {
+            case 'catButton': {
+                this.transitionOut(name);
+                break;
+            }
+
+            case 'eraseButton': {
+                this.setStars(true);
+                break;
+            }
+
+            case 'levelButton11': {
+                name = name.substring(0, name.length-1);
+                this.transitionOut(name, {'level': level});
+                break;
+            }
+
+            case 'levelButton12': {
+                name = name.substring(0, name.length-1);
+                this.transitionOut(name, {'level': level});
+                break;
+            }
+
+            case 'levelButton13': {
+                name = name.substring(0, name.length-1);
+                this.transitionOut(name, {'level': level});
+                break;
+            }
+
+            case 'levelButton14': {
+                name = name.substring(0, name.length-1);
+                this.transitionOut(name, {'level': level});
+                break;
+            }
+
+            case 'levelButton21': {
+                name = name.substring(0, name.length-1);
+                this.transitionOut(name, {'level': level});
+                break;
+            }
+
+            case 'levelButton22': {
+                name = name.substring(0, name.length-1);
+                this.transitionOut(name, {'level': level});
+                break;
+            }
+
+            case 'levelButton23': {
+                name = name.substring(0, name.length-1);
+                this.transitionOut(name, {'level': level});
+                break;
+            }
+
+            case 'levelButton24': {
+                name = name.substring(0, name.length-1);
+                this.transitionOut(name, {'level': level});
+                break;
+            }
+
+            case 'levelButton31': {
+                name = name.substring(0, name.length-1);
+                this.transitionOut(name, {'level': level});
+                break;
+            }
+
+            case 'levelButton32': {
+                name = name.substring(0, name.length-1);
+                this.transitionOut(name, {'level': level});
+                break;
+            }
+
+            case 'levelButton33': {
+                name = name.substring(0, name.length-1);
+                this.transitionOut(name, {'level': level});
+                break;
+            }
+
+            case 'levelButton34': {
+                name = name.substring(0, name.length-1);
+                this.transitionOut(name, {'level': level});
+                break;
+            }
+
+            case 'title': {
+                this.transitionOut(name);
+                break;
+            }
+
+            default: {
+                break;
+            }
+        }
+    }
+
+    /**
+     * Method for initializing title and animation
+     */
+    private setTitle(): void {
+        // Add title
+        const y: number = (this.cameras.main.height / 4 - this.buttonSize / 2) / 2;
+        const title: Phaser.GameObjects.Sprite = this.add.sprite(this.cameras.main.width / 2, y, 'title');
+        const titleScale: number = this.imageScalingFactor(y * 1.3, title.width, title.height, true);
+        title.setOrigin(0.5, 0.5);
+        title.setScale(titleScale);
+        title.setName('title');
+        title.setInteractive({cursor: 'pointer'});
+    }
+
+    /**
+     * Method for initializing the dashed line under the level buttons
+     */
+    private setVisualLink(): void {
+        const alpha: number = 0.5;
+
+        // Add lines
+        const dashedLine1: Phaser.GameObjects.Grid = this.add.grid(this.cameras.main.width / 2, 1 / 4 * this.cameras.main.height, 3 / 5 * this.cameras.main.width, this.buttonSize / 6, this.buttonSize / 10, this.buttonSize / 6);
+        dashedLine1.setFillStyle(0x000000);
+        dashedLine1.setOrigin(0.5, 0.5);
+        dashedLine1.setAltFillStyle(0x000000, 0);
+        dashedLine1.setAlpha(alpha);
+
+        const dashedLine2: Phaser.GameObjects.Grid = this.add.grid(this.cameras.main.width / 2, 2 / 4 * this.cameras.main.height, 3 / 5 * this.cameras.main.width, this.buttonSize / 6, this.buttonSize / 10, this.buttonSize / 6);
+        dashedLine2.setFillStyle(0x000000);
+        dashedLine2.setOrigin(0.5, 0.5);
+        dashedLine2.setAltFillStyle(0x000000, 0);
+        dashedLine2.setAlpha(alpha);
+
+        const dashedLine3: Phaser.GameObjects.Grid = this.add.grid(this.cameras.main.width / 2, 3 / 4 * this.cameras.main.height, 3 / 5 * this.cameras.main.width, this.buttonSize / 6, this.buttonSize / 10, this.buttonSize / 6);
+        dashedLine3.setFillStyle(0x000000);
+        dashedLine3.setOrigin(0.5, 0.5);
+        dashedLine3.setAltFillStyle(0x000000, 0);
+        dashedLine3.setAlpha(alpha);
+
+        // Connecting half circles
+        const circle12 = this.add.graphics();
+        circle12.lineStyle(this.buttonSize / 6, 0x000000, 1);
+        circle12.beginPath();
+        circle12.arc(4 / 5 * this.cameras.main.width + this.cameras.main.height / 12, 1 / 4 * this.cameras.main.height + this.cameras.main.height / 8, this.cameras.main.height / 8, - Math.PI/2, Math.PI/2, false);
+        circle12.strokePath();
+        circle12.setAlpha(alpha);
+
+        const circle23 = this.add.graphics();
+        circle23.lineStyle(this.buttonSize / 6, 0x000000, 1);
+        circle23.beginPath();
+        circle23.arc(1 / 5 * this.cameras.main.width - this.cameras.main.height / 12, 2 / 4 * this.cameras.main.height + this.cameras.main.height / 8, this.cameras.main.height / 8, - Math.PI/2, Math.PI/2, true);
+        circle23.strokePath();
+        circle23.setAlpha(alpha);
+
+
+        // Triangle for indicating starting point
+        const triSize: number = this.buttonSize/3;
+        const startX: number = 1 / 5 * this.cameras.main.width - this.cameras.main.height / 8 + triSize - 10;
+        const startY: number = 1 / 4 * this.cameras.main.height + triSize;
+        const startTriangle1: Phaser.GameObjects.Triangle = this.add.triangle(startX, startY, 0, 0,- triSize, - triSize, - triSize, triSize, 0x000000, 1);
+        const startTriangle2: Phaser.GameObjects.Triangle = this.add.triangle(startX - 1/2*triSize, startY, 0, 0,- triSize, - triSize, - triSize, triSize, 0x000000, 1);
+        const startTriangle3: Phaser.GameObjects.Triangle = this.add.triangle(startX - 2/2*triSize, startY, 0, 0,- triSize, - triSize, - triSize, triSize, 0x000000, 1);
+
+        startTriangle1.setAlpha(alpha);
+        startTriangle2.setAlpha(alpha);
+        startTriangle3.setAlpha(alpha);
+
+        // Orange Square indicating the final level
+        const size: number = this.buttonSize*1.2;
+        const bossField: Phaser.GameObjects.Graphics = this.add.graphics();
+        bossField.fillStyle(0xfa7500, 0.3);
+        bossField.fillRoundedRect(4 / 5 * this.cameras.main.width - size/2, 3 / 4 * this.cameras.main.height - size/2, size, size, this.buttonSize/20);
+
+        const bossTween: Phaser.Tweens.Tween = this.tweens.add({
+            targets: bossField,
+            alpha: 0.1,
+            ease: 'Linear',
+            repeat: 1000,
+            yoyo: true,
+            duration: 1000
+        });
+    }
+
+    /**
+     * Method for initializing sound effects
+     */
+    private initAudio(): void {
+        this.sound.add('loading').play('', {loop: true});
+    }
+
+    /**
+     * Method for retrieving scene the respective button leads to with level at the end of the string
+     * @param buttonName Name of the button
+     */
+    private buttonToSceneMap(buttonName: string): string {
+        let ret: string = "";
+
+        switch (buttonName) {
+            case 'catButton': {
+                ret = 'SortingScene';
+                break;
+            }
+            case 'levelButton11': {
+                ret = 'PropertySortingScene1';
+                break;
+            }
+
+            case 'levelButton12': {
+                ret = 'PropertySortingScene2';
+
+                break;
+            }
+
+            case 'levelButton13': {
+                ret = 'PropertySortingScene3';
+                break;
+            }
+
+            case 'levelButton14': {
+                ret = 'PropertySortingScene4';
+                break;
+            }
+
+            case 'levelButton21': {
+                ret = 'PropertySortingScene5';
+                break;
+            }
+
+            case 'levelButton22': {
+                ret = 'PropertySortingScene6';
+                break;
+            }
+
+            case 'levelButton23': {
+                ret = 'PropertySortingScene7';
+                break;
+            }
+
+            case 'levelButton24': {
+                ret = 'PropertySortingScene8';
+                break;
+            }
+
+            case 'levelButton31': {
+                ret = 'RestrictedSortingScene1';
+                break;
+            }
+
+            case 'levelButton32': {
+                ret = 'RestrictedSortingScene2';
+                break;
+            }
+
+            case 'levelButton33': {
+                ret = 'GameScene1';
+                break;
+            }
+
+            case 'levelButton34': {
+                ret = 'GameScene2';
+                break;
+            }
+
+            case 'title': {
+                ret = 'WelcomeScene';
+                break;
+            }
+
+            default: {
+                break;
+            }
+        }
+        return ret;
+    }
+
+    /**
+     * Method for initializing or resetting the (previous/default) score
+     */
+    private setStars(reset: boolean = false): void {
+        this.levelButtons.getChildren().forEach(function(gameObject) {
+            if (gameObject instanceof Phaser.GameObjects.Sprite && gameObject.name != "catButton" && gameObject.name != 'eraseButton') {
+                let score: string = 'star_0';
+                if (typeof(Storage) !== "undefined") {
+                    if(window.localStorage.getItem('phaser_score_' + this.buttonToSceneMap(gameObject.name))){
+                        if (reset) {
+                            window.localStorage.setItem('phaser_score_' + this.buttonToSceneMap(gameObject.name), score);
+                        } else {
+                            score = window.localStorage.getItem('phaser_score_' + this.buttonToSceneMap(gameObject.name));
+                        }
+                    }
+                } else {
+                    console.log("Sorry! No Web Storage support...");
+                }
+
+                const star: Phaser.GameObjects.Sprite = this.add.sprite(gameObject.getBottomCenter().x, gameObject.getBottomCenter().y, score);
+                const scale: number = this.imageScalingFactor((gameObject.getTopRight().x - gameObject.getTopLeft().x)/2, star.width, star.height);
+                star.setScale(scale);
+                star.setOrigin(0.5, 0.5);
+            }
+        }, this);
+    }
+}
+\end{lstlisting}
+
+\section{sortingScene.ts}\label{sec:sortingscene.ts}
+\begin{lstlisting}[style=TypeScript, caption={sortingScene.ts}]
+import 'phaser';
+import {BaseScene} from './baseScene';
+
+export class SortingScene extends BaseScene {
+    /**
+     * Object database with all image names, image paths and image properties
+     */
+    private jsonObject: any;
+
+    /**
+     * Preselected objects
+     */
+    private selectedObjects: any[];
+
+    /**
+     * Remaining stack of objects
+     */
+    private arrayStack: Phaser.GameObjects.Container;
+
+    /**
+     * All category objects
+     */
+    private arrayCategory: Phaser.GameObjects.Group;
+
+    /**
+     * Size of displayed objects
+     */
+    private objectDisplaySize: number;
+
+    /**
+     * Number of objects per property
+     */
+    private objectsPerProperty: number;
+
+    /**
+     * The size of buttons
+     */
+    private buttonSize: number;
+
+    constructor() {
+        super('SortingScene');
+    }
+
+    init(): void {
+
+        // Initialize data from previous scene
+        this.jsonObject = this.cache.json.get('objects');
+
+        // Initialize fields
+        this.arrayStack = this.add.container(0, 0);
+        this.arrayCategory = this.add.group();
+        this.objectDisplaySize = 100;
+        this.objectsPerProperty = 5;
+        this.buttonSize = 64;
+    }
+
+    preload(): void {
+    }
+
+    create(): void {
+        // Bring MenuUI to the front and initialize transition
+        this.game.scene.sendToBack(this.getKey());
+        this.transitionIn();
+
+        this.imagePreSelection();
+        this.setBackground();
+        this.setControlBar();
+        this.loadGameObjects();
+        this.exitButton();
+        this.initInput();
+        this.initAudio();
+    }
+
+    update(): void {
+    }
+
+    /**
+     * Method for pre-selecting a subgroup of images so that every property of each category has X representatives.
+     */
+    private imagePreSelection(): void {
+        // Select an manageable amount of images to be displayed
+        const selectiveArray: any[] = [];
+        const originArray: any[] = [...this.jsonObject['images']];
+
+        // Select category to add
+        for (let category of this.jsonObject['categories']) {
+            const temporaryArray: any[] = [];
+
+            // Select property to add
+            for (let property of category['validElements']) {
+                Phaser.Math.RND.shuffle(originArray);
+                // Check how many are needed in already selected elements
+                let missing: number = this.objectsPerProperty;
+                for (let selectedImage of selectiveArray) {
+                    if (missing <= 0) {
+                        break;
+                    }
+
+                    if (selectedImage[category.name] === property.name) {
+                        missing--;
+                    }
+                }
+
+                // Add number of needed images per property
+                for (let image of originArray) {
+                    if (missing <= 0) {
+                        break;
+                    }
+
+                    if (image[category.name] === property.name) {
+                        temporaryArray.push(image);
+                        missing--;
+                    }
+                }
+
+                for (let image of temporaryArray) {
+                    let index: number = originArray.indexOf(image, 0);
+                    if (index > -1) {
+                        originArray.splice(index, 1);
+                    }
+                }
+            }
+            temporaryArray.forEach((x) => selectiveArray.push(x));
+        }
+
+        this.selectedObjects = selectiveArray;
+    }
+
+    /**
+     * Method for initializing the background
+     */
+    private setBackground(): void {
+        const background: Phaser.GameObjects.Sprite = this.add.sprite(0, 0, 'background4');
+        background.setOrigin(0, 0);
+        background.setDisplaySize(this.cameras.main.width, this.cameras.main.height);
+        background.setTint(0xffccaa);
+        background.setAlpha(0.9);
+    }
+
+    /**
+     * Method for initializing the control bar
+     */
+    private setControlBar(): void {
+        const controlbar: Phaser.GameObjects.Sprite = this.add.sprite(this.cameras.main.width / 2, this.cameras.main.height, 'menubackground');
+        controlbar.setOrigin(0.5, 0.5);
+        controlbar.setAngle(-90);
+        controlbar.setScale(0.13, 0.20);
+
+        // Category indicator
+        let x: number = this.cameras.main.width / 2 - (controlbar.height * 0.24) / 2;
+        let countCategories: number = 0;
+
+        // Find out how many categories not null exist
+        for (let cat of this.jsonObject['categories']) {
+            if (cat.url === null) {
+                continue;
+            }
+            countCategories++;
+        }
+
+        for (let cat of this.jsonObject['categories']) {
+            if (cat.url === null) {
+                continue;
+            }
+
+            const validElements: any[] = [...cat['validElements']];
+            validElements.forEach((object, index, array) => array[index] = object.name);
+
+            x += (controlbar.height * 0.24) / (countCategories + 1);
+            const name: string = cat.name;
+            const sprite: Phaser.GameObjects.Sprite = this.add.sprite(x, this.cameras.main.height - controlbar.width * 0.13 / 5, name);
+            sprite.setName(name);
+            sprite.setOrigin(0.5, 0.5);
+
+            sprite.setData('validElements', validElements);
+
+            const scale: number = this.imageScalingFactor(this.buttonSize, sprite.width, sprite.height);
+            sprite.setScale(scale);
+
+            sprite.setVisible(true);
+
+            this.arrayCategory.add(sprite);
+
+            sprite.setInteractive({ cursor: 'pointer' });
+
+            sprite.on('pointerdown', function() {
+                for (let item of this.arrayCategory.getChildren()) {
+                    if (item instanceof Phaser.GameObjects.Sprite) {
+                        item.clearTint();
+                    }
+                }
+
+                if (sprite instanceof Phaser.GameObjects.Sprite) {
+                    sprite.setTintFill(0x8dfd59);
+                    this.orderObjects(sprite.name, sprite.getData('validElements'));
+                }
+            }, this);
+        }
+    }
+
+    /**
+     * Method for loading all game objects
+     */
+    private loadGameObjects(): void {
+        for (let image of this.selectedObjects) {
+
+            let size = this.objectDisplaySize;
+
+            const name = image.name;
+            const cat1 = image.cat1;
+            const cat2 = image.cat2;
+            const cat3 = image.cat3;
+            const cat4 = image.cat4;
+
+            const sprite: Phaser.GameObjects.Sprite = this.add.sprite(Phaser.Math.RND.between(100 + size / 2, this.cameras.main.width - size / 2), Phaser.Math.RND.between(size / 2, this.cameras.main.height - 100 - size / 2), name);
+            sprite.setOrigin(0.5, 0.5);
+            sprite.setAngle(Phaser.Math.RND.angle());
+            sprite.setVisible(true);
+
+            const scale: number = Math.min(size / sprite.height, size / sprite.width);
+            sprite.setScale(scale);
+
+            sprite.setName(name);
+
+            sprite.setData('cat1', cat1);
+            sprite.setData('cat2', cat2);
+            sprite.setData('cat3', cat3);
+            sprite.setData('cat4', cat4);
+            sprite.setData('scale', scale);
+
+            sprite.setInteractive({ cursor: 'pointer' });
+
+            this.arrayStack.add(sprite);
+            this.arrayStack.bringToTop(sprite);
+
+        }
+        this.children.bringToTop(this.arrayStack);
+    }
+
+    /**
+     * Method which initializes all global input actions
+     */
+    private initInput(): void {
+        // On start dragging
+        this.input.setDraggable(this.arrayStack.getAll());
+
+        this.input.on('dragstart', function(pointer, gameObject) {
+            if (gameObject instanceof Phaser.GameObjects.Sprite) {
+                // Bring gameObject to top
+                this.arrayStack.bringToTop(gameObject);
+
+                // Set visual effects
+                gameObject.clearTint();
+                gameObject.setTint(0x999999);
+
+                let scale: number = gameObject.getData('scale')*1.2;
+                gameObject.setScale(scale);
+            }
+        }, this);
+
+        // On stop dragging
+        this.input.on('dragend', function (pointer, gameObject, dropped) {
+            // If not dropped set default visual effects
+            if (!dropped && gameObject instanceof Phaser.GameObjects.Sprite) {
+                gameObject.clearTint();
+
+                let scale: number = gameObject.getData('scale');
+                gameObject.setScale(scale);
+
+                let x: number = gameObject.x;
+                let y: number = gameObject.y;
+                let dist: number = Math.sqrt(Math.pow(gameObject.width*gameObject.getData('scale'), 2) + Math.pow(gameObject.height*gameObject.getData('scale'), 2))/2;
+
+                if (x < 0) {
+                    x = 0 + dist;
+                }
+
+                if (y < 0) {
+                    y = 0 + dist;
+                }
+
+                if (x > this.cameras.main.width) {
+                    x = this.cameras.main.width - dist;
+                }
+
+                if (y > this.cameras.main.height) {
+                    y = this.cameras.main.height - dist;
+                }
+
+                gameObject.setPosition(x, y);
+            }
+        }, this);
+
+        // While dragging update coordinates
+        this.input.on('drag', function(pointer, gameObject, dragX, dragY) {
+            if (gameObject instanceof Phaser.GameObjects.Sprite){
+                gameObject.setPosition(dragX, dragY);
+            }
+        }, this);
+    }
+
+    /**
+     * Method for adding the exit button
+     */
+    private exitButton(): void {
+        const exitButton: Phaser.GameObjects.Sprite = this.add.sprite(10, this.cameras.main.height - 10, 'return');
+        exitButton.setOrigin(0,1);
+        exitButton.setInteractive({ cursor: 'pointer' });
+
+        const scale: number = this.imageScalingFactor(this.buttonSize*1.5, exitButton.width, exitButton.height);
+        exitButton.setScale(scale);
+
+        exitButton.on('pointerdown', function() {
+            exitButton.on('pointerup', function() {
+                this.sound.add('back').play();
+                this.transitionOut("LevelMenuScene");
+            }, this);
+        }, this);
+    }
+
+    /**
+     * Method for ordering objects by the properties of a category in a grid
+     * @param categoryName Name of the category
+     * @param validElements Properties of this category
+     */
+    private orderObjects(categoryName: string, validElements: string[]): void {
+        this.arrayStack.each(function(gameObject) {
+            if (gameObject instanceof Phaser.GameObjects.Sprite) {
+                let coords: number[] = this.returnQuad(validElements.indexOf(gameObject.getData(categoryName)), validElements.length);
+                gameObject.setPosition(coords[0], coords[1]);
+            }
+        }, this);
+    }
+
+    /**
+     * Method for initializing sound effects
+     */
+    private initAudio(): void {
+        this.sound.add('space').play('', {loop: true});
+    }
+
+    /**
+     * Returns random coordinates in the requested quadrant of total quadrants.
+     * Starting by 0, from left to right then from top to bottom.
+     * IMPORTANT: Sprite origin has to be (0.5, 0.5)!
+     * @param quadrant Number of the quadrant
+     * @param quadrantType Number of quadrants
+     */
+    private returnQuad(quadrant: number, quadrantType: number): number[] {
+        let ret: number[] = null;
+
+        if (quadrant >= quadrantType) {
+            console.log('ERROR: quadrant >= quadrantType');
+            return ret;
+        }
+
+        const spriteSizeHalf: number = this.objectDisplaySize / 2 + 20;
+
+        const leftOffsite: number = 100;
+        const rightOffsite: number = 0;
+        const topOffsite: number = 0;
+        const bottomOffsite: number = 100;
+
+        // Has entries dependant of
+        const horizontal: number[] = [];
+
+        // Has numberOfLines + 1 entries
+        const vertical: number[] = [];
+
+        horizontal.push(leftOffsite);
+
+        vertical.push(topOffsite);
+
+        switch (quadrantType) {
+            case 3: {
+                horizontal.push(leftOffsite + (this.cameras.main.width - leftOffsite - rightOffsite) / 3);
+                horizontal.push(leftOffsite + (this.cameras.main.width - leftOffsite - rightOffsite) * 2 / 3);
+                break;
+            }
+            case 4: {
+                horizontal.push(leftOffsite + (this.cameras.main.width - leftOffsite - rightOffsite) / 2);
+                vertical.push(topOffsite + (this.cameras.main.height - topOffsite - bottomOffsite) / 2);
+                break;
+            }
+            case 6: {
+                horizontal.push(leftOffsite + (this.cameras.main.width - leftOffsite - rightOffsite) / 3);
+                horizontal.push(leftOffsite + (this.cameras.main.width - leftOffsite - rightOffsite) * 2 / 3);
+                vertical.push(topOffsite + (this.cameras.main.height - topOffsite - bottomOffsite) / 2);
+                break;
+            }
+            default: {
+                break;
+            }
+        }
+
+        horizontal.push(this.cameras.main.width - rightOffsite);
+        vertical.push(this.cameras.main.height - bottomOffsite);
+
+        switch (quadrantType) {
+            case 3: {
+                ret = [Phaser.Math.RND.between(horizontal[quadrant] + spriteSizeHalf, horizontal[quadrant + 1] - spriteSizeHalf), Phaser.Math.RND.between(vertical[0] + spriteSizeHalf + this.cameras.main.height / 8, vertical[1] - spriteSizeHalf - this.cameras.main.height / 8)];
+                break;
+            }
+            case 4: {
+                if (quadrant < 2) {
+                    ret = [Phaser.Math.RND.between(horizontal[quadrant] + spriteSizeHalf, horizontal[quadrant + 1] - spriteSizeHalf), Phaser.Math.RND.between(vertical[0] + spriteSizeHalf, vertical[1] - spriteSizeHalf)];
+                } else {
+                    ret = [Phaser.Math.RND.between(horizontal[quadrant \% 2] + spriteSizeHalf, horizontal[(quadrant \% 2) + 1] - spriteSizeHalf), Phaser.Math.RND.between(vertical[1] + spriteSizeHalf, vertical[2] - spriteSizeHalf)];
+
+                }
+                break;
+            }
+            case 6: {
+                if (quadrant < 3) {
+                    ret = [Phaser.Math.RND.between(horizontal[quadrant] + spriteSizeHalf, horizontal[quadrant + 1] - spriteSizeHalf), Phaser.Math.RND.between(vertical[0] + spriteSizeHalf, vertical[1] - spriteSizeHalf)];
+                } else {
+                    ret = [Phaser.Math.RND.between(horizontal[quadrant \% 3] + spriteSizeHalf, horizontal[(quadrant \% 3) + 1] - spriteSizeHalf), Phaser.Math.RND.between(vertical[1] + spriteSizeHalf, vertical[2] - spriteSizeHalf)];
+                }
+                break;
+            }
+            default: {
+                break;
+            }
+        }
+        return ret;
+    }
+}
+\end{lstlisting}
+
+\section{propertySortingScene.ts}\label{sec:propertysortingscene.ts}
+\begin{lstlisting}[style=TypeScript, caption={propertySortingScene.ts}]
+import 'phaser';
+import {BaseScene} from './baseScene';
+import {LevelMenuScene} from './levelMenuScene';
+
+export class PropertySortingScene extends BaseScene {
+
+    /**
+     * Object database with all image names, image paths and image properties
+     */
+    private jsonObject: any;
+
+    /**
+     * Array index number +1 of category to sort
+     */
+    private setCat: number;
+
+    /**
+     * Should the object fall (true) or be static (false)
+     */
+    private infinite: boolean;
+
+    /**
+     * All loaded objects
+     */
+    private arrayStack: Phaser.GameObjects.Container;
+
+    /**
+     * All displayed interactive objects with NO velocity
+     */
+    private arrayStatic: Phaser.GameObjects.Group;
+
+    /**
+     * All displayed interactive objects WITH velocity
+     */
+    private arrayFalling: Phaser.GameObjects.Group;
+
+    /**
+     * All DROPPED displayed interactive objects
+     */
+    private arrayDropped: Phaser.GameObjects.Group;
+
+    /**
+     * All category objects (images)
+     */
+    private arrayCategory: Phaser.GameObjects.Group;
+
+    /**
+     * All drop zones
+     */
+    private arrayDropZone: Phaser.GameObjects.Group;
+
+    /**
+     * Display size of displayed interactive objects
+     */
+    private objectDisplaySize: number;
+
+    /**
+     * Object of the number of correct categorized objects
+     */
+    private correctBar: Phaser.GameObjects.Sprite;
+
+    /**
+     * Object of the number of incorrect categorized objects
+     */
+    private wrongBar: Phaser.GameObjects.Sprite;
+
+    /**
+     * Number of correct categorized objects
+     */
+    private correctCount: number;
+
+    /**
+     * Number of incorrect categorized objects
+     */
+    private wrongCount: number;
+
+    /**
+     * Amount of properties in the respective category
+     */
+    private propertyCount: number;
+
+    /**
+     * Maximum reachable points
+     */
+    private maxPoints: number;
+
+    /**
+     * Object falling speed
+     */
+    private velocity: number;
+
+    /**
+     * Last time an object was emitted to fall
+     */
+    private lastEmitTime: number;
+
+    /**
+     * Time until the next object starts to fall
+     */
+    private delay: number;
+
+    /**
+     * How many objects of each category - category count
+     */
+    private numberOfObjectsEach: number;
+
+    /**
+     * Array of preselected objects with name for faster loading
+     */
+    private selectedElements: any[];
+    private selectedElementsName: string[];
+
+    /**
+     * Amount of dummies in play
+     */
+    private numberOfDummies: number;
+
+    /**
+     * Scaling value of the dropped object
+     */
+    private droppedObjectScale: number;
+
+    constructor() {
+        super('PropertySortingScene');
+    }
+
+    init(data): void {
+
+        // Initialize data from previous scene
+        this.jsonObject = this.cache.json.get('objects');
+        this.level = data.level;
+
+        // Set level parameter
+        this.infinite = false;
+        this.setCat = this.level;
+
+        if (this.setCat > 4) {
+            this.infinite = true;
+            this.setCat -= 4;
+        }
+
+        // Initialize fields
+        this.arrayStack = this.add.container(0, 0);
+        this.arrayCategory = this.add.group();
+        this.arrayStatic = this.add.group();
+        this.arrayFalling = this.add.group();
+        this.arrayDropped = this.add.group();
+        this.arrayDropZone = this.add.group();
+
+        this.correctCount = 0;
+        this.wrongCount = 0;
+        this.numberOfDummies = 0;
+
+        this.selectedElements = [];
+        this.selectedElementsName = [];
+
+        let numberOfProperties = 0;
+        for (let property of this.jsonObject['categories'][this.setCat - 1]['validElements']) {
+            numberOfProperties++;
+        }
+
+        // Randomization of amount of properties to sort
+        this.propertyCount = Phaser.Math.RND.between(3, numberOfProperties);
+
+        // Debatable initializations
+        this.objectDisplaySize = 100;
+        this.droppedObjectScale = 0.4;
+        this.velocity = 150;
+        this.lastEmitTime = 0;
+        this.delay = 1500;
+        this.numberOfObjectsEach = Phaser.Math.RND.between(3, 5);
+    }
+
+    preload(): void {
+
+    }
+
+    create(): void {
+        // Bring MenuUI to the front and initialize transition
+        this.game.scene.sendToBack(this.getKey());
+        this.transitionIn();
+
+        this.preselectObjects();
+        this.setBackground();
+        this.addProgressbar();
+        this.loadObjects();
+        this.setDropzones();
+        this.initInput();
+        this.initFirstDrop();
+        this.initAudio();
+    }
+
+    update(time: number): void {
+        // If infinite, emit object after a specified amount of time
+        if (this.infinite) {
+            let diff: number = time - this.lastEmitTime;
+            if (diff > this.delay) {
+                this.lastEmitTime = time;
+                if (this.delay > 300) {
+                    this.delay -= 20;
+                }
+                if (this.arrayStatic.getLength() != 0) {
+                    const sprite: Phaser.Physics.Arcade.Sprite = Phaser.Math.RND.pick(this.arrayStatic.getChildren());
+                    this.arrayStack.bringToTop(sprite);
+                    this.arrayStatic.remove(sprite);
+                    sprite.setVelocityY(this.velocity);
+                    sprite.setAngularVelocity(sprite.getData('spin'));
+                }
+            }
+        }
+    }
+
+    /**
+     * Method for initializing the background
+     */
+    private setBackground(): void {
+        let background: Phaser.GameObjects.Sprite;
+        if (this.infinite) {
+            background = this.add.sprite(0, 0, 'background3');
+        } else {
+            background = this.add.sprite(0, 0, 'background2');
+        }
+        background.setOrigin(0, 0);
+        background.setDisplaySize(this.cameras.main.width, this.cameras.main.height);
+        background.setTint(0xffccaa);
+        background.setAlpha(0.9);
+    }
+
+    /**
+     * Methods for initializing the drop zones
+     */
+    private setDropzones(): void {
+        const leftBound: number = this.correctBar.getTopRight().x + 10;
+        const stepSize: number = (this.cameras.main.width - leftBound) / (this.propertyCount);
+        const zoneWidth: number = (this.cameras.main.width - leftBound) / (this.selectedElements.length);
+        const crateSize: number = Math.min(this.objectDisplaySize * 2, zoneWidth);
+        let iteration: number = 0.5;
+
+        for (let property of this.selectedElements) {
+            // Add crate
+            const crate: Phaser.GameObjects.Sprite = this.add.sprite(leftBound + stepSize * iteration, this.cameras.main.height - crateSize / 2, 'wooden_crate');
+            crate.setOrigin(0.5, 0.5);
+
+            const imageScalingFactor: number = this.imageScalingFactor(crateSize, crate.width, crate.height);
+            crate.setScale(imageScalingFactor);
+
+            // Add zone around crate
+            const zone: Phaser.GameObjects.Zone = this.add.zone(crate.x, crate.y, zoneWidth, crate.height * imageScalingFactor + this.objectDisplaySize);
+            zone.setOrigin(0.5, 0.5);
+            zone.setRectangleDropZone(zone.width, zone.height);
+            zone.setName(property.name);
+
+            this.arrayDropZone.add(zone);
+
+            iteration++;
+        }
+    }
+
+    /**
+     * Method which initializes all input actions
+     */
+    private initInput(): void {
+
+        // On dragstart
+        this.input.on('dragstart', function(pointer, gameObject) {
+            if (gameObject instanceof Phaser.Physics.Arcade.Sprite) {
+                if (gameObject.getData('active')) {
+                    gameObject.setTint(0x999999);
+                }
+                gameObject.setVelocityY(0);
+                gameObject.setAngularVelocity(0);
+                const zoomSpriteScale: number = gameObject.getData('scale') * 1.5;
+                gameObject.setScale(zoomSpriteScale);
+                this.arrayStack.bringToTop(gameObject);
+            }
+        }, this);
+
+        this.input.on('drag', function(pointer, gameObject, dragX, dragY) {
+            if (gameObject instanceof Phaser.Physics.Arcade.Sprite) {
+                gameObject.setPosition(dragX, dragY);
+            }
+        }, this);
+
+        // On stop dragging
+        this.input.on('dragend', function(pointer, gameObject, dropped) {
+            // If not dropped set default visual effects
+            if (!dropped && gameObject instanceof Phaser.Physics.Arcade.Sprite) {
+                if (gameObject.getData('active')) {
+                    gameObject.clearTint();
+                }
+
+                let scale: number = gameObject.getData('scale');
+                gameObject.setScale(scale);
+
+                if (this.infinite) {
+                    gameObject.setVelocityY(this.velocity);
+                    gameObject.setAngularVelocity(gameObject.getData('spin'));
+                }
+
+                let x: number = gameObject.x;
+                let y: number = gameObject.y;
+                let dist: number = Math.sqrt(Math.pow(gameObject.width * gameObject.getData('scale'), 2) + Math.pow(gameObject.height * gameObject.getData('scale'), 2)) / 2;
+
+                if (x < 0) {
+                    x = dist;
+                }
+
+                if (y < 0) {
+                    y = dist;
+                }
+
+                if (x > this.cameras.main.width) {
+                    x = this.cameras.main.width - dist;
+                }
+
+                if (y > this.cameras.main.height) {
+                    y = this.cameras.main.height - dist;
+                }
+
+                gameObject.setPosition(x, y);
+            }
+        }, this);
+
+        this.input.on('drop', function(pointer, gameObject, dropZone) {
+            if (gameObject instanceof Phaser.Physics.Arcade.Sprite && dropZone instanceof Phaser.GameObjects.Zone) {
+                let coords: number[] = [gameObject.input.dragStartX, gameObject.input.dragStartY];
+                let scale: number = gameObject.getData('scale');
+                let point: number = -1;
+
+                if (gameObject.name === dropZone.name && gameObject.getData('active')) {
+                    coords = [dropZone.x + dropZone.width * 0.15, dropZone.y - dropZone.height * 0.2];
+
+                    scale = this.imageScalingFactor(Math.min(dropZone.width, dropZone.height) * this.droppedObjectScale, gameObject.width, gameObject.height);
+
+                    this.arrayDropped.add(gameObject);
+
+                    gameObject.disableInteractive();
+                    gameObject.setImmovable(true);
+
+                    point = +1;
+
+                } else {
+                    if (this.infinite) {
+                        gameObject.setVelocityY(this.velocity);
+                        gameObject.setAngularVelocity(gameObject.getData('spin'));
+                    }
+                }
+
+                this.updateProgressbar(point);
+                if (gameObject.getData('active')) {
+                    gameObject.clearTint();
+                }
+                gameObject.setScale(scale);
+                gameObject.setPosition(coords[0], coords[1]);
+            }
+        }, this);
+    }
+
+    /**
+     * Method for initializing all game objects
+     */
+    private loadObjects(): void {
+        this.arrayStack.setDepth(1);
+
+        for (let propImage of this.selectedElements) {
+
+            // Create 10 of each property
+            for (let i = 0; i < this.numberOfObjectsEach; i++) {
+                // RND size
+                const size: number = Phaser.Math.RND.between(this.objectDisplaySize, this.objectDisplaySize * 1.3);
+
+                const sprite: Phaser.Physics.Arcade.Sprite = this.physics.add.sprite(Phaser.Math.RND.between(100 + this.objectDisplaySize / 2, this.cameras.main.width - this.objectDisplaySize / 1.5), Phaser.Math.RND.between(this.objectDisplaySize / 2, this.cameras.main.height - this.objectDisplaySize * 2 - this.objectDisplaySize / 2), this.selectedElementsName[this.selectedElements.indexOf(propImage)]);
+                sprite.setName(propImage.name);
+
+                if (this.infinite) {
+                    sprite.setY(0 - 2 * this.objectDisplaySize);
+                }
+
+                sprite.setVelocity(0, 0);
+                sprite.setOrigin(0.5, 0.5);
+
+                // RND spin
+                sprite.setAngle(Phaser.Math.RND.angle());
+
+                sprite.setVisible(true);
+
+                const spriteScale: number = this.imageScalingFactor(size, sprite.width, sprite.height);
+                sprite.setScale(spriteScale);
+
+                sprite.setData('scale', spriteScale);
+                sprite.setData('spin', Phaser.Math.RND.between(10, 50));
+                sprite.setData('active', true);
+
+                sprite.setInteractive({cursor: 'pointer'});
+
+                this.arrayStatic.add(sprite);
+                this.arrayStack.add(sprite);
+
+                this.input.setDraggable(sprite);
+            }
+
+            let rndDummy: number = 0;
+
+            if (this.infinite) {
+                rndDummy = Phaser.Math.RND.between(0, this.numberOfObjectsEach / 2);
+            }
+
+            this.numberOfDummies += rndDummy;
+
+            for (let i = 0; i < rndDummy; i++) {
+                // RND size
+                const size: number = Phaser.Math.RND.between(this.objectDisplaySize * 0.8, this.objectDisplaySize * 1.3);
+
+                const sprite: Phaser.Physics.Arcade.Sprite = this.physics.add.sprite(Phaser.Math.RND.between(100 + this.objectDisplaySize / 2, this.cameras.main.width - this.objectDisplaySize / 2), Phaser.Math.RND.between(this.objectDisplaySize / 2, this.cameras.main.height - this.objectDisplaySize * 2 - this.objectDisplaySize / 2), this.selectedElementsName[this.selectedElements.indexOf(propImage)]);
+                sprite.setName(propImage.name);
+
+                if (this.infinite) {
+                    sprite.setY(0 - 2 * this.objectDisplaySize);
+                }
+
+                sprite.setVelocity(0, 0);
+                sprite.setOrigin(0.5, 0.5);
+
+                sprite.setTintFill(0xffffff);
+
+                // RND spin
+                sprite.setAngle(Phaser.Math.RND.angle());
+
+                sprite.setVisible(true);
+
+                const spriteScale: number = this.imageScalingFactor(size, sprite.width, sprite.height);
+                sprite.setScale(spriteScale);
+
+                sprite.setData('scale', spriteScale);
+                sprite.setData('spin', Phaser.Math.RND.between(10, 50));
+                sprite.setData('active', false);
+
+                sprite.setInteractive({cursor: 'pointer'});
+
+                this.arrayStatic.add(sprite);
+                this.arrayStack.add(sprite);
+
+                this.input.setDraggable(sprite);
+            }
+        }
+
+        this.maxPoints = this.arrayStack.length - this.propertyCount - this.numberOfDummies;
+
+        const floor: Phaser.Physics.Arcade.Sprite = this.physics.add.sprite(0, this.cameras.main.height + 2 * this.objectDisplaySize, 'background');
+        floor.setDisplaySize(this.cameras.main.width, 1);
+        floor.setTintFill(0x000000);
+        floor.setOrigin(0, 0);
+        floor.setImmovable(true);
+
+        this.physics.add.collider(this.arrayStack.getAll(), floor, function(gameObject1) {
+            if (gameObject1 instanceof Phaser.Physics.Arcade.Sprite) {
+                if (gameObject1.getData('active')) {
+                    this.updateProgressbar(-1);
+                }
+                gameObject1.setVelocityY(0);
+                gameObject1.setAngularVelocity(0);
+                gameObject1.setPosition(Phaser.Math.RND.between(100 + this.objectDisplaySize / 2, this.cameras.main.width - this.objectDisplaySize / 2), 0 - 2 * this.objectDisplaySize);
+                this.arrayStatic.add(gameObject1);
+                this.arrayFalling.remove(gameObject1);
+            }
+        }, null, this);
+    }
+
+    /**
+     * Method for visually marking the drop zones
+     */
+    private initFirstDrop(): void {
+        let counterSet: string[] = [];
+
+        for (let sprite of this.arrayStack.getAll()) {
+            if (sprite instanceof Phaser.Physics.Arcade.Sprite && sprite.getData('active')) {
+                const spriteName: string = sprite.name;
+                if (!(counterSet.indexOf(spriteName) > -1)) {
+                    for (let dropZone of this.arrayDropZone.getChildren()) {
+                        if (dropZone instanceof Phaser.GameObjects.Zone) {
+                            if (dropZone.name === spriteName) {
+                                sprite.clearTint();
+                                sprite.setPosition(dropZone.x + dropZone.width * 0.15, dropZone.y - dropZone.height * 0.2);
+
+                                const imageScale: number = this.imageScalingFactor(Math.min(dropZone.width, dropZone.height) * this.droppedObjectScale, sprite.width, sprite.height);
+                                sprite.setScale(imageScale);
+
+                                this.arrayDropped.add(sprite);
+                                sprite.disableInteractive();
+                                this.arrayStatic.remove(sprite);
+
+                                this.arrayStack.sendToBack(sprite);
+                            }
+                        }
+                    }
+
+                    counterSet.push(spriteName);
+                }
+
+                // Return if every crate has an example
+                if (counterSet.length >= this.propertyCount) {
+                    return;
+                }
+            }
+
+        }
+    }
+
+    /**
+     * Method for initializing the progressbar
+     */
+    private addProgressbar(): void {
+        const progressbarY: number = this.cameras.main.height - 10;
+        const progressbarCorrect: Phaser.GameObjects.Sprite = this.add.sprite(0, progressbarY, 'progressbar');
+        const multiplierX: number = 0.4;
+        const multiplierY: number = this.imageScalingFactor(this.cameras.main.height * 0.5, progressbarCorrect.height, progressbarCorrect.height);//0.3;
+
+        progressbarCorrect.setOrigin(0, 1);
+        progressbarCorrect.setScale(multiplierX, multiplierY);
+
+        const progressbarCorrectX: number = 10 * 2 + progressbarCorrect.width * multiplierX;
+        progressbarCorrect.setX(progressbarCorrectX);
+
+        const progressbarWrong: Phaser.GameObjects.Sprite = this.add.sprite(10, progressbarY, 'progressbar');
+        progressbarWrong.setOrigin(0, 1);
+        progressbarWrong.setScale(multiplierX, multiplierY);
+
+        const progressbarWrongX: number = 10;
+        progressbarWrong.setX(progressbarWrongX);
+
+        const plus: Phaser.GameObjects.Sprite = this.add.sprite(progressbarCorrectX, progressbarY - progressbarWrong.height * multiplierY - 10, 'plus');
+        const plusMultiplier: number = progressbarWrong.width * multiplierX / plus.width;
+        plus.setOrigin(0, 1);
+        plus.setScale(plusMultiplier);
+
+        const minus: Phaser.GameObjects.Sprite = this.add.sprite(progressbarWrongX, progressbarY - progressbarWrong.height * multiplierY - 10, 'minus');
+        const minusMultiplier: number = progressbarWrong.width * multiplierX / minus.width;
+        minus.setOrigin(0, 1);
+        minus.setScale(minusMultiplier);
+
+        this.correctBar = this.add.sprite(progressbarCorrectX + progressbarCorrect.width * multiplierX / 2 + 2, progressbarY - 6, 'progressbarGreen');
+        this.correctBar.setOrigin(0.5, 1);
+        this.correctBar.setData('gameX', multiplierX);
+        this.correctBar.setData('gameY', 0.01);
+        this.correctBar.setData('gameMax', (progressbarCorrect.height * multiplierY - 6) / this.correctBar.height);
+        this.correctBar.setScale(multiplierX, 0.01);
+        this.correctBar.setAlpha(0.7);
+
+        this.wrongBar = this.add.sprite(progressbarWrongX + progressbarWrong.width * multiplierX / 2 + 2, progressbarY - 6, 'progressbarRed');
+        this.wrongBar.setOrigin(0.5, 1);
+        this.wrongBar.setData('gameX', multiplierX);
+        this.wrongBar.setData('gameY', 0.01);
+        this.wrongBar.setData('gameMax', (progressbarWrong.height * multiplierY - 6) / this.wrongBar.height);
+        this.wrongBar.setScale(multiplierX, 0.01);
+        this.wrongBar.setAlpha(0.7);
+    }
+
+    /**
+     * Method for updating the progressbar
+     * @param point Number of points made (+1 or -1)
+     */
+    private updateProgressbar(point: number): void {
+
+        if (point > 0) {
+            // Add to plus: max number of cards minus three
+            this.correctCount += this.correctBar.getData('gameMax') / this.maxPoints;
+            this.correctBar.setScale(this.correctBar.getData('gameX'), this.correctCount);
+
+
+        } else {
+            // Add to minus: max not defined (lets say number of cards minus three also...)
+            this.wrongCount += this.wrongBar.getData('gameMax') / this.maxPoints;
+            this.wrongBar.setScale(this.wrongBar.getData('gameX'), this.wrongCount);
+
+        }
+
+        if ((this.wrongCount >= this.wrongBar.getData('gameMax') - Phaser.Math.EPSILON) || (this.correctCount >= this.correctBar.getData('gameMax') - Phaser.Math.EPSILON)) {
+            this.transitionOut('ScoreScene', {
+                'score': this.correctCount / this.correctBar.getData('gameMax') - this.wrongCount / this.wrongBar.getData('gameMax'),
+                'previousScene': this.getKey() + String(this.level)
+            });
+        }
+    }
+
+    /**
+     * Method for initializing sound effects
+     */
+    private initAudio(): void {
+        if (this.infinite) {
+            this.sound.add('battle').play('', {loop: true});
+        } else {
+            this.sound.add('space').play('', {loop: true});
+        }
+    }
+
+    /**
+     * Method for preselecting objects
+     */
+    private preselectObjects(): void {
+        // Preselect properties
+        for (let property of this.jsonObject['categories'][this.setCat - 1].validElements) {
+            this.selectedElements.push(property);
+        }
+
+        // Pick the elements
+        while (this.selectedElements.length > this.propertyCount) {
+            this.selectedElements = Phaser.Math.RND.shuffle(this.selectedElements);
+            this.selectedElements.pop();
+        }
+
+        // Get property images
+        let propLength: number = this.selectedElements[0].urls.length;
+        let rndIndex: number = Phaser.Math.RND.between(0, propLength - 1);
+        for (let prop of this.selectedElements) {
+            const name = prop.urls[rndIndex];
+            this.selectedElementsName.push(name);
+        }
+    }
+}
+\end{lstlisting}
+
+\section{restrictedSortingScene.ts}\label{sec:restrictedsortingscene.ts}
+\begin{lstlisting}[style=TypeScript, caption={restrictedSortingScene.ts}]
+import 'phaser';
+import {BaseScene} from './baseScene';
+
+export class RestrictedSortingScene extends BaseScene {
+
+    /**
+     * Object database with all image names, image paths and image properties
+     */
+    private jsonObject: any;
+
+    /**
+     * Global average display size of interactive objects
+     */
+    private objectSize: number;
+
+    /**
+     * Two arrays which map the dropped objects to the respective zone and vice versa
+     */
+    private zoneObjMap: Phaser.GameObjects.Zone[];
+    private objZoneMap: Phaser.GameObjects.Sprite[];
+
+    /**
+     * Array of preselected objects so that not all objects must be loaded
+     */
+    private preselectedObjects: any[];
+
+    /**
+     * Array of all displayed and not dropped objects
+     */
+    private displayedObjects: Phaser.GameObjects.Group;
+
+    constructor() {
+        super('RestrictedSortingScene');
+    }
+
+    init(data): void {
+
+        // Initialize data from previous scene
+        this.jsonObject = this.cache.json.get('objects');
+        this.level = data.level;
+
+        // Initialize fields
+        this.objZoneMap = [];
+        this.zoneObjMap = [];
+        this.preselectedObjects = [];
+        this.displayedObjects = this.add.group();
+        this.objectSize = 100;
+    }
+
+    preload(): void {
+    }
+
+    create(): void {
+        // Bring MenuUI to the front and initialize transition
+        this.game.scene.sendToBack(this.getKey());
+        this.transitionIn();
+
+        this.preselectObjects();
+        this.setBackground();
+        this.setDropZones();
+        this.setObjects();
+        this.initInput();
+        this.initAudio();
+    }
+
+    update(time: number): void {
+
+    }
+
+    /**
+     * Method which initializes the background graphics
+     */
+    private setBackground(): void {
+        const background: Phaser.GameObjects.Sprite = this.add.sprite(0, 0, 'background4');
+        background.setOrigin(0, 0);
+        background.setDisplaySize(this.cameras.main.width, this.cameras.main.height);
+        background.setTint(0xffccaa);
+        background.setAlpha(0.9);
+    }
+
+    /**
+     * Method which initializes the dropZones and their graphics
+     */
+    private setDropZones(): void {
+        const crate1: Phaser.GameObjects.Sprite = this.add.sprite(this.cameras.main.width * (1 / 6), this.cameras.main.height * (3 / 4), 'crate');
+        const crate2: Phaser.GameObjects.Sprite = this.add.sprite(this.cameras.main.width * (3 / 6), this.cameras.main.height * (3 / 4), 'crate');
+        const crate3: Phaser.GameObjects.Sprite = this.add.sprite(this.cameras.main.width * (5 / 6), this.cameras.main.height * (3 / 4), 'crate');
+
+        crate1.setOrigin(0.5, 0.5);
+        crate2.setOrigin(0.5, 0.5);
+        crate3.setOrigin(0.5, 0.5);
+
+        const scale: number = this.imageScalingFactor(Math.min(this.cameras.main.width / 3, this.cameras.main.height / 2) - 40, crate1.width, crate1.height);
+        crate1.setScale(scale);
+        crate2.setScale(scale);
+        crate3.setScale(scale);
+
+        for (let i: number = 0; i < 6; i++) {
+            let heightPosition: number = 0;
+            if (i > 2) {
+                heightPosition = 1;
+            }
+
+            const x: number = crate1.x - crate1.width * scale / 2;
+            const y: number = crate1.y - crate1.height * scale / 2;
+            const zone: Phaser.GameObjects.Zone = this.add.zone(x + (i % 3) * crate1.width * scale / 3, y + heightPosition * crate1.height * scale / 2, crate1.width * scale / 3, crate1.height * scale / 2);
+            zone.setRectangleDropZone(crate1.width * scale / 3, crate1.height * scale / 2);
+            zone.setOrigin(0, 0);
+            zone.setName('dropZone1');
+            this.zoneObjMap.push(zone);
+
+            // Display border of drop zones
+            const graphics: Phaser.GameObjects.Graphics = this.add.graphics();
+            graphics.lineStyle(10, 0x000000);
+            graphics.strokeRect(zone.x, zone.y, zone.input.hitArea.width, zone.input.hitArea.height);
+
+        }
+
+        for (let i: number = 0; i < 4; i++) {
+            let heightPosition: number = 0;
+            if (i > 1) {
+                heightPosition = 1;
+            }
+
+            const x: number = crate2.x - crate2.width * scale / 2;
+            const y: number = crate2.y - crate2.height * scale / 2;
+            const zone: Phaser.GameObjects.Zone = this.add.zone(x + (i % 2) * crate2.width * scale / 2, y + heightPosition * crate2.height * scale / 2, crate2.width * scale / 2, crate2.height * scale / 2);
+            zone.setRectangleDropZone(crate2.width * scale / 2, crate2.height * scale / 2);
+            zone.setOrigin(0, 0);
+            zone.setName('dropZone2');
+
+            this.zoneObjMap.push(zone);
+
+            // Display border of drop zones
+            const graphics: Phaser.GameObjects.Graphics = this.add.graphics();
+            graphics.lineStyle(10, 0x000000);
+            graphics.strokeRect(zone.x, zone.y, zone.input.hitArea.width, zone.input.hitArea.height);
+        }
+
+        if (this.level == 1) {
+            for (let i: number = 0; i < 2; i++) {
+                const x: number = crate3.x - crate3.width * scale / 2;
+                const y: number = crate3.y - crate3.height * scale / 2;
+                const zone: Phaser.GameObjects.Zone = this.add.zone(x + (i % 2) * crate3.width * scale / 2, y, crate3.width * scale / 2, crate3.height * scale);
+                zone.setRectangleDropZone(crate3.width * scale / 2, crate3.height * scale);
+                zone.setOrigin(0, 0);
+                zone.setName('dropZone3');
+
+                this.zoneObjMap.push(zone);
+
+                // Display border of drop zones
+                const graphics: Phaser.GameObjects.Graphics = this.add.graphics();
+                graphics.lineStyle(10, 0x000000);
+                graphics.strokeRect(zone.x, zone.y, zone.input.hitArea.width, zone.input.hitArea.height);
+            }
+        } else {
+            for (let i: number = 0; i < 5; i++) {
+                let mod: number = 3;
+                let heightPosition: number = 0;
+                if (i > 2) {
+                    heightPosition = 1;
+                    mod = 2;
+                }
+                const x: number = crate3.x - crate3.width * scale / 2;
+                const y: number = crate3.y - crate3.height * scale / 2;
+                const zone: Phaser.GameObjects.Zone = this.add.zone(x + (i % mod) * crate3.width * scale / mod, y + heightPosition * crate3.height * scale / 2, crate3.width * scale / mod, crate3.height * scale / 2);
+                zone.setRectangleDropZone(crate3.width * scale / mod, crate3.height * scale / 2);
+                zone.setOrigin(0, 0);
+                zone.setName('dropZone3');
+
+                this.zoneObjMap.push(zone);
+
+                // Display border of drop zones
+                const graphics: Phaser.GameObjects.Graphics = this.add.graphics();
+                graphics.lineStyle(10, 0x000000);
+                graphics.strokeRect(zone.x, zone.y, zone.input.hitArea.width, zone.input.hitArea.height);
+            }
+        }
+
+    }
+
+    /**
+     * Method which initializes all input actions
+     */
+    private initInput(): void {
+        // On start dragging
+        this.input.on('dragstart', function (pointer, gameObject) {
+            if (gameObject instanceof Phaser.GameObjects.Sprite) {
+                // Bring gameObject to top
+                this.children.bringToTop(gameObject);
+
+                // Set visual effects
+                gameObject.clearTint();
+                gameObject.setTint(0x999999);
+
+                const scale: number = gameObject.getData('scale') * 1.2;
+                gameObject.setScale(scale);
+            }
+        }, this);
+
+        // On stop dragging
+        this.input.on('dragend', function (pointer, gameObject, dropped) {
+            // If not dropped set default visual effects
+            if (!dropped && gameObject instanceof Phaser.GameObjects.Sprite) {
+                gameObject.clearTint();
+
+                const scale: number = gameObject.getData('scale');
+                gameObject.setScale(scale);
+
+                let x: number = gameObject.x;
+                let y: number = gameObject.y;
+                const dist: number = Math.sqrt(Math.pow(gameObject.width * gameObject.getData('scale'), 2) + Math.pow(gameObject.height * gameObject.getData('scale'), 2)) / 2;
+
+                if (x < 0) {
+                    x = dist;
+                }
+
+                if (y < 0) {
+                    y = dist;
+                }
+
+                if (x > this.cameras.main.width) {
+                    x = this.cameras.main.width - dist;
+                }
+
+                if (y > this.cameras.main.height) {
+                    y = this.cameras.main.height - dist;
+                }
+
+                gameObject.setPosition(x, y);
+
+                // Check if the gameObject is already in a zone
+                const index = this.objZoneMap.indexOf(gameObject);
+                if (index > -1) {
+                    // Clear gameObject from this zone
+                    delete this.objZoneMap[index];
+                    this.displayedObjects.add(gameObject);
+                }
+            }
+        }, this);
+
+        // While dragging update coordinates
+        this.input.on('drag', function (pointer, gameObject, dragX, dragY) {
+            if (gameObject instanceof Phaser.GameObjects.Sprite) {
+                gameObject.setPosition(dragX, dragY);
+            }
+        }, this);
+
+        // On drop
+        this.input.on('drop', function (pointer, gameObject, dropZone) {
+            if (gameObject instanceof Phaser.GameObjects.Sprite && dropZone instanceof Phaser.GameObjects.Zone) {
+                let scale: number = gameObject.getData('scale');
+                let coords: number[] = [gameObject.input.dragStartX, gameObject.input.dragStartY];
+
+                // Check if there is already an object in the dropZone and if the current gameObject fits with the other elements
+                let index1: number = this.zoneObjMap.indexOf(dropZone);
+                let index2: number = this.objZoneMap.indexOf(gameObject);
+                if (typeof this.objZoneMap[index1] == 'undefined' && this.equalityCheck(gameObject, dropZone)) {
+                    // Check if the gameObject is already in a zone
+                    if (index2 > -1) {
+                        // Clear gameObject from this zone
+                        delete this.objZoneMap[index2];
+                        this.displayedObjects.add(gameObject);
+                    }
+
+                    // Set scale and coordinates
+                    scale = this.imageScalingFactor(Math.min(dropZone.width, dropZone.height) * 0.9, gameObject.width, gameObject.height);
+                    coords = [dropZone.getCenter().x, dropZone.getCenter().y];
+
+                    // Add object to the dropZone
+                    this.objZoneMap[index1] = gameObject;
+
+                    // Remove from displayed array
+                    this.displayedObjects.remove(gameObject);
+
+                    // If all elements are sorted, end game with score
+                    if (this.displayedObjects.getLength() <= 0) {
+                        this.transitionOut('ScoreScene', {
+                            'score': 1,
+                            'previousScene': this.getKey() + String(this.level)
+                        });
+                    }
+
+
+                } else if (index2 > -1) {
+                    // Check if the gameObject was already in a zone
+                    let dropZoneOld: Phaser.GameObjects.Zone = this.zoneObjMap[index2];
+                    scale = this.imageScalingFactor(Math.min(dropZoneOld.width, dropZoneOld.height) * 0.9, gameObject.width, gameObject.height);
+                }
+
+                // Set default visual effect and position
+                gameObject.clearTint();
+                gameObject.setScale(scale);
+                gameObject.setPosition(coords[0], coords[1]);
+            }
+        }, this);
+    }
+
+    /**
+     * Method which initializes all the displayed object to sort
+     */
+    private setObjects(): void {
+        for (let image of this.preselectedObjects) {
+            const x: number = Phaser.Math.RND.between(100 + this.objectSize / 2, this.cameras.main.width - this.objectSize / 2);
+            const y: number = Phaser.Math.RND.between(this.objectSize / 2, this.cameras.main.height / 2 - this.objectSize / 2);
+
+            const sprite: Phaser.GameObjects.Sprite = this.add.sprite(x, y, image.name);
+
+            const size: number = Phaser.Math.RND.between(this.objectSize, this.objectSize * 1.3);
+            const scale: number = this.imageScalingFactor(size, sprite.width, sprite.height);
+
+            sprite.setScale(scale);
+            sprite.setOrigin(0.5, 0.5);
+            sprite.setVisible(true);
+
+            sprite.setName(image.name);
+            sprite.setData('scale', scale);
+            sprite.setData('properties', [image.cat1, image.cat2, image.cat3, image.cat4]);
+
+            sprite.setInteractive({cursor: 'pointer'});
+            this.input.setDraggable(sprite);
+
+            this.displayedObjects.add(sprite);
+        }
+    }
+
+    /**
+     * Method for checking if there are mutual properties between the elements in the dropZone and the gameObject
+     * @param gameObject Current object you want to add to the dropZone
+     * @param dropZone Current dropZone the gameObject should be added to
+     */
+    private equalityCheck(gameObject: Phaser.GameObjects.Sprite, dropZone: Phaser.GameObjects.Zone): boolean {
+        // Initialize property-intersect-array
+        let mergeArray: any[] = [];
+
+        // Fill array with all property names
+        for (let cat of this.jsonObject['categories']) {
+            mergeArray = [...mergeArray, ...cat['validElements']];
+        }
+        mergeArray.forEach((element, index, array) => array[index] = element.name);
+
+        // Intersect valid elements of all elements already in dropzone plus current gameObject
+        [...this.objZoneMap.filter((element, index) => this.zoneObjMap[index].name === dropZone.name), gameObject].forEach(function (element) {
+            mergeArray = mergeArray.filter((x) => element.getData('properties').includes(x));
+        });
+
+        // Return false if there are no mutual properties
+        return (mergeArray.length > 0);
+    }
+
+    /**
+     * Method for initializing sound effects
+     */
+    private initAudio(): void {
+        this.sound.add('exploration').play('', {loop: true});
+    }
+
+    /**
+     * Method for preselecting the used objects
+     */
+    private preselectObjects(): void {
+        // Load accordingly to level
+        if (this.level === 1) {
+
+            // Copy category array
+            const categories: any[] = [...this.jsonObject['categories']];
+
+            // Choose a random category
+            const rndCat: any = Phaser.Math.RND.shuffle(categories)[0];
+
+            // Select random fitting images
+            const images: any[] = [...this.jsonObject['images']];
+            Phaser.Math.RND.shuffle(images);
+
+            for (let property of Phaser.Math.RND.shuffle(rndCat['validElements']).slice(0, 3)) {
+
+                // Choose for one category 2, for the other 4 and for the last 6 matching (in one property) images.
+                let maxSize: number = 2;
+                if (this.preselectedObjects.length === 2) {
+                    maxSize = 6;
+                } else if (this.preselectedObjects.length === 6) {
+                    maxSize = 12;
+                }
+
+                // Iterate through the images until selecting criteria is fulfilled
+                for (let image of images) {
+                    // If selected enough images, break.
+                    if (this.preselectedObjects.length >= maxSize) {
+                        break;
+                    }
+
+                    // Load and add image if is has the same property as the selected one
+                    if (image[rndCat.name] === property.name) {
+                        this.preselectedObjects.push(image);
+                    }
+                }
+
+                // Remove the selected images from the images array to avoid duplicates
+                this.preselectedObjects.forEach(function (element) {
+                    if (images.indexOf(element, 0) > -1) {
+                        images.splice(images.indexOf(element, 0), 1);
+                    }
+                }, this);
+            }
+
+        } else {
+
+            // Copy category array
+            const categories: any[] = [...this.jsonObject['categories']];
+
+            // Choose a random category
+            const rndCat: any = Phaser.Math.RND.shuffle(categories)[0];
+
+            // Select random fitting images
+            const images: any[] = [...this.jsonObject['images']];
+            Phaser.Math.RND.shuffle(images);
+
+            for (let property of Phaser.Math.RND.shuffle(rndCat['validElements']).slice(0, 3)) {
+
+                // Choose for one category 2, for the other 4 and for the last 6 matching (in one property) images.
+                let maxSize: number = 5;
+                if (this.preselectedObjects.length === 5) {
+                    maxSize = 9;
+                } else if (this.preselectedObjects.length === 9) {
+                    maxSize = 15;
+                }
+
+                // Iterate through the images until selecting criteria is fulfilled
+                for (let image of images) {
+                    // If selected enough images, break.
+                    if (this.preselectedObjects.length >= maxSize) {
+                        break;
+                    }
+
+                    // Load and add image if is has the same property as the selected one
+                    if (image[rndCat.name] === property.name) {
+                        this.preselectedObjects.push(image);
+                    }
+                }
+
+                // Remove the selected images from the images array to avoid duplicates
+                this.preselectedObjects.forEach(function (element) {
+                    if (images.indexOf(element, 0) > -1) {
+                        images.splice(images.indexOf(element, 0), 1);
+                    }
+                }, this);
+            }
+        }
+    }
+}
+\end{lstlisting}
+
+\section{gameScene.ts}\label{sec:gamescene.ts}
+\begin{lstlisting}[style=TypeScript, caption={gameScene.ts}]
+import 'phaser';
+import {BaseScene} from './baseScene';
+
+export class GameScene extends BaseScene {
+
+    /**
+     * Object data file
+     */
+    private jsonObject: any;
+
+    /**
+     * Lock for not messing up animations by clicking repeatedly without waiting for the animation to finish
+     */
+    private lock: boolean;
+
+    /**
+     * State of the helper menu and data
+     */
+    private helpDown: boolean;
+    private buttonSize: number;
+
+    /**
+     * Lock for checking the marked objects
+     */
+    private checked: boolean;
+
+    /**
+     * Array of objects in play
+     */
+    private gameSet: any[];
+
+    /**
+     * Copy of the categories
+     */
+    private categorySet: any[];
+
+
+    /**
+     * Grid properties
+     */
+    private cellsX: number;
+    private cellsY: number;
+    private cellWidth: number;
+    private cellHeight: number;
+
+    /**
+     * Center coordinates of each grid cell
+     */
+    private arrayCoordinates: number[][];
+
+    /**
+     * All category objects
+     */
+    private arrayCategory: Phaser.GameObjects.Group;
+
+    /**
+     * All remaining (not yet discarded) objects
+     */
+    private arrayStack: Phaser.GameObjects.Group;
+
+    /**
+     * All displayed objects
+     */
+    private arrayDisplayed: Phaser.GameObjects.Group;
+
+    /**
+     * All marked objects
+     */
+    private arrayMarked: Phaser.GameObjects.Group;
+
+    /**
+     * All correctly indentified object sets
+     */
+    private arrayDropped: Phaser.GameObjects.Group;
+
+    /**
+     * Stats of already found sets
+     */
+    private points: number;
+    private maxPoints: number;
+
+    /**
+     * Timeprogressbar
+     */
+    private timefluid: Phaser.GameObjects.Sprite;
+
+    /**
+     * Gameprogressbar and data
+     */
+    private gamefluid: Phaser.GameObjects.Sprite;
+    private timedataStepsize: number;
+
+    constructor() {
+        super('GameScene');
+    }
+
+    init(data): void {
+
+        // Initialize data from previous scene
+        this.jsonObject = this.cache.json.get('objects');
+        this.level = data.level;
+
+        // Initialize fields
+        this.lock = false;
+        this.helpDown = false;
+        this.gameSet = [];
+        this.categorySet = [];
+        this.arrayCategory = this.add.group();
+        this.arrayStack = this.add.group();
+        this.arrayDisplayed = this.add.group();
+        this.arrayDropped = this.add.group();
+        this.arrayMarked = this.add.group();
+        this.checked = false;
+        this.points = 0;
+
+        // Initialize game parameters
+        this.buttonSize = 64;
+
+        this.maxPoints = 10;
+
+        this.timedataStepsize = 0.0001;
+
+        if (this.level > 1) {
+            this.timedataStepsize = 0.00001;
+        }
+
+        this.cellsX = 4;
+        this.cellsY = 3;
+
+        this.arrayCoordinates = [];
+        let offsetX = 100;
+        let offsetY = 30;
+        this.cellWidth = (this.cameras.main.width - 2 * offsetX) / (this.cellsX);
+        this.cellHeight = (this.cameras.main.height - 2 * offsetY) / (this.cellsY);
+        for (let x = 0; x < this.cellsX; x++) {
+            for (let y = 0; y < this.cellsY; y++) {
+                this.arrayCoordinates.push([offsetX + this.cellWidth * (0.5 + x), offsetY + this.cellHeight * (0.5 + y)]);
+            }
+        }
+
+
+    }
+
+    preload(): void {
+    }
+
+    create(): void {
+        // Bring MenuUI to the front and initialize transition
+        this.game.scene.sendToBack(this.getKey());
+        this.transitionIn();
+
+        this.preselectObjects();
+        this.setBackground();
+        this.setHelperMenu();
+        this.loadObjects();
+        this.initObjects();
+        this.setEqualityCheck();
+        this.setTimeProgressbar();
+        this.setGameProgressbar();
+        this.initAudio();
+    }
+
+    update(time: number): void {
+
+        // Check for correctness of selected cards
+        if (!this.checked && this.arrayMarked.getLength() >= 3) {
+            this.checked = true;
+            const objects: Phaser.GameObjects.GameObject[] = this.arrayMarked.getChildren();
+            this.replaceObject(this.checkEquality(objects[0], objects[1], objects[2], true));
+        }
+
+        // Update timeprogressbar
+        let timedata: number = this.timefluid.getData('timeY');
+        if (timedata <= 0) {
+            this.checked = true;
+
+            // Endgame
+            this.transitionOut('ScoreScene', {
+                'score': this.points / this.gamefluid.getData('gameMax'),
+                'previousScene': this.getKey() + String(this.level)
+            });
+        } else {
+            timedata -= this.timedataStepsize;
+            this.timefluid.setData('timeY', timedata);
+            this.timefluid.setScale(this.timefluid.getData('timeX'), timedata);
+        }
+    }
+
+    /**
+     * Method for preselecting objects
+     */
+    private preselectObjects(): void {
+        // Preselect objects and preload images
+        const selectedProperties: any[] = [];
+        // Choose three random properties of each category
+        for (let cat of this.jsonObject['categories']) {
+            const selectedProperty: any[] = Phaser.Math.RND.shuffle(cat['validElements']).slice(0, 3);
+            selectedProperty.forEach((object, index, array) => array[index] = object.name);
+            selectedProperties.push(selectedProperty);
+        }
+
+        // Choose all image
+        for (let image of this.jsonObject['images']) {
+            if (
+                selectedProperties[0].indexOf(image['cat1']) > -1 &&
+                selectedProperties[1].indexOf(image['cat2']) > -1 &&
+                selectedProperties[2].indexOf(image['cat3']) > -1
+            ) {
+                // If level one, fix the last category
+                if (this.level === 1) {
+                    if (image['cat4'] === 'full') {
+                        this.gameSet.push(image);
+                    }
+                } else {
+                    this.gameSet.push(image);
+                }
+            }
+        }
+
+        // Preload category images
+        this.categorySet = [...this.jsonObject['categories']]; // Full copy the array instead of referencing
+
+        // If level one, ignore the last category
+        if (this.level === 1) {
+            this.categorySet.pop();
+        }
+    }
+
+    /**
+     * Function for initializing the background
+     */
+    private setBackground(): void {
+        const background = this.add.sprite(0, 0, 'background5');
+        background.setOrigin(0, 0);
+        background.setDisplaySize(this.cameras.main.width, this.cameras.main.height);
+        background.setTint(0xffccaa);
+        background.setAlpha(0.9);
+    }
+
+    /**
+     * Function for creating the helper menu
+     */
+    private setHelperMenu(): void {
+        // Menu background
+        const backgroundY: number = 64 + 10 + 30;
+        const menuBackground: Phaser.GameObjects.Sprite = this.add.sprite(this.cameras.main.width - 64 - 10 - 30, backgroundY, 'menubackground');
+        menuBackground.setAngle(180);
+        menuBackground.setOrigin(1, 0);
+        menuBackground.setDisplaySize(500, this.cameras.main.height + 120);
+        menuBackground.setTint(0xdddddd);
+        menuBackground.setData('y', backgroundY);
+
+        // Category indicator
+        let y: number = 16 + 32;
+        let countCategories: number = 0;
+
+
+        for (let cat of this.categorySet) {
+            if (cat.url === null || cat.name === null) {
+                continue;
+            }
+            countCategories++;
+        }
+
+        for (let cat of this.categorySet) {
+            if (cat.url === null || cat.name === null) {
+                continue;
+            }
+
+            y += (this.cameras.main.height - (16 + 32)) / (countCategories + 1);
+            let name: string = cat.name;
+            const sprite: Phaser.GameObjects.Sprite = this.add.sprite(this.cameras.main.width + 64, y, name);
+            sprite.setName(name);
+            sprite.setOrigin(0.5, 0.5);
+
+            const scale: number = this.imageScalingFactor(this.buttonSize, sprite.width, sprite.height);
+            sprite.setScale(scale, scale);
+
+            sprite.setVisible(true);
+
+            this.arrayCategory.add(sprite);
+        }
+
+        // MenuButton
+        const menuButton: Phaser.GameObjects.Sprite = this.add.sprite(this.cameras.main.width - (10 + 32), 10 + 32, 'help');
+
+        const scale: number = this.imageScalingFactor(this.buttonSize, menuButton.width, menuButton.height);
+        menuButton.setScale(scale, scale);
+        menuButton.setInteractive({cursor: 'pointer'});
+
+        menuButton.on('pointerup', () => this.menuAction(menuButton, menuBackground));
+    }
+
+    /**
+     * Function fot loading all objects as sprites and data initialization
+     */
+    private loadObjects(): void {
+        for (let image of this.gameSet) {
+            const name: string = image.name;
+            const cat1: string = image.cat1;
+            const cat2: string = image.cat2;
+            const cat3: string = image.cat3;
+            const cat4: string = image.cat4;
+            const sprite: Phaser.GameObjects.Sprite = this.arrayStack.create(200, 200, name);
+
+            sprite.setName(name);
+
+            sprite.setData('cat1', cat1);
+            sprite.setData('cat2', cat2);
+            sprite.setData('cat3', cat3);
+            sprite.setData('cat4', cat4);
+
+            sprite.setOrigin(0.5, 0.5);
+            sprite.setAngle(Phaser.Math.RND.angle());
+
+            sprite.setVisible(false);
+
+            const diag: number = Math.sqrt(Math.pow(sprite.height, 2) + Math.pow(sprite.width, 2));
+            const scale: number = this.imageScalingFactor(Math.min(this.cellWidth, this.cellHeight), diag, diag);
+            sprite.setScale(scale, scale);
+            sprite.setInteractive({cursor: 'pointer'});
+
+            sprite.on('pointerdown', function () {
+
+                // If not already selected and there aren't already three selected
+                if (!this.arrayMarked.contains(sprite) && this.arrayMarked.getLength() < 3) {
+
+                    // Mark card
+                    sprite.setTint(0x999999);
+
+                    // Add card to marked array
+                    this.arrayMarked.add(sprite);
+
+                    // Set checked to false
+                    this.checked = false;
+
+                } else if (this.arrayMarked.contains(sprite)) {
+
+                    // Unmark card
+                    sprite.clearTint();
+
+                    // Remove from marked array
+                    this.arrayMarked.remove(sprite);
+
+                    this.resetHelp();
+
+                    // Set checked to false
+                    this.checked = false;
+                }
+            }, this);
+        }
+    }
+
+    /**
+     * Function for initializing the first set of displayed objects
+     */
+    private initObjects(): void {
+
+        for (let coords of this.arrayCoordinates) {
+            const sprite: Phaser.GameObjects.Sprite = Phaser.Math.RND.pick(this.arrayStack.getChildren());
+
+            sprite.setX(coords[0]);
+            sprite.setY(coords[1]);
+
+            sprite.setVisible(true);
+
+            this.arrayStack.remove(sprite);
+            this.arrayDisplayed.add(sprite);
+        }
+    }
+
+    /**
+     * Function for checking for set equality.
+     * All properties of one category have to be equal or inherently different.
+     * @param sprite1 First set object
+     * @param sprite2 Second set object
+     * @param sprite3 Third set object
+     * @param inGame Boolean: Shall the indicator for ingame help be marked?
+     */
+    private checkEquality(sprite1: Phaser.GameObjects.GameObject, sprite2: Phaser.GameObjects.GameObject, sprite3: Phaser.GameObjects.GameObject, inGame: boolean): boolean {
+        if (sprite1 instanceof Phaser.GameObjects.Sprite &&
+            sprite2 instanceof Phaser.GameObjects.Sprite &&
+            sprite3 instanceof Phaser.GameObjects.Sprite
+        ) {
+            // Return value
+            let replaceObjects: boolean = true;
+
+            for (let categoryIndicator of this.arrayCategory.getChildren()) {
+
+                // Make sure your objects are sprites
+                if (categoryIndicator instanceof Phaser.GameObjects.Sprite) {
+
+                    // Clear tint
+                    categoryIndicator.clearTint();
+
+                    if (
+                        sprite1.getData(categoryIndicator.name) === sprite2.getData(categoryIndicator.name) &&
+                        sprite2.getData(categoryIndicator.name) === sprite3.getData(categoryIndicator.name) &&
+                        sprite1.getData(categoryIndicator.name) === sprite3.getData(categoryIndicator.name)
+                    ) {
+                        if (inGame) {
+                            categoryIndicator.setTintFill(0x00dd00);
+                        }
+                    } else if (
+                        !(sprite1.getData(categoryIndicator.name) === sprite2.getData(categoryIndicator.name)) &&
+                        !(sprite2.getData(categoryIndicator.name) === sprite3.getData(categoryIndicator.name)) &&
+                        !(sprite1.getData(categoryIndicator.name) === sprite3.getData(categoryIndicator.name))
+                    ) {
+                        if (inGame) {
+                            categoryIndicator.setTintFill(0x00dd00);
+                        }
+                    } else {
+                        if (replaceObjects) {
+                            replaceObjects = false;
+                        }
+                        if (inGame) {
+                            // Mark category as red
+                            categoryIndicator.setTintFill(0xdd0000);
+                        }
+                    }
+                }
+            }
+            return replaceObjects;
+        }
+    }
+
+    /**
+     * Function for replacing marked objects
+     * @param replaceObject
+     */
+    private replaceObject(replaceObject: boolean): void {
+        if (replaceObject) {
+            for (let oldSprite of this.arrayMarked.getChildren()) {
+                if (oldSprite instanceof Phaser.GameObjects.Sprite) {
+                    oldSprite.clearTint();
+                    oldSprite.setVisible(false);
+                    this.arrayDisplayed.remove(oldSprite);
+                    this.arrayDropped.add(oldSprite);
+
+                    if (this.arrayStack.getLength() <= 0) {
+                        this.arrayDropped.getChildren().forEach((element) => this.arrayStack.add(element));
+                        this.arrayDropped.clear(false, false);
+                    }
+
+                    const newSprite: Phaser.GameObjects.Sprite = Phaser.Math.RND.pick(this.arrayStack.getChildren());
+                    newSprite.setPosition(oldSprite.x, oldSprite.y);
+                    newSprite.setVisible(true);
+                    this.arrayStack.remove(newSprite);
+                    this.arrayDisplayed.add(newSprite);
+                }
+            }
+
+            this.arrayMarked.clear(false, false);
+
+            this.resetHelp();
+
+            this.setEqualityCheck();
+
+            // Set checked to false
+            this.checked = false;
+
+            this.updateProgressbar();
+        }
+    }
+
+    /**
+     * Function for reseting the tint on the helper menu
+     */
+    private resetHelp(): void {
+        for (let cat of this.arrayCategory.getChildren()) {
+            if (cat instanceof Phaser.GameObjects.Sprite) {
+                cat.clearTint();
+            }
+        }
+    }
+
+    /**
+     * Function for updating the progressbar
+     */
+    private updateProgressbar(): void {
+        this.points += this.gamefluid.getData('gameMax') / this.maxPoints;
+
+        // Add time but not more than max
+        let timedata: number = this.timefluid.getData('timeY');
+        timedata += this.timedataStepsize * 5000;
+        if (timedata > this.timefluid.getData('timeYMax')) {
+            timedata = this.timefluid.getData('timeYMax');
+        }
+
+        this.timefluid.setScale(this.timefluid.getData('timeX'), timedata);
+        this.timefluid.setData('timeY', timedata);
+
+        if (this.points >= this.gamefluid.getData('gameMax') - Phaser.Math.EPSILON) {
+            this.checked = true;
+
+            // Disable further interaction with the objects
+            this.arrayDisplayed.getChildren().forEach((gameObject) => gameObject.disableInteractive());
+
+            this.gamefluid.setScale(this.gamefluid.getData('gameX'), this.points);
+
+            // End game
+            this.transitionOut('ScoreScene', {'score': 1, 'previousScene': this.getKey() + String(this.level)});
+
+        }
+
+        this.gamefluid.setScale(this.gamefluid.getData('gameX'), this.points);
+    }
+
+    /**
+     * Function for checking if there is a occurrence of a set in the displayed objects
+     */
+    private setEqualityCheck(): void {
+        const objectSet: Phaser.GameObjects.GameObject[] = this.arrayDisplayed.getChildren();
+        const objectSetLength: number = objectSet.length;
+
+        for (let x = 0; x <= objectSetLength; x++) {
+            for (let y = x + 1; y <= objectSetLength - (x + 1); y++) {
+                for (let z = y + 1; z <= objectSetLength - (y + 1); z++) {
+                    if (this.checkEquality(objectSet[x], objectSet[y], objectSet[z], false)) {
+                        return;
+                    }
+                }
+            }
+        }
+
+        // Replace/add cards
+        this.rebuildDisplayedObjects();
+    }
+
+    /**
+     * Function for refreshing all displayed objects with new ones
+     * Usually used if there is no occurrence of a set.
+     */
+    private rebuildDisplayedObjects(): void {
+
+        // Replace all cards
+        for (let card of this.arrayDisplayed.getChildren()) {
+            if (card instanceof Phaser.GameObjects.Sprite) {
+                card.setVisible(false);
+                this.arrayStack.add(card);
+            }
+        }
+
+        this.arrayDisplayed.clear(false, false);
+
+        this.initObjects();
+
+    }
+
+    /**
+     * Function for initializing the animation on the helpers menu
+     * @param menuButton The helpers menu button
+     * @param menuBackground The helpers menu background
+     */
+    private menuAction(menuButton, menuBackground): void {
+        // ButtonAnimation
+        const menuButtonTween1: Phaser.Tweens.Tween = this.tweens.add({
+            targets: menuButton,
+            scale: 0.37,
+            ease: 'linear',
+            yoyo: true,
+            duration: 200
+        });
+
+        // Retract
+        if (this.helpDown) {
+            const menuBackgroundTween: Phaser.Tweens.Tween = this.tweens.add({
+                targets: menuBackground,
+                y: menuBackground.getData('y'),
+                x: this.cameras.main.width - 64 - 10 - 30,
+                ease: 'Cubic',
+                duration: 500,
+                delay: 100
+            });
+
+            for (let helperButton of this.arrayCategory.getChildren()) {
+                let helperButtonTween: Phaser.Tweens.Tween = this.tweens.add({
+                    targets: helperButton,
+                    x: this.cameras.main.width + 64,
+                    ease: 'Cubic',
+                    duration: 300
+                });
+            }
+
+
+            this.helpDown = false;
+
+            // Extend
+        } else {
+            let menuBackgroundTween: Phaser.Tweens.Tween = this.tweens.add({
+                targets: menuBackground,
+                y: this.cameras.main.height + 90,
+                x: this.cameras.main.width - 64 - 10 - 50,
+                ease: 'Cubic',
+                duration: 500
+            });
+
+            for (let helperButton of this.arrayCategory.getChildren()) {
+                let helperButtonTween: Phaser.Tweens.Tween = this.tweens.add({
+                    targets: helperButton,
+                    x: this.cameras.main.width - (16 + 32) + 4,
+                    ease: 'Cubic',
+                    duration: 300
+                });
+            }
+
+            this.helpDown = true;
+        }
+
+    }
+
+    /**
+     * Function for initializing the progressbar for ingame game score
+     */
+    private setGameProgressbar(): void {
+        const progressbarY: number = this.cameras.main.height - 10;
+        const progressbar: Phaser.GameObjects.Sprite = this.add.sprite(0, progressbarY, 'progressbar');
+        const multiplierX: number = 0.4;
+        const multiplierY: number = this.imageScalingFactor(this.cameras.main.height * 0.5, progressbar.height, progressbar.height);//0.3;
+        progressbar.setOrigin(0, 1);
+        progressbar.setScale(multiplierX, multiplierY);
+
+        const progressbarX: number = 10 * 2 + progressbar.width * multiplierX;
+        progressbar.setX(progressbarX);
+
+        const progressstar: Phaser.GameObjects.Sprite = this.add.sprite(progressbarX, progressbarY - progressbar.height * multiplierY - 10, 'progressstar');
+        const starmultiplier: number = progressbar.width * multiplierX / progressstar.width;
+        progressstar.setOrigin(0, 1);
+        progressstar.setScale(starmultiplier, starmultiplier);
+
+        this.gamefluid = this.add.sprite(progressbarX + progressbar.width * multiplierX / 2 + 2, progressbarY - 6, 'gamefluid');
+        this.gamefluid.setOrigin(0.5, 1);
+        this.gamefluid.setData('gameX', multiplierX);
+        this.gamefluid.setData('gameY', 0.01);
+        this.gamefluid.setData('gameMax', (progressbar.height * multiplierY - 6) / this.gamefluid.height);
+        this.gamefluid.setScale(multiplierX, 0.01);
+        this.gamefluid.setAlpha(0.7);
+    }
+
+    /**
+     * Function for initializing the game timer
+     */
+    private setTimeProgressbar(): void {
+        const progressbarY: number = this.cameras.main.height - 10;
+        const progressbar: Phaser.GameObjects.Sprite = this.add.sprite(10, progressbarY, 'progressbar');
+        const multiplierX: number = 0.4;
+        const multiplierY: number = this.imageScalingFactor(this.cameras.main.height * 0.5, progressbar.height, progressbar.height);//0.3;
+        progressbar.setOrigin(0, 1);
+        progressbar.setScale(multiplierX, multiplierY);
+
+        const hourglass: Phaser.GameObjects.Sprite = this.add.sprite(10, progressbarY - progressbar.height * multiplierY - 10, 'hourglass');
+        const starmultiplier: number = progressbar.width * multiplierX / hourglass.width;
+        hourglass.setOrigin(0, 1);
+        hourglass.setScale(starmultiplier);
+
+        this.timefluid = this.add.sprite(10 + progressbar.width * multiplierX / 2 + 2, progressbarY - 6, 'timefluid');
+        this.timefluid.setOrigin(0.5, 1);
+        this.timefluid.setData('timeX', multiplierX);
+        this.timefluid.setData('timeY', (progressbar.height * multiplierY - 6) / this.timefluid.height);
+        this.timefluid.setData('timeYMax', (progressbar.height * multiplierY - 6) / this.timefluid.height);
+        this.timefluid.setScale(this.timefluid.getData('timeX'), this.timefluid.getData('timeY'));
+        this.timefluid.setAlpha(0.7);
+    }
+
+    /**
+     * Function for initializing sound effects
+     */
+    private initAudio(): void {
+        this.sound.add('fun').play('', {loop: true});
+    }
+}
+\end{lstlisting}
+
+\section{scoreScene.ts}\label{sec:scorescene.ts}
+\begin{lstlisting}[style=TypeScript, caption={scoreScene.ts}]
+import 'phaser';
+import {BaseScene} from './baseScene';
+
+export class ScoreScene extends BaseScene {
+    /**
+     * Game score
+     */
+    private score: number;
+
+    /**
+     * Name and level of the previous scene
+     */
+    private previousScene: string;
+
+    /**
+     * Standard size of a button
+     */
+    private buttonSize: number;
+
+    constructor() {
+        super('ScoreScene');
+    }
+
+    init(data): void {
+        // Initialize data from previous scene
+        this.score = data.score;
+        this.previousScene = data.previousScene;
+        this.buttonSize = 64;
+    }
+
+    preload(): void {
+
+    }
+
+    create(): void {
+        // Bring MenuUI to the front and initialize transition
+        this.game.scene.sendToBack(this.getKey());
+        this.transitionIn();
+
+        this.setBackground();
+        this.initUI();
+        this.initInput();
+        this.initAudio();
+    }
+
+    /**
+     * Method for initializing the background
+     */
+    private setBackground(): void {
+        const background: Phaser.GameObjects.Sprite = this.add.sprite(0, 0, 'background5');
+        background.setOrigin(0, 0);
+        background.setDisplaySize(this.cameras.main.width, this.cameras.main.height);
+        background.setInteractive({ cursor: 'pointer' });
+    }
+
+    /**
+     * Method for initializing replaybutton and reward graphics
+     */
+    private initUI(): void {
+        // Add replay button
+        const replayButton: Phaser.GameObjects.Sprite = this.add.sprite(this.cameras.main.width - 100 + 34, this.cameras.main.height - 100 + 34, 'replay');
+        replayButton.setOrigin(0.5, 0.5);
+        const buttonScale: number = this.imageScalingFactor(this.buttonSize*1.5, replayButton.width, replayButton.height);
+        replayButton.setScale(buttonScale);
+        replayButton.setInteractive({ cursor: 'pointer' });
+        replayButton.on('pointerdown', function() {
+            replayButton.on('pointerup', function() {
+                this.transitionOut(this.previousScene.substring(0, this.previousScene.length-1), {level: Number(this.previousScene[this.previousScene.length-1])});
+            }, this);
+        }, this);
+
+        let star: string;
+
+        if (this.score < 0.2) {
+            star = 'star_0';
+        } else if (this.score < 0.6) {
+            star = 'star_1';
+        } else if (this.score + Phaser.Math.EPSILON < 1) {
+            star = 'star_2';
+        } else {
+            star = 'star_3';
+        }
+        this.saveScore(star);
+
+        let sprite: Phaser.GameObjects.Sprite = this.add.sprite(this.cameras.main.width / 2, this.cameras.main.height / 2, star);
+
+        sprite.setOrigin(0.5, 0.5);
+        const starScale: number = this.imageScalingFactor(this.cameras.main.width*3/5, sprite.height, sprite.width);
+        sprite.setScale(starScale);
+        sprite.setData('scale', starScale);
+        sprite.setInteractive({ cursor: 'pointer' });
+
+        const starTween: Phaser.Tweens.Tween = this.tweens.add({
+            targets: sprite,
+            ease: 'Linear',
+            scale: 1.1*sprite.getData('scale'),
+            repeat: 1000,
+            yoyo: true,
+            duration: 1000
+        });
+
+        // Add finger
+        const finger: Phaser.GameObjects.Sprite = this.add.sprite(this.cameras.main.width / 2, 6/7*this.cameras.main.height, 'finger');
+        const fingerScale: number = this.imageScalingFactor(1/6*this.cameras.main.height, finger.width, finger.height, true);
+        finger.setOrigin(0.5, 0.5);
+        finger.setScale(fingerScale);
+        finger.setInteractive({ cursor: 'pointer' });
+
+        const fingerTween: Phaser.Tweens.Tween = this.tweens.add({
+            targets: finger,
+            alpha: 0.1,
+            ease: 'Linear',
+            repeat: 1000,
+            yoyo: true,
+            duration: 1000
+        });
+    }
+
+    /**
+     * Method which initializes all global input actions
+     */
+    private initInput(): void {
+        this.input.on('pointerdown', function() {
+            this.input.on('pointerup', function() {
+                this.transitionOut('LevelMenuScene');
+            }, this);
+        }, this);
+    }
+
+    /**
+     * Method for initializing sound effects
+     */
+    private initAudio(): void {
+        if (this.score + Phaser.Math.EPSILON < 1) {
+            this.sound.add('lose').play();
+        } else {
+            this.sound.add('win').play();
+        }
+    }
+
+    /**
+     * Method for saving the score global
+     */
+    private saveScore(score: string): void {
+        if (typeof(Storage) !== "undefined") {
+            window.localStorage.setItem('phaser_score_' + this.previousScene, score);
+        } else {
+            console.log("Sorry! No Web Storage support...");
+        }
+    }
+}
+\end{lstlisting}
+

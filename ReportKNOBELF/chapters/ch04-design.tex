@@ -1,28 +1,25 @@
 % !TEX root = ../thesis.tex
 
-\chapter{Design of the Learning Environment}
-\label{chap:design}
+\chapter{Design of the Learning Environment}\label{ch:design}
 
 In this section all implementation tools and approaches are explained.
-First our used framework will be explained, then how our different scenes and objects are generated and
-at last how these two are combined to our final solution: Gotscha!
-Gotscha is a learning environment based on game based learning.
+First the used framework will be explained, then how the different scenes and objects are generated and
+at last how these two are combined to the final solution: Gotscha! A learning environment based on game based learning.
 The user goes through multiple levels to learn detecting and comparing properties of objects
 under simple and more difficult situations.
 
 \section{Phaser 3}\label{sec:phaser-3}
 
-Phaser \cite{phaser} is an open source HTML5 \cite{html5} game framework created by Photon Storm \cite{phaser}.
-It is a JavaScript/TypeScript \cite{typescript} library designed to run on all major desktop browsers.
+Phaser\cite{phaser} is an open source HTML5\cite{html5} game framework created by Photon Storm\cite{phaser}.
+It is a JavaScript/TypeScript\cite{typescript} library designed to run on all major desktop browsers.
 A lot of focus was given to the performance inside of mobile web browsers.
-Important for the renderer is that if the device is capable, it uses WebGL \cite{webgl}, otherwise it seamlessly reverts to Canvas \cite{canvas}.
-The current version is 3.17 and is used in this work. Version 4 is currently in development.
+Important for the renderer is that if the device is capable, it uses WebGL\cite{webgl}, otherwise it seamlessly reverts to Canvas\cite{canvas}.
+The current version is 3.17 and is used in this work. Version 4 is in development.
 
 \subsection{Base Configuration}\label{subsec:base-configuration}
-In Phaser 3, games need a configuration file and a starting point.
+In Phaser 3, games need a configuration file and a starting point [\ref{lst:gamesetupfile}].
 
-For example:
-\begin{lstlisting}[style=TypeScript, caption={Game Setup File}]
+\begin{lstlisting}[style=TypeScript, caption={Game Setup File}, label={lst:gamesetupfile}]
     import 'phaser';
     import GameConfig = Phaser.Types.Core.GameConfig;
     import RenderConfig = Phaser.Types.Core.RenderConfig;
@@ -65,7 +62,6 @@ For example:
         render: renderConfig,
 
         scale: {
-            parent: 'phaser-example',
             mode: Phaser.Scale.FIT,
             autoCenter: Phaser.Scale.CENTER_BOTH,
             width: width,
@@ -79,14 +75,14 @@ For example:
         }
     }
 
-    // Event handler for starting the game
+    // Event handler for starting the game (starting point)
     window.onload = () => {
         const game = new GameName(config);
     };
 \end{lstlisting}
 
 \subsection{Scenes}\label{subsec:scenes}
-Games in Phaser 3+ are structured around scene objects.
+Games in Phaser 3 are structured around scene objects.
 A scene is a collection of game objects and related logic because these two should be kept together.
 The objects will be drawn when the scene is rendered.
 
@@ -106,7 +102,7 @@ Functions which initiate a transition are in yellow and signals emitted are oran
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{figures/lifecycle}
-    \caption{Scene Lifecycle \cite{phaser-guides-scenes}}
+    \caption{Scene Lifecycle\cite{phaser-guides-scenes}}
     \label{fig:lifecycle}
 \end{figure}
 
@@ -114,7 +110,7 @@ An interesting behavior is that once a scene has been shut down it is not garbag
 The scene can always be resumed by the start() method.
 When this happens the three creation functions get called once more.
 This means any state tracked in the scene class will be retained between a stopped state and the next create state.
-Thus special care must be taken to set a known initial value on everything requiring one.
+Thus one has to be careful with setting a known initial value on everything requiring one.
 Especially when loading/creating objects outside the preloader (animations, tweens, audiofiles, etc.).
 
 Scenes here have 5 functions:
@@ -148,7 +144,8 @@ Examples for used managers in this work are:
     on a duration and type of ease.
 \end{itemize}
 
-\section{Object Generation}\label{sec:object-generation}
+\section{Objects}\label{sec:objects}
+\subsection{Object Generation}\label{subsec:object-generation}
 Our objects can have up to four properties with exactly one from each of the following categories:
 
 \begin{itemize}
@@ -160,25 +157,21 @@ Our objects can have up to four properties with exactly one from each of the fol
 
 All possible objects with one, three and four properties, are needed.
 
-With a python script [\ref{lst:svggen}] scalable vector graphic (SVG) \cite{svg-tutorial} files are generated [\ref{lst:svgimagefile}].
-After that they are converted to portable network graphic (PNG) files with the GNU image manipulation program (GIMP) \cite{gimp}.
+With a python script [\ref{lst:svggen}] scalable vector graphic (SVG)\cite{svg-tutorial} files are generated [\ref{lst:svgimagefile}].
+After that they are converted to portable network graphic (PNG) files with the GNU image manipulation program (GIMP)\cite{gimp}.
 Additional image scaling and cropping is done for saving space and only displaying the actual image with as less empty space as possible around it.
-With the imagemagick command mogrify [\ref{lst:mogrify}] the last step is easily applicable to all 1000+ images.
-
-\begin{lstlisting}[style=TypeScript, caption={ImageMagick console command "mogrify"}, label={lst:mogrify}]
-    mogrify -resize 50% -trim -repage *.png
-\end{lstlisting}
+With the imagemagick command \textit{mogrify} [\ref{lst:mogrify}] the last step is easily applicable to all 1000+ images.
 
 \begin{lstlisting}[style=TypeScript, caption={SVG Generation}, label={lst:svggen}]
     ...
     imageString = imgStr(colordefault, colordark, square, circle, triangle, ellipse, octagon, rhombus, filling, one,
-                         two, three, four, five, six)
+    two, three, four, five, six)
 
     filename = colordefault + shape + number + fillingname
 
     with open("images/svg/" + filename + ".svg", "w+") as file:
-        file.write(imageString)
-        file.close()
+    file.write(imageString)
+    file.close()
     ...
 \end{lstlisting}
 
@@ -187,113 +180,104 @@ With the imagemagick command mogrify [\ref{lst:mogrify}] the last step is easily
 
     <svg height="1000" width="1000" viewbox="0 0 1000 1000" xmlns="http://www.w3.org/2000/svg">
     <defs>
-            <pattern id="stripe" patternUnits="userSpaceOnUse" width="20%" height="20%">
-                <path stroke="aqua" stroke-linecap="butt" stroke-width="50" d="M -20 -20 l1000 1000"/>
-                <path stroke="aqua" stroke-linecap="butt" stroke-width="50" d="M -20 180 l1000 1000"/>
-                <path stroke="aqua" stroke-linecap="butt" stroke-width="50" d="M -20 -220 l1000 1000"/>
+    <pattern id="stripe" patternUnits="userSpaceOnUse" width="20%" height="20%">
+    <path stroke="aqua" stroke-linecap="butt" stroke-width="50" d="M -20 -20 l1000 1000"/>
+    ...
 
-            </pattern>
-            <pattern id="dotted" enable-background="true" patternUnits="userSpaceOnUse" width="15%" height="15%">
-                <circle cx="30" cy="30" r="25" fill="aqua" />
-                <circle cx="105" cy="105" r="25" fill="aqua" />
-            </pattern>
-            <style>
-            .button {
+    </pattern>
+    <pattern id="dotted" enable-background="true" patternUnits="userSpaceOnUse" width="15%" height="15%">
+    <circle cx="30" cy="30" r="25" fill="aqua" />
+    ...
+    </pattern>
+    <style>
+    .button {
 
-            stroke-width:5;
-            stroke:black;
+    stroke-width:5;
+    stroke:black;
 
-            }
-        </style>
-        </defs>
+    }
+    </style>
+    </defs>
 
-     <g id="circle" display="none">
-         <circle cx="500" cy="500" r="300" class="button" fill="blue"/>
-         <circle cx="500" cy="500" r="300" class="button" fill="none"/>
-         <circle cx="500" cy="500" r="250" class="button" fill="none"/>
-     </g>
+    <g id="circle" display="none">
+    <circle cx="500" cy="500" r="300" class="button" fill="blue"/>
+    ...
+    </g>
 
-     <g id="square" display="inherit">
-      <rect x="250" y="250" rx="20" ry="20" width="500" height="500" class="button" fill="blue"/>
-      <rect x="250" y="250" rx="20" ry="20" width="500" height="500" class="button" fill="none"/>
-      <rect x="300" y="300" rx="20" ry="20" width="400" height="400" class="button" fill="none"/>
-     </g>
+    <g id="square" display="inherit">
+    <rect x="250" y="250" rx="20" ry="20" width="500" height="500" class="button" fill="blue"/>
+    ...
+    </g>
 
-     <g id="triangle" display="none">
-      <polygon points="500,50 113.4,700 886.6,700" stroke-linejoin="round" class="button" fill="blue" />
-      <polygon points="500,50 113.4,700 886.6,700" stroke-linejoin="round" class="button" fill="none" />
-      <polygon points="500,150 200,650 800,650" stroke-linejoin="round" class="button" fill="none"/>
-     </g>
+    <g id="triangle" display="none">
+    <polygon points="500,50 113.4,700 886.6,700" stroke-linejoin="round" class="button" fill="blue" />
+    ...
+    </g>
 
-     <g id="ellipse" display="none">
-      <ellipse cx="500" cy="500" rx="400" ry="250" class="button" fill="blue" />
-      <ellipse cx="500" cy="500" rx="400" ry="250" class="button" fill="none" />
-      <ellipse cx="500" cy="500" rx="350" ry="200" class="button" fill="none" />
-     </g>
-     <g id="octagon" display="none">
-      <polygon points="400,250 600,250 750,400 750,600 600,750 400,750 250,600 250,400" stroke-linejoin="round" class="button" fill="blue" />
-      <polygon points="400,250 600,250 750,400 750,600 600,750 400,750 250,600 250,400" stroke-linejoin="round" class="button" fill="none" />
-      <polygon points="400,300 600,300 700,400 700,600 600,700 400,700 300,600 300,400" stroke-linejoin="round" class="button" fill="none"/>
-     </g>
+    <g id="ellipse" display="none">
+    <ellipse cx="500" cy="500" rx="400" ry="250" class="button" fill="blue" />
+    ...
+    </g>
+    <g id="octagon" display="none">
+    <polygon points="400,250 600,250 750,400 750,600 600,750 400,750 250,600 250,400" stroke-linejoin="round" class="button" fill="blue" />
+    ...
+    </g>
 
-     <g id="rhombus" display="none">
-      <polygon points="350,250 150,750 650,750 850,250" stroke-linejoin="round" class="button" fill="blue" />
-      <polygon points="350,250 150,750 650,750 850,250" stroke-linejoin="round" class="button" fill="none" />
-      <polygon points="390,300 230,700 620,700 770,300" stroke-linejoin="round" class="button" fill="none"/>
-     </g>
+    <g id="rhombus" display="none">
+    <polygon points="350,250 150,750 650,750 850,250" stroke-linejoin="round" class="button" fill="blue" />
+    ...
+    </g>
 
 
-     <g id="one" display="none">
-      <circle cx="500" cy="500" r="40" stroke="black" fill="black"/>
-     </g>
+    <g id="one" display="none">
+    <circle cx="500" cy="500" r="40" stroke="black" fill="black"/>
+    </g>
 
-     <g id="two" display="none">
-      <circle cx="570" cy="500" r="40" stroke="black" fill="black"/>
-      <circle cx="430" cy="500" r="40" stroke="black" fill="black"/>
-     </g>
+    <g id="two" display="none">
+    <circle cx="570" cy="500" r="40" stroke="black" fill="black"/>
+    ...
+    </g>
 
     <g id="three" display="none">
-      <circle cx="570" cy="560" r="40" stroke="black" fill="black"/>
-      <circle cx="430" cy="560" r="40" stroke="black" fill="black"/>
-      <circle cx="500" cy="440" r="40" stroke="black" fill="black"/>
-     </g>
+    <circle cx="570" cy="560" r="40" stroke="black" fill="black"/>
+    ...
+    </g>
 
     <g id="four" display="none">
-      <circle cx="570" cy="430" r="40" stroke="black" fill="black"/>
-      <circle cx="430" cy="430" r="40" stroke="black" fill="black"/>
-      <circle cx="570" cy="570" r="40" stroke="black" fill="black"/>
-      <circle cx="430" cy="570" r="40" stroke="black" fill="black"/>
+    <circle cx="570" cy="430" r="40" stroke="black" fill="black"/>
+    ...
     </g>
     <g id="five" display="none">
-      <circle cx="570" cy="430" r="40" stroke="black" fill="black"/>
-      <circle cx="430" cy="430" r="40" stroke="black" fill="black"/>
-      <circle cx="570" cy="570" r="40" stroke="black" fill="black"/>
-      <circle cx="430" cy="570" r="40" stroke="black" fill="black"/>
-      <circle cx="500" cy="500" r="40" stroke="black" fill="black"/>
+    <circle cx="570" cy="430" r="40" stroke="black" fill="black"/>
+    ...
     </g>
 
     <g id="six" display="none">
-      <circle cx="570" cy="400" r="40" stroke="black" fill="black"/>
-      <circle cx="430" cy="400" r="40" stroke="black" fill="black"/>
-      <circle cx="570" cy="600" r="40" stroke="black" fill="black"/>
-      <circle cx="430" cy="600" r="40" stroke="black" fill="black"/>
-      <circle cx="430" cy="500" r="40" stroke="black" fill="black"/>
-      <circle cx="570" cy="500" r="40" stroke="black" fill="black"/>
+    <circle cx="570" cy="400" r="40" stroke="black" fill="black"/>
+    ...
     </g>
 
     Sorry, your browser does not support inline SVG.
     </svg>
-
 \end{lstlisting}
 
-\section{Objects}\label{sec:objects}
+\begin{lstlisting}[style=TypeScript, caption={ImageMagick console command "mogrify"}, label={lst:mogrify}]
+    mogrify -resize 50\% -trim -repage *.png
+\end{lstlisting}
+
 \subsection{Object Storage}\label{subsec:object-storage}
 Our objects are images with different properties.
 These properties cannot be saved in the images itself.
 for that reason the image path with the respective properties are stored in a easily accessible
-"JavaScript Object Notation" (JSON) file.
+"JavaScript Object Notation" (JSON) [\ref{lst:json}] file.
 
-\begin{lstlisting}[style=TypeScript, caption={geometrical\_objects.json}]
+As the game should be just a template for further graphical enhancements the JSON File can be adapted in a simple way
+to other categories and images.
+
+\textbf{IMPORTANT}: Objects in this game have three to six properties per category. This is just an example.
+Categories can have more than six properties but should not have less than three.
+
+\begin{lstlisting}[style=TypeScript, caption={JavaScript Object Notation File (geometrical\_objects.json)}, label={lst:json}]
 {
   "categories": [
     {
@@ -305,10 +289,7 @@ for that reason the image path with the respective properties are stored in a ea
           "urls": [
             "purple1.png",
             "purple2.png",
-            "purple3.png",
-            "purple4.png",
-            "purple5.png",
-            "purple6.png"
+            ...
           ]
         },
         ...
@@ -330,16 +311,19 @@ for that reason the image path with the respective properties are stored in a ea
 \end{lstlisting}
 
 \subsection{Object Display}\label{subsec:object-display}
-Displaying just the image of an object without tweaking it a little can seem boring for the user in long term.
-To add more diversity, objects gets a random rotation angle, size and position every time it is displayed/created.
+Displaying the same set of objects or just the image of an object without tweaking it a little can seem boring for the user in long term.
+Thus in every game and level the set of objects is randomly selected
+and playing the same game or even level keeps being visually interesting for a longer time.
+To add even more diversity, objects gets a random rotation angle, size and position every time it is displayed/created.
 Of course within certain predefined boundaries.
+Those boundaries take into account that the minimum size should always be enough to touch it with a normal sized finger.
 
 \subsection{Object Interaction}\label{subsec:object-interaction}
-Whenever possible a generalization of the input code is used with every user-object interaction.
+Whenever possible a generalization of the input code [\ref{lst:inputcode}] is used with every user-object interaction.
 Instead of giving each object an event task, the global event task is fetched and the object via the event parameters.
 This way the input interaction code is kept in one place and so less fragmented.
 
-\begin{lstlisting}[style=TypeScript, caption={Input code}]
+\begin{lstlisting}[style=TypeScript, caption={Input code}, label={lst:inputcode}]
     ...
     this.input.on('dragstart', function(pointer, gameObject) {
         ...
@@ -363,12 +347,12 @@ This way the input interaction code is kept in one place and so less fragmented.
 \end{lstlisting}
 
 \section{Score Storage}\label{sec:scorestorage}
-The achieved score is saved in the local storage of the browser.
+The achieved score is saved in the local storage\cite{webstorage} of the browser.
 The local storage remains unchanged until it is cleared in the browser settings.
 Thus the saved score is not lost on the same device until purposely deleted.
-Before accessing the local storage it is checked if there even is a storage.
+Before accessing the local storage it is checked if there even is a storage [\ref{lst:storageaccess1}][\ref{lst:storageaccess2}].
 
-\begin{lstlisting}[style=TypeScript, caption={Storage access (scoreScene.ts)}]
+\begin{lstlisting}[style=TypeScript, caption={Storage access (scoreScene.ts)}, label={lst:storageaccess1}]
     ...
     private saveScore(score: string): void {
         if (typeof(Storage) !== "undefined") {
@@ -380,7 +364,7 @@ Before accessing the local storage it is checked if there even is a storage.
     ...
 \end{lstlisting}
 
-\begin{lstlisting}[style=TypeScript, caption={Storage access (levelMenuScene.ts)}]
+\begin{lstlisting}[style=TypeScript, caption={Storage access (levelMenuScene.ts)}, label={lst:storageaccess2}]
     ...
     if (typeof(Storage) !== "undefined") {
         if(window.localStorage.getItem('phaser_score_' + this.buttonToSceneMap(gameObject.name))){
@@ -396,15 +380,16 @@ Before accessing the local storage it is checked if there even is a storage.
     ...
 \end{lstlisting}
 
-\section{Introduction Animation Generation}\label{sec:introduction-animation-generation}
-To produce animated instruction for the task later on,
-the screen is recorded with the Open Broadcaster Software (OBS) Studio \cite{obs} while someone is playing the game.
-Parts of the final video are then taken for the respective scenes and converted into single pictures.
+\section{Creating animated Introductions}\label{sec:creating-animated-introductions}
+To generate animated instructions for the task later on,
+the screen is recorded with the Open Broadcaster Software (OBS) Studio\cite{obs} while someone is playing the game.
+Phaser does not support video playback.
+Thus parts of the final video are then taken for the respective scenes and converted into single pictures.
 These single pictures are saved in one picture (called spreadsheet [\ref{fig:spreadsheet}]).
-The Phaser framework animates those spreadsheets.
+Those spreadsheets can then be animated with Phaser.
 
 Is is important to note, that different devices have a different limit for the resolution of images.
-Tablets seem to have the lowest, namely 4096x4096 pixels \cite{webglmaxtexturesize}.
+Tablets seem to have the lowest, namely 4096x4096 pixels\cite{webglmaxtexturesize}.
 The spreadsheet images are scaled down for that reason.
 
 \begin{figure}[H]
@@ -414,7 +399,7 @@ The spreadsheet images are scaled down for that reason.
     \label{fig:spreadsheet}
 \end{figure}
 
-\section{Concept of the Learning Environment}\label{sec:concept-of-the-learning-environment}
+\section{Scene Concept of the Learning Environment}\label{sec:scene-concept-of-the-learning-environment}
 Through the given boundary conditions and requirements the environment is split into multiple parts/scenes.
 
 \subsection{Drop Down Menu}\label{subsec:drop-down-menu}
@@ -424,11 +409,13 @@ Once the menu is open, the user may close the menu and return to the current sce
 exit the current scene and return to the level menu and go into fullscreen and back.
 The current scene is paused while the menu is open as it can be distracting for the user,
 if suddenly something pops up and covers parts of the visible and running scene.
+With blurring out the current scene the user is made aware of the current scene being paused and of the "open menu" state.
 
 \subsection{Welcome Screen}\label{subsec:welcome-screen}
 The welcome screen is the starting point of the user experience.
 Through this screen the user is greeted by showing the name of the game.
 Through a click he may commence to the level menu.
+To make the art of transition clear to the user a finger icon is displayed and animated.
 
 \subsection{Level Menu}\label{subsec:level-menu}
 In the level menu, the user is able to choose between different levels and games and can access the object summary.
@@ -437,26 +424,34 @@ The progress can be resetted by the reset button.
 
 \subsection{Object Summary}\label{subsec:object-summary}
 The Object summary allows the user to get a feeling for all the different properties an object can have.
-For that reason the number of objects per category is restricted to five, as there are over 1000 different objects.
+The number of objects per category is restricted to five, as there are over 1000 different objects and with all of them
+the user would not be able to focus on the different properties.
 Objects are draggable and sortable by each category with a click on a respective button.
 
 \subsection{Sorting with one Category}\label{subsec:sorting-with-one-category}
 Here the user has to sort the static objects with one category by the given category.
+It is important for users, inexperienced with sorting objects by their properties, to start at the lowest level possible.
 As the user should be able to experience all categories, they are split into different levels.
 Each level represents a category.
-For motivation, the user can track his progress.
+
+For motivational purposes, the user can track his progress.
 The Progress is defined by objects sorted the right and the wrong way.
 
 The amount of objects to sort, as well as the amount of properties of the category
 is randomly selected each time you start the game.
 
 \subsection{Sorting with one category under difficult conditions}\label{subsec:sorting-with-one-category-under-difficult-conditions}
-Here the user has to sort falling objects with one category by the given category.
-As the user should be able to experience all categories, they are split into different level.
+It is important to internalize learned skills under difficult conditions.
+This turns mental processes into automatisms, which means to execute processes correctly without thinking.
+
+So in this game the user has to sort falling objects with one category by the given category.
+As the user should be able to experience all categories, they are split into different levels.
 Each level represents a category.
-For motivation, the user can track his progress.
+
+For motivational purposes, the user can track his progress.
 The progress is defined by objects missed, sorted the right and the wrong way.
-To make the task harder, dummy objects are added.
+To make the task harder, objects get instead of a randomly selected rotation angle a randomly selected spin velocity.
+Dummy objects are added as well.
 Those objects look similar to the original ones but with a succinct characteristic.
 There are no negative points for missing such an object but negative points for sorting them in any way.
 
@@ -464,28 +459,46 @@ For more diversity, the amount of falling objects to sort, as well as the amount
 is randomly selected each time you start the game.
 
 \subsection{Sorting with restricted space}\label{subsec:sorting-with-restricted-space}
-In this scene the user has to sort a given number of objects with all properties shown into boxes with limited space.
+This game scene is specific designed for the users preparation to the computer science topic hashing or hash functions.
+
+A hash function is any function that can be used to map data of arbitrary size to fixed-size values.
+The values returned by a hash function are called hash values, hash codes, or simply hashes and
+are used to index a fixed-size table called a hash table.
+The use of a hash function to index a hash table is called hashing or scatter storage addressing.\cite{artofcomputerscience}
+
+Broadly summarized, a hash function converts a given sequence of objects (e.g.\ text, symbols, etc.)
+with a certain length to a fixed sequence with always the same length within the same hash function.
+This function is not invertible.
+
+This scene is an strong abstraction of a hash function.
+The user has to sort a given number of objects, with all properties shown, into boxes with limited space.
+
 The objects in one box must have at least one property in common and
 can be put into the box and taken out an infinite amount of times.
 
 To make the game more difficult, this level is split into two.
 The first level has boxes with the size 6, 4, 2 and the second one boxes with the size 6, 5, 4.
 
-\subsection{Object pairing - easy version}\label{subsec:object-pairing---easy-version}
-In this game, twelve objects with three categories are shown.
-the user has to select three objects which have to fulfil the following.
-For each category (color, shape and number of holes/dots) one of the following conditions has to hold:
+\subsection{Object pairing}\label{subsec:object-pairing}
+This game scene trains the user in the comparison and grouping of objects.
+In the process he must identify and isolate properties of different objects, compare them and remember the outcome.
+To finally compare objects and reach a conclusion if the objects can be grouped or not,
+the user has to remember multiple outcomes.
+
+This lays a foundation of a rich mathematical structure linking it to the combinatorics of finite affine and
+projective spaces and the theory of error-correcting codes.\cite{cardgameset}
+
+The game is split into two versions. The easy one for adapting to the correct thinking
+and the normal one to strengthen it.
+
+There are twelve objects being displayed.
+The user has to select three objects which have to fulfil the following rules.
+
+For each category one of the following conditions has to hold:
 \begin{itemize}
     \item They must be the same (blue, blue, blue)
     \item They must be completely different (square, triangle, circle)
 \end{itemize}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.8\textwidth]{figures/setexample}
-    \caption{Example: Matching Set}
-    \label{fig:setexample1}
-\end{figure}
 
 If the user needs help, there is a helper bar which can be accessed by a button with a question mark on it.
 The helper bar shows which categories fulfil the conditions and which do not
@@ -497,59 +510,57 @@ After a set amount of correct selected objects, the game will end.
 
 If there are no three objects that fulfil the conditions, the playfield will be generated anew.
 
-\subsection{Object pairing - normal version}\label{subsec:object-pairing---normal-version}
-In this game, twelve objects with four categories are shown.
-the user has to select three objects which have to fulfil the following.
-For each category (color, filling, shape and number of holes/dots) one of the following conditions has to hold:
-\begin{itemize}
-    \item They must be the same (blue, blue, blue)
-    \item They must be completely different (square, triangle, circle)
-\end{itemize}
+\subsubsection{Object pairing - easy version}\label{subsubsec:object-pairing---easy-version}
+In the easy version objects have three categories: \textit{color, shape and number of holes/dots}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{figures/setexample}
-    \caption{Example: Matching Set}
-    \label{fig:setexample2}
+    \includegraphics[width=0.5\textwidth]{figures/matchingseteasy}
+    \caption{Example: Matching Set Easy}
+    \label{fig:matchingseteasy}
 \end{figure}
 
-If the user needs help, there is a helper bar which can be accessed by a button with a question mark on it.
-The helper bar shows which categories fulfil the conditions and which do not
-by coloring the category symbols on the bar in green or red.
+\subsubsection{Object pairing - hard version}\label{subsubsec:object-pairing---hard-version}
+In the hard version objects have four categories: \textit{color, shape, number of holes/dots and filling}
 
-The game is time limited. The remaining time is shown by a bar.
-If you select three objects which fulfil the conditions, more time will be added.
-After a set amount of correct selected objects, the game will end.
-
-If there are no three objects that fulfil the conditions, the playfield will be generated anew.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{figures/matchingsethard}
+    \caption{Example: Matching Set Hard}
+    \label{fig:matchingsethard}
+\end{figure}
 
 \subsection{Score Screen}\label{subsec:score-screen}
-After a task has been completed, there is going to be a score.
-This score is represented here with a displayed number of stars.
-The minimum of starts is zero and the maximum is three.
+After the completion of a task/level/game, the user will be granted a score.
+The score is represented here with a displayed number of stars.
+The minimum of stars is zero and the maximum is three.
 If the user is unhappy with his results, he can replay the game by clicking on the replay button.
+To return back to the level menu the user has to click anywhere on the screen (excluding buttons).
+To make this action clear, a clicking finger is being displayed.
 
 \subsection{Introduction}\label{subsec:introduction}
-Before each game starts, a sample animation of the task beforehand is being shown.
-The current scene is paused in the meantime, so that the user has enough time to find out what he has to do.
+As the task beforehand for each level may not be clear to every user an introduction is necessary.
+Before each game starts, an animation [\ref{sec:creating-animated-introductions}] of the task beforehand is being shown.
+This scene serves as a helper scene so that the running scene can be paused while the animated introduction runs.
+If the current scene is not paused in the meantime, the user may not take enough time to understand the task.
 
 \section{Code structure of the learning environment}\label{sec:code-structure-of-the-learning-environment}
 Our learning environment consists of different scenes each one inheriting the base scene.
 The following subsections won't contain the whole code as some parts are trivial to understand.
-Instead a summary of the scenes purpose and crucial parts are shown and explained.
+Instead a summary of the scene codes purpose and crucial parts are shown and explained.
 
-The full code can be accessed in the appendix.
+The full code can be accessed in the appendix [\ref{ch:gotcha!---full-codegot}].
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{figures/statediagram}
-    \caption{Scene Statediagram}
+    \caption{Scene State Diagram}
     \label{fig:statediagram}
 \end{figure}
 
 \subsection{BaseScene}\label{subsec:basescene}
 This scene contains methods and fields which are necessary in multiple scenes
-(e.g. the scene transition, identifier of the scene, ...).
+(e.g.\ the scene transition, identifier of the scene, ...).
 
 The transition is a mask in the form of a circle laid over a black rectangle.
 Masks have to be applied to every object they have to mask.
@@ -1087,7 +1098,7 @@ This section contains the final look of the learning environment.
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{figures/falling}
-    \caption{Falling Property Sorting Category 1, 2-4 will be omitted}
+    \caption{Falling Property Sorting Category 1, 2--4 will be omitted}
     \label{fig:falling}
 \end{figure}
 

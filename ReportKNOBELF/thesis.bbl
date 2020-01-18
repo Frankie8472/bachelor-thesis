@@ -15,6 +15,11 @@
 \newblock \url{https://www.w3.org/TR/2017/REC-html51-20171003/}.
 \newblock Accessed: 2019-01-17.
 
+\bibitem{webstorage}
+{HTML5 Web Storage}.
+\newblock \url{https://www.w3schools.com/html/html5_webstorage.asp}.
+\newblock Accessed: 2019-01-17.
+
 \bibitem{obs}
 {Open Broadcaster Software (OBS) Studio}.
 \newblock \url{https://obsproject.com/}.
@@ -60,5 +65,16 @@
 {WebGL API Documentation}.
 \newblock \url{https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API}.
 \newblock Accessed: 2019-01-17.
+
+\bibitem{cardgameset}
+Diane Davis, Benjamin Lentand~Maclagan.
+\newblock The card game set.
+\newblock {\em The Mathematical Intelligencer}, 25(3):33--40, Jun 2003.
+
+\bibitem{artofcomputerscience}
+Donald~E. Knuth.
+\newblock {\em The Art of Computer Programming, Volume 3: (2nd Ed.) Sorting and
+  Searching}.
+\newblock Addison Wesley Longman Publishing Co., Inc., USA, 1998.
 
 \end{thebibliography}
