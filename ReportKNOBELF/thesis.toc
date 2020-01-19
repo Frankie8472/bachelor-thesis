@@ -41,12 +41,13 @@
 \contentsline {subsection}{\numberline {4.6.1}Playing the Game}{22}{subsection.4.6.1}% 
 \contentsline {subsection}{\numberline {4.6.2}Running the Code}{22}{subsection.4.6.2}% 
 \contentsline {subsection}{\numberline {4.6.3}BaseScene}{22}{subsection.4.6.3}% 
+\contentsline {subsubsection}{\nonumberline The Scene Transition}{22}{section*.21}% 
 \contentsline {subsection}{\numberline {4.6.4}PreloadAssets}{23}{subsection.4.6.4}% 
-\contentsline {subsubsection}{\nonumberline Image Game Objects}{24}{section*.21}% 
-\contentsline {subsection}{\numberline {4.6.5}DropDownMenu}{24}{subsection.4.6.5}% 
-\contentsline {subsection}{\numberline {4.6.6}WelcomeScene}{25}{subsection.4.6.6}% 
-\contentsline {subsection}{\numberline {4.6.7}LevelMenuSceneScene}{25}{subsection.4.6.7}% 
-\contentsline {subsection}{\numberline {4.6.8}IntroScene}{26}{subsection.4.6.8}% 
+\contentsline {subsubsection}{\nonumberline Image Game Objects}{24}{section*.22}% 
+\contentsline {subsection}{\numberline {4.6.5}DropDownMenu}{25}{subsection.4.6.5}% 
+\contentsline {subsection}{\numberline {4.6.6}WelcomeScene}{26}{subsection.4.6.6}% 
+\contentsline {subsection}{\numberline {4.6.7}LevelMenuSceneScene}{26}{subsection.4.6.7}% 
+\contentsline {subsection}{\numberline {4.6.8}IntroScene}{27}{subsection.4.6.8}% 
 \contentsline {subsection}{\numberline {4.6.9}SortingScene}{27}{subsection.4.6.9}% 
 \contentsline {subsection}{\numberline {4.6.10}PropertySortingScene}{29}{subsection.4.6.10}% 
 \contentsline {subsection}{\numberline {4.6.11}RestrictedSortingScene}{29}{subsection.4.6.11}% 
@@ -63,4 +64,4 @@
 \contentsline {chapter}{\numberline {6}Conclusion}{47}{chapter.6}% 
 \contentsline {section}{\numberline {6.1}Future Improvements}{47}{section.6.1}% 
 \contentsline {section}{\numberline {6.2}checklist}{47}{section.6.2}% 
-\contentsline {chapter}{Bibliography}{49}{section*.48}% 
+\contentsline {chapter}{Bibliography}{49}{section*.49}% 

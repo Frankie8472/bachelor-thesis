@@ -545,9 +545,8 @@ This scene serves as a helper scene so that the running scene can be paused whil
 If the current scene is not paused in the meantime, the user may not take enough time to understand the task.
 
 \section{Code structure of the learning environment}\label{sec:code-structure-of-the-learning-environment}
-Our learning environment consists of different scenes each one inheriting the base scene.
-The following subsections won't contain the whole code as some parts are trivial to understand.
-Instead a summary of crucial parts are shown and explained.
+Our learning environment consists of different scenes each one inherits the base scene.
+The following subsections contain a summary of crucial and not trivial parts of the code.
 
 The full code can be accessed in the appendix [\ref{ch:gotcha!---full-codegot}] or on gitlab\cite{gitlab-thesis}.
 
@@ -557,6 +556,7 @@ The full code can be accessed in the appendix [\ref{ch:gotcha!---full-codegot}] 
     \caption{Scene State Diagram}
     \label{fig:statediagram}
 \end{figure}
+
 \subsection{Playing the Game}\label{subsec:playing-the-game}
 The game can be played here\cite{gotscha}.
 
@@ -575,13 +575,15 @@ Please note that the gameplay video is not included in the repository.
 This scene contains methods and fields which are necessary in multiple scenes
 (e.g.\ the scene transition, identifier of the scene, ...).
 
-The transition is a mask in the form of a circle laid over a black rectangle.
-Masks have to be applied to every object they have to mask.
-So a simple solution was to lay a black rectangle over the whole scene and mask it.
-The animated transition is created by increasing or decreasing the radius of the circle
-mask according to the wanted animation (IN/OUT).
+\subsubsection{The Scene Transition}
+Transitions are simply made by laying a geometrical mask over an game object and animate the mask.
+As masks have to be applied to every object they have to mask,
+a simple solution was to lay a black rectangle over the whole scene and mask it.
+So the scene transition has the form of a circle cut out of a black rectangle [\ref{lst:transitioninitializationmethod}].
+The animation comes to life with increasing or decreasing
+the radius of the circle according to the wanted animation (IN/OUT).
 
-\begin{lstlisting}[style=TypeScript, caption={BaseScene.ts}]
+\begin{lstlisting}[style=TypeScript, caption={Transition Initialization Method (BaseScene.ts)}, label={lst:transitioninitializationmethod}]
     ...
     private transitionInit(): void {
         // Shape of the graphical transition
@@ -607,11 +609,11 @@ mask according to the wanted animation (IN/OUT).
 
         this.transition = [circle, rectangle];
     }
+    ...
 \end{lstlisting}
 
 \subsection{PreloadAssets}\label{subsec:preloadassets}
-In the method "preload()" the files used later on can be loaded into the respective managers/cache.
-If files are loaded in a method outside of the preload method, the loader has to be started manually (in the code).
+In the "preload()" method the files used later on can be loaded into the respective managers/cache.
 Now every asset loaded this way has a unique identifier and can be used in future scene
 as long as it is not removed explicitly.
 The asset can as such be loaded into the managers/cache in every scene,
@@ -619,7 +621,7 @@ so that only the actual used assets are loaded.
 The advantage of this is that you can save time and storage.
 But the disadvantage is that you have to be connected to the internet the whole time.
 Should the connection be severed for only a short time, objects might not be displayed correctly.
-With a "preload" scene in the beginning all available assets are loaded,
+With a "preloadAsset" scene in the beginning, all available assets are loaded,
 so that after the longer loading time the game can run fluently,
 without problems and most importantly without a connection to the internet.
 
@@ -643,13 +645,21 @@ can be accessed by filename.["fieldname"] or filename.fieldname [\ref{lst:jsonfi
 \end{lstlisting}
 
 The way the objects files are preloaded into the respective managers is shown below.
-
+It is important to note that if assets are loaded outside of the preload() method,
+the loader has to be started manually.
 \begin{lstlisting}[style=TypeScript, caption={preloadAsset.ts}, label={lst:jsonpreload}]
     ...
     private preload(): void {
         this.load.setPath('assets/geometrical_objects/');
         this.load.json('objects', 'geometrical_objects.json');
         ...
+    }
+    ...
+    private create(): void {
+        ...
+        this.preLoadImages();
+        ...
+        this.start();
     }
     ...
     private preLoadImages(): void {
@@ -674,13 +684,19 @@ The way the objects files are preloaded into the respective managers is shown be
         ...
     }
     ...
+    private start(): void {
+        ...
+        this.load.start();
+    }
+    ...
 \end{lstlisting}
 
 \subsubsection{Image Game Objects}
 Instead of representing an image as a normal image in game, sprites, a special texture, is used.
-A sprite game object can display both static and animated images in your game.
-They have input events, additional functions, fields and physics bodies.
-The main difference between a sprite and an image game object is that you cannot animate images.
+But what is a sprite?
+A sprite is a game object which can display both static and animated images in your game.
+The big main difference between a sprite and an image game object is that you cannot animate images.
+Additionally, sprites have input events, additional functions, fields and physics bodies.
 
 \subsection{DropDownMenu}\label{subsec:dropdownmenu}
 In this scene the drop down menu is created.
