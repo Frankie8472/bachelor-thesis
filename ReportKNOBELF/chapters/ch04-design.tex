@@ -5,7 +5,7 @@
 In this section all implementation tools and approaches are explained.
 First the used framework will be explained, then how the different scenes and objects are generated and
 at last how these two are combined to the final solution: Gotscha! A learning environment based on game based learning.
-The user goes through multiple levels to learn detecting and comparing properties of objects
+The user goes through multiple levels to learn to detect and compare properties of objects
 under simple and more difficult situations.
 
 \section{Phaser 3}\label{sec:phaser-3}
@@ -498,7 +498,7 @@ The game is split into two versions. The easy one for adapting to the correct th
 and the normal one to strengthen it.
 
 There are twelve objects being displayed.
-The user has to select three objects which have to fulfil the following rules.
+The user has to select three objects which have to fulfill the following rules.
 
 For each category one of the following conditions has to hold:
 \begin{itemize}
@@ -507,14 +507,14 @@ For each category one of the following conditions has to hold:
 \end{itemize}
 
 If the user needs help, there is a helper bar which can be accessed by a button with a question mark on it.
-The helper bar shows which categories fulfil the conditions and which do not
+The helper bar shows which categories fulfill the conditions and which do not
 by coloring the category symbols on the bar in green or red.
 
 The game is time limited. The remaining time is shown by a bar.
-If you select three objects which fulfil the conditions, more time will be added.
+If you select three objects which fulfill the conditions, more time will be added.
 After a set amount of correct selected objects, the game will end.
 
-If there are no three objects that fulfil the conditions, the playfield will be generated anew.
+If there are no three objects that fulfill the conditions, the play field will be generated anew.
 
 \subsubsection{Object pairing - easy version}\label{subsubsec:object-pairing---easy-version}
 In the easy version objects have three categories: \textit{color, shape and number of holes/dots}
@@ -723,7 +723,7 @@ As the drop down animation takes time, it was necessary to create a boolean fiel
 This ensures that the closing and opening animation won't interfere with each other.
 The lock is freed after the completion of an event/animation.
 
-\begin{lstlisting}[style=TypeScript, caption={Lock aquiring and freeing}]
+\begin{lstlisting}[style=TypeScript, caption={Lock acquiring and freeing}]
     ...
     if (!this.lock) {
         this.lock = true;
