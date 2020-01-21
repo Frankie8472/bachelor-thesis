@@ -356,7 +356,7 @@ writing the property file. As a template the current property file should be use
 The achieved score is saved in the local storage\cite{webstorage} of the browser.
 The local storage remains unchanged until it is cleared in the browser settings.
 Thus the saved score is not lost on the same device until purposely deleted.
-Before accessing the local storage it is checked if there even is a storage [\ref{lst:storageaccess1, lst:storageaccess2}].
+Before accessing the local storage it is checked if there even is a storage [\ref{lst:storageaccess1}, \ref{lst:storageaccess2}].
 
 \begin{lstlisting}[style=TypeScript, caption={Storage access (scoreScene.ts)}, label={lst:storageaccess1}]
     ...
@@ -554,7 +554,7 @@ If the current scene is not paused in the meantime, the user may not take enough
 Our learning environment consists of different scenes each one inherits the base scene.
 The following subsections contain a summary of crucial and not trivial parts of the code.
 
-The full code can be accessed in the appendix [\ref{ch:gotcha!---full-codegot}] or on gitlab\cite{gitlab-thesis}.
+The full code can be accessed in the appendix [\ref{ch:gotcha!---full-code}] or on gitlab\cite{gitlab-thesis}.
 
 \begin{figure}[H]
     \centering
@@ -750,7 +750,7 @@ The same trick is used for closing all current scenes when exiting (without the 
 \subsection{LevelMenuSceneScene}\label{subsec:levelmenuscenescene}
 Levels with the same difficulty are distinguished by numbers from one to four.
 Those with another difficulty are distinguished by images of monsters with different level of spookiness
-[\ref{fig:easylevelicon, fig:mediumlevelicon, fig:hardlevelicon}].
+[\ref{fig:easylevelicon},\ \ref{fig:mediumlevelicon},\ \ref{fig:hardlevelicon}].
 
 \begin{figure}[H]
     \centering
@@ -787,7 +787,7 @@ To make sure that the behaviour is bug free, on pointer down on a button, this r
 Now, only marked buttons can react to pointer up events.
 And upon any pointer up event all markers are removed.
 
-\begin{lstlisting}[style=TypeScript, caption={Button marking (levelMenuScene.ts), label={lst:buttonmarking}}]
+\begin{lstlisting}[style=TypeScript, caption={Button marking (levelMenuScene.ts)}, label={lst:buttonmarking}]
     ...
     private initInput(): void {
         this.input.on('pointerdown', function(pointer, currentlyOver) {

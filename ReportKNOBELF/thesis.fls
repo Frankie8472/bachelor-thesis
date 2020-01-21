@@ -416,6 +416,8 @@ INPUT ./chapters/ch05-evaluation.tex
 INPUT ./chapters/ch05-evaluation.tex
 INPUT ./chapters/ch06-conclusion.tex
 INPUT ./chapters/ch06-conclusion.tex
+INPUT ./chapters/appendix.tex
+INPUT ./chapters/appendix.tex
 INPUT /home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/thesis.bbl
 INPUT /home/frankie/WebstormProjects/bachelor-thesis/ReportKNOBELF/thesis.bbl
 INPUT /usr/share/texmf-dist/fonts/tfm/adobe/courier/pcrr8t.tfm
