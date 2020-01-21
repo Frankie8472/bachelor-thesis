@@ -7,24 +7,27 @@ some elements of gamification which will be analyzed and assessed.
 The existing environment, our work should be implemented in, has conditions as well.
 Those will be taken into consideration while evaluating a suitable framework.
 
-\section{Programming Environment}
-\subsection{Boundary Conditions}
+\section{Programming Environment}\label{sec:programming-environment}
+\subsection{Boundary Conditions}\label{subsec:boundary-conditions}
+The following conditions were extracted from the assignment:
+
 \begin{itemize}
     \item The game should be maintainable as it is not excluded that others are going to work on it.
-    \item Modularity is an important aspect as one cannot assume the final design to this point in time.
+    \item Modularity is an important aspect as one cannot assume the final design at this point in time.
     \item It should be possible to integrate it in a Typescript/JavaScript/HTML environment (e.g.\ as a canvas) as
-    all similar work up until now is mostly written in Typescript
-    \item The ability to run on computers and tablets is important as a lot of schools have one or the other.
+    all similar work up until now is mostly written in Typescript in the Angular framework.
+    \item The ability to run on computers and tablets is important as a lot of schools have at least one.
+    \item The game should be self-explainable as the teacher has to keep his focus on the majority of his students.
     \item Easy to learn. Support is an important aspect as it is easier to start with something new.
     A huge community correlates in most cases with good support on free open source software.
 \end{itemize}
 
-\subsection{Evaluation of Possible Solutions}
+\subsection{Evaluation of Possible Solutions}\label{subsec:evaluation-of-possible-solutions}
 \subsubsection{Babylon.js}
 Babylon.js is a complete JavaScript framework for building 3D games.
 Using WebGL for graphics, the feature set for Babylon is somewhat extensive.
 Its community is said to be fairly active.
-The most significant features are:
+The most significant features worth mentioning are:
 
 \begin{itemize}
     \item Support and exporting tools
@@ -70,79 +73,54 @@ so it isn’t restricted to doing just one thing.
 Here’s a list of some of the feature sets provided with Phaser:
 
 \begin{itemize}
-    \item built on WebGL and canvas
-    \item preloader system
-    \item physics features
-    \item sprite and animation handling
-    \item particle system
-    \item camera, input, and sound systems
-    \item tilemap support
-    \item device scaling support
-    \item plugin availability
+    \item Built on WebGL and canvas
+    \item Preloader system
+    \item Physics features
+    \item Sprite and animation handling
+    \item Particle system
+    \item Camera, input, and sound systems
+    \item Tilemap support
+    \item Device scaling support
+    \item Plugin availability
 \end{itemize}
 
 Phaser’s preloader makes it easy for developers to load their game assets and have them automatically handled.
-That way, you don’t have to waste time writing extensive code for each part of the game\cite{phaserad}.
+That way, one des not have to waste time writing extensive code for each part of the game\cite{phaserad}.
 
 \subsubsection{Evaluation of the Frameworks}
-Through the boundary conditions one can see that the TypeScript support, a lot of code examples,
+Considering the boundary conditions one can see that the TypeScript support, a lot of code examples,
 an active community for support and multiple browser support is most important for this work.
-After a short evaluation of the most featured JavaScript/TypeScript game engines, it became clear,
-that the phaser framework fulfils our conditions to a fairly good extent.
+It is trivial to see that the phaser framework fulfils these conditions to a fairly good extent.
 
-\section{Boundary Conditions of the problem statement}
-There have to be objects with different property categories with multiple properties in each category.
-With these objects should be played with in different levels of difficulty.
+\section{Boundary Conditions of the Problem Statement}\label{sec:boundary-conditions-of-the-problem-statement}
+Considering the problem statement the user has to learn how to identify and compare properties of objects.
+As these object should just be placeholders, the simplest objects can be used for that purpose (e.g.\ geometrical objects).
+To make the task of comparing more difficult the objects can have more than one property.
+The user should train the task at hand on different levels of difficulty.
 There should be easy levels for inexperienced users and hard levels for more advanced users.
 The aspect of hashing in the context of sorting these objects with limited available space must be included.
 
-\section{Target Audience}
+\section{Boundary Condition of the Target Audience}\label{sec:boundary-condition-of-the-target-audience}
 The target audience are going to be children between the age of 5 and 8.
 They cannot be expected to be able to read or write. Numbers from 1 to 5 should be possible though.
 The motoric abilities of children with tablets are rather advanced in contrast to useing a computer with a mouse.
 So a touch screen of any kind is not a problem but the handling with a keyboard of a mouse cannot be assumed.
 
-\section{Elements of Gamification}
+\section{Additional Conditions: Elements of Gamification}\label{sec:additional-conditions:-elements-of-gamification}
+To enhance the user experience and to influence his behaviour the following elements of gamification should be implemented:
 \begin{itemize}
-    \item Easy levels for beginners
-    \item Hard levels for experienced users
-    \item Levels should always be playable under difficult conditions to strengthen what you have learned
-    \item Reward system for instant gratification and progress tracking
-    \item The gratification should be visualized
-    \item Tracking of correct and incorrect choices made
-    \item Time limits
-    \item Sound
-    \item If possible there should be an aspect of a story/timeline
-    \item A fullscreen option helps to stay focused
-    \item A level manu or a map
+    \item Different levels for different experienced users.
+    \item A reward system for instant gratification.
+    \item Global progress tracking to keep track of your success.
+    \item The gratification should be visualized and animated as this gives the user more satisfaction
+    \item Tracking of correct and incorrect choices made to have a live tracking, which ads motivation and
+    stress on the same time (higher difficulty).
+    \item Time limits to put the user under stress.
+    \item Sound can add a valuable replay factor.
+    \item If possible there should be an aspect of a story/timeline. This has the potential to captivate the user on a
+    whole different level.
+    \item A level menu or a map is useful addition or replacement for a story.
+    \item A fullscreen option helps to stay focused and not get distracted by other visuals from your environment
+    \item A pause menu is important for the user as he can always be distracted.
+    Without a pause menu the user may get frustrated and fed up with the game.
 \end{itemize}
-\section{Additional Conditions}
-
-
-Objects should have properties and subproperties.
-
-Game
-- capturing name
-- objects categories nad subcategories
-- easy level
-- easy level under harder difficulties
-- limited sorting -> hashing
-- set easy
-- set hard
-- overview
-- gamification
-    - track progress
-        - time based
-        - correct and wrong
-        - visual gratification
-    - have fun dont recognize you are learning
-        - optics
-            - randomization and more options for variety
-        - sound
-        - story like
-    - menu
-    - levelmenu
-    - fullscreen
-    - flow
-        - exitbutton
-        - returnbutton

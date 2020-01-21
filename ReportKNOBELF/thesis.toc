@@ -7,12 +7,12 @@
 \contentsline {section}{\numberline {1.6}Outline}{3}{section.1.6}% 
 \contentsline {chapter}{\numberline {2}Related Work}{5}{chapter.2}% 
 \contentsline {section}{\numberline {2.1}Previous work}{5}{section.2.1}% 
-\contentsline {section}{\numberline {2.2}Gamification and Game Based Learning (GBL)}{5}{section.2.2}% 
-\contentsline {subsection}{\numberline {2.2.1}Gamification}{5}{subsection.2.2.1}% 
+\contentsline {subsection}{\numberline {2.1.1}Angular}{6}{subsection.2.1.1}% 
+\contentsline {section}{\numberline {2.2}Gamification and Game Based Learning (GBL)}{6}{section.2.2}% 
+\contentsline {subsection}{\numberline {2.2.1}Gamification}{6}{subsection.2.2.1}% 
 \contentsline {subsection}{\numberline {2.2.2}Game-Based-Learning}{6}{subsection.2.2.2}% 
-\contentsline {subsection}{\numberline {2.2.3}Gamification vs. Game-Based-Learning}{6}{subsection.2.2.3}% 
-\contentsline {section}{\numberline {2.3}Existing Educational Software}{6}{section.2.3}% 
-\contentsline {section}{\numberline {2.4}Checklist}{7}{section.2.4}% 
+\contentsline {subsection}{\numberline {2.2.3}Gamification vs. Game-Based-Learning}{7}{subsection.2.2.3}% 
+\contentsline {section}{\numberline {2.3}Existing Educational Software}{7}{section.2.3}% 
 \contentsline {chapter}{\numberline {3}Requirements}{9}{chapter.3}% 
 \contentsline {section}{\numberline {3.1}Programming Environment}{9}{section.3.1}% 
 \contentsline {subsection}{\numberline {3.1.1}Boundary Conditions}{9}{subsection.3.1.1}% 
@@ -22,10 +22,9 @@
 \contentsline {subsubsection}{\nonumberline Melon.js}{10}{section*.9}% 
 \contentsline {subsubsection}{\nonumberline Phaser}{11}{section*.10}% 
 \contentsline {subsubsection}{\nonumberline Evaluation of the Frameworks}{11}{section*.11}% 
-\contentsline {section}{\numberline {3.2}Boundary Conditions of the problem statement}{11}{section.3.2}% 
-\contentsline {section}{\numberline {3.3}Target Audience}{12}{section.3.3}% 
-\contentsline {section}{\numberline {3.4}Elements of Gamification}{12}{section.3.4}% 
-\contentsline {section}{\numberline {3.5}Additional Conditions}{12}{section.3.5}% 
+\contentsline {section}{\numberline {3.2}Boundary Conditions of the Problem Statement}{11}{section.3.2}% 
+\contentsline {section}{\numberline {3.3}Boundary Condition of the Target Audience}{12}{section.3.3}% 
+\contentsline {section}{\numberline {3.4}Additional Conditions: Elements of Gamification}{12}{section.3.4}% 
 \contentsline {chapter}{\numberline {4}Design of the Learning Environment}{13}{chapter.4}% 
 \contentsline {section}{\numberline {4.1}Phaser 3}{13}{section.4.1}% 
 \contentsline {subsection}{\numberline {4.1.1}Base Configuration}{13}{subsection.4.1.1}% 
