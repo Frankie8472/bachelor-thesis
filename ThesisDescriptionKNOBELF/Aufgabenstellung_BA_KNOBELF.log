@@ -1,30 +1,30 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Arch Linux) (preloaded format=pdflatex 2019.8.23)  26 AUG 2019 10:40
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Arch Linux) (preloaded format=pdflatex 2020.1.15)  20 JAN 2020 14:52
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**"/home/frankie/MEGA/ETH/INFK/2019 FS/Bachelor Thesis/ThesisDescriptionKNOBELF/Aufgabenstellung_BA_KNOBELF.tex"
-(/home/frankie/MEGA/ETH/INFK/2019 FS/Bachelor Thesis/ThesisDescriptionKNOBELF/Aufgabenstellung_BA_KNOBELF.tex
-LaTeX2e <2018-12-01>
+**/home/frankie/WebstormProjects/bachelor-thesis/ThesisDescriptionKNOBELF/Aufgabenstellung_BA_KNOBELF.tex
+(/home/frankie/WebstormProjects/bachelor-thesis/ThesisDescriptionKNOBELF/Aufgabenstellung_BA_KNOBELF.tex
+LaTeX2e <2019-10-01> patch level 1
 (/usr/share/texmf-dist/tex/latex/koma-script/scrartcl.cls
-Document Class: scrartcl 2019/02/01 v3.26b KOMA-Script document class (article)
+Document Class: scrartcl 2019/10/12 v3.27 KOMA-Script document class (article)
 (/usr/share/texmf-dist/tex/latex/koma-script/scrkbase.sty
-Package: scrkbase 2019/02/01 v3.26b KOMA-Script package (KOMA-Script-dependent basics and keyval usage)
+Package: scrkbase 2019/10/12 v3.27 KOMA-Script package (KOMA-Script-dependent basics and keyval usage)
  (/usr/share/texmf-dist/tex/latex/koma-script/scrbase.sty
-Package: scrbase 2019/02/01 v3.26b KOMA-Script package (KOMA-Script-independent basics and keyval usage)
+Package: scrbase 2019/10/12 v3.27 KOMA-Script package (KOMA-Script-independent basics and keyval usage)
  (/usr/share/texmf-dist/tex/latex/graphics/keyval.sty
 Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
 \KV@toks@=\toks14
 ) (/usr/share/texmf-dist/tex/latex/koma-script/scrlfile.sty
-Package: scrlfile 2019/02/01 v3.26b KOMA-Script package (loading files)
+Package: scrlfile 2019/10/12 v3.27 KOMA-Script package (loading files)
 ))) (/usr/share/texmf-dist/tex/latex/koma-script/tocbasic.sty
-Package: tocbasic 2019/02/01 v3.26b KOMA-Script package (handling toc-files)
+Package: tocbasic 2019/10/12 v3.27 KOMA-Script package (handling toc-files)
 \scr@dte@tocline@numberwidth=\skip41
 \scr@dte@tocline@numbox=\box27
 )
 Package tocbasic Info: omitting babel extension for `toc'
 (tocbasic)             because of feature `nobabel' available
-(tocbasic)             for `toc' on input line 134.
+(tocbasic)             for `toc' on input line 137.
 Class scrartcl Info: You've used standard option `oneside'.
 (scrartcl)           This is correct!
 (scrartcl)           Internally I'm using `twoside=false'.
@@ -43,11 +43,11 @@ Class scrartcl Info: You've used standard option `final'.
 (scrartcl)           If you'd like to set the option with \KOMAoptions,
 (scrartcl)           you'd have to use `draft=false' there
 (scrartcl)           instead of `final', too.
-Class scrartcl Info: File `scrsize11pt.clo' used to setup font sizes on input line 2162.
+Class scrartcl Info: File `scrsize11pt.clo' used to setup font sizes on input line 2208.
  (/usr/share/texmf-dist/tex/latex/koma-script/scrsize11pt.clo
-File: scrsize11pt.clo 2019/02/01 v3.26b KOMA-Script font size class option (11pt)
+File: scrsize11pt.clo 2019/10/12 v3.27 KOMA-Script font size class option (11pt)
 ) (/usr/share/texmf-dist/tex/latex/koma-script/typearea.sty
-Package: typearea 2019/02/01 v3.26b KOMA-Script package (type area)
+Package: typearea 2019/10/12 v3.27 KOMA-Script package (type area)
 \ta@bcor=\skip42
 \ta@div=\count80
 Package typearea Info: You've used standard option `a4paper'.
@@ -82,7 +82,7 @@ Package typearea Info: These are the values describing the layout:
 (typearea)              \topskip        = 11.0pt
 (typearea)              \footskip       = 47.6pt
 (typearea)              \baselineskip   = 13.6pt
-(typearea)              on input line 1715.
+(typearea)              on input line 1716.
 )
 \c@part=\count81
 \c@section=\count82
@@ -92,46 +92,46 @@ Package typearea Info: These are the values describing the layout:
 \c@subparagraph=\count86
 \scr@dte@section@maxnumwidth=\skip47
 Class scrartcl Info: using compatibility default `runin=bysign'
-(scrartcl)           for `\section on input line 4489.
+(scrartcl)           for `\section on input line 4702.
 Class scrartcl Info: using compatibility default `afterindent=bysign'
-(scrartcl)           for `\section on input line 4489.
+(scrartcl)           for `\section on input line 4702.
 \scr@dte@part@maxnumwidth=\skip48
 Class scrartcl Info: using compatibility default `afterindent=false'
-(scrartcl)           for `\part on input line 4497.
+(scrartcl)           for `\part on input line 4710.
 \scr@dte@subsection@maxnumwidth=\skip49
 Class scrartcl Info: using compatibility default `runin=bysign'
-(scrartcl)           for `\subsection on input line 4507.
+(scrartcl)           for `\subsection on input line 4720.
 Class scrartcl Info: using compatibility default `afterindent=bysign'
-(scrartcl)           for `\subsection on input line 4507.
+(scrartcl)           for `\subsection on input line 4720.
 \scr@dte@subsubsection@maxnumwidth=\skip50
 Class scrartcl Info: using compatibility default `runin=bysign'
-(scrartcl)           for `\subsubsection on input line 4517.
+(scrartcl)           for `\subsubsection on input line 4730.
 Class scrartcl Info: using compatibility default `afterindent=bysign'
-(scrartcl)           for `\subsubsection on input line 4517.
+(scrartcl)           for `\subsubsection on input line 4730.
 \scr@dte@paragraph@maxnumwidth=\skip51
 Class scrartcl Info: using compatibility default `runin=bysign'
-(scrartcl)           for `\paragraph on input line 4527.
+(scrartcl)           for `\paragraph on input line 4740.
 Class scrartcl Info: using compatibility default `afterindent=bysign'
-(scrartcl)           for `\paragraph on input line 4527.
+(scrartcl)           for `\paragraph on input line 4740.
 \scr@dte@subparagraph@maxnumwidth=\skip52
 Class scrartcl Info: using compatibility default `runin=bysign'
-(scrartcl)           for `\subparagraph on input line 4537.
+(scrartcl)           for `\subparagraph on input line 4750.
 Class scrartcl Info: using compatibility default `afterindent=bysign'
-(scrartcl)           for `\subparagraph on input line 4537.
+(scrartcl)           for `\subparagraph on input line 4750.
 \abovecaptionskip=\skip53
 \belowcaptionskip=\skip54
 \c@pti@nb@sid@b@x=\box28
 Package tocbasic Info: omitting babel extension for `lof'
 (tocbasic)             because of feature `nobabel' available
-(tocbasic)             for `lof' on input line 5781.
+(tocbasic)             for `lof' on input line 5969.
 \scr@dte@figure@maxnumwidth=\skip55
 \c@figure=\count87
 Package tocbasic Info: omitting babel extension for `lot'
 (tocbasic)             because of feature `nobabel' available
-(tocbasic)             for `lot' on input line 5793.
+(tocbasic)             for `lot' on input line 5981.
 \scr@dte@table@maxnumwidth=\skip56
 \c@table=\count88
-Class scrartcl Info: Redefining `\numberline' on input line 5957.
+Class scrartcl Info: Redefining `\numberline' on input line 6145.
 \bibindent=\dimen102
 ) (/usr/share/texmf-dist/tex/latex/base/fontenc.sty
 Package: fontenc 2018/08/11 v2.0j Standard LaTeX package
@@ -145,13 +145,13 @@ Package: inputenc 2018/08/11 v1.3c Input encoding file
  (/usr/share/texmf-dist/tex/latex/base/latin1.def
 File: latin1.def 2018/08/11 v1.3c Input encoding file
 )) (/usr/share/texmf-dist/tex/generic/babel/babel.sty
-Package: babel 2019/04/03 3.29 The Babel package
+Package: babel 2019/10/15 3.35 The Babel package
  (/usr/share/texmf-dist/tex/generic/babel/switch.def
-File: switch.def 2019/04/03 3.29 Babel switching mechanism
+File: switch.def 2019/10/15 3.35 Babel switching mechanism
 ) (/usr/share/texmf-dist/tex/generic/babel-english/english.ldf
 Language: english 2017/06/06 v3.3r English support from the babel system
  (/usr/share/texmf-dist/tex/generic/babel/babel.def
-File: babel.def 2019/04/03 3.29 Babel common definitions
+File: babel.def 2019/10/15 3.35 Babel common definitions
 \babel@savecnt=\count89
 \U@D=\dimen103
  (/usr/share/texmf-dist/tex/generic/babel/txtbabel.def)
@@ -161,10 +161,10 @@ File: babel.def 2019/04/03 3.29 Babel common definitions
 \l@australian = a dialect from \language\l@british 
 \l@newzealand = a dialect from \language\l@british 
 )) (/usr/share/texmf-dist/tex/latex/tools/varioref.sty
-Package: varioref 2016/02/16 v1.5c package for extended references (FMi)
+Package: varioref 2019/09/08 v1.6b package for extended references (FMi)
 \c@vrcnt=\count91
-) (/usr/share/texmf-dist/tex/latex/ms/ragged2e.sty
-Package: ragged2e 2009/05/21 v2.1 ragged2e Package (MS)
+) (/usr/share/texmf-dist/tex/latex/ragged2e/ragged2e.sty
+Package: ragged2e 2019/07/28 v2.2 ragged2e Package (MS)
  (/usr/share/texmf-dist/tex/latex/ms/everysel.sty
 Package: everysel 2011/10/28 v1.2 EverySelectfont Package (MS)
 )
@@ -235,7 +235,7 @@ File: ts1enc.def 2001/06/05 v3.0e (jk/car/fm) Standard LaTeX file
 Now handling font encoding TS1 ...
 ... processing UTF-8 mapping file for font encoding TS1
  (/usr/share/texmf-dist/tex/latex/base/ts1enc.dfu
-File: ts1enc.dfu 2018/10/05 v1.2f UTF-8 support for inputenc
+File: ts1enc.dfu 2019/07/11 v1.2j UTF-8 support for inputenc
    defining Unicode char U+00A2 (decimal 162)
    defining Unicode char U+00A3 (decimal 163)
    defining Unicode char U+00A4 (decimal 164)
@@ -305,6 +305,8 @@ File: ts1enc.dfu 2018/10/05 v1.2f UTF-8 support for inputenc
    defining Unicode char U+25E6 (decimal 9702)
    defining Unicode char U+25EF (decimal 9711)
    defining Unicode char U+266A (decimal 9834)
+   defining Unicode char U+27E8 (decimal 10216)
+   defining Unicode char U+27E9 (decimal 10217)
    defining Unicode char U+FEFF (decimal 65279)
 ))
 LaTeX Info: Redefining \oldstylenums on input line 334.
@@ -378,7 +380,7 @@ LaTeX Font Info:    Overwriting symbol font `lasy' in version `bold'
 \Urlmuskip=\muskip10
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 ) (/usr/share/texmf-dist/tex/latex/tools/array.sty
-Package: array 2018/12/30 v2.4k Tabular extension package (FMi)
+Package: array 2019/08/31 v2.4l Tabular extension package (FMi)
 \col@sep=\dimen104
 \ar@mcellbox=\box29
 \extrarowheight=\dimen105
@@ -387,7 +389,7 @@ Package: array 2018/12/30 v2.4k Tabular extension package (FMi)
 \backup@length=\skip72
 \ar@cellbox=\box30
 ) (/usr/share/texmf-dist/tex/latex/booktabs/booktabs.sty
-Package: booktabs 2016/04/27 v1.618033 publication quality tables
+Package: booktabs 2019/10/08 v1.6180339 publication quality tables
 \heavyrulewidth=\dimen106
 \lightrulewidth=\dimen107
 \cmidrulewidth=\dimen108
@@ -406,32 +408,32 @@ Package: booktabs 2016/04/27 v1.618033 publication quality tables
 \@lastruleclass=\count95
 \@thisrulewidth=\dimen118
 ) (/usr/share/texmf-dist/tex/latex/microtype/microtype.sty
-Package: microtype 2019/02/28 v2.7b Micro-typographical refinements (RS)
+Package: microtype 2019/10/10 v2.7c Micro-typographical refinements (RS)
 \MT@toks=\toks18
 \MT@count=\count96
 LaTeX Info: Redefining \textls on input line 790.
 \MT@outer@kern=\dimen119
-LaTeX Info: Redefining \textmicrotypecontext on input line 1336.
+LaTeX Info: Redefining \textmicrotypecontext on input line 1347.
 \MT@listname@count=\count97
  (/usr/share/texmf-dist/tex/latex/microtype/microtype-pdftex.def
-File: microtype-pdftex.def 2019/02/28 v2.7b Definitions specific to pdftex (RS)
+File: microtype-pdftex.def 2019/10/10 v2.7c Definitions specific to pdftex (RS)
 LaTeX Info: Redefining \lsstyle on input line 914.
 LaTeX Info: Redefining \lslig on input line 914.
 \MT@outer@space=\skip73
 )
 Package microtype Info: Loading configuration file microtype.cfg.
  (/usr/share/texmf-dist/tex/latex/microtype/microtype.cfg
-File: microtype.cfg 2019/02/28 v2.7b microtype main configuration file (RS)
+File: microtype.cfg 2019/10/10 v2.7c microtype main configuration file (RS)
 )) (/usr/share/texmf-dist/tex/latex/graphics/graphicx.sty
 Package: graphicx 2017/06/01 v1.1a Enhanced LaTeX Graphics (DPC,SPQR)
  (/usr/share/texmf-dist/tex/latex/graphics/graphics.sty
-Package: graphics 2017/06/25 v1.2c Standard LaTeX Graphics (DPC,SPQR)
+Package: graphics 2019/10/08 v1.3c Standard LaTeX Graphics (DPC,SPQR)
  (/usr/share/texmf-dist/tex/latex/graphics/trig.sty
 Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
 ) (/usr/share/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
 File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 )
-Package graphics Info: Driver file: pdftex.def on input line 99.
+Package graphics Info: Driver file: pdftex.def on input line 105.
  (/usr/share/texmf-dist/tex/latex/graphics-def/pdftex.def
 File: pdftex.def 2018/01/08 v1.0l Graphics/color driver for pdftex
 ))
@@ -443,9 +445,9 @@ Package: enumerate 2015/07/23 v3.00 enumerate extensions (DPC)
 ) (/usr/share/texmf-dist/tex/latex/lastpage/lastpage.sty
 Package: lastpage 2015/03/29 v1.2m Refers to last page's name (HMM; JPG)
 ) (/usr/share/texmf-dist/tex/latex/csquotes/csquotes.sty
-Package: csquotes 2018/04/13 v5.2d context-sensitive quotations (JAW)
+Package: csquotes 2019/05/10 v5.2e context-sensitive quotations (JAW)
  (/usr/share/texmf-dist/tex/latex/etoolbox/etoolbox.sty
-Package: etoolbox 2018/08/19 v2.5f e-TeX tools for LaTeX (JAW)
+Package: etoolbox 2019/09/21 v2.5h e-TeX tools for LaTeX (JAW)
 \etb@tempcnta=\count98
 )
 \csq@reset=\count99
@@ -456,7 +458,7 @@ Package: etoolbox 2018/08/19 v2.5f e-TeX tools for LaTeX (JAW)
 \csq@tshold=\count104
 \csq@ltx@everypar=\toks20
  (/usr/share/texmf-dist/tex/latex/csquotes/csquotes.def
-File: csquotes.def 2018/04/13 v5.2d csquotes generic definitions (JAW)
+File: csquotes.def 2019/05/10 v5.2e csquotes generic definitions (JAW)
 )
 Package csquotes Info: Trying to load configuration file 'csquotes.cfg'...
 Package csquotes Info: ... configuration file loaded successfully.
@@ -478,7 +480,7 @@ Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1369.
 Package xcolor Info: Model `Gray' substituted by `gray' on input line 1370.
 Package xcolor Info: Model `wave' substituted by `hsb' on input line 1371.
 ) (/usr/share/texmf-dist/tex/latex/hyperref/hyperref.sty
-Package: hyperref 2018/11/30 v6.88e Hypertext links for LaTeX
+Package: hyperref 2019/09/28 v7.00a Hypertext links for LaTeX
  (/usr/share/texmf-dist/tex/generic/oberdiek/hobsub-hyperref.sty
 Package: hobsub-hyperref 2016/05/16 v1.14 Bundle oberdiek, subset hyperref (HO)
  (/usr/share/texmf-dist/tex/generic/oberdiek/hobsub-generic.sty
@@ -495,7 +497,7 @@ Package: ifpdf 2018/09/07 v3.3 Provides the ifpdf switch
 Package: etexcmds 2016/05/16 v1.6 Avoid name clashes with e-TeX commands (HO)
 Package: kvsetkeys 2016/05/16 v1.17 Key value parser (HO)
 Package: kvdefinekeys 2016/05/16 v1.4 Define keys (HO)
-Package: pdftexcmds 2018/09/10 v0.29 Utility functions of pdfTeX for LuaTeX (HO)
+Package: pdftexcmds 2019/07/25 v0.30 Utility functions of pdfTeX for LuaTeX (HO)
 Package pdftexcmds Info: LuaTeX not detected.
 Package pdftexcmds Info: \pdf@primitive is available.
 Package pdftexcmds Info: \pdf@ifprimitive is available.
@@ -524,7 +526,7 @@ Package: kvoptions 2016/05/16 v3.12 Key value format for package options (HO)
 \Hy@linkcounter=\count105
 \Hy@pagecounter=\count106
  (/usr/share/texmf-dist/tex/latex/hyperref/pd1enc.def
-File: pd1enc.def 2018/11/30 v6.88e Hyperref: PDFDocEncoding definition (HO)
+File: pd1enc.def 2019/09/28 v7.00a Hyperref: PDFDocEncoding definition (HO)
 Now handling font encoding PD1 ...
 ... no UTF-8 mapping file for font encoding PD1
 )
@@ -532,36 +534,36 @@ Now handling font encoding PD1 ...
  (/usr/share/texmf-dist/tex/latex/latexconfig/hyperref.cfg
 File: hyperref.cfg 2002/06/06 v1.2 hyperref configuration of TeXLive
 )
-Package hyperref Info: Option `final' set `true' on input line 4393.
-Package hyperref Info: Hyper figures OFF on input line 4519.
-Package hyperref Info: Link nesting OFF on input line 4524.
-Package hyperref Info: Hyper index ON on input line 4527.
-Package hyperref Info: Plain pages OFF on input line 4534.
-Package hyperref Info: Backreferencing OFF on input line 4539.
+Package hyperref Info: Option `final' set `true' on input line 4414.
+Package hyperref Info: Hyper figures OFF on input line 4540.
+Package hyperref Info: Link nesting OFF on input line 4545.
+Package hyperref Info: Hyper index ON on input line 4548.
+Package hyperref Info: Plain pages OFF on input line 4555.
+Package hyperref Info: Backreferencing OFF on input line 4560.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
-Package hyperref Info: Bookmarks ON on input line 4772.
+Package hyperref Info: Bookmarks ON on input line 4793.
 \c@Hy@tempcnt=\count108
-LaTeX Info: Redefining \url on input line 5125.
+LaTeX Info: Redefining \url on input line 5152.
 \XeTeXLinkMargin=\dimen123
 \Fld@menulength=\count109
 \Field@Width=\dimen124
 \Fld@charsize=\dimen125
-Package hyperref Info: Hyper figures OFF on input line 6380.
-Package hyperref Info: Link nesting OFF on input line 6385.
-Package hyperref Info: Hyper index ON on input line 6388.
-Package hyperref Info: backreferencing OFF on input line 6395.
-Package hyperref Info: Link coloring OFF on input line 6400.
-Package hyperref Info: Link coloring with OCG OFF on input line 6405.
-Package hyperref Info: PDF/A mode OFF on input line 6410.
-LaTeX Info: Redefining \ref on input line 6450.
-LaTeX Info: Redefining \pageref on input line 6454.
+Package hyperref Info: Hyper figures OFF on input line 6423.
+Package hyperref Info: Link nesting OFF on input line 6428.
+Package hyperref Info: Hyper index ON on input line 6431.
+Package hyperref Info: backreferencing OFF on input line 6438.
+Package hyperref Info: Link coloring OFF on input line 6443.
+Package hyperref Info: Link coloring with OCG OFF on input line 6448.
+Package hyperref Info: PDF/A mode OFF on input line 6453.
+LaTeX Info: Redefining \ref on input line 6493.
+LaTeX Info: Redefining \pageref on input line 6497.
 \Hy@abspage=\count110
 \c@Item=\count111
 \c@Hfootnote=\count112
 )
 Package hyperref Info: Driver (autodetected): hpdftex.
  (/usr/share/texmf-dist/tex/latex/hyperref/hpdftex.def
-File: hpdftex.def 2018/11/30 v6.88e Hyperref driver for pdfTeX
+File: hpdftex.def 2019/09/28 v7.00a Hyperref driver for pdfTeX
 \Fld@listcount=\count113
 \c@bookmark@seq@number=\count114
  (/usr/share/texmf-dist/tex/latex/oberdiek/rerunfilecheck.sty
@@ -635,7 +637,7 @@ Package csquotes Info: Checking for multilingual support...
 Package csquotes Info: ... found 'babel' package.
 Package csquotes Info: Adjusting default style.
 Package csquotes Info: Redefining alias 'default' -> 'english'.
- (/home/frankie/MEGA/ETH/INFK/2019 FS/Bachelor Thesis/ThesisDescriptionKNOBELF/Aufgabenstellung_BA_KNOBELF.aux)
+ (/home/frankie/WebstormProjects/bachelor-thesis/ThesisDescriptionKNOBELF/Aufgabenstellung_BA_KNOBELF.aux)
 \openout1 = `Aufgabenstellung_BA_KNOBELF.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 52.
@@ -651,17 +653,21 @@ LaTeX Font Info:    ... okay on input line 52.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 52.
 LaTeX Font Info:    ... okay on input line 52.
 LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 52.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 52.
+LaTeX Font Info:    Trying to load font information for TS1+cmr on input line 52.
  (/usr/share/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    ... okay on input line 52.
 LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 52.
 LaTeX Font Info:    ... okay on input line 52.
-LaTeX Font Info:    Try loading font information for T1+lmr on input line 52.
+LaTeX Font Info:    Trying to load font information for T1+lmr on input line 52.
  (/usr/share/texmf-dist/tex/latex/lm/t1lmr.fd
 File: t1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
-) ABD: EverySelectfont initializing macros
+)
+Package scrbase Info: activating english \contentsname on input line 52.
+Package scrbase Info: activating english \listfigurename on input line 52.
+Package scrbase Info: activating english \listtablename on input line 52.
+ ABD: EverySelectfont initializing macros
 LaTeX Info: Redefining \selectfont on input line 52.
 LaTeX Info: Redefining \microtypecontext on input line 52.
 Package microtype Info: Generating PDF output.
@@ -670,6 +676,7 @@ Package microtype Info: Using default protrusion set `alltext'.
 Package microtype Info: Automatic font expansion enabled (level 2),
 (microtype)             stretch: 20, shrink: 20, step: 1, non-selected.
 Package microtype Info: Using default expansion set `basictext'.
+LaTeX Info: Redefining \showhyphens on input line 52.
 Package microtype Info: No adjustment of tracking.
 Package microtype Info: No adjustment of interword spacing.
 Package microtype Info: No adjustment of character kerning.
@@ -706,17 +713,17 @@ Package lastpage Info: Please have a look at the pageslts package at
 \AtBeginShipoutBox=\box32
 Package hyperref Info: Link coloring OFF on input line 52.
  (/usr/share/texmf-dist/tex/latex/hyperref/nameref.sty
-Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
+Package: nameref 2019/09/16 v2.46 Cross-referencing by name of section
  (/usr/share/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
 \c@section@level=\count124
-LaTeX Info: Redefining \Ref on input line 515.
+LaTeX Info: Redefining \Ref on input line 520.
 )
 LaTeX Info: Redefining \ref on input line 52.
 LaTeX Info: Redefining \pageref on input line 52.
 LaTeX Info: Redefining \nameref on input line 52.
- (/home/frankie/MEGA/ETH/INFK/2019 FS/Bachelor Thesis/ThesisDescriptionKNOBELF/Aufgabenstellung_BA_KNOBELF.out) (/home/frankie/MEGA/ETH/INFK/2019 FS/Bachelor Thesis/ThesisDescriptionKNOBELF/Aufgabenstellung_BA_KNOBELF.out)
+ (/home/frankie/WebstormProjects/bachelor-thesis/ThesisDescriptionKNOBELF/Aufgabenstellung_BA_KNOBELF.out) (/home/frankie/WebstormProjects/bachelor-thesis/ThesisDescriptionKNOBELF/Aufgabenstellung_BA_KNOBELF.out)
 \@outlinefile=\write3
 \openout3 = `Aufgabenstellung_BA_KNOBELF.out'.
 
@@ -726,12 +733,13 @@ Class scrartcl Info: loading recommended package `bookmark'.
 (scrartcl)           because of handling of possible bookmark level gaps.
 (scrartcl)           You can avoid loading `bookmark' with KOMA-Script option
 (scrartcl)           `bookmarkpackage=false' before \begin{document} and
-(scrartcl)           you can avoid this message with `\usepackage{bookmark}'
+(scrartcl)           you can avoid this message adding:
+(scrartcl)             \usepackage{bookmark}
 (scrartcl)           before \begin{document} on input line 52.
  (/usr/share/texmf-dist/tex/latex/oberdiek/bookmark.sty
-Package: bookmark 2016/05/17 v1.26 PDF bookmarks (HO)
+Package: bookmark 2019/06/04 v1.27 PDF bookmarks (HO)
  (/usr/share/texmf-dist/tex/latex/oberdiek/bkm-pdftex.def
-File: bkm-pdftex.def 2016/05/17 v1.26 bookmark driver for pdfTeX (HO)
+File: bkm-pdftex.def 2019/06/04 v1.27 bookmark driver for pdfTeX (HO)
 Package auxhook Info: \AddLineBeginMainAux comes a little late,
 (auxhook)             because the main .aux file is already opened on input line 164.
 \BKM@id=\count125
@@ -795,7 +803,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 68--70
  []\T1/lmr/m/n/20.74 Project De-scrip-tion  
  []
 
-LaTeX Font Info:    Try loading font information for T1+lmss on input line 73.
+LaTeX Font Info:    Trying to load font information for T1+lmss on input line 73.
 (/usr/share/texmf-dist/tex/latex/lm/t1lmss.fd
 File: t1lmss.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
@@ -825,7 +833,7 @@ Underfull \hbox (badness 10000) has occurred while \output is active
 
 [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} </home/frankie/MEGA/ETH/INFK/2019 FS/Bachelor Thesis/ThesisDescriptionKNOBELF/ETHlogo_13.pdf>]
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} </home/frankie/WebstormProjects/bachelor-thesis/ThesisDescriptionKNOBELF/ETHlogo_13.pdf>]
 Underfull \hbox (badness 10000) has occurred while \output is active
  [] 
  []
@@ -866,7 +874,7 @@ Underfull \hbox (badness 10000) has occurred while \output is active
  []
 
 [3]
-LaTeX Font Info:    Try loading font information for T1+lmtt on input line 219.
+LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 219.
  (/usr/share/texmf-dist/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
@@ -874,19 +882,19 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `lmtt' (encoding: T1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
-LaTeX Font Info:    Try loading font information for OT1+lmr on input line 219.
+LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 219.
  (/usr/share/texmf-dist/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OML+lmm on input line 219.
+LaTeX Font Info:    Trying to load font information for OML+lmm on input line 219.
  (/usr/share/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 219.
+LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 219.
  (/usr/share/texmf-dist/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OMX+lmex on input line 219.
+LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 219.
  (/usr/share/texmf-dist/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
@@ -896,7 +904,7 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <8> on input line 219.
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <6> on input line 219.
-LaTeX Font Info:    Try loading font information for U+lasy on input line 219.
+LaTeX Font Info:    Trying to load font information for U+lasy on input line 219.
  (/usr/share/texmf-dist/tex/latex/base/ulasy.fd
 File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
 )
@@ -949,22 +957,22 @@ Underfull \hbox (badness 10000) has occurred while \output is active
 [5]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 279.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 279.
- (/home/frankie/MEGA/ETH/INFK/2019 FS/Bachelor Thesis/ThesisDescriptionKNOBELF/Aufgabenstellung_BA_KNOBELF.aux)
+ (/home/frankie/WebstormProjects/bachelor-thesis/ThesisDescriptionKNOBELF/Aufgabenstellung_BA_KNOBELF.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 279.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 279.
 Package rerunfilecheck Info: File `Aufgabenstellung_BA_KNOBELF.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 14242 strings out of 492623
- 240157 string characters out of 6135669
- 507712 words of memory out of 5000000
- 17833 multiletter control sequences out of 15000+600000
+ 14841 strings out of 492167
+ 256733 string characters out of 6131558
+ 529211 words of memory out of 5000000
+ 18882 multiletter control sequences out of 15000+600000
  41812 words of font info for 77 fonts, out of 8000000 for 9000
  1142 hyphenation exceptions out of 8191
- 42i,11n,51p,9209b,534s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 45i,11n,56p,10182b,544s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}</usr/share/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmr10.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmr17.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmri10.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmssbx10.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmtt10.pfb>
-Output written on "/home/frankie/MEGA/ETH/INFK/2019 FS/Bachelor Thesis/ThesisDescriptionKNOBELF/Aufgabenstellung_BA_KNOBELF.pdf" (5 pages, 181826 bytes).
+Output written on /home/frankie/WebstormProjects/bachelor-thesis/ThesisDescriptionKNOBELF/Aufgabenstellung_BA_KNOBELF.pdf (5 pages, 181814 bytes).
 PDF statistics:
  140 PDF objects out of 1000 (max. 8388607)
  124 compressed objects within 2 object streams

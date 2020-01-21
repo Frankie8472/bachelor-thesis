@@ -1,8 +1,8 @@
-PWD /home/frankie/MEGA/ETH/INFK/2019 FS/Bachelor Thesis/ThesisDescriptionKNOBELF
+PWD /home/frankie/WebstormProjects/bachelor-thesis/ThesisDescriptionKNOBELF
 INPUT /usr/share/texmf-dist/web2c/texmf.cnf
 INPUT /var/lib/texmf/web2c/pdftex/pdflatex.fmt
-INPUT /home/frankie/MEGA/ETH/INFK/2019 FS/Bachelor Thesis/ThesisDescriptionKNOBELF/Aufgabenstellung_BA_KNOBELF.tex
-OUTPUT /home/frankie/MEGA/ETH/INFK/2019 FS/Bachelor Thesis/ThesisDescriptionKNOBELF/Aufgabenstellung_BA_KNOBELF.log
+INPUT /home/frankie/WebstormProjects/bachelor-thesis/ThesisDescriptionKNOBELF/Aufgabenstellung_BA_KNOBELF.tex
+OUTPUT /home/frankie/WebstormProjects/bachelor-thesis/ThesisDescriptionKNOBELF/Aufgabenstellung_BA_KNOBELF.log
 INPUT /usr/share/texmf-dist/tex/latex/koma-script/scrartcl.cls
 INPUT /usr/share/texmf-dist/tex/latex/koma-script/scrartcl.cls
 INPUT /usr/share/texmf-dist/tex/latex/koma-script/scrkbase.sty
@@ -39,8 +39,8 @@ INPUT /usr/share/texmf-dist/tex/generic/babel/babel.def
 INPUT /usr/share/texmf-dist/tex/generic/babel/txtbabel.def
 INPUT /usr/share/texmf-dist/tex/latex/tools/varioref.sty
 INPUT /usr/share/texmf-dist/tex/latex/tools/varioref.sty
-INPUT /usr/share/texmf-dist/tex/latex/ms/ragged2e.sty
-INPUT /usr/share/texmf-dist/tex/latex/ms/ragged2e.sty
+INPUT /usr/share/texmf-dist/tex/latex/ragged2e/ragged2e.sty
+INPUT /usr/share/texmf-dist/tex/latex/ragged2e/ragged2e.sty
 INPUT /usr/share/texmf-dist/tex/latex/ms/everysel.sty
 INPUT /usr/share/texmf-dist/tex/latex/ms/everysel.sty
 INPUT /usr/share/texmf-dist/tex/latex/lm/lmodern.sty
@@ -119,9 +119,9 @@ INPUT /usr/share/texmf-dist/tex/latex/geometry/geometry.sty
 INPUT /usr/share/texmf-dist/tex/latex/geometry/geometry.sty
 INPUT /usr/share/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty
 INPUT /usr/share/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty
-INPUT /home/frankie/MEGA/ETH/INFK/2019 FS/Bachelor Thesis/ThesisDescriptionKNOBELF/Aufgabenstellung_BA_KNOBELF.aux
-INPUT /home/frankie/MEGA/ETH/INFK/2019 FS/Bachelor Thesis/ThesisDescriptionKNOBELF/Aufgabenstellung_BA_KNOBELF.aux
-OUTPUT /home/frankie/MEGA/ETH/INFK/2019 FS/Bachelor Thesis/ThesisDescriptionKNOBELF/Aufgabenstellung_BA_KNOBELF.aux
+INPUT /home/frankie/WebstormProjects/bachelor-thesis/ThesisDescriptionKNOBELF/Aufgabenstellung_BA_KNOBELF.aux
+INPUT /home/frankie/WebstormProjects/bachelor-thesis/ThesisDescriptionKNOBELF/Aufgabenstellung_BA_KNOBELF.aux
+OUTPUT /home/frankie/WebstormProjects/bachelor-thesis/ThesisDescriptionKNOBELF/Aufgabenstellung_BA_KNOBELF.aux
 INPUT /usr/share/texmf-dist/tex/latex/base/ts1cmr.fd
 INPUT /usr/share/texmf-dist/tex/latex/base/ts1cmr.fd
 INPUT /usr/share/texmf-dist/tex/latex/lm/t1lmr.fd
@@ -141,21 +141,21 @@ INPUT /usr/share/texmf-dist/tex/latex/hyperref/nameref.sty
 INPUT /usr/share/texmf-dist/tex/latex/hyperref/nameref.sty
 INPUT /usr/share/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 INPUT /usr/share/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
-INPUT /home/frankie/MEGA/ETH/INFK/2019 FS/Bachelor Thesis/ThesisDescriptionKNOBELF/Aufgabenstellung_BA_KNOBELF.out
-INPUT /home/frankie/MEGA/ETH/INFK/2019 FS/Bachelor Thesis/ThesisDescriptionKNOBELF/Aufgabenstellung_BA_KNOBELF.out
-INPUT /home/frankie/MEGA/ETH/INFK/2019 FS/Bachelor Thesis/ThesisDescriptionKNOBELF/Aufgabenstellung_BA_KNOBELF.out
-INPUT /home/frankie/MEGA/ETH/INFK/2019 FS/Bachelor Thesis/ThesisDescriptionKNOBELF/Aufgabenstellung_BA_KNOBELF.out
-INPUT /home/frankie/MEGA/ETH/INFK/2019 FS/Bachelor Thesis/ThesisDescriptionKNOBELF/Aufgabenstellung_BA_KNOBELF.out
-INPUT /home/frankie/MEGA/ETH/INFK/2019 FS/Bachelor Thesis/ThesisDescriptionKNOBELF/Aufgabenstellung_BA_KNOBELF.out
-OUTPUT /home/frankie/MEGA/ETH/INFK/2019 FS/Bachelor Thesis/ThesisDescriptionKNOBELF/Aufgabenstellung_BA_KNOBELF.out
-OUTPUT /home/frankie/MEGA/ETH/INFK/2019 FS/Bachelor Thesis/ThesisDescriptionKNOBELF/Aufgabenstellung_BA_KNOBELF.pdf
+INPUT /home/frankie/WebstormProjects/bachelor-thesis/ThesisDescriptionKNOBELF/Aufgabenstellung_BA_KNOBELF.out
+INPUT /home/frankie/WebstormProjects/bachelor-thesis/ThesisDescriptionKNOBELF/Aufgabenstellung_BA_KNOBELF.out
+INPUT /home/frankie/WebstormProjects/bachelor-thesis/ThesisDescriptionKNOBELF/Aufgabenstellung_BA_KNOBELF.out
+INPUT /home/frankie/WebstormProjects/bachelor-thesis/ThesisDescriptionKNOBELF/Aufgabenstellung_BA_KNOBELF.out
+INPUT /home/frankie/WebstormProjects/bachelor-thesis/ThesisDescriptionKNOBELF/Aufgabenstellung_BA_KNOBELF.out
+INPUT /home/frankie/WebstormProjects/bachelor-thesis/ThesisDescriptionKNOBELF/Aufgabenstellung_BA_KNOBELF.out
+OUTPUT /home/frankie/WebstormProjects/bachelor-thesis/ThesisDescriptionKNOBELF/Aufgabenstellung_BA_KNOBELF.out
+OUTPUT /home/frankie/WebstormProjects/bachelor-thesis/ThesisDescriptionKNOBELF/Aufgabenstellung_BA_KNOBELF.pdf
 INPUT /usr/share/texmf-dist/tex/latex/oberdiek/bookmark.sty
 INPUT /usr/share/texmf-dist/tex/latex/oberdiek/bookmark.sty
 INPUT /usr/share/texmf-dist/tex/latex/oberdiek/bkm-pdftex.def
 INPUT /usr/share/texmf-dist/tex/latex/oberdiek/bkm-pdftex.def
-INPUT /home/frankie/MEGA/ETH/INFK/2019 FS/Bachelor Thesis/ThesisDescriptionKNOBELF/ETHlogo_13.pdf
-INPUT /home/frankie/MEGA/ETH/INFK/2019 FS/Bachelor Thesis/ThesisDescriptionKNOBELF/ETHlogo_13.pdf
-INPUT /home/frankie/MEGA/ETH/INFK/2019 FS/Bachelor Thesis/ThesisDescriptionKNOBELF/ETHlogo_13.pdf
+INPUT /home/frankie/WebstormProjects/bachelor-thesis/ThesisDescriptionKNOBELF/ETHlogo_13.pdf
+INPUT /home/frankie/WebstormProjects/bachelor-thesis/ThesisDescriptionKNOBELF/ETHlogo_13.pdf
+INPUT /home/frankie/WebstormProjects/bachelor-thesis/ThesisDescriptionKNOBELF/ETHlogo_13.pdf
 INPUT /usr/share/texmf-dist/fonts/tfm/public/lm/ec-lmr17.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/lm/ec-lmbx12.tfm
 INPUT /usr/share/texmf-dist/tex/latex/lm/t1lmss.fd
@@ -191,9 +191,9 @@ INPUT /usr/share/texmf-dist/tex/latex/base/ulasy.fd
 INPUT /usr/share/texmf-dist/fonts/tfm/public/latex-fonts/lasy10.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/latex-fonts/lasy8.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/latex-fonts/lasy6.tfm
-INPUT /home/frankie/MEGA/ETH/INFK/2019 FS/Bachelor Thesis/ThesisDescriptionKNOBELF/Aufgabenstellung_BA_KNOBELF.aux
-INPUT /home/frankie/MEGA/ETH/INFK/2019 FS/Bachelor Thesis/ThesisDescriptionKNOBELF/Aufgabenstellung_BA_KNOBELF.out
-INPUT /home/frankie/MEGA/ETH/INFK/2019 FS/Bachelor Thesis/ThesisDescriptionKNOBELF/Aufgabenstellung_BA_KNOBELF.out
+INPUT /home/frankie/WebstormProjects/bachelor-thesis/ThesisDescriptionKNOBELF/Aufgabenstellung_BA_KNOBELF.aux
+INPUT /home/frankie/WebstormProjects/bachelor-thesis/ThesisDescriptionKNOBELF/Aufgabenstellung_BA_KNOBELF.out
+INPUT /home/frankie/WebstormProjects/bachelor-thesis/ThesisDescriptionKNOBELF/Aufgabenstellung_BA_KNOBELF.out
 INPUT /usr/share/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc
 INPUT /usr/share/texmf-dist/fonts/type1/public/lm/lmbx12.pfb
 INPUT /usr/share/texmf-dist/fonts/type1/public/lm/lmr10.pfb

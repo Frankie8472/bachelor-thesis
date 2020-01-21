@@ -1,67 +1,82 @@
-\contentsline {chapter}{\numberline {1}Introduction}{3}{chapter.1}% 
-\contentsline {section}{\numberline {1.1}Introduction}{3}{section.1.1}% 
-\contentsline {section}{\numberline {1.2}Problem Statement}{3}{section.1.2}% 
-\contentsline {section}{\numberline {1.3}Section}{4}{section.1.3}% 
+\contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}% 
+\contentsline {section}{\numberline {1.1}Introduction}{1}{section.1.1}% 
+\contentsline {section}{\numberline {1.2}Goals of the Thesis}{1}{section.1.2}% 
+\contentsline {section}{\numberline {1.3}Problem Statement}{2}{section.1.3}% 
+\contentsline {section}{\numberline {1.4}Background}{2}{section.1.4}% 
+\contentsline {section}{\numberline {1.5}Motivation}{2}{section.1.5}% 
+\contentsline {section}{\numberline {1.6}Outline}{3}{section.1.6}% 
 \contentsline {chapter}{\numberline {2}Related Work}{5}{chapter.2}% 
 \contentsline {section}{\numberline {2.1}Previous work}{5}{section.2.1}% 
 \contentsline {section}{\numberline {2.2}Gamification and Game Based Learning (GBL)}{5}{section.2.2}% 
-\contentsline {section}{\numberline {2.3}Existing Educational Software}{5}{section.2.3}% 
-\contentsline {section}{\numberline {2.4}Checklist}{6}{section.2.4}% 
-\contentsline {chapter}{\numberline {3}Requirements}{7}{chapter.3}% 
-\contentsline {section}{\numberline {3.1}Boundary conditions}{7}{section.3.1}% 
-\contentsline {section}{\numberline {3.2}Evaluation of possible solutions}{7}{section.3.2}% 
-\contentsline {section}{\numberline {3.3}Checklist}{8}{section.3.3}% 
-\contentsline {chapter}{\numberline {4}Design of the Learning Environment}{9}{chapter.4}% 
-\contentsline {section}{\numberline {4.1}Phaser 3}{9}{section.4.1}% 
-\contentsline {subsection}{\numberline {4.1.1}Base Configuration}{9}{subsection.4.1.1}% 
-\contentsline {subsection}{\numberline {4.1.2}Scenes}{11}{subsection.4.1.2}% 
-\contentsline {subsubsection}{\nonumberline Lifecycle}{11}{section*.13}% 
-\contentsline {subsection}{\numberline {4.1.3}Managers}{12}{subsection.4.1.3}% 
-\contentsline {section}{\numberline {4.2}Objects}{12}{section.4.2}% 
-\contentsline {subsection}{\numberline {4.2.1}Object Generation}{12}{subsection.4.2.1}% 
-\contentsline {subsection}{\numberline {4.2.2}Object Storage}{15}{subsection.4.2.2}% 
-\contentsline {subsection}{\numberline {4.2.3}Object Display}{16}{subsection.4.2.3}% 
-\contentsline {subsection}{\numberline {4.2.4}Object Interaction}{16}{subsection.4.2.4}% 
-\contentsline {section}{\numberline {4.3}Score Storage}{16}{section.4.3}% 
-\contentsline {section}{\numberline {4.4}Creating animated Introductions}{17}{section.4.4}% 
-\contentsline {section}{\numberline {4.5}Scene Concept of the Learning Environment}{18}{section.4.5}% 
-\contentsline {subsection}{\numberline {4.5.1}Drop Down Menu}{18}{subsection.4.5.1}% 
-\contentsline {subsection}{\numberline {4.5.2}Welcome Screen}{18}{subsection.4.5.2}% 
-\contentsline {subsection}{\numberline {4.5.3}Level Menu}{18}{subsection.4.5.3}% 
-\contentsline {subsection}{\numberline {4.5.4}Object Summary}{19}{subsection.4.5.4}% 
-\contentsline {subsection}{\numberline {4.5.5}Sorting with one Category}{19}{subsection.4.5.5}% 
-\contentsline {subsection}{\numberline {4.5.6}Sorting with one category under difficult conditions}{19}{subsection.4.5.6}% 
-\contentsline {subsection}{\numberline {4.5.7}Sorting with restricted space}{19}{subsection.4.5.7}% 
-\contentsline {subsection}{\numberline {4.5.8}Object pairing}{20}{subsection.4.5.8}% 
-\contentsline {subsubsection}{\nonumberline Object pairing - easy version}{20}{section*.16}% 
-\contentsline {subsubsection}{\nonumberline Object pairing - hard version}{21}{section*.18}% 
-\contentsline {subsection}{\numberline {4.5.9}Score Screen}{21}{subsection.4.5.9}% 
-\contentsline {subsection}{\numberline {4.5.10}Introduction}{21}{subsection.4.5.10}% 
-\contentsline {section}{\numberline {4.6}Code structure of the learning environment}{21}{section.4.6}% 
-\contentsline {subsection}{\numberline {4.6.1}Playing the Game}{22}{subsection.4.6.1}% 
-\contentsline {subsection}{\numberline {4.6.2}Running the Code}{22}{subsection.4.6.2}% 
-\contentsline {subsection}{\numberline {4.6.3}BaseScene}{22}{subsection.4.6.3}% 
-\contentsline {subsubsection}{\nonumberline The Scene Transition}{22}{section*.21}% 
-\contentsline {subsection}{\numberline {4.6.4}PreloadAssets}{23}{subsection.4.6.4}% 
-\contentsline {subsubsection}{\nonumberline Image Game Objects}{24}{section*.22}% 
-\contentsline {subsection}{\numberline {4.6.5}DropDownMenu}{25}{subsection.4.6.5}% 
-\contentsline {subsection}{\numberline {4.6.6}WelcomeScene}{26}{subsection.4.6.6}% 
-\contentsline {subsection}{\numberline {4.6.7}LevelMenuSceneScene}{26}{subsection.4.6.7}% 
-\contentsline {subsection}{\numberline {4.6.8}IntroScene}{27}{subsection.4.6.8}% 
-\contentsline {subsection}{\numberline {4.6.9}SortingScene}{27}{subsection.4.6.9}% 
-\contentsline {subsection}{\numberline {4.6.10}PropertySortingScene}{29}{subsection.4.6.10}% 
-\contentsline {subsection}{\numberline {4.6.11}RestrictedSortingScene}{29}{subsection.4.6.11}% 
-\contentsline {subsection}{\numberline {4.6.12}GameScene}{30}{subsection.4.6.12}% 
-\contentsline {subsection}{\numberline {4.6.13}ScoreScene}{32}{subsection.4.6.13}% 
-\contentsline {section}{\numberline {4.7}Final Look of the Learning Environment}{32}{section.4.7}% 
-\contentsline {chapter}{\numberline {5}Evaluation}{45}{chapter.5}% 
-\contentsline {section}{\numberline {5.1}Debugging}{45}{section.5.1}% 
-\contentsline {subsection}{\numberline {5.1.1}Devices}{45}{subsection.5.1.1}% 
-\contentsline {subsection}{\numberline {5.1.2}Differences and obstacles}{45}{subsection.5.1.2}% 
-\contentsline {section}{\numberline {5.2}Target Audience Test}{45}{section.5.2}% 
-\contentsline {section}{\numberline {5.3}Various Audience Test}{46}{section.5.3}% 
-\contentsline {section}{\numberline {5.4}Checklist}{46}{section.5.4}% 
-\contentsline {chapter}{\numberline {6}Conclusion}{47}{chapter.6}% 
-\contentsline {section}{\numberline {6.1}Future Improvements}{47}{section.6.1}% 
-\contentsline {section}{\numberline {6.2}checklist}{47}{section.6.2}% 
-\contentsline {chapter}{Bibliography}{49}{section*.49}% 
+\contentsline {subsection}{\numberline {2.2.1}Gamification}{5}{subsection.2.2.1}% 
+\contentsline {subsection}{\numberline {2.2.2}Game-Based-Learning}{6}{subsection.2.2.2}% 
+\contentsline {subsection}{\numberline {2.2.3}Gamification vs. Game-Based-Learning}{6}{subsection.2.2.3}% 
+\contentsline {section}{\numberline {2.3}Existing Educational Software}{6}{section.2.3}% 
+\contentsline {section}{\numberline {2.4}Checklist}{7}{section.2.4}% 
+\contentsline {chapter}{\numberline {3}Requirements}{9}{chapter.3}% 
+\contentsline {section}{\numberline {3.1}Programming Environment}{9}{section.3.1}% 
+\contentsline {subsection}{\numberline {3.1.1}Boundary Conditions}{9}{subsection.3.1.1}% 
+\contentsline {subsection}{\numberline {3.1.2}Evaluation of Possible Solutions}{10}{subsection.3.1.2}% 
+\contentsline {subsubsection}{\nonumberline Babylon.js}{10}{section*.7}% 
+\contentsline {subsubsection}{\nonumberline Pixi.js}{10}{section*.8}% 
+\contentsline {subsubsection}{\nonumberline Melon.js}{10}{section*.9}% 
+\contentsline {subsubsection}{\nonumberline Phaser}{11}{section*.10}% 
+\contentsline {subsubsection}{\nonumberline Evaluation of the Frameworks}{11}{section*.11}% 
+\contentsline {section}{\numberline {3.2}Boundary Conditions of the problem statement}{11}{section.3.2}% 
+\contentsline {section}{\numberline {3.3}Target Audience}{12}{section.3.3}% 
+\contentsline {section}{\numberline {3.4}Elements of Gamification}{12}{section.3.4}% 
+\contentsline {section}{\numberline {3.5}Additional Conditions}{12}{section.3.5}% 
+\contentsline {chapter}{\numberline {4}Design of the Learning Environment}{13}{chapter.4}% 
+\contentsline {section}{\numberline {4.1}Phaser 3}{13}{section.4.1}% 
+\contentsline {subsection}{\numberline {4.1.1}Base Configuration}{13}{subsection.4.1.1}% 
+\contentsline {subsection}{\numberline {4.1.2}Scenes}{15}{subsection.4.1.2}% 
+\contentsline {subsubsection}{\nonumberline Lifecycle}{15}{section*.12}% 
+\contentsline {subsection}{\numberline {4.1.3}Managers}{16}{subsection.4.1.3}% 
+\contentsline {section}{\numberline {4.2}Objects}{16}{section.4.2}% 
+\contentsline {subsection}{\numberline {4.2.1}Object Generation}{16}{subsection.4.2.1}% 
+\contentsline {subsection}{\numberline {4.2.2}Object Storage}{19}{subsection.4.2.2}% 
+\contentsline {subsection}{\numberline {4.2.3}Object Display}{20}{subsection.4.2.3}% 
+\contentsline {subsection}{\numberline {4.2.4}Object Interaction}{20}{subsection.4.2.4}% 
+\contentsline {subsection}{\numberline {4.2.5}Modularity}{20}{subsection.4.2.5}% 
+\contentsline {section}{\numberline {4.3}Score Storage}{21}{section.4.3}% 
+\contentsline {section}{\numberline {4.4}Creating animated Introductions}{21}{section.4.4}% 
+\contentsline {section}{\numberline {4.5}Scene Concept of the Learning Environment}{22}{section.4.5}% 
+\contentsline {subsection}{\numberline {4.5.1}Drop Down Menu}{22}{subsection.4.5.1}% 
+\contentsline {subsection}{\numberline {4.5.2}Welcome Screen}{22}{subsection.4.5.2}% 
+\contentsline {subsection}{\numberline {4.5.3}Level Menu}{22}{subsection.4.5.3}% 
+\contentsline {subsection}{\numberline {4.5.4}Object Summary}{23}{subsection.4.5.4}% 
+\contentsline {subsection}{\numberline {4.5.5}Sorting with one Category}{23}{subsection.4.5.5}% 
+\contentsline {subsection}{\numberline {4.5.6}Sorting with one Category under difficult Conditions}{23}{subsection.4.5.6}% 
+\contentsline {subsection}{\numberline {4.5.7}Sorting with restricted space}{23}{subsection.4.5.7}% 
+\contentsline {subsection}{\numberline {4.5.8}Object pairing}{24}{subsection.4.5.8}% 
+\contentsline {subsubsection}{\nonumberline Object pairing - easy version}{24}{section*.15}% 
+\contentsline {subsubsection}{\nonumberline Object pairing - hard version}{25}{section*.17}% 
+\contentsline {subsection}{\numberline {4.5.9}Score Screen}{25}{subsection.4.5.9}% 
+\contentsline {subsection}{\numberline {4.5.10}Introduction}{25}{subsection.4.5.10}% 
+\contentsline {section}{\numberline {4.6}Code structure of the learning environment}{25}{section.4.6}% 
+\contentsline {subsection}{\numberline {4.6.1}Playing the Game}{26}{subsection.4.6.1}% 
+\contentsline {subsection}{\numberline {4.6.2}Running the Code}{26}{subsection.4.6.2}% 
+\contentsline {subsection}{\numberline {4.6.3}BaseScene}{26}{subsection.4.6.3}% 
+\contentsline {subsubsection}{\nonumberline The Scene Transition}{26}{section*.20}% 
+\contentsline {subsection}{\numberline {4.6.4}PreloadAssets}{27}{subsection.4.6.4}% 
+\contentsline {subsubsection}{\nonumberline Image Game Objects}{28}{section*.21}% 
+\contentsline {subsection}{\numberline {4.6.5}DropDownMenu}{29}{subsection.4.6.5}% 
+\contentsline {subsection}{\numberline {4.6.6}LevelMenuSceneScene}{30}{subsection.4.6.6}% 
+\contentsline {subsection}{\numberline {4.6.7}IntroScene}{31}{subsection.4.6.7}% 
+\contentsline {subsection}{\numberline {4.6.8}SortingScene}{31}{subsection.4.6.8}% 
+\contentsline {subsection}{\numberline {4.6.9}PropertySortingScene}{33}{subsection.4.6.9}% 
+\contentsline {subsection}{\numberline {4.6.10}RestrictedSortingScene}{34}{subsection.4.6.10}% 
+\contentsline {subsection}{\numberline {4.6.11}GameScene}{34}{subsection.4.6.11}% 
+\contentsline {subsection}{\numberline {4.6.12}ScoreScene}{37}{subsection.4.6.12}% 
+\contentsline {section}{\numberline {4.7}Final Look of the Learning Environment}{37}{section.4.7}% 
+\contentsline {chapter}{\numberline {5}Evaluation}{51}{chapter.5}% 
+\contentsline {section}{\numberline {5.1}Debugging}{51}{section.5.1}% 
+\contentsline {subsection}{\numberline {5.1.1}Devices}{51}{subsection.5.1.1}% 
+\contentsline {subsection}{\numberline {5.1.2}Differences and obstacles}{52}{subsection.5.1.2}% 
+\contentsline {subsection}{\numberline {5.1.3}Unexpected Bugs}{52}{subsection.5.1.3}% 
+\contentsline {section}{\numberline {5.2}Target Audience Test}{52}{section.5.2}% 
+\contentsline {section}{\numberline {5.3}Various Audience Test}{53}{section.5.3}% 
+\contentsline {chapter}{\numberline {6}Conclusion}{55}{chapter.6}% 
+\contentsline {section}{\numberline {6.1}Limitation}{55}{section.6.1}% 
+\contentsline {section}{\numberline {6.2}Future Improvements}{56}{section.6.2}% 
+\contentsline {chapter}{Bibliography}{57}{section*.48}% 

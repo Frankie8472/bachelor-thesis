@@ -1,61 +1,113 @@
 % !TEX root = ../thesis.tex
 
-\chapter{Evaluation}
-\label{chap:evaluation}
-UNDER CONSTRUCTION
-
+\chapter{Evaluation}\label{ch:evaluation}
 In this section the environment the game was tested in will be presented and analysed.
-First every game has to be tested on different devices for code errors or functional disbehaviour which was not intended.
+First every game has to be tested on different devices for code errors or unintended behaviour.
 Second and third a target and various audience will test the game and significant reaction and behaviour will be stated.
 
 \section{Debugging}
 \subsection{Devices}
-firefox, chrome, microsoft edge
-computer (apple, windows 10), tablet (apple, android), smartphone (apple, android)
+The game was tested on the following devices and browsers:
+
+\textbf{Browsers}
+\begin{itemize}
+    \item Firefox
+    \item Chrome
+    \item Microsoft Edge (only on devices with Windows OS)
+    \item Safari (only on iOS devices)
+\end{itemize}
+
+\textbf{Devices}
+\begin{itemize}
+    \item Computer with Windows 10
+    \item Computer with Apple iOS
+    \item Tablet with Apple iOS
+    \item Tablet with Android
+    \item Smartphone with Android
+    \item iPhone
+\end{itemize}
+
 \subsection{Differences and obstacles}
+On Windows and Android devices the browser based application run without any troubles.
+On Apple devices there is an issue with the fullscreen option.
+As soon as the fullscreen is engaged, the touch functions of the operating system interferes with the touch input in the
+browser window. This is a common problem with apple devices and the only known solution to work so far is to just
+minimize the header bar.
+This is an acceptable solution considering all the safety restriction apple applies to its users and developers.
+
+\subsection{Unexpected Bugs}
+With the various test audience some unexpected bugs are found. The most fascinating are mentioned here.
+
+One would not expect the users to something that is not goal related.
+For example dragging an object not to its intended destination but to the screen/window boundary and even further.
+To ensure the object can still be accessed through dragging,
+a restriction on dragging the object outside of the windows had to be added.
+
+After a goal is reached and the scene transition sets in, one could expect the user to wait until a new scene is loaded.
+As this is not the case further restriction on the user input had to be added.
+
+The users thinking becomes faster the longer he plays the game and so are his interaction/inputs.
+Thus different locks on animations had to be placed, so that while some animation is in progress not another animation can
+be triggered.
+
+It was fascinating to see that users have a different thickness of their finger.
+For users with a thicker fingers, sometimes the object size was too small to touch and still observe the now dragged object.
+Thus adjustments had to be made to the size of objects.
 
 \section{Target Audience Test}
-5 Test subjects age between 4 and 7 with less to none knowledge of use of electronic devices.
-6 Test subjects age between 4 and 7 with strong knowledge of use of electronic devices.
+The created learning environment was tested on two groups:
+\begin{enumerate}
+    \item 6 test subjects; age between 4 and 7; advanced knowledge on handling electronic devices
+    \item 5 test subjects; age between 4 and 7; less to none knowledge on handling electronic devices
+\end{enumerate}
+
+The first group had no problem at all interacting with the browser based application.
+The second group needed more time to get a feeling of the game mechanics but after the adjustment time the difference of
+the two groups was negligible.
+
+In the end both test groups were eager to play and explore the newly presented learning environment.
+
+In the first levels the perfect score was almost always reached on the first try.
+
+The younger ones had the most fun with the middle staged levels with the falling objects but were eager and curious
+to explore the harder levels. With the support of the older ones or even an adult playing the easy pairing game
+was possible and understandable.
+
+The older ones were most eager to understand and beat the hardest level and sometimes found a possible solution
+faster than the adult test group.
+
+What was fascinating that almost every test subject knew what to do in the level with restricted space but
+some had different tactics to approach it. The two tactics used were:
+\begin{itemize}
+    \item Fixating a category and finding the solution with trial and error.
+    \item Sorting the objects in the field above the boxes after a category.
+\end{itemize}
+
+Some test subjects wanted to play more even after playing all the levels and some of them even formed a group and
+were discussing possible solutions, sharing their thoughts.
 
 \section{Various Audience Test}
-11 Test subjects age between 18 and 40 equally distributed with daily usage of electronics (computer, tablet, smartphone)
-13 Test subjects age between 30 and 70 equally distributed with only daily usage of their smartphone
+\begin{enumerate}
+    \item 11 test subjects; age between 18 and 40; daily usage of electronic devices (computer, tablet, smartphone)
+    \item 13 test subjects; age between 30 and 70; only some knowledge in how to handle a smartphone
+\end{enumerate}
 
-\section{Checklist}
-Depending on your budget and available time, you may
-have performed simulations or even some experiments. In
-either case, it is important to describe the environment
-of your experiments or simulations. This includes stating
-the parameters and conditions of the environment (sim-
-ulated or real), what measurements were taken and how
-they were taken.
-You need to establish the fact that your simulation or
-experiment results are statistically stable, meaning that
-they are representative of the space of possible results.
-Performing experiments and simulations is a subtle mat-
-ter, always putting the validity of your data at risk in
-many aspects. Before you perform the simulation or ex-
-periment, educate yourself on how to perform simula-
-tions, how to interpret the results and how to present
-them in graphs and figures.
-Each figure (or graph) should be well explained. Dedi-
-cate at least one paragraph for each figure. Describe what
-the reader sees in each figure and what he should notice.
-Moreover, reason on the results - are they the way they
-were expected to be? Avoid giving tables of numerical
-data as means of presenting your results.
-Compare the performance of your solution to the per-
-formance of one or two competing solutions. Usually,
-when you simulate or experiment on your solution, you
-simulate it in contrast to a competing solution. You have
-to make sure that the test scenarios are fair and make an
-argument about the fairness of your comparison in the
-paper.
-A special case of experiment is the usability test. Many
-times, although the performance of a solution can be im-
-pressive, the applicability of it can be minimal. Usability
-test is a type of experimentation, which determines the
-acceptance of a solution by end-users or its suitability for
-certain applications. Usually, papers on software product
-solutions contain usability tests.
+The first test group had no problem at all finding out how to interact with the browser based application.
+All of them figured out all tasks on their own. As in the first test run the time limit on the last level was somewhat
+too small, at first no one managed to beat it at all. Fascinating to see was that 5 test subjects did not want to stop
+playing until they beat the game, what they did in the end.
+
+The second test group needed some adjustment time to figure out how to interact with the browser based application.
+On some one could see that the motoric abilities were not trained as well. One could assume that this were the older
+test subjects. On the contrary, yes there were two test subject in the older spectrum, but three younger test subjects
+had not used their smartphone in that way in a long time and some of their motoric functions deteriorated
+in a fascinating way.
+Furthermore almost all of them had trouble understanding the level with sorting objects in boxes with restricted space
+but not with the other levels.
+Though the ones who immediately understood the task on hand had problem understanding other tasks others had no problems with.
+
+There were two teachers (one preschool and one kindergarden) who tested the game.
+One of them was not found of tablets in kindergarden and opposed the idea in the beginning.
+After she found out that the application was not intended to replace some topics or ways they are teaching but
+to enhance their spectrum and ability to deal with their pupils on their respective levels,
+she wanted to give the idea a chance. The aspect of group work was also very welcomed.

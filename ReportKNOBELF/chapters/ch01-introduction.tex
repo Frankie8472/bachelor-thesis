@@ -2,80 +2,26 @@
 
 % set counter to n-1:
 \setcounter{chapter}{0}
-UNDER CONSTRUCTION
 
-\chapter{Introduction}
-\label{chap:introduction}
-
-\section{Introduction}
-\section{Problem Statement}
-
-
-the background on and motivation for your research
-- technological trends of the area
-- open problems
-- recent promising developments
-- introduce more specific terminology which is not widely known.
-- Provide good motivation for your work,
-- explaining its technological, research or economic importance
-- The motivation simply two or three good reasons are enough to
-make your research important.
-
-a summary and outline of your paper, telling readers what they should expect to find in it.
-
-- a problem description, which is slightly more detailed than in the abstract.
-- a description of your solution
-- some arguments on its impacts
-- key concepts and categorize its approach.
-
-Close your introduction with a description of your pa-
-per outline
-- what sections it contains
-- what the reader will find in each.
-
-A proper flow
-1. context
-2. present your proposal
-3. provide the verification
-4. conclusions.
-
-As the importance of computer science is rising, certain games that support the
-developement of abstract thinking, analytical skills and decision making, are
-becoming more and more interesting at an early age. Through identification and
-describing relationships between items, children develop a foundation to early
-math skills and basic concepts of computer science (e.g. combinatorics of finite
-affine and projective spaces, the theory of error-correcting codes, etc.)
-%\cite{SET}
-. The pupils individual learning speed and lack of concentration, if
-not receiving the right amount of attention, is another challenge by itself.
+\chapter{Introduction}\label{ch:introduction}
+\section{Introduction}\label{sec:introduction}
+The importance of computer science is rising.
+The development of abstract thinking, analytical skills and decision making,
+are becoming more and more interesting at an early age.
+Through identification and describing relationships between items,
+children develop a foundation to early math skills and basic concepts of computer science
+(e.g.\ combinatorics of finite affine and projective spaces, the theory of error-correcting codes, hashing, etc.)\cite{cardgameset}.
+The pupils individual learning speed and lack of concentration,
+if not receiving the right amount of attention, is another challenge by itself.
 Without individual fostering, children are at high risk of losing interest.
-Through this thesis the teachers should receive a tool for their pupils. Focused
-on classification of objects with certain properties, the pupils get introduced
-to a computer-based learning environment. There they can individually train and
-improve themselves in this field. In the mean time the teachers can concentrate
-on the majority of their pupils and have the opportunity to work with pupils on
-an individual basis, without feeling the pressure of having to support everyone
-at once.
+Through this thesis the teachers will be introduced to a tool for their pupils.
+Focused on classification of objects with certain properties, the pupils get introduced to a computer-based
+learning environment or so called game based learning.
+There they can individually train and improve themselves in this field.
+In the mean time the teachers can concentrate on the majority of their pupils and have the opportunity to work with
+pupils on an individual basis, without feeling the pressure of having to support everyone at once.
 
-\section*{Background}
-The key contribution of computer science to general school education is rooted
-in the concept of \textit{algorithmic thinking} %\cite{HKKS17}
-. One way of
-introducing kindergarten and primary school pupils to algorithmic thinking and
-it's concepts consists in making them solve problems with and without computers.
-This can be achieved using age- and knowledge-appropriate learning materials.
-Several papers with corresponding online learning environments have been
-proposed.
-%\cite{STBLUM, SKAMP, TANGK, JWEBER}.
-This work is going to be added to
-the implementation of "INFORMATIK BIBER in KG und 1/2" by Jil Weber
-%\cite{JWEBER}
-. The focus of this work will not solely lie on the translation of
-the existing teaching material to a computer-based learning environment, but
-also on introducing learning methods in a gamified environment which not only
-complements the teachers with their teachings but also assisting them.
-
-\section*{Goals of the Thesis}
+\section{Goals of the Thesis}\label{sec:goals-of-the-thesis}
 The main objective of this thesis consists of planning, analyzing, implementing
 and testing a computer-based learning environment on the topic of
 classification. The student studies the already existing implementations of
@@ -87,6 +33,41 @@ find a suitable implementation that integrates neatly into our existing system
 mentioned before. The outcome of this thesis is a well-documented, stable and
 reliable prototype, providing the functional elements to be used in schools.
 
-\section{Section}
+\section{Problem Statement}\label{sec:problem-statement}
+New educational material is in production and some is already distributed.
+And with the printing teaching materials there comes the need for digitalized materials and exercises.
+In related work [\ref{ch:relatedwork}] the already published digitalized exercises and
+in what way they were realized are addressed.
+The book \textit{"INFORMATIK BIBER in KG und 1/2"} was published recently and only parts have been digitalized yet.
+In this thesis the part where children learn how to identify and compare properties of different objects is covered.
 
-SECTION 0
+The focus though will not solely lie on the translation of the existing teaching material to a
+computer-based learning environment, but also on introducing learning methods in a gamified environment which
+not only complements the teachers with their teachings but also assisting them.
+
+The main questions we are going to ask are:
+
+\begin{itemize}
+    \item How can we reach and support our target audience?
+    \item What is our target audience capable of?
+    \item What kind of different digital environments are there?
+\end{itemize}
+
+\section{Background}\label{sec:background}
+The key contribution of computer science to general school education is rooted in the concept of
+\textit{algorithmic thinking}\cite{HKKS17}.
+One way of introducing kindergarten and primary school pupils to algorithmic thinking and
+it's concepts consists in making them solve problems with and without computers.
+This can be achieved using age- and knowledge-appropriate learning materials.
+
+\section{Motivation}\label{sec:motivation}
+Computer science provides already an easier way than other topics for teaching in the digitalized world.
+As one can at least guess the huge potential to make use of the students daily enjoyments while still teaching
+them the necessary things, it would be a loss to the teaching world not to explore and evaluate this kind of teaching
+method. Especially game based learning as gamified learning is already being explored and evaluated.
+
+\section{Outline}\label{sec:outlook}
+In the following chapters related work in the field of game based learning will be addressed,
+and the target audience as well as electronic devices will be analyzed for their requirements and capabilities.
+Furthermore the created learning environment based on game based learning is explained in detail, its evaluation and
+future applications and improvements.

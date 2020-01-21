@@ -1,26 +1,125 @@
 % !TEX root = ../thesis.tex
 
-\chapter{Requirements}
-\label{chap:requirements}
-UNDER CONSTRUCTION
-
-\section{Boundary conditions}
-
-\section{Evaluation of possible solutions}
-
+\chapter{Requirements}\label{ch:requirements}
 In this section we will capture the requirements for our learning environment.
 We will look into the cognitive and motor abilities of the target audience and
 some elements of gamification which will be analyzed and assessed.
-The existing environment our work should be implemented has conditions as well.
+The existing environment, our work should be implemented in, has conditions as well.
 Those will be taken into consideration while evaluating a suitable framework.
 
-\section*{Target Audience}
-\section*{Elements of Gamification}
-\section*{Additional Conditions}
-\section*{Framework}
+\section{Programming Environment}
+\subsection{Boundary Conditions}
+\begin{itemize}
+    \item The game should be maintainable as it is not excluded that others are going to work on it.
+    \item Modularity is an important aspect as one cannot assume the final design to this point in time.
+    \item It should be possible to integrate it in a Typescript/JavaScript/HTML environment (e.g.\ as a canvas) as
+    all similar work up until now is mostly written in Typescript
+    \item The ability to run on computers and tablets is important as a lot of schools have one or the other.
+    \item Easy to learn. Support is an important aspect as it is easier to start with something new.
+    A huge community correlates in most cases with good support on free open source software.
+\end{itemize}
 
-human
-- kinder koennen nicht lesen und schreiben, keine groesseren zahlen und keine buchstaben
+\subsection{Evaluation of Possible Solutions}
+\subsubsection{Babylon.js}
+Babylon.js is a complete JavaScript framework for building 3D games.
+Using WebGL for graphics, the feature set for Babylon is somewhat extensive.
+Its community is said to be fairly active.
+The most significant features are:
+
+\begin{itemize}
+    \item Support and exporting tools
+    \item Game engine staples such as scene picking, collision handling, and scene graphs
+    \item Particle and animation systems
+    \item Performance optimizations such as frustum clipping, hardware scaling, and occlusion queries
+    \item Shader, rendering, and texture systems
+    \item Expansive mesh support
+\end{itemize}
+
+Babylon does not require to be installed as an internal entity on your computer.
+Thus, all development can happen within the browser/code editor itself\cite{phaserad}.
+
+\subsubsection{Pixi.js}
+Pixi.js is a 2D game rendering engine intended for HTML5 games.
+There are benefits of its integrated hardware acceleration.
+Pixi’s focus lies not on WebGL, yet utilizes rich game content, interactive displays,
+and apps that are supported on all platforms equally.
+It is said that it is the way that Pixi has been built that enables for it to be a smooth, rapid, and evenly interactive rendering engine\cite{phaserad}.
+
+\subsubsection{Melon.js}
+Melon.js has a sprite-built JavaScript engine for 2D game development,
+is an independent project which does not require additional libraries to work,
+supports mobile type devices as well as all leading browsers,
+optimization for mobile devices for motion and hardware,
+in-built HTML5 audio support,
+a practical physics engine to reduce the CPU usage,
+a great deal of effects that would be required for creating a
+functional on-line game in the browser.
+Community forums is hosted on Google Groups, where you can quickly yield answers to your questions in regards to how Melon.js works or in the case of you experiencing bugs.
+The documentation features several dozens of demo applications built with Melon,
+some of which are open-source and can be used to learn different aspects of game development from\cite{phaserad}.
+
+\subsubsection{Phaser}
+Phaser is a free and open source JavaScript/TypeScript framework which puts a focus on letting coders make games quickly.
+The system works primarily with Canvas and WebGL, letting programmers easily build substantial games for both
+desktop and mobile browsers.
+
+It is said that phaser has an active community that regularly participates on the forum, Slack, and Discord channels.
+
+One of the biggest benefits of this engine is that it is a fully-featured engine,
+so it isn’t restricted to doing just one thing.
+Here’s a list of some of the feature sets provided with Phaser:
+
+\begin{itemize}
+    \item built on WebGL and canvas
+    \item preloader system
+    \item physics features
+    \item sprite and animation handling
+    \item particle system
+    \item camera, input, and sound systems
+    \item tilemap support
+    \item device scaling support
+    \item plugin availability
+\end{itemize}
+
+Phaser’s preloader makes it easy for developers to load their game assets and have them automatically handled.
+That way, you don’t have to waste time writing extensive code for each part of the game\cite{phaserad}.
+
+\subsubsection{Evaluation of the Frameworks}
+Through the boundary conditions one can see that the TypeScript support, a lot of code examples,
+an active community for support and multiple browser support is most important for this work.
+After a short evaluation of the most featured JavaScript/TypeScript game engines, it became clear,
+that the phaser framework fulfils our conditions to a fairly good extent.
+
+\section{Boundary Conditions of the problem statement}
+There have to be objects with different property categories with multiple properties in each category.
+With these objects should be played with in different levels of difficulty.
+There should be easy levels for inexperienced users and hard levels for more advanced users.
+The aspect of hashing in the context of sorting these objects with limited available space must be included.
+
+\section{Target Audience}
+The target audience are going to be children between the age of 5 and 8.
+They cannot be expected to be able to read or write. Numbers from 1 to 5 should be possible though.
+The motoric abilities of children with tablets are rather advanced in contrast to useing a computer with a mouse.
+So a touch screen of any kind is not a problem but the handling with a keyboard of a mouse cannot be assumed.
+
+\section{Elements of Gamification}
+\begin{itemize}
+    \item Easy levels for beginners
+    \item Hard levels for experienced users
+    \item Levels should always be playable under difficult conditions to strengthen what you have learned
+    \item Reward system for instant gratification and progress tracking
+    \item The gratification should be visualized
+    \item Tracking of correct and incorrect choices made
+    \item Time limits
+    \item Sound
+    \item If possible there should be an aspect of a story/timeline
+    \item A fullscreen option helps to stay focused
+    \item A level manu or a map
+\end{itemize}
+\section{Additional Conditions}
+
+
+Objects should have properties and subproperties.
 
 Game
 - capturing name
@@ -47,25 +146,3 @@ Game
     - flow
         - exitbutton
         - returnbutton
-    -
-
-
-\section{Checklist}
-- explicitly describe all the hypotheses and assumptions of the environment on which the problem will be stated.
-- Put good effort in realizing all explicit and implicit assumptions that you make, and clearly state them.
-It is important to provide support for
-your assumption choices. The more valid and acceptable
-your assumptions are, the more valid and acceptable your
-work will be.
-The system model section should always have a figure.
-The figure should demonstrate the parameters of your
-system model. Prepare the figure so that it can later be
-reused or enhanced to demonstrate your solution.
-
-Often, this section is merged with the system model.
-State your problem clearly. Be as exact as possible into
-stating what the question of the problem is. It reflects
-poorly upon an author if he cannot describe or does not
-know what problem his solution addresses. But most im-
-portantly, it will be easier for successive researchers to
-classify your work.
