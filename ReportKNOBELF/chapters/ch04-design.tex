@@ -91,7 +91,7 @@ This means you can have 0, 1, or as many as you need running at once.
 You can communicate between them and each scene has a depth (z-index).
 With the z-index a UI scene, rendered above the play scene, which is always rendered above the background scene, is possible.
 
-\subsubsection{Lifecycle}
+\subsubsection{Life Cycle}
 A simplified model has a scene that moves between four states: \textit{Create, Update Loop, Paused, and Stopped}.
 Transitions are initiated by a function call and emit a signal that can be listened for.
 This way, you can take action at specific point in the process.
@@ -102,7 +102,7 @@ Functions which initiate a transition are in yellow and signals emitted are oran
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{figures/lifecycle}
-    \caption{Scene Lifecycle\cite{phaser-guides-scenes}}
+    \caption{Scene Life Cycle\cite{phaser-guides-scenes}}
     \label{fig:lifecycle}
 \end{figure}
 
@@ -491,7 +491,7 @@ In the process he must identify and isolate properties of different objects, com
 To finally compare objects and reach a conclusion if the objects can be grouped or not,
 the user has to remember multiple outcomes.
 
-This lays a foundation of a rich mathematical structure linking it to the combinatorics of finite affine and
+This lays a foundation of a rich mathematical structure linking it to the combinatorics of finite, affine and
 projective spaces and the theory of error-correcting codes.\cite{cardgameset}
 
 The game is split into two versions. The easy one for adapting to the correct thinking
