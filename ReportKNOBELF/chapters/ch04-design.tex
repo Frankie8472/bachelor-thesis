@@ -5,8 +5,8 @@
 In this section all implementation tools and approaches are explained.
 First the used framework will be explained, then how the different scenes and objects are generated and
 at last how these two are combined to the final solution: Gotscha! A learning environment based on game based learning.
-The user goes through multiple levels to learn to detect and compare properties of objects
-under simple and more difficult situations.
+The user goes through multiple levels learning how to detect and compare properties of objects
+under simple and more difficult circumstances.
 
 \section{Phaser 3}\label{sec:phaser-3}
 
@@ -86,7 +86,7 @@ Games in Phaser 3 are structured around scene objects.
 A scene is a collection of game objects and related logic because these two should be kept together.
 The objects will be drawn when the scene is rendered.
 
-Where this gets special is that Phaser doesn't place any constraints on how many scenes need to be running.
+Where this gets special is Phaser doesn't place any constraints on how many scenes need to be running.
 This means you can have 0, 1, or as many as you need running at once.
 You can communicate between them and each scene has a depth (z-index).
 With the z-index a UI scene, rendered above the play scene, which is always rendered above the background scene, is possible.
@@ -97,7 +97,7 @@ Transitions are initiated by a function call and emit a signal that can be liste
 This way, you can take action at specific point in the process.
 
 The scene state transitions and fired events are summarized in the following state diagram.
-Functions which initiate a transition are in yellow and signals emitted are orange.
+Functions which initiate a transition are in yellow and signals emitted are orange\cite{phaser-guides-scenes}.
 
 \begin{figure}[H]
     \centering
@@ -111,7 +111,7 @@ The scene can always be resumed by the start() method.
 When this happens the three creation functions get called once more.
 This means any state tracked in the scene class will be retained between a stopped state and the next create state.
 Thus one has to be careful with setting a known initial value on everything requiring one.
-Especially when loading/creating objects outside the preloader (animations, tweens, audiofiles, etc.).
+Especially when loading/creating objects outside the preloader (animations, tweens, audiofiles, etc.)\cite{phaser-guides-scenes}.
 
 Scenes here have 5 functions:
 
@@ -128,7 +128,7 @@ In Phaser 3 managers are a global system.
 Animations, scenes, images loaded/created within it are globally available to all game objects.
 They share the base data while managing their own timelines.
 This allows the definition of a single object once and its application to as many game objects as required.
-So a game object can be called in an completely other and unrelated scene.
+So a game object can be called in an completely other and unrelated scene\cite{phaser-guides-scenes}.
 Examples for used managers in this work are:
 
 \begin{itemize}
@@ -262,7 +262,7 @@ With the imagemagick command \textit{mogrify} [\ref{lst:mogrify}] the last step 
 \end{lstlisting}
 
 \begin{lstlisting}[style=TypeScript, caption={ImageMagick console command "mogrify"}, label={lst:mogrify}]
-    mogrify -resize 50\% -trim -repage *.png
+    mogrify -resize 50% -trim -repage *.png
 \end{lstlisting}
 
 \subsection{Object Storage}\label{subsec:object-storage}
@@ -555,6 +555,9 @@ Our learning environment consists of different scenes each one inherits the base
 The following subsections contain a summary of crucial and not trivial parts of the code.
 
 The full code can be accessed in the appendix [\ref{ch:gotcha!---full-code}] or on gitlab\cite{gitlab-thesis}.
+The game itself can be played here\cite{gotscha}.
+
+The following state diagram [\ref{fig:statediagram}] displays our scenes and how they interact with each other.
 
 \begin{figure}[H]
     \centering
@@ -562,9 +565,6 @@ The full code can be accessed in the appendix [\ref{ch:gotcha!---full-code}] or 
     \caption{Scene State Diagram}
     \label{fig:statediagram}
 \end{figure}
-
-\subsection{Playing the Game}\label{subsec:playing-the-game}
-The game can be played here\cite{gotscha}.
 
 \subsection{Running the Code}\label{subsec:running-the-code}
 To run the code clone the gitlab repository\cite{gitlab-thesis} and run the following commands in the terminal in the cloned folder.
@@ -582,12 +582,12 @@ This scene contains methods and fields which are necessary in multiple scenes
 (e.g.\ the scene transition, identifier of the scene, ...).
 
 \subsubsection{The Scene Transition}
-Transitions are simply made by laying a geometrical mask over an game object and animate the mask.
-As masks have to be applied to every object they have to mask,
+Transitions are simply made by laying a geometrical mask over a game object and animate the mask.
+As masks have to be applied to every object they want to mask,
 a simple solution was to lay a black rectangle over the whole scene and mask it.
 So the scene transition has the form of a circle cut out of a black rectangle [\ref{lst:transitioninitializationmethod}].
 The animation comes to life with increasing or decreasing
-the radius of the circle according to the wanted animation (IN/OUT).
+the radius of the circle according to the desired animation (IN/OUT).
 
 \begin{lstlisting}[style=TypeScript, caption={Transition Initialization Method (BaseScene.ts)}, label={lst:transitioninitializationmethod}]
     ...
@@ -619,9 +619,9 @@ the radius of the circle according to the wanted animation (IN/OUT).
 \end{lstlisting}
 
 \subsection{PreloadAssets}\label{subsec:preloadassets}
-In the "preload()" method the files used later on can be loaded into the respective managers/cache.
-Now every asset loaded this way has a unique identifier and can be used in future scene
-as long as it is not removed explicitly.
+In the "preload()" method the files, used later on, can be loaded into the respective managers/cache.
+Now every asset loaded this way has a unique identifier and can be used in future scenes
+as long as not explicitly removed/deleted.
 The asset can as such be loaded into the managers/cache in every scene,
 so that only the actual used assets are loaded.
 The advantage of this is that you can save time and storage.
@@ -719,8 +719,8 @@ The following code [\ref{lst:sceneback}] in every other scene ensures this:
     ...
 \end{lstlisting}
 
-As the drop down animation takes time, it was necessary to create a boolean field as a lock.
-This ensures that the closing and opening animation won't interfere with each other.
+The drop down animation takes time. Thus, it was necessary to create a boolean field as a lock.
+With that the closing and opening animation won't interfere with each other.
 The lock is freed after the completion of an event/animation.
 
 \begin{lstlisting}[style=TypeScript, caption={Lock acquiring and freeing}]
@@ -817,8 +817,8 @@ And upon any pointer up event all markers are removed.
 
 \subsection{IntroScene}\label{subsec:introscene}
 To pause the current scene and still play the animated introduction, a separate scene is necessary.
-Each time an intro has to be played, the intro scene is started anew.
-The current scene is pauses itself when the intro scene is started and the name/key/identifier
+To play the respective intro, the intro scene has to be started anew and stopped again each time.
+The current scene pauses itself when the intro scene is started and the name/key/identifier
 of the paused scene is given to the intro scene.
 That way the intro scene can resume the paused scene and then stop itself.
 
@@ -826,7 +826,8 @@ The respective intro material is selected via the name/key/identifier of the pau
 
 \subsection{SortingScene}\label{subsec:sortingscene}
 To sort the displayed objects by their respective subcategory by clicking on one of the category buttons,
-random coordinates [\ref{lst:returnquad}] are needed dependant on the screen size and object size.
+random coordinates [\ref{lst:returnquad}] are needed.
+Those depend on the screen size and object size.
 
 \begin{lstlisting}[style=TypeScript, caption={returnQuad() (sortingScene.ts)}, label={lst:returnquad}]
     ...
@@ -905,6 +906,7 @@ random coordinates [\ref{lst:returnquad}] are needed dependant on the screen siz
 
 \subsection{PropertySortingScene}\label{subsec:propertysortingscene}
 To specify the difficulty level, two fields are needed:
+
 \begin{lstlisting}[style=TypeScript, caption={Level fields (propertySortingScene.ts)}]
     ...
     private setCat: number;
@@ -913,18 +915,19 @@ To specify the difficulty level, two fields are needed:
     ...
 \end{lstlisting}
 
-In contrast to other scenes, objects must have the type Phaser.Physics.Arcade.Sprite as only arcade sprites have the
-possibility of an acceleration in a direction.
+In contrast to other scenes, objects must have the type Phaser.Physics.Arcade.Sprite instead of
+Phaser.GameObjects.Sprite as only arcade sprites can have an acceleration in specified directions.
 
-As additional visual feature objects get a random spin velocity and the time an object spawns gets shorter over time.
+To add another visual feature, objects get a random spin velocity and the time an object spawns gets shorter over time.
 
 \subsection{RestrictedSortingScene}\label{subsec:restrictedsortingscene}
-To check if objects in the same box have some property in common,
+To check if objects in the same box have some common property,
 the four properties of an object are taken as a list of strings and intersected with the list of strings from the other
 objects in the same box [\ref{lst:equalitycheckres}].
-If finally there is no empty list, the objects have some property in common and thus this is a valid solution for one box.
-Which one does not matter to us in this case.
-That way, the possibility of multiple solutions, which were not intended but also correct, is open.
+If there is in the end no empty list, the objects have at least some property in common and thus this is a valid
+solution for one box.
+Which one does not matter to us now.
+with that, the possibility of multiple solutions, where some where not intended but also correct, is considered.
 
 \begin{lstlisting}[style=TypeScript, caption={equalityCheck (restrictedSortingScene.ts)}, label={lst:equalitycheckres}]
     ...
@@ -1037,7 +1040,8 @@ Therefore the checkEquality method [\ref{lst:checkequalitygame}] is modified wit
 \end{lstlisting}
 
 To add another small gamification element in the form of a mini reward to the game, every time the user finds a matching
-pair, some additional is added to the timer [\ref{lst:updateprogress}]. So the user is even more motivated to find pairs even faster.
+pair, additional time is added to the timer [\ref{lst:updateprogress}].
+So the user is even more motivated to find pairs even faster.
 But not only that, the user sets himself under stress and thus the game gets harder without making it actually harder.
 
 \begin{lstlisting}[style=TypeScript, caption={updateProgressbar (gameScene.ts)}, label={lst:updateprogress}]
@@ -1050,7 +1054,7 @@ But not only that, the user sets himself under stress and thus the game gets har
     ...
 \end{lstlisting}
 
-It is frustrating to not find a matching pair, thus
+It is frustrating not finding a matching pair, thus
 it is ensured [\ref{lst:refresh}] that there is at least one possible pair every time a new object is added.
 
 \begin{lstlisting}[style=TypeScript, caption={Refreshing the current set of objects (gameScene.ts)}, label={lst:refresh}]
